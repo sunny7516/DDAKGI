@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.tacademy.ddakgi.MainActivity"
+    android:weightSum="1"
+    android:background="@color/colorPrimaryDark">
+
+
+    <!-- 화면을 꽉채워서 좌우 스크롤(페이지단위) -->
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_weight="0.9"
+        android:layout_marginBottom="15dp"></android.support.v4.view.ViewPager>
+
+    <!-- animation 적용하여 home으로 이동하는 버튼 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1">
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:gravity="center|left"
+            android:onClick="goHome"
+            android:paddingLeft="20dp"
+            android:text="@string/more_room" />
+    </LinearLayout>
+</LinearLayout>

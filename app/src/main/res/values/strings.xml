@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">DDAKGI</string>
+
+    <!-- intro -->
+    <string name="more_room">더 많은 방 찾아보기</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- filter menu -->
+    <string name="filter_cancel">취소</string>
+    <string name="filter_reset">리셋</string>
+    <string name="filter_apply">적용</string>
+
+</resources>
