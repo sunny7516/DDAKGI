@@ -1,4 +1,4 @@
-package com.example.tacademy.ddakgi;
+package com.example.tacademy.ddakgi.Adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -9,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.example.tacademy.ddakgi.R;
+import com.example.tacademy.ddakgi.HomeTab.TimelineItem;
 
 import java.util.List;
 

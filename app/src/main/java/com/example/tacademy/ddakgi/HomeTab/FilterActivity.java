@@ -1,10 +1,12 @@
-package com.example.tacademy.ddakgi;
+package com.example.tacademy.ddakgi.HomeTab;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.example.tacademy.ddakgi.R;
 
 public class FilterActivity extends AppCompatActivity {
 

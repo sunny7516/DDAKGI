@@ -1,4 +1,4 @@
-package com.example.tacademy.ddakgi;
+package com.example.tacademy.ddakgi.HomeTab;
 
 /**
  * intro화면
@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.tacademy.ddakgi.Adapter.CustomAdapter;
+import com.example.tacademy.ddakgi.HomeActivity;
+import com.example.tacademy.ddakgi.R;
 
 public class MainActivity extends AppCompatActivity {
     ViewPager pager;

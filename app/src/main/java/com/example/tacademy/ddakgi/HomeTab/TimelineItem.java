@@ -1,4 +1,4 @@
-package com.example.tacademy.ddakgi;
+package com.example.tacademy.ddakgi.HomeTab;
 
 /**
  * Created by Tacademy on 2017-02-03.

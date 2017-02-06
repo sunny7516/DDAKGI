@@ -1,8 +1,10 @@
-package com.example.tacademy.ddakgi;
+package com.example.tacademy.ddakgi.HomeTab;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.tacademy.ddakgi.R;
 
 /**
  * Created by Tacademy on 2017-02-03.

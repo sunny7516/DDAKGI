@@ -1,18 +1,24 @@
 package com.example.tacademy.ddakgi.TabFragment;
 
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.tacademy.ddakgi.HomeTab.FilterActivity;
 import com.example.tacademy.ddakgi.R;
-import com.example.tacademy.ddakgi.RecyclerAdapter;
-import com.example.tacademy.ddakgi.TimelineItem;
+import com.example.tacademy.ddakgi.Adapter.RecyclerAdapter;
+import com.example.tacademy.ddakgi.HomeTab.TimelineItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,45 +28,21 @@ public class HomeTab extends Fragment {
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
-
     public HomeTab() {
-        // Required empty public constructor
-    }
-
-    // TODO: Rename and change types and number of parameters
-    public static HomeTab newInstance(String param1, String param2) {
-        HomeTab fragment = new HomeTab();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_home_tab, container, false);
+
+        // Fragment toolbar
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.homeToolbar);
+
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.setSupportActionBar(toolbar);
+        activity.getSupportActionBar().setTitle(null);
+        setHasOptionsMenu(true);
 
         // Inflate the layout for this fragment
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
@@ -83,32 +65,29 @@ public class HomeTab extends Fragment {
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    // toolbar button =======================================================================
+    @Override
+    public void onResume() {
+        super.onResume();
+        // destroy all menu and re-call onCreateOptionsMenu
+        getActivity().invalidateOptionsMenu();
     }
-/*
+
+    // Filter Button을 Toolbar에 적용
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.hometab_menu, menu);
+    }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_filter:
+                Intent intent = new Intent(getActivity(), FilterActivity.class);
+                startActivity(intent);
+                break;
         }
-    }
-*/
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        return super.onOptionsItemSelected(item);
     }
 }
