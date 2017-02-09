@@ -4,7 +4,6 @@
     <!-- intro -->
     <string name="more_room">더 많은 방 찾아보기</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- hometab_menu -->
@@ -14,6 +13,59 @@
 
     <!-- writetab -->
     <string name="writeHelp">글을 등록하고 나만의 룸메이트를 찾아보세요</string>
+    <string name="writetoolName">등록하기</string>
 
+    <!-- Mytab -->
+    <string name="myStory">내가 등록한 글</string>
+    <string name="modifyBt">수정</string>
+    <string name="deleteBt">삭제</string>
+
+    <!-- 방 등록하기 화면 -->
+    <string name="WriteRoomTool">제목</string>
+    <string name="roomTitle">제목</string>
+    <string name="roomTitleHint">제목을 입력해주세요</string>
+    <string name="roomLocate">위치</string>
+    <string name="roomLocateText">방위치 검색</string>
+    <string name="roomPhoto">사진</string>
+    <string name="roomPhotoText">이미지 등록</string>
+    <string name="roomPrice">보증금</string>
+    <string name="roomPriceHint">만원</string>
+    <string name="roomMonth">월세</string>
+    <string name="roomMonthHint">만원(전세일 경우 0으로 입력)</string>
+    <string name="roomHeight">층수</string>
+    <string name="roomHeightHint">층(반 지하는 0, 지하는 -1)</string>
+    <string name="roomExtraInfo">추가 정보 입력(선택)</string>
+    <string name="roomType">유형</string>
+    <string name="typeOne">원룸</string>
+    <string name="typeTwo">투룸</string>
+    <string name="typeHouse">주택</string>
+    <string name="typeOffice">오피스텔</string>
+    <string name="typeApart">아파트</string>
+    <string name="roomSize">평수</string>
+    <string name="sizeUnderTen">10평미만</string>
+    <string name="sizeTen">10평대</string>
+    <string name="sizeTwenty">20평대</string>
+    <string name="sizeThirty">30평대</string>
+    <string name="sizeFirty">40평대 이상</string>
+    <string name="identify">임대 계약서/신분증 인증(선택)</string>
+    <string name="prefDate">입주 가능일</string>
+    <string name="pay">관리비</string>
+    <string name="payHint">만원</string>
+    <string name="waterPay">수도</string>
+    <string name="electPay">전기</string>
+    <string name="internetPay">인터넷</string>
+    <string name="gasPay">도시가스</string>
+    <string name="tvPay">TV</string>
+    <string name="heatpay">난방</string>
+    <string name="option">옵션</string>
+    <string name="introduce">자기소개</string>
+    <string name="introduceHint">간단하게 자기소개를 써보세요</string>
+    <string name="extraQue">추가질문</string>
+    <string name="extraQueHint">예비룸메이트에게 추가로 묻고싶은 질문을 써보세요!</string>
+
+    <!-- 방 등록하기 화면 Toolbar-->
+    <string name="writeroomTool">방 등록하기</string>
+    <string name="writeroomFinish">완료</string>
+    <string name="title_activity_write_maps">Map</string>
 
 </resources>

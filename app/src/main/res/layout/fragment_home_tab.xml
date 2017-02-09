@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.tacademy.ddakgi.TabFragment.HomeTab">
+<!-- HomeTab의 timeline(fragment_my) -->
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/homeToolbar"
@@ -43,10 +44,8 @@
 
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview"
+    <include layout="@layout/fragment_timeline_recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

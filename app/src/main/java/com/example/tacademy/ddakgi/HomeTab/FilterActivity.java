@@ -24,9 +24,6 @@ public class FilterActivity extends AppCompatActivity {
         switch (itemId){
             case R.id.filter_cancel:
                 this.finish();
-                /*
-                Intent intent = new Intent(this, HomeActivity.class);
-                startActivity(intent);*/
                 break;
             case R.id.filter_reset:
                 break;

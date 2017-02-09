@@ -1,6 +1,7 @@
 package com.example.tacademy.ddakgi.TabFragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -38,6 +39,7 @@ public class HomeTab extends Fragment {
 
         // Fragment toolbar
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.homeToolbar);
+        toolbar.setBackgroundColor(Color.WHITE);
 
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
@@ -51,7 +53,7 @@ public class HomeTab extends Fragment {
         linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        // 가데이터
+        // 가데이터 > 수정해야됨
         List<TimelineItem> items = new ArrayList<>();
         TimelineItem[] item = new TimelineItem[ITEM_SIZE];
         item[0] = new TimelineItem(R.drawable.testroom0);

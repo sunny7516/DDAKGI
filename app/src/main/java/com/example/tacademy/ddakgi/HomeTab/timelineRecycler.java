@@ -1,5 +1,4 @@
-package com.example.tacademy.ddakgi.MyTab;
-
+package com.example.tacademy.ddakgi.HomeTab;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,13 +8,9 @@ import android.view.ViewGroup;
 
 import com.example.tacademy.ddakgi.R;
 
+public class TimelineRecycler extends Fragment {
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class HelpActivity extends Fragment {
-
-    public HelpActivity() {
+    public TimelineRecycler() {
         // Required empty public constructor
     }
 
@@ -23,7 +18,7 @@ public class HelpActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_help, container, false);
+        return inflater.inflate(R.layout.fragment_timeline_recycler, container, false);
     }
 
 }

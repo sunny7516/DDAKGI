@@ -41,7 +41,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final TimelineItem item = items.get(position);
-        Drawable photo = ContextCompat.getDrawable(context, item.getImage());
+        Drawable photo = ContextCompat.getDrawable(context, item.getRoomImg());
+
+
 
         holder.image.setImageDrawable(photo);
     }
@@ -56,10 +58,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         CardView cardView;
 
         public ViewHolder(View itemView) {
-
             super(itemView);
             this.image = (ImageView)itemView.findViewById(R.id.mPhoto);
-            this.cardView = (CardView)itemView.findViewById(R.id.cardView);
+            this.cardView = (CardView)itemView.findViewById(R.id.timelinecardView);
         }
     }
 }
