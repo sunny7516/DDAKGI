@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.example.tacademy.ddakgi.R;
+import com.example.tacademy.ddakgi.WriteTab.WriteMateActivity;
 import com.example.tacademy.ddakgi.WriteTab.WriteRoomActivity;
 
 public class WriteTab extends Fragment {
@@ -40,7 +41,7 @@ public class WriteTab extends Fragment {
                     startActivity(roomIntent);
                     break;
                 case R.id.mateBt:
-                    Intent mateIntent = new Intent(getContext(), WriteRoomActivity.class);
+                    Intent mateIntent = new Intent(getContext(), WriteMateActivity.class);
                     startActivity(mateIntent);
                     break;
             }

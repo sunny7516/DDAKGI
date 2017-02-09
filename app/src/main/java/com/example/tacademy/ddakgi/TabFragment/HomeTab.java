@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,11 +16,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
-import com.example.tacademy.ddakgi.HomeTab.FilterActivity;
-import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.Adapter.RecyclerAdapter;
+import com.example.tacademy.ddakgi.HomeTab.FilterActivity;
 import com.example.tacademy.ddakgi.HomeTab.TimelineItem;
+import com.example.tacademy.ddakgi.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +30,7 @@ public class HomeTab extends Fragment {
     final int ITEM_SIZE = 3;
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
+    private boolean activityStartup = true;
 
     public HomeTab() {
     }
@@ -37,6 +40,22 @@ public class HomeTab extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_tab, container, false);
 
+        SearchView searchView = (SearchView) view.findViewById(R.id.search);
+        EditText searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        searchEditText.setTextColor(getResources().getColor(R.color.black));
+        searchEditText.setHintTextColor(getResources().getColor(R.color.colorAccent));
+        searchView.setIconifiedByDefault(false);
+        searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    if (activityStartup) {
+                        getView().clearFocus();
+                        activityStartup = false;
+                    }
+                }
+            }
+        });
         // Fragment toolbar
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.homeToolbar);
         toolbar.setBackgroundColor(Color.WHITE);
@@ -78,8 +97,10 @@ public class HomeTab extends Fragment {
     // Filter Button을 Toolbar에 적용
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.hometab_menu, menu);
+
     }
 
     @Override
@@ -91,5 +112,9 @@ public class HomeTab extends Fragment {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void goSearch(){
+
     }
 }

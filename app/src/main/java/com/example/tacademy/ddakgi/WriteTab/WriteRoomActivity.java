@@ -87,7 +87,6 @@ public class WriteRoomActivity extends AppCompatActivity {
 
     // 위치 등록
     public void goLocate(View view){
-        //Intent intent = new Intent(this,WriteMapsActivity.class);
-       // startActivity(intent);
+
     }
 }
