@@ -1,4 +1,4 @@
-package com.example.tacademy.ddakgi.MyTab;
+package com.example.tacademy.ddakgi.Search.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 
 import com.example.tacademy.ddakgi.R;
 
+public class SearchMap extends Fragment {
 
-public class SettingActivity extends Fragment {
-    public SettingActivity() {
+    public SearchMap() {
         // Required empty public constructor
     }
 
@@ -18,6 +18,6 @@ public class SettingActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_setting, container, false);
+        return inflater.inflate(R.layout.fragment_search_map, container, false);
     }
 }

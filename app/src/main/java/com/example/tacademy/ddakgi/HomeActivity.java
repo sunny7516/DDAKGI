@@ -13,10 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
 
 import com.example.tacademy.ddakgi.TabFragment.ChatTab;
-import com.example.tacademy.ddakgi.TabFragment.HomeTab;
+import com.example.tacademy.ddakgi.HomeTab.fragment.HomeTab;
 import com.example.tacademy.ddakgi.TabFragment.LikeTab;
-import com.example.tacademy.ddakgi.TabFragment.MyTab;
-import com.example.tacademy.ddakgi.TabFragment.WriteTab;
+import com.example.tacademy.ddakgi.MyTab.fragment.MyTab;
+import com.example.tacademy.ddakgi.WriteTab.fragment.WriteTab;
 
 public class HomeActivity extends AppCompatActivity {
     private TabLayout tabLayout;

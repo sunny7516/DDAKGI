@@ -11,12 +11,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.tacademy.ddakgi.R;
-import com.example.tacademy.ddakgi.HomeTab.TimelineItem;
+import com.example.tacademy.ddakgi.HomeTab.util.TimelineItem;
 
 import java.util.List;
 
 /**
- * Created by Tacademy on 2017-02-03.
+ * HomeTab 타임라인 recyclerview
  */
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
@@ -42,8 +42,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         final TimelineItem item = items.get(position);
         Drawable photo = ContextCompat.getDrawable(context, item.getRoomImg());
-
-
 
         holder.image.setImageDrawable(photo);
     }

@@ -1,15 +1,15 @@
-package com.example.tacademy.ddakgi.HomeTab;
+package com.example.tacademy.ddakgi.MyTab.util;
 
 import android.widget.Button;
 import android.widget.ImageButton;
 
 /**
- * HomeTab 타임라인의 글에 들어갈 구성
+ * Mytab 타임라인(내가 쓴 글)
  */
 
-public class TimelineItem {
+public class MyTimelineItem {
 
-    int profileImg;
+    int profile;
     String nickName;
     Button modifyBt;
     Button deleteBt;
@@ -21,11 +21,11 @@ public class TimelineItem {
     ImageButton like;
     String likeNum;
 
-    public TimelineItem() {
+    public MyTimelineItem() {
     }
 
-    public TimelineItem(int roomImg) {
-        //this.profileImg = profileImg;
+    public MyTimelineItem(int roomImg) {
+        //this.profile = profile;
         //this.nickName = nickName;
         this.roomImg = roomImg;
         //this.age = age;
@@ -36,12 +36,12 @@ public class TimelineItem {
         //this.likeNum = likeNum;
     }
 
-    public int getProfileImg() {
-        return profileImg;
+    public int getProfile() {
+        return profile;
     }
 
-    public void setProfileImg(int profileImg) {
-        this.profileImg = profileImg;
+    public void setProfile(int profile) {
+        this.profile = profile;
     }
 
     public String getNickName() {

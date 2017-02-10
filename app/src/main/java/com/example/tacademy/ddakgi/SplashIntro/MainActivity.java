@@ -1,4 +1,4 @@
-package com.example.tacademy.ddakgi.HomeTab;
+package com.example.tacademy.ddakgi.SplashIntro;
 
 /**
  * intro화면

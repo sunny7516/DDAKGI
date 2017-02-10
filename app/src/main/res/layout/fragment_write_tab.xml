@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.tacademy.ddakgi.TabFragment.WriteTab">
+    tools:context="com.example.tacademy.ddakgi.WriteTab.fragment.WriteTab">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/writeToolbar"
@@ -40,7 +40,6 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:scaleType="fitXY"
-        android:onClick="WriteRoomBt"
         app:srcCompat="@drawable/room" />
 
     <ImageButton
@@ -49,7 +48,6 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:scaleType="fitXY"
-        android:onClick="WriteMateBt"
         app:srcCompat="@drawable/mate" />
 
 </LinearLayout>

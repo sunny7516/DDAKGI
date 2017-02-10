@@ -1,4 +1,4 @@
-package com.example.tacademy.ddakgi.TabFragment;
+package com.example.tacademy.ddakgi.MyTab.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,9 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.tacademy.ddakgi.Adapter.MyRecyclerAdapter;
-import com.example.tacademy.ddakgi.MyTab.HelpActivity;
-import com.example.tacademy.ddakgi.MyTab.MyTimelineItem;
-import com.example.tacademy.ddakgi.MyTab.SettingActivity;
+import com.example.tacademy.ddakgi.MyTab.activity.HelpActivity;
+import com.example.tacademy.ddakgi.MyTab.activity.SettingActivity;
+import com.example.tacademy.ddakgi.MyTab.util.MyTimelineItem;
 import com.example.tacademy.ddakgi.R;
 
 import java.util.ArrayList;

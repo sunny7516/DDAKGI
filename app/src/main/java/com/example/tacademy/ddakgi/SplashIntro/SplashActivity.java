@@ -1,4 +1,4 @@
-package com.example.tacademy.ddakgi.HomeTab;
+package com.example.tacademy.ddakgi.SplashIntro;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.tacademy.ddakgi.R;
 
+/**
+ * 로딩 splash 화면
+ * */
 public class SplashActivity extends AppCompatActivity {
 
     @Override

@@ -1,4 +1,4 @@
-package com.example.tacademy.ddakgi.WriteTab;
+package com.example.tacademy.ddakgi.WriteTab.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

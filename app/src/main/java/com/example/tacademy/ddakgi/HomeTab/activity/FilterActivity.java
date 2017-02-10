@@ -1,4 +1,4 @@
-package com.example.tacademy.ddakgi.HomeTab;
+package com.example.tacademy.ddakgi.HomeTab.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +8,9 @@ import android.view.MenuItem;
 
 import com.example.tacademy.ddakgi.R;
 
+/**
+ * HomeTab 상단버튼에서 이어지는 filter화면
+ */
 public class FilterActivity extends AppCompatActivity {
 
     // Filter Button을 Toolbar에 적용

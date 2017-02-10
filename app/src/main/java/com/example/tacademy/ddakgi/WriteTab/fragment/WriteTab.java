@@ -1,4 +1,4 @@
-package com.example.tacademy.ddakgi.TabFragment;
+package com.example.tacademy.ddakgi.WriteTab.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.example.tacademy.ddakgi.R;
-import com.example.tacademy.ddakgi.WriteTab.WriteMateActivity;
-import com.example.tacademy.ddakgi.WriteTab.WriteRoomActivity;
+import com.example.tacademy.ddakgi.WriteTab.activity.WriteMateActivity;
+import com.example.tacademy.ddakgi.WriteTab.activity.WriteRoomActivity;
 
 public class WriteTab extends Fragment {
     ImageButton roomBt;

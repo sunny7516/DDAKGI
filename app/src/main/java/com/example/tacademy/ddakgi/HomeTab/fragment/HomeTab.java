@@ -1,7 +1,8 @@
-package com.example.tacademy.ddakgi.TabFragment;
+package com.example.tacademy.ddakgi.HomeTab.fragment;
 
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.res.ColorStateList;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -16,15 +17,22 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.tacademy.ddakgi.Adapter.RecyclerAdapter;
-import com.example.tacademy.ddakgi.HomeTab.FilterActivity;
-import com.example.tacademy.ddakgi.HomeTab.TimelineItem;
+import com.example.tacademy.ddakgi.HomeTab.activity.FilterActivity;
+import com.example.tacademy.ddakgi.HomeTab.util.TimelineItem;
 import com.example.tacademy.ddakgi.R;
+import com.example.tacademy.ddakgi.Search.SearchActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ *
+ */
 
 public class HomeTab extends Fragment {
     final int ITEM_SIZE = 3;
@@ -40,25 +48,40 @@ public class HomeTab extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_tab, container, false);
 
-        SearchView searchView = (SearchView) view.findViewById(R.id.search);
+        // SearchView Style
+        SearchView searchView = (SearchView) view.findViewById(R.id.searchView);
+
         EditText searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         searchEditText.setTextColor(getResources().getColor(R.color.black));
-        searchEditText.setHintTextColor(getResources().getColor(R.color.colorAccent));
+        searchEditText.setHintTextColor(getResources().getColor(R.color.gray));
+
+        ImageView search_close_btn = (ImageView) searchView.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
+        ImageView search_icon = (ImageView) searchView.findViewById(android.support.v7.appcompat.R.id.search_mag_icon);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            search_close_btn.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.gray)));
+            search_icon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.gray)));
+        }
+
         searchView.setIconifiedByDefault(false);
+        // 처음 searchview 초기화 시 커서가 보이지 않도록 지정
         searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
+            public void onFocusChange(View view, boolean hasFocus) {
                 if (hasFocus) {
                     if (activityStartup) {
-                        getView().clearFocus();
+                        view.clearFocus();
                         activityStartup = false;
                     }
                 }
             }
         });
+
         // Fragment toolbar
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.homeToolbar);
-        toolbar.setBackgroundColor(Color.WHITE);
+        // search화면으로 가는 ClickListener 적용
+        Button gosearchBt = (Button) view.findViewById(R.id.gosearchBt);
+        gosearchBt.setOnClickListener(goSearchListener);
 
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
@@ -86,6 +109,20 @@ public class HomeTab extends Fragment {
         return view;
     }
 
+    // Click Event
+    private View.OnClickListener goSearchListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                // Toolbar에 있는 검색창 눌렀을 때 search화면으로 intent
+                case R.id.gosearchBt:
+                    Intent Intent = new Intent(getContext(), SearchActivity.class);
+                    startActivity(Intent);
+                    break;
+            }
+        }
+    };
+
     // toolbar button =======================================================================
     @Override
     public void onResume() {
@@ -103,6 +140,7 @@ public class HomeTab extends Fragment {
 
     }
 
+    // toolbar 옵션 메뉴 선택 시 event
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -112,9 +150,5 @@ public class HomeTab extends Fragment {
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void goSearch(){
-
     }
 }
