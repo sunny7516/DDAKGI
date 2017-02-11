@@ -71,10 +71,16 @@
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
+    <string name="roomImageTool">사진등록(최대 15장)</string>
+    <string name="gallery">갤러리에서 선택</string>
+    <string name="camera">사진 촬영</string>
+
+
     <!-- 검색 -->
     <string name="searchLocation">검색</string>
     <string name="searchAll">지하철 역 또는 지역명을 입력하세요. \n
                             ex) 신림역, 강남구, 논현동</string>
+
 
 
 </resources>

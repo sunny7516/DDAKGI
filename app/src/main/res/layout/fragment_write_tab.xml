@@ -4,35 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.tacademy.ddakgi.WriteTab.fragment.WriteTab">
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/writeToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:minHeight="?attr/actionBarSize"
-        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/writetoolName"
-            android:layout_gravity="center"
-            android:textColor="@android:color/black"
-            android:id="@+id/toolbar_title" />
-    </android.support.v7.widget.Toolbar>
+    tools:context="com.example.tacademy.ddakgi.WriteTab.WriteTab">
 
     <TextView
-        android:text="@string/writeHelp"
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
+        android:layout_weight="0.12"
         android:background="@android:color/darker_gray"
         android:gravity="left|center"
         android:paddingLeft="15dp"
-        android:layout_weight="0.12" />
+        android:text="@string/writeHelp" />
 
     <ImageButton
         android:id="@+id/roomBt"

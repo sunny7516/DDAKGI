@@ -31,7 +31,6 @@ public class MyTab extends Fragment {
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
 
-
     public MyTab() {
         // Required empty public constructor
     }
@@ -42,10 +41,11 @@ public class MyTab extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_tab, container, false);
 
         // Fragment toolbar
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.myToolbar);
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.MainToolbar);
 
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
+        activity.getSupportActionBar().show();
         activity.getSupportActionBar().setTitle(null);
         setHasOptionsMenu(true);
 
@@ -96,7 +96,6 @@ public class MyTab extends Fragment {
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     // Fragment 화면 이동(Filter화면 띄우기)
     private void FragmentIntent(Fragment fragment) {

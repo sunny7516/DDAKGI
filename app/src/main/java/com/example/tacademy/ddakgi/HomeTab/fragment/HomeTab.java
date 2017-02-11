@@ -12,9 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -30,15 +27,19 @@ import com.example.tacademy.ddakgi.Search.SearchActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- */
+import static com.example.tacademy.ddakgi.R.id.gosearchBt;
 
 public class HomeTab extends Fragment {
+    private boolean activityStartup = true;
     final int ITEM_SIZE = 3;
+
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
-    private boolean activityStartup = true;
+
+    SearchView searchView;
+    EditText searchEditText;
+    ImageView search_close_btn;
+    ImageView search_icon;
 
     public HomeTab() {
     }
@@ -49,14 +50,14 @@ public class HomeTab extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home_tab, container, false);
 
         // SearchView Style
-        SearchView searchView = (SearchView) view.findViewById(R.id.searchView);
+        searchView = (SearchView) view.findViewById(R.id.searchView);
 
-        EditText searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         searchEditText.setTextColor(getResources().getColor(R.color.black));
         searchEditText.setHintTextColor(getResources().getColor(R.color.gray));
 
-        ImageView search_close_btn = (ImageView) searchView.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
-        ImageView search_icon = (ImageView) searchView.findViewById(android.support.v7.appcompat.R.id.search_mag_icon);
+        search_close_btn = (ImageView) searchView.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
+        search_icon = (ImageView) searchView.findViewById(android.support.v7.appcompat.R.id.search_mag_icon);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             search_close_btn.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.gray)));
@@ -78,15 +79,18 @@ public class HomeTab extends Fragment {
         });
 
         // Fragment toolbar
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.homeToolbar);
-        // search화면으로 가는 ClickListener 적용
-        Button gosearchBt = (Button) view.findViewById(R.id.gosearchBt);
-        gosearchBt.setOnClickListener(goSearchListener);
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.MainToolbar);
 
+        // Toolbar에 OptionMenu 지정
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
-        activity.getSupportActionBar().setTitle(null);
-        setHasOptionsMenu(true);
+        activity.getSupportActionBar().hide();
+
+        // search화면으로 가는 ClickListener 적용
+        Button gosearchBt = (Button) view.findViewById(R.id.gosearchBt);
+        Button filter_menu = (Button) view.findViewById(R.id.filter_menu);
+        gosearchBt.setOnClickListener(goSearchListener);
+        filter_menu.setOnClickListener(goSearchListener);
 
         // Inflate the layout for this fragment
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
@@ -114,41 +118,16 @@ public class HomeTab extends Fragment {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                // Toolbar에 있는 검색창 눌렀을 때 search화면으로 intent
-                case R.id.gosearchBt:
+                // 검색창 눌렀을 때 search화면으로 intent
+                case gosearchBt:
                     Intent Intent = new Intent(getContext(), SearchActivity.class);
                     startActivity(Intent);
                     break;
+                // 이미지 버튼 눌렀을 때 filter 화면으로 intent
+                case R.id.filter_menu:
+                    Intent intent = new Intent(getActivity(), FilterActivity.class);
+                    startActivity(intent);
             }
         }
     };
-
-    // toolbar button =======================================================================
-    @Override
-    public void onResume() {
-        super.onResume();
-        // destroy all menu and re-call onCreateOptionsMenu
-        getActivity().invalidateOptionsMenu();
-    }
-
-    // Filter Button을 Toolbar에 적용
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.hometab_menu, menu);
-
-    }
-
-    // toolbar 옵션 메뉴 선택 시 event
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_filter:
-                Intent intent = new Intent(getActivity(), FilterActivity.class);
-                startActivity(intent);
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

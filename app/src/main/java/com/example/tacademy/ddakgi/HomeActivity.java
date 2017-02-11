@@ -16,7 +16,7 @@ import com.example.tacademy.ddakgi.TabFragment.ChatTab;
 import com.example.tacademy.ddakgi.HomeTab.fragment.HomeTab;
 import com.example.tacademy.ddakgi.TabFragment.LikeTab;
 import com.example.tacademy.ddakgi.MyTab.fragment.MyTab;
-import com.example.tacademy.ddakgi.WriteTab.fragment.WriteTab;
+import com.example.tacademy.ddakgi.WriteTab.WriteTab;
 
 public class HomeActivity extends AppCompatActivity {
     private TabLayout tabLayout;
@@ -37,7 +37,6 @@ public class HomeActivity extends AppCompatActivity {
         // 기본 탭 지정
         replaceFragment(new HomeTab());
 
-
         // 각 Tab화면을 뿌려줄 밑바탕 layout
         fragment_container = (LinearLayout) findViewById(R.id.fragment_container);
 
@@ -51,7 +50,6 @@ public class HomeActivity extends AppCompatActivity {
         tabLayout.setBackgroundColor(Color.WHITE);
         tabLayout.setTabTextColors(getResources().getColor(R.color.black), getResources().getColor(R.color.colorAccent));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
 
         // Set TabSelectedListener
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -82,7 +80,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
-
 
     // 각 탭에 해당하는 화면으로 변경
     public void replaceFragment(Fragment fragment) {

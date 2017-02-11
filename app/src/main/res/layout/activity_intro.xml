@@ -10,14 +10,12 @@
     android:background="@color/colorPrimaryDark">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/introToolbar"
-        android:title="DDAKGI"
+        android:id="@+id/MainToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:minHeight="?attr/actionBarSize"
-        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+        android:weightSum="1" />
 
     <!-- 화면을 꽉채워서 좌우 스크롤(페이지단위) -->
     <android.support.v4.view.ViewPager
