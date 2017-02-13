@@ -63,9 +63,9 @@
     <string name="extraQue">추가질문</string>
     <string name="extraQueHint">예비룸메이트에게 추가로 묻고싶은 질문을 써보세요!</string>
 
-    <!-- 방 등록하기 화면 Toolbar-->
+    <!-- 방 등록 화면-->
     <string name="writeroomTool">방 등록하기</string>
-    <string name="writeroomFinish">완료</string>
+    <string name="finish">완료</string>
     <string name="title_activity_write_maps">Map</string>
     <string name="title_activity_search">Search</string>
     <string name="action_settings">Settings</string>
@@ -75,12 +75,16 @@
     <string name="gallery">갤러리에서 선택</string>
     <string name="camera">사진 촬영</string>
 
+    <string name="identifyText">인증 뱃지를 받아 더 많은 룸메이트를 만나보세요.\n
+                                인증 정보는 개인 정보 보호 약관에 따라 안전하게 보관됩니다.</string>
+    <string name="IDCard">신분증</string>
+    <string name="contract">임대계약서</string>
+    <string name="roomidentifyTool">인증하기 (선택)</string>
 
     <!-- 검색 -->
     <string name="searchLocation">검색</string>
     <string name="searchAll">지하철 역 또는 지역명을 입력하세요. \n
                             ex) 신림역, 강남구, 논현동</string>
-
 
 
 </resources>

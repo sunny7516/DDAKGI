@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <item
-        android:id="@+id/writeroomBack"
+        android:id="@+id/roomIdentifyBack"
         android:icon="?attr/homeAsUpIndicator"
         android:orderInCategory="100"
         android:title="back"
         app:showAsAction="always" />
     <item
-        android:id="@+id/writeroomTitle"
+        android:id="@+id/roomIdentifyTitle"
         android:orderInCategory="100"
-        android:title="@string/writeroomTool"
+        android:title="@string/roomidentifyTool"
         app:showAsAction="always" />
     <item
-        android:id="@+id/writeroomFinish"
+        android:id="@+id/roomIdentifyFinish"
         android:orderInCategory="100"
         android:title="@string/finish"
         app:showAsAction="always" />
-
 </menu>

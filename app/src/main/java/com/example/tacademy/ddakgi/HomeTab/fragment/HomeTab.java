@@ -27,6 +27,8 @@ import com.example.tacademy.ddakgi.Search.SearchActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 import static com.example.tacademy.ddakgi.R.id.gosearchBt;
 
 public class HomeTab extends Fragment {
@@ -40,6 +42,7 @@ public class HomeTab extends Fragment {
     EditText searchEditText;
     ImageView search_close_btn;
     ImageView search_icon;
+    SweetAlertDialog alert;
 
     public HomeTab() {
     }
@@ -48,6 +51,9 @@ public class HomeTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_tab, container, false);
+
+        // 홈화면 유입 시 로그인 유도 팝업
+        letLogin();
 
         // SearchView Style
         searchView = (SearchView) view.findViewById(R.id.searchView);
@@ -130,4 +136,26 @@ public class HomeTab extends Fragment {
             }
         }
     };
+
+    public void letLogin(){
+        alert = new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("로그인 유도")
+                .setContentText("로그인 하시겠습니까?")
+                .setConfirmText("로그인")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        // 로그인 화면으로
+                    }
+                })
+                .setCancelText("나중에 하기")
+                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        alert.dismissWithAnimation();
+                    }
+                });
+        alert.setCancelable(true);
+        alert.show();
+    }
 }
