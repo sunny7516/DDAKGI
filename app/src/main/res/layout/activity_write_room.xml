@@ -132,7 +132,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:onClick="isChecked"
+                android:onClick="typeChecked"
                 android:text="@string/typeOne" />
 
             <TextView
@@ -141,7 +141,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:onClick="isChecked"
+                android:onClick="typeChecked"
                 android:text="@string/typeTwo" />
 
             <TextView
@@ -150,7 +150,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:onClick="isChecked"
+                android:onClick="typeChecked"
                 android:text="@string/typeHouse" />
 
             <TextView
@@ -159,7 +159,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:onClick="isChecked"
+                android:onClick="typeChecked"
                 android:text="@string/typeOffice" />
 
             <TextView
@@ -167,447 +167,493 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:onClick="isChecked"
                 android:gravity="center"
+                android:onClick="typeChecked"
                 android:text="@string/typeApart" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="showRoomSize"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView23"
-            android:layout_width="90dp"
-            android:layout_height="match_parent"
-            android:gravity="left|center"
-            android:paddingLeft="20dp"
-            android:text="@string/roomSize"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:srcCompat="@android:drawable/ic_menu_more" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/roomSize"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:visibility="visible">
-
-        <TextView
-            android:id="@+id/textView28"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/sizeUnderTen" />
-
-        <TextView
-            android:id="@+id/textView27"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/sizeTen" />
-
-        <TextView
-            android:id="@+id/textView26"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/sizeTwenty" />
-
-        <TextView
-            android:id="@+id/textView25"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/sizeThirty" />
-
-        <TextView
-            android:id="@+id/textView24"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/sizeFirty" />
-    </LinearLayout>
-
-    <!-- 보증금 ~ 임대계약서/신분증 -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView15"
-            android:layout_width="90dp"
-            android:layout_height="match_parent"
-            android:gravity="left|center"
-            android:paddingLeft="20dp"
-            android:text="@string/roomPrice"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/editText3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/roomPriceHint"
-            android:inputType="number" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView20"
-            android:layout_width="90dp"
-            android:layout_height="match_parent"
-            android:gravity="left|center"
-            android:paddingLeft="20dp"
-            android:text="@string/roomMonth"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/editText6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="@string/roomMonthHint"
-            android:inputType="number" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView17"
-            android:layout_width="90dp"
-            android:layout_height="match_parent"
-            android:gravity="left|center"
-            android:paddingLeft="20dp"
-            android:text="@string/roomHeight"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/editText5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/roomHeightHint"
-            android:inputType="textPersonName" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="goIdentify"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:gravity="left|center"
-            android:paddingLeft="20dp"
-            android:text="@string/identify" />
-
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingLeft="10dp"
-            app:srcCompat="@android:drawable/ic_menu_add" />
-    </LinearLayout>
-
-    <!-- 추가 정보 입력 -->
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="ShowExtraInfo"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView29"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="left|center"
-            android:paddingLeft="20dp"
-            android:text="@string/roomExtraInfo"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:paddingLeft="10dp"
-            app:srcCompat="@android:drawable/ic_menu_more" />
-    </LinearLayout>
-
-    <!-- 추가 정보 show/hide -->
-    <LinearLayout
-        android:id="@+id/extraInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="visible">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView32"
-                android:layout_width="90dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/prefDate"
-                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="showRoomSize"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView33"
+                android:id="@+id/textView23"
                 android:layout_width="90dp"
                 android:layout_height="match_parent"
+                android:gravity="left|center"
+                android:paddingLeft="20dp"
+                android:text="@string/roomSize"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:srcCompat="@android:drawable/ic_menu_more" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/roomSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/textView28"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/pay"
+                android:onClick="sizeClicked"
+                android:text="@string/sizeUnderTen" />
+
+            <TextView
+                android:id="@+id/textView27"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="sizeClicked"
+                android:text="@string/sizeTen" />
+
+            <TextView
+                android:id="@+id/textView26"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="sizeClicked"
+                android:text="@string/sizeTwenty" />
+
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="sizeClicked"
+                android:text="@string/sizeThirty" />
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="sizeClicked"
+                android:text="@string/sizeFirty" />
+        </LinearLayout>
+
+        <!-- 보증금 ~ 임대계약서/신분증 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:gravity="left|center"
+                android:paddingLeft="20dp"
+                android:text="@string/roomPrice"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editText2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:id="@+id/editText3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="@string/payHint"
+                android:hint="@string/roomPriceHint"
                 android:inputType="number" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ToggleButton
-                android:id="@+id/textView39"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:onClick="isToggled"
-                android:textOff="@string/waterPay"
-                android:textOn="@string/waterPay" />
-
-            <ToggleButton
-                android:id="@+id/textView38"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:onClick="isToggled"
-                android:textOff="@string/electPay"
-                android:textOn="@string/electPay" />
-
-            <ToggleButton
-                android:id="@+id/textView37"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:onClick="isToggled"
-                android:textOff="@string/internetPay"
-                android:textOn="@string/internetPay" />
-
-            <ToggleButton
-                android:id="@+id/textView36"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:onClick="isToggled"
-                android:textOff="@string/gasPay"
-                android:textOn="@string/gasPay" />
-
-            <ToggleButton
-                android:id="@+id/textView35"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:onClick="isToggled"
-                android:textOff="@string/tvPay"
-                android:textOn="@string/tvPay" />
-
-            <ToggleButton
-                android:id="@+id/heatpay"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:onClick="isToggled"
-                android:textOff="@string/heatpay"
-                android:textOn="@string/heatpay" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/textView40"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left|center"
-            android:text="@string/option"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                app:srcCompat="@drawable/op1" />
-
-            <ImageButton
-                android:id="@+id/imageButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                app:srcCompat="@drawable/op2" />
-
-            <ImageButton
-                android:id="@+id/imageButton3"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                app:srcCompat="@drawable/op3" />
-
-            <ImageButton
-                android:id="@+id/imageButton4"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                app:srcCompat="@drawable/op4" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/imageButton5"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                app:srcCompat="@drawable/op5" />
-
-            <ImageButton
-                android:id="@+id/imageButton6"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                app:srcCompat="@drawable/op6" />
-
-            <ImageButton
-                android:id="@+id/imageButton7"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                app:srcCompat="@drawable/op7" />
-
-            <ImageButton
-                android:id="@+id/imageButton8"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                app:srcCompat="@drawable/op8" />
-
-            <ImageButton
-                android:id="@+id/imageButton9"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                app:srcCompat="@drawable/op9" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView41"
+                android:id="@+id/textView20"
                 android:layout_width="90dp"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical|center"
-                android:text="@string/introduce" />
+                android:gravity="left|center"
+                android:paddingLeft="20dp"
+                android:text="@string/roomMonth"
+                android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editText4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:id="@+id/editText6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:ems="10"
-                android:hint="@string/introduceHint"
-                android:inputType="textPersonName" />
-
+                android:hint="@string/roomMonthHint"
+                android:inputType="number" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView43"
-            android:layout_width="90dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="left|center"
-            android:text="@string/extraQue"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/editText7"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:ems="10"
-            android:hint="@string/extraQueHint"
-            android:inputType="textPersonName" />
+            android:orientation="horizontal">
 
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:gravity="left|center"
+                android:paddingLeft="20dp"
+                android:text="@string/roomHeight"
+                android:textStyle="bold" />
 
+            <EditText
+                android:id="@+id/editText5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/roomHeightHint"
+                android:inputType="textPersonName" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="goIdentify"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:gravity="left|center"
+                android:paddingLeft="20dp"
+                android:text="@string/identify" />
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingLeft="10dp"
+                app:srcCompat="@android:drawable/ic_menu_add" />
+        </LinearLayout>
+
+        <!-- 추가 정보 입력 -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="ShowExtraInfo"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView29"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="left|center"
+                android:paddingLeft="20dp"
+                android:text="@string/roomExtraInfo"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="10dp"
+                app:srcCompat="@android:drawable/ic_menu_more" />
+        </LinearLayout>
+
+        <!-- 추가 정보 show/hide -->
+        <LinearLayout
+            android:id="@+id/extraInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView32"
+                    android:layout_width="90dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/prefDate"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView33"
+                    android:layout_width="90dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/pay"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editText2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:ems="10"
+                    android:hint="@string/payHint"
+                    android:inputType="number" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ToggleButton
+                    android:id="@+id/textView39"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:onClick="togglePay"
+                    android:textOff="@string/waterPay"
+                    android:textOn="@string/waterPay" />
+
+                <ToggleButton
+                    android:id="@+id/textView38"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:onClick="togglePay"
+                    android:textOff="@string/electPay"
+                    android:textOn="@string/electPay" />
+
+                <ToggleButton
+                    android:id="@+id/textView37"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:onClick="togglePay"
+                    android:textOff="@string/internetPay"
+                    android:textOn="@string/internetPay" />
+
+                <ToggleButton
+                    android:id="@+id/textView36"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:onClick="togglePay"
+                    android:textOff="@string/gasPay"
+                    android:textOn="@string/gasPay" />
+
+                <ToggleButton
+                    android:id="@+id/textView35"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:onClick="togglePay"
+                    android:textOff="@string/tvPay"
+                    android:textOn="@string/tvPay" />
+
+                <ToggleButton
+                    android:id="@+id/heatpay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:onClick="togglePay"
+                    android:textOff="@string/heatpay"
+                    android:textOn="@string/heatpay" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView40"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left|center"
+                android:text="@string/option"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ToggleButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/op1"
+                    android:onClick="toggledOp"
+                    android:textOff="@null"
+                    android:textOn="@null" />
+
+                <ToggleButton
+                    android:id="@+id/imageButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/op2"
+                    android:onClick="toggledOp"
+                    android:textOff="@null"
+                    android:textOn="@null" />
+
+                <ToggleButton
+                    android:id="@+id/imageButton3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/op3"
+                    android:onClick="toggledOp"
+                    android:textOff="@null"
+                    android:textOn="@null" />
+
+                <ToggleButton
+                    android:id="@+id/imageButton4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/op4"
+                    android:onClick="toggledOp"
+                    android:textOff="@null"
+                    android:textOn="@null" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ToggleButton
+                    android:id="@+id/imageButton5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/op5"
+                    android:onClick="toggledOp"
+                    android:textOff="@null"
+                    android:textOn="@null" />
+
+                <ToggleButton
+                    android:id="@+id/imageButton6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/op6"
+                    android:onClick="toggledOp"
+                    android:textOff="@null"
+                    android:textOn="@null" />
+
+                <ToggleButton
+                    android:id="@+id/imageButton7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/op7"
+                    android:onClick="toggledOp"
+                    android:textOff="@null"
+                    android:textOn="@null" />
+
+                <ToggleButton
+                    android:id="@+id/imageButton8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/op8"
+                    android:onClick="toggledOp"
+                    android:textOff="@null"
+                    android:textOn="@null" />
+
+                <ToggleButton
+                    android:id="@+id/imageButton9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/op9"
+                    android:onClick="toggledOp"
+                    android:textOff="@null"
+                    android:textOn="@null" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView41"
+                    android:layout_width="90dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|center"
+                    android:text="@string/introduce" />
+
+                <EditText
+                    android:id="@+id/editText4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:ems="10"
+                    android:hint="@string/introduceHint"
+                    android:inputType="textPersonName" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView43"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left|center"
+                android:text="@string/extraQue"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ExtraQue10"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/editText7"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="9"
+                    android:ems="10"
+                    android:hint="@string/extraQueHint"
+                    android:inputType="textPersonName" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/ExtraQue1"
+                    android:onClick="plusExtra"
+                    android:background="@color/float_transparent"
+                    android:text="+" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ExtraQuelinear"
+                android:orientation="vertical"/>
+
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout></ScrollView>
+</ScrollView>
