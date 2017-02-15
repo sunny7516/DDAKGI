@@ -42,11 +42,11 @@ public class HomeActivity extends AppCompatActivity {
 
         // TabLayout 초기화
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        tabLayout.addTab(tabLayout.newTab().setText("HomeTab"));
-        tabLayout.addTab(tabLayout.newTab().setText("ChatTab"));
-        tabLayout.addTab(tabLayout.newTab().setText("WriteTab"));
-        tabLayout.addTab(tabLayout.newTab().setText("LikeTab"));
-        tabLayout.addTab(tabLayout.newTab().setText("MyTab"));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.mipmap.home_ic_on));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.mipmap.chat_ic_off));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.mipmap.write_ic_off));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.mipmap.heart_ic_off));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.mipmap.person_ic));
         tabLayout.setBackgroundColor(Color.WHITE);
         tabLayout.setTabTextColors(getResources().getColor(R.color.black), getResources().getColor(R.color.colorAccent));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
@@ -58,20 +58,35 @@ public class HomeActivity extends AppCompatActivity {
                 //viewPager.setCurrentItem(tab.getPosition());
                 if (tab.getPosition() == 0) {
                     replaceFragment(new HomeTab());
+                    tab.setIcon(R.mipmap.home_ic_on);
                 } else if (tab.getPosition() == 1) {
                     replaceFragment(new ChatTab());
+                    tab.setIcon(R.mipmap.chat_ic_on);
                 } else if (tab.getPosition() == 2) {
                     replaceFragment(new WriteTab());
+                    tab.setIcon(R.mipmap.write_ic_on);
                 } else if (tab.getPosition() == 3) {
                     replaceFragment(new LikeTab());
+                    tab.setIcon(R.mipmap.heart_ic_on);
                 } else if (tab.getPosition() == 4) {
                     replaceFragment(new MyTab());
+                    tab.setIcon(R.mipmap.person_ic_on);
                 }
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
+                if (tab.getPosition() == 0) {
+                    tab.setIcon(R.mipmap.home_ic_off);
+                } else if (tab.getPosition() == 1) {
+                    tab.setIcon(R.mipmap.chat_ic_off);
+                } else if (tab.getPosition() == 2) {
+                    tab.setIcon(R.mipmap.write_ic_off);
+                } else if (tab.getPosition() == 3) {
+                    tab.setIcon(R.mipmap.heart_ic_off);
+                } else if (tab.getPosition() == 4) {
+                    tab.setIcon(R.mipmap.person_ic);
+                }
             }
 
             @Override

@@ -1,29 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/timelinecardView"
+    android:id="@+id/timelineLinear"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
     <!-- recyclerview에 들어가는 한 항목의 구성 View -->
 
     <!-- 프로필, 닉네임 -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="51dp"
+        android:layout_marginLeft="16dp"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/mProfile"
-            android:layout_width="70dp"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/profiletest" />
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginRight="5dp"
+            app:srcCompat="@mipmap/profile" />
 
-        <TextView
-            android:id="@+id/mNickname"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="left|center"
-            android:text="NickName" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <io.chooco13.NotoTextView
+                android:id="@+id/nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="NickName"
+                android:textColor="@color/defaultTextColor"
+                android:textSize="13sp"
+                app:fontWeight="medium" />
+
+            <io.chooco13.NotoTextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="date"
+                android:textColor="@color/grayTextColor"
+                android:textSize="10sp"
+                app:fontWeight="demilight" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/modifyBt"
@@ -44,44 +70,80 @@
             android:visibility="invisible" />
     </LinearLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/mPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/testroom0"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:id="@+id/beforeLoginShadow"
+            android:layout_height="300dp"
+            android:alpha="0.75"
+            android:background="#131313"
+            app:srcCompat="@drawable/testroom0"/>
+
+        <io.chooco13.NotoTextView
+            android:id="@+id/loginBeforeText"
+            app:fontWeight="light"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/berforeLogin"/>
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="350dp"
         android:layout_weight="2"
         android:orientation="horizontal">
         <!-- 정보 -->
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="168dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="16dp"
             android:layout_weight="2"
             android:gravity="left|center"
             android:orientation="vertical">
 
-            <TextView
+            <io.chooco13.NotoTextView
                 android:id="@+id/mAge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Age" />
+                android:layout_marginTop="16dp"
+                android:text="Age"
+                android:textColor="@color/defaultTextColor"
+                android:textSize="16sp"
+                app:fontWeight="medium" />
 
-            <TextView
-                android:id="@+id/mPrice"
+            <io.chooco13.NotoTextView
+                android:id="@+id/Age"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Price" />
+                android:text="Price"
+                android:textColor="@color/subTextColor"
+                android:textSize="13sp"
+                app:fontWeight="regular" />
 
-            <TextView
+            <io.chooco13.NotoTextView
                 android:id="@+id/mLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Location" />
+                android:text="Location"
+                android:textColor="@color/subTextColor"
+                android:textSize="16sp"
+                app:fontWeight="regular" />
 
-            <TextView
-                android:id="@+id/mDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Date" />
         </LinearLayout>
 
         <!-- 버튼, 좋아요수 -->
@@ -95,23 +157,27 @@
             <ImageButton
                 android:id="@+id/mLike"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="4dp"
+                android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/testheart" />
+                app:srcCompat="@mipmap/heart_off_btn" />
 
-            <TextView
+            <io.chooco13.NotoTextView
                 android:id="@+id/mLikenum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="LikeNum" />
+                android:layout_marginRight="23dp"
+                android:text="LikeNum"
+                android:textColor="@color/grayTextColor"
+                android:textSize="13sp"
+                app:fontWeight="demilight" />
         </LinearLayout>
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/mPhoto"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginTop="50dp"
-        app:srcCompat="@drawable/testroom0" />
-</android.support.v7.widget.CardView>
+        android:layout_height="8dp"
+        android:background="@color/grayTextColor" />
+</LinearLayout>

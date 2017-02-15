@@ -6,30 +6,94 @@
     android:orientation="vertical"
     tools:context="com.example.tacademy.ddakgi.WriteTab.WriteTab">
 
-    <TextView
+    <io.chooco13.NotoTextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.12"
+        android:layout_height="46dp"
         android:background="@android:color/darker_gray"
         android:gravity="left|center"
-        android:paddingLeft="15dp"
-        android:text="@string/writeHelp" />
+        android:paddingLeft="16dp"
+        android:text="@string/writeHelp"
+        android:textColor="@color/subTextColor"
+        android:textSize="10sp"
+        app:fontWeight="demilight" />
 
-    <ImageButton
-        android:id="@+id/roomBt"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/room" />
+        android:layout_height="236dp"
+        android:layout_weight="1">
 
-    <ImageButton
-        android:id="@+id/mateBt"
+        <ImageButton
+            android:id="@+id/roomBt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.75"
+            android:background="#000000"
+            android:scaleType="fitXY"
+            app:srcCompat="@mipmap/room" />
+
+        <io.chooco13.NotoTextView
+            android:id="@+id/writeRoomTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="@string/writeRoomTitle"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:fontWeight="medium" />
+
+        <io.chooco13.NotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/writeRoomTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="@string/writeRoomHelp"
+            android:textColor="@color/grayTextColor"
+            android:textSize="10sp"
+            app:fontWeight="demilight" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/mate" />
+        android:layout_height="236dp"
+        android:layout_weight="1">
+
+        <ImageButton
+            android:id="@+id/mateBt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.75"
+            android:background="#000000"
+            android:scaleType="fitXY"
+            app:srcCompat="@mipmap/mate" />
+
+        <io.chooco13.NotoTextView
+            android:id="@+id/writeMateTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="@string/writeMateTitle"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:fontWeight="medium" />
+
+        <io.chooco13.NotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/writeMateTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="@string/writeMateHelp"
+            android:textColor="@color/grayTextColor"
+            android:textSize="10sp"
+            app:fontWeight="demilight" />
+    </RelativeLayout>
 
 </LinearLayout>

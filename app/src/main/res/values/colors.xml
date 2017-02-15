@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#3f51b5</color>
-    <color name="colorPrimaryDark">#d1d5ed</color>
+    <color name="colorPrimaryDark">#f6f6f6</color>
     <color name="colorAccent">#FF4081</color>
 
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
     <color name="gray">#A6A6A6</color>
+
+    <!-- 공통 -->
+    <color name="defaultTextColor">#333339</color>
+    <color name="subTextColor">#595966</color>
+    <color name="grayTextColor">#C5CAD4</color>
+
+    <color name="pointColor">#ef3263</color>
+    <!-- intro -->
+    <color name="introBack">#d5d4d5</color>
+    <color name="inroTextcolor">#262630</color>
+
 </resources>

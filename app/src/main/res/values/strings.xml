@@ -2,7 +2,8 @@
     <string name="app_name">DDAKGI</string>
 
     <!-- intro -->
-    <string name="more_room">더 많은 방 찾아보기</string>
+    <string name="more_mate">더 많은 룸메이트 찾아보기</string>
+    <string name="introBeforeLog">로그인 후 \n 매칭률을 확인해보세요.</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -10,10 +11,16 @@
     <string name="filter_cancel">취소</string>
     <string name="filter_reset">리셋</string>
     <string name="filter_apply">적용</string>
+    <string name="berforeLogin">로그인 후 \n 매칭율을 확인해보세요.</string>
 
     <!-- writetab -->
     <string name="writeHelp">글을 등록하고 나만의 룸메이트를 찾아보세요</string>
     <string name="writetoolName">등록하기</string>
+    <string name="writeRoomTitle">방 등록하기</string>
+    <string name="writeRoomHelp">내 글을 보고 함께 살고 싶은 룸메가 연락을 할 거에요!</string>
+    <string name="writeMateTitle">룸메이트 등록하기</string>
+    <string name="writeMateHelp">내 글을 보고 방이 있는 룸메가 연락을 할 거에요!</string>
+
 
     <!-- Mytab -->
     <string name="myStory">내가 등록한 글</string>

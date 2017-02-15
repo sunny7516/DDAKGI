@@ -186,7 +186,7 @@ public class WriteRoomIdentify extends AppCompatActivity {
     // 사진 삭제
     // 업로드했던 사진 data 삭제로 수정해야 함.
     public void deleteImage(ImageButton roomImageBt){
-        roomImageBt.setImageDrawable(getResources().getDrawable(R.drawable.plus));
+        roomImageBt.setImageDrawable(getResources().getDrawable(R.mipmap.plus));
         roomImageBt.setScaleType(ImageView.ScaleType.FIT_CENTER);
         roomImageBt.setTag(null);
         alert.dismissWithAnimation();

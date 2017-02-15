@@ -3,15 +3,15 @@ package com.example.tacademy.ddakgi.Adapter;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
-import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.HomeTab.util.TimelineItem;
+import com.example.tacademy.ddakgi.R;
 
 import java.util.List;
 
@@ -53,12 +53,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView image;
-        CardView cardView;
+        LinearLayout linear;
 
         public ViewHolder(View itemView) {
             super(itemView);
             this.image = (ImageView)itemView.findViewById(R.id.mPhoto);
-            this.cardView = (CardView)itemView.findViewById(R.id.timelinecardView);
+            this.linear = (LinearLayout)itemView.findViewById(R.id.timelineLinear);
         }
     }
 }

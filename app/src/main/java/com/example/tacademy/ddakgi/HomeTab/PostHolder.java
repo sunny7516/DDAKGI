@@ -15,7 +15,7 @@ public class PostHolder extends RecyclerView.ViewHolder {
 
     public PostHolder(View itemView){
         super(itemView);
-        mNickname = (TextView)itemView.findViewById(R.id.mNickname);
+        mNickname = (TextView)itemView.findViewById(R.id.nickname);
     }
 
     public void bindOnPost(String nickName){

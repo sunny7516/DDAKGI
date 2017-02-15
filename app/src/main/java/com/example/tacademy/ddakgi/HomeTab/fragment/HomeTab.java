@@ -44,6 +44,11 @@ public class HomeTab extends Fragment {
     ImageView search_icon;
     SweetAlertDialog alert;
 
+    // all/room/mate 버튼
+    io.chooco13.NotoTextView all;
+    io.chooco13.NotoTextView room;
+    io.chooco13.NotoTextView mate;
+
     public HomeTab() {
     }
 
@@ -95,8 +100,16 @@ public class HomeTab extends Fragment {
         // search화면으로 가는 ClickListener 적용
         Button gosearchBt = (Button) view.findViewById(R.id.gosearchBt);
         Button filter_menu = (Button) view.findViewById(R.id.filter_menu);
-        gosearchBt.setOnClickListener(goSearchListener);
-        filter_menu.setOnClickListener(goSearchListener);
+        gosearchBt.setOnClickListener(toolBtListener);
+        filter_menu.setOnClickListener(toolBtListener);
+
+        // 홈탭 all/room/mate 버튼
+        all = (io.chooco13.NotoTextView) view.findViewById(R.id.all);
+        room = (io.chooco13.NotoTextView) view.findViewById(R.id.room);
+        mate = (io.chooco13.NotoTextView) view.findViewById(R.id.mate);
+        all.setOnClickListener(clickBtListener);
+        room.setOnClickListener(clickBtListener);
+        mate.setOnClickListener(clickBtListener);
 
         // Inflate the layout for this fragment
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
@@ -120,7 +133,7 @@ public class HomeTab extends Fragment {
     }
 
     // Click Event
-    private View.OnClickListener goSearchListener = new View.OnClickListener() {
+    private View.OnClickListener toolBtListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
@@ -133,11 +146,34 @@ public class HomeTab extends Fragment {
                 case R.id.filter_menu:
                     Intent intent = new Intent(getActivity(), FilterActivity.class);
                     startActivity(intent);
+                    break;
             }
         }
     };
 
-    public void letLogin(){
+    // all/room/mate Bt Click Event
+    io.chooco13.NotoTextView clickedText = null;
+    private View.OnClickListener clickBtListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            all.setTextColor(getResources().getColor(R.color.grayTextColor));
+            all.setBackgroundColor(getResources().getColor(R.color.white));
+            if (clickedText == null) {
+                clickedText = (io.chooco13.NotoTextView) view;
+                clickedText.setTextColor(getResources().getColor(R.color.white));
+                clickedText.setBackgroundColor(getResources().getColor(R.color.pointColor));
+            } else if (clickedText != view) {
+                clickedText.setTextColor(getResources().getColor(R.color.grayTextColor));
+                clickedText.setBackgroundColor(getResources().getColor(R.color.white));
+                clickedText = (io.chooco13.NotoTextView) view;
+                clickedText.setTextColor(getResources().getColor(R.color.white));
+                clickedText.setBackgroundColor(getResources().getColor(R.color.pointColor));
+            }
+        }
+    };
+
+    // 로그인 유도 팝업 띄우기
+    public void letLogin() {
         alert = new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
                 .setTitleText("로그인 유도")
                 .setContentText("로그인 하시겠습니까?")

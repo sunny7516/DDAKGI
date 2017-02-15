@@ -1,45 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/introBack"
     android:orientation="vertical"
     tools:context="com.example.tacademy.ddakgi.SplashIntro.MainActivity"
-    android:weightSum="1"
-    android:background="@color/colorPrimaryDark">
+    android:weightSum="1">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/MainToolbar"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:minHeight="?attr/actionBarSize"
-        android:weightSum="1" />
+        android:layout_height="wrap_content">
 
-    <!-- 화면을 꽉채워서 좌우 스크롤(페이지단위) -->
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_alignParentTop="true"
-        android:layout_weight="0.9"
-        android:layout_marginBottom="15dp"></android.support.v4.view.ViewPager>
-
-    <!-- animation 적용하여 home으로 이동하는 버튼 -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.1">
-
-        <Button
-            android:id="@+id/button"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/MainToolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:gravity="center|left"
+            android:layout_height="48dp"
+            android:background="@android:color/white"
+            android:minHeight="?attr/actionBarSize" />
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/main_icon" />
+    </RelativeLayout>
+
+        <!-- 화면을 꽉채워서 좌우 스크롤(페이지단위) -->
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            android:layout_weight="1"
+            android:layout_marginBottom="28dp" />
+
+        <!-- animation 적용하여 home으로 이동하는 버튼 -->
+        <LinearLayout
+            android:id="@+id/morelayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:onClick="goHome"
-            android:paddingLeft="20dp"
-            android:text="@string/more_room" />
-    </LinearLayout>
+            android:orientation="vertical">
+
+            <io.chooco13.NotoTextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="@string/more_mate"
+                android:textColor="@color/inroTextcolor"
+                android:textSize="13sp"
+                app:fontWeight="regular" />
+
+            <ImageView
+                android:id="@+id/moremateBt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="14dp"
+                android:src="@mipmap/morematebt" />
+        </LinearLayout>
 </LinearLayout>

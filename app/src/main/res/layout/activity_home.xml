@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:minHeight="?attr/actionBarSize"
-        android:weightSum="1" />
+        android:weightSum="1">
+        </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:id="@+id/fragment_container"

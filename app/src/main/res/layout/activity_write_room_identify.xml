@@ -38,8 +38,8 @@
         android:layout_weight="1"
         android:background="@android:color/transparent"
         android:onClick="getPhoto"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/plus" />
+        android:scaleType="fitXY"
+        app:srcCompat="@mipmap/plus" />
 
     <TextView
         android:id="@+id/textView42"
@@ -54,7 +54,7 @@
         android:layout_weight="1"
         android:background="@android:color/transparent"
         android:onClick="getPhoto"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/plus" />
+        android:scaleType="fitXY"
+        app:srcCompat="@mipmap/plus" />
 
 </LinearLayout>

@@ -499,7 +499,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/op1"
+                    android:background="@mipmap/airconditon_icon"
                     android:onClick="toggledOp"
                     android:textOff="@null"
                     android:textOn="@null" />
@@ -509,7 +509,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/op2"
+                    android:background="@mipmap/bed_icon"
                     android:onClick="toggledOp"
                     android:textOff="@null"
                     android:textOn="@null" />
@@ -519,7 +519,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/op3"
+                    android:background="@mipmap/elevator_icon"
                     android:onClick="toggledOp"
                     android:textOff="@null"
                     android:textOn="@null" />
@@ -529,7 +529,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/op4"
+                    android:background="@mipmap/microwave_icon"
                     android:onClick="toggledOp"
                     android:textOff="@null"
                     android:textOn="@null" />
@@ -546,7 +546,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/op5"
+                    android:background="@mipmap/parking_icon"
                     android:onClick="toggledOp"
                     android:textOff="@null"
                     android:textOn="@null" />
@@ -556,7 +556,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/op6"
+                    android:background="@mipmap/refrige_icon"
                     android:onClick="toggledOp"
                     android:textOff="@null"
                     android:textOn="@null" />
@@ -566,7 +566,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/op7"
+                    android:background="@mipmap/stove_icon"
                     android:onClick="toggledOp"
                     android:textOff="@null"
                     android:textOn="@null" />
@@ -576,7 +576,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/op8"
+                    android:background="@mipmap/tv_icon"
                     android:onClick="toggledOp"
                     android:textOff="@null"
                     android:textOn="@null" />
@@ -586,7 +586,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/op9"
+                    android:background="@mipmap/washmachine_icon"
                     android:onClick="toggledOp"
                     android:textOff="@null"
                     android:textOn="@null" />
@@ -624,9 +624,9 @@
                 android:textStyle="bold" />
 
             <LinearLayout
+                android:id="@+id/ExtraQue10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/ExtraQue10"
                 android:orientation="horizontal">
 
                 <EditText
@@ -639,20 +639,20 @@
                     android:inputType="textPersonName" />
 
                 <Button
+                    android:id="@+id/ExtraQue1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:id="@+id/ExtraQue1"
-                    android:onClick="plusExtra"
                     android:background="@color/float_transparent"
+                    android:onClick="plusExtra"
                     android:text="+" />
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ExtraQuelinear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/ExtraQuelinear"
-                android:orientation="vertical"/>
+                android:orientation="vertical" />
 
         </LinearLayout>
     </LinearLayout>
