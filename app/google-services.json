@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "492328524598",
+    "firebase_url": "https://ddakgi-94b1b.firebaseio.com",
+    "project_id": "ddakgi-94b1b",
+    "storage_bucket": "ddakgi-94b1b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:492328524598:android:633e9891ba9f4dec",
+        "android_client_info": {
+          "package_name": "com.example.tacademy.ddakgi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "492328524598-jb4fine16i2ia9j21bpsjp6c8iiuh1lh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_lHFzkMXEs1I-EaqsrzylYZ57LvaFoPA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -9,15 +9,10 @@ import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.tacademy.ddakgi.Adapter.MyRecyclerAdapter;
-import com.example.tacademy.ddakgi.MyTab.activity.HelpActivity;
-import com.example.tacademy.ddakgi.MyTab.activity.SettingActivity;
 import com.example.tacademy.ddakgi.MyTab.util.MyTimelineItem;
 import com.example.tacademy.ddakgi.R;
 
@@ -68,33 +63,6 @@ public class MyTab extends Fragment {
         }
         recyclerView.setAdapter(new MyRecyclerAdapter(getContext(), items, R.layout.home_timeline));
         return view;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        // destroy all menu and re-call onCreateOptionsMenu
-        getActivity().invalidateOptionsMenu();
-    }
-
-    // Filter Button을 Toolbar에 적용
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.mytab_menu, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_help:
-                FragmentIntent(new HelpActivity());
-                break;
-            case R.id.menu_settings:
-                FragmentIntent(new SettingActivity());
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     // Fragment 화면 이동(Filter화면 띄우기)

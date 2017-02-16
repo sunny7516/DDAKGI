@@ -88,10 +88,14 @@
     <string name="contract">임대계약서</string>
     <string name="roomidentifyTool">인증하기 (선택)</string>
 
+    <string name="plusCard">신분증\n사진을 추가하세요.</string>
+    <string name="plusContract">임대계약서\n사진을 추가하세요.</string>
+
     <!-- 검색 -->
     <string name="searchLocation">검색</string>
     <string name="searchAll">지하철 역 또는 지역명을 입력하세요. \n
                             ex) 신림역, 강남구, 논현동</string>
+    <string name="title_activity_write_room_locate">Map</string>
 
 
 </resources>

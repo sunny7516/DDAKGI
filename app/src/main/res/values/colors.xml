@@ -14,6 +14,8 @@
     <color name="grayTextColor">#C5CAD4</color>
 
     <color name="pointColor">#ef3263</color>
+    <color name="textpointColor">#e52356</color>
+
     <!-- intro -->
     <color name="introBack">#d5d4d5</color>
     <color name="inroTextcolor">#262630</color>

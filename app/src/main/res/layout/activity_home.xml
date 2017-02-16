@@ -23,7 +23,6 @@
         android:layout_weight="1"
         android:orientation="vertical" />
 
-
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
@@ -31,6 +30,5 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
-
 
 </LinearLayout>

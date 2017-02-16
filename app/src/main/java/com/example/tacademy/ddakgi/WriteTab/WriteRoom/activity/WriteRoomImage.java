@@ -19,15 +19,21 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class WriteRoomIdentify extends AppCompatActivity {
+import static com.example.tacademy.ddakgi.R.mipmap.plus;
+
+/**
+ * 방 사진 등록하는 화면
+ */
+
+public class WriteRoomImage extends AppCompatActivity {
     SweetAlertDialog alert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_write_room_identify);
+        setContentView(R.layout.activity_write_room_image);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.writeroomIdentifyTool);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.writeroomImageTool);
         this.setSupportActionBar(toolbar);
     }
 
@@ -35,10 +41,10 @@ public class WriteRoomIdentify extends AppCompatActivity {
     // 사진이 이미 있으면 삭제 혹은 재설정, 없으면 사진 선택
     public void getPhoto(View view) {
         //if (havePhoto == null) {
-        ImageButton roomIdentifyBt = (ImageButton)view;
-        if (roomIdentifyBt.getTag() == null) {
+        ImageButton roomImageBt = (ImageButton) view;
+        if (roomImageBt.getTag() == null) {
             // 사진이 등록되지 않았으면
-            onPhoto(view, roomIdentifyBt);
+            onPhoto(view, roomImageBt);
         } else {
             // 사진이 이미 등록되어 있음
             alert = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
@@ -47,7 +53,7 @@ public class WriteRoomIdentify extends AppCompatActivity {
                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                         @Override
                         public void onClick(SweetAlertDialog sweetAlertDialog) {
-                            deleteImage(roomIdentifyBt);
+                            deleteImage(roomImageBt);
                         }
                     })
                     .setCancelText("재설정")
@@ -55,8 +61,8 @@ public class WriteRoomIdentify extends AppCompatActivity {
                         @Override
                         public void onClick(SweetAlertDialog sweetAlertDialog) {
                             alert.dismissWithAnimation();
-                            roomIdentifyBt.setTag(null);
-                            onPhoto(view,roomIdentifyBt);
+                            roomImageBt.setTag(null);
+                            onPhoto(view, roomImageBt);
                         }
                     });
             alert.setCancelable(true);
@@ -64,9 +70,13 @@ public class WriteRoomIdentify extends AppCompatActivity {
         }
     }
 
+    // backbutton
+    public void back(View view){
+        finish();
+    }
 
     // 사진 선택 방법 (포토앨범, 사진 촬영)
-    public void onPhoto(View view, ImageButton roomIdentifyBt) {
+    public void onPhoto(View view, ImageButton roomImageBt) {
         alert = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                 .setTitleText("사진선택")
                 .setContentText("사진 선택 방법을 고르세요")
@@ -75,7 +85,7 @@ public class WriteRoomIdentify extends AppCompatActivity {
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
                         // 갤러리에서 선택
-                        onGallery(roomIdentifyBt);
+                        onGallery(roomImageBt);
                     }
                 })
                 .setCancelText("사진 촬영")
@@ -83,7 +93,7 @@ public class WriteRoomIdentify extends AppCompatActivity {
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
                         // 사진 촬영
-                        onCamera(roomIdentifyBt);
+                        onCamera(roomImageBt);
                     }
                 });
         alert.setCancelable(true);
@@ -91,7 +101,7 @@ public class WriteRoomIdentify extends AppCompatActivity {
     }
 
     // 사진 촬영
-    public void onCamera( ImageButton roomIdentifyBt) {
+    public void onCamera(ImageButton roomImageBt) {
         // 크롭작업을 하기 위해 옵션 설정(편집)
         UCrop.Options options = new UCrop.Options();
         options.setToolbarColor(ContextCompat.getColor(this, R.color.white));
@@ -111,12 +121,12 @@ public class WriteRoomIdentify extends AppCompatActivity {
                         return;
                     }
                     Log.i("PH", response.data());
-                    loadImage(response.data(), roomIdentifyBt);
+                    loadImage(response.data(), roomImageBt);
                 });
     }
 
     // 갤러리에서 선택
-    public void onGallery( ImageButton roomIdentifyBt) {
+    public void onGallery(ImageButton roomImageBt) {
         // 크롭작업을 하기 위해 옵션 설정(편집)
         UCrop.Options options = new UCrop.Options();
         options.setToolbarColor(ContextCompat.getColor(this, R.color.white));
@@ -136,31 +146,33 @@ public class WriteRoomIdentify extends AppCompatActivity {
                         return;
                     }
                     Log.i("PH", response.data());
-                    loadImage(response.data(), roomIdentifyBt);
+                    loadImage(response.data(), roomImageBt);
                 });
     }
 
     // 사진 올리기
-    public void loadImage(String path,  ImageButton roomIdentifyBt) {
-        alert.dismissWithAnimation();
+    public void loadImage(String path, ImageButton roomImageBt) {
+        ImageView plusBt = (ImageView) findViewById(R.id.plusBt);
+        plusBt.setBackground(null);
 
+        alert.dismissWithAnimation();
         // 이미지뷰에 이미지 세팅
         String url = "file://" + path;
 
         Picasso.with(this).setLoggingEnabled(true);
         Picasso.with(this).setIndicatorsEnabled(true);
         Picasso.with(this).invalidate(url);
-        Picasso.with(this).load(url).into(roomIdentifyBt);
+        Picasso.with(this).load(url).into(roomImageBt);
 
-        roomIdentifyBt.setTag(path);
+        roomImageBt.setTag(path);
         //havePhoto = path;
         //uploadImage(path);
     }
 
     // 사진 삭제
     // 업로드했던 사진 data 삭제로 수정해야 함.
-    public void deleteImage(ImageButton roomImageBt){
-        roomImageBt.setImageDrawable(getResources().getDrawable(R.mipmap.plus));
+    public void deleteImage(ImageButton roomImageBt) {
+        roomImageBt.setImageDrawable(getResources().getDrawable(plus));
         roomImageBt.setScaleType(ImageView.ScaleType.FIT_CENTER);
         roomImageBt.setTag(null);
         alert.dismissWithAnimation();

@@ -16,644 +16,808 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/writeroomTool"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:background="@android:color/white"
             android:minHeight="?attr/actionBarSize"
-            android:weightSum="1" />
-        <!-- 제목, 위치, 사진 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:weightSum="1">
 
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="90dp"
-                android:layout_height="match_parent"
-                android:gravity="left|center"
-                android:paddingLeft="20dp"
-                android:text="@string/roomTitle"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/editText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:ems="10"
-                android:hint="@string/roomTitleHint"
-                android:inputType="textPersonName" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/button2"
-                android:layout_width="90dp"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:gravity="left|center"
-                android:paddingLeft="20dp"
-                android:text="@string/roomLocate"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/textView13"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:gravity="left|center"
-                android:onClick="goLocate"
-                android:text="@string/roomLocateText" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/button3"
-                android:layout_width="90dp"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:gravity="left|center"
-                android:paddingLeft="20dp"
-                android:text="@string/roomPhoto"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/textView14"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:gravity="left|center"
-                android:onClick="goWriteRoomImage"
-                android:text="@string/roomPhotoText" />
-        </LinearLayout>
-
-        <!-- 펼쳐지는 내용(유형, 평수) -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="showRoomType"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="90dp"
-                android:layout_height="match_parent"
-                android:gravity="left|center"
-                android:paddingLeft="20dp"
-                android:text="@string/roomType"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@android:drawable/ic_menu_more" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/roomType"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:visibility="visible">
-
-            <TextView
-                android:id="@+id/typeOne"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:onClick="typeChecked"
-                android:text="@string/typeOne" />
-
-            <TextView
-                android:id="@+id/typeTwo"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:onClick="typeChecked"
-                android:text="@string/typeTwo" />
-
-            <TextView
-                android:id="@+id/typeHouse"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:onClick="typeChecked"
-                android:text="@string/typeHouse" />
-
-            <TextView
-                android:id="@+id/typeOffice"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:onClick="typeChecked"
-                android:text="@string/typeOffice" />
-
-            <TextView
-                android:id="@+id/typeApart"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:onClick="typeChecked"
-                android:text="@string/typeApart" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="showRoomSize"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView23"
-                android:layout_width="90dp"
-                android:layout_height="match_parent"
-                android:gravity="left|center"
-                android:paddingLeft="20dp"
-                android:text="@string/roomSize"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@android:drawable/ic_menu_more" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/roomSize"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:visibility="visible">
-
-            <TextView
-                android:id="@+id/textView28"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:onClick="sizeClicked"
-                android:text="@string/sizeUnderTen" />
-
-            <TextView
-                android:id="@+id/textView27"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:onClick="sizeClicked"
-                android:text="@string/sizeTen" />
-
-            <TextView
-                android:id="@+id/textView26"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:onClick="sizeClicked"
-                android:text="@string/sizeTwenty" />
-
-            <TextView
-                android:id="@+id/textView25"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:onClick="sizeClicked"
-                android:text="@string/sizeThirty" />
-
-            <TextView
-                android:id="@+id/textView24"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:onClick="sizeClicked"
-                android:text="@string/sizeFirty" />
-        </LinearLayout>
-
-        <!-- 보증금 ~ 임대계약서/신분증 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView15"
-                android:layout_width="90dp"
-                android:layout_height="match_parent"
-                android:gravity="left|center"
-                android:paddingLeft="20dp"
-                android:text="@string/roomPrice"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/editText3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/roomPriceHint"
-                android:inputType="number" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView20"
-                android:layout_width="90dp"
-                android:layout_height="match_parent"
-                android:gravity="left|center"
-                android:paddingLeft="20dp"
-                android:text="@string/roomMonth"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/editText6"
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="@string/roomMonthHint"
-                android:inputType="number" />
-        </LinearLayout>
+                android:layout_marginLeft="16dp">
 
-        <LinearLayout
+                <Button
+                    android:id="@+id/writeroomBackBt"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:onClick="back"
+                    android:background="@mipmap/back_btn" />
+
+                <io.chooco13.NotoTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_toRightOf="@id/writeroomBackBt"
+                    android:gravity="center"
+                    android:text="@string/writeRoomTitle"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="16sp"
+                    app:fontWeight="medium" />
+
+                <io.chooco13.NotoTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:text="@string/finish"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp"
+                    app:fontWeight="regular" />
+            </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView17"
-                android:layout_width="90dp"
-                android:layout_height="match_parent"
-                android:gravity="left|center"
-                android:paddingLeft="20dp"
-                android:text="@string/roomHeight"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/editText5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/roomHeightHint"
-                android:inputType="textPersonName" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="goIdentify"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:gravity="left|center"
-                android:paddingLeft="20dp"
-                android:text="@string/identify" />
-
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingLeft="10dp"
-                app:srcCompat="@android:drawable/ic_menu_add" />
-        </LinearLayout>
-
-        <!-- 추가 정보 입력 -->
-
+            android:layout_height="8dp"
+            android:background="@color/grayTextColor"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="ShowExtraInfo"
-            android:orientation="horizontal">
+            android:layout_marginLeft="16dp"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView29"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="left|center"
-                android:paddingLeft="20dp"
-                android:text="@string/roomExtraInfo"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/imageView7"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingLeft="10dp"
-                app:srcCompat="@android:drawable/ic_menu_more" />
-        </LinearLayout>
-
-        <!-- 추가 정보 show/hide -->
-        <LinearLayout
-            android:id="@+id/extraInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="visible">
-
+            <!-- 제목, 위치, 사진 -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView32"
-                    android:layout_width="90dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="@string/prefDate"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView33"
-                    android:layout_width="90dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="@string/pay"
-                    android:textStyle="bold" />
+                <io.chooco13.NotoTextView
+                    android:id="@+id/text1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="32dp"
+                    android:text="@string/roomTitle"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:fontWeight="regular" />
 
                 <EditText
-                    android:id="@+id/editText2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:ems="10"
-                    android:hint="@string/payHint"
-                    android:inputType="number" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ToggleButton
-                    android:id="@+id/textView39"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:background="@android:color/transparent"
-                    android:onClick="togglePay"
-                    android:textOff="@string/waterPay"
-                    android:textOn="@string/waterPay" />
-
-                <ToggleButton
-                    android:id="@+id/textView38"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@android:color/transparent"
-                    android:onClick="togglePay"
-                    android:textOff="@string/electPay"
-                    android:textOn="@string/electPay" />
-
-                <ToggleButton
-                    android:id="@+id/textView37"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@android:color/transparent"
-                    android:onClick="togglePay"
-                    android:textOff="@string/internetPay"
-                    android:textOn="@string/internetPay" />
-
-                <ToggleButton
-                    android:id="@+id/textView36"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@android:color/transparent"
-                    android:onClick="togglePay"
-                    android:textOff="@string/gasPay"
-                    android:textOn="@string/gasPay" />
-
-                <ToggleButton
-                    android:id="@+id/textView35"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@android:color/transparent"
-                    android:onClick="togglePay"
-                    android:textOff="@string/tvPay"
-                    android:textOn="@string/tvPay" />
-
-                <ToggleButton
-                    android:id="@+id/heatpay"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@android:color/transparent"
-                    android:onClick="togglePay"
-                    android:textOff="@string/heatpay"
-                    android:textOn="@string/heatpay" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/textView40"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left|center"
-                android:text="@string/option"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ToggleButton
-                    android:id="@+id/imageButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@mipmap/airconditon_icon"
-                    android:onClick="toggledOp"
-                    android:textOff="@null"
-                    android:textOn="@null" />
-
-                <ToggleButton
-                    android:id="@+id/imageButton2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@mipmap/bed_icon"
-                    android:onClick="toggledOp"
-                    android:textOff="@null"
-                    android:textOn="@null" />
-
-                <ToggleButton
-                    android:id="@+id/imageButton3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@mipmap/elevator_icon"
-                    android:onClick="toggledOp"
-                    android:textOff="@null"
-                    android:textOn="@null" />
-
-                <ToggleButton
-                    android:id="@+id/imageButton4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@mipmap/microwave_icon"
-                    android:onClick="toggledOp"
-                    android:textOff="@null"
-                    android:textOn="@null" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ToggleButton
-                    android:id="@+id/imageButton5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@mipmap/parking_icon"
-                    android:onClick="toggledOp"
-                    android:textOff="@null"
-                    android:textOn="@null" />
-
-                <ToggleButton
-                    android:id="@+id/imageButton6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@mipmap/refrige_icon"
-                    android:onClick="toggledOp"
-                    android:textOff="@null"
-                    android:textOn="@null" />
-
-                <ToggleButton
-                    android:id="@+id/imageButton7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@mipmap/stove_icon"
-                    android:onClick="toggledOp"
-                    android:textOff="@null"
-                    android:textOn="@null" />
-
-                <ToggleButton
-                    android:id="@+id/imageButton8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@mipmap/tv_icon"
-                    android:onClick="toggledOp"
-                    android:textOff="@null"
-                    android:textOn="@null" />
-
-                <ToggleButton
-                    android:id="@+id/imageButton9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@mipmap/washmachine_icon"
-                    android:onClick="toggledOp"
-                    android:textOff="@null"
-                    android:textOn="@null" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView41"
-                    android:layout_width="90dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical|center"
-                    android:text="@string/introduce" />
-
-                <EditText
-                    android:id="@+id/editText4"
+                    android:id="@+id/editText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:ems="10"
-                    android:hint="@string/introduceHint"
-                    android:inputType="textPersonName" />
-
+                    android:hint="@string/roomTitleHint"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/textView43"
-                android:layout_width="90dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="left|center"
-                android:text="@string/extraQue"
-                android:textStyle="bold" />
-
             <LinearLayout
-                android:id="@+id/ExtraQue10"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/editText7"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="9"
-                    android:ems="10"
-                    android:hint="@string/extraQueHint"
-                    android:inputType="textPersonName" />
+                <io.chooco13.NotoTextView
+                    android:id="@+id/text2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="32dp"
+                    android:text="@string/roomLocate"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:fontWeight="regular" />
 
                 <Button
-                    android:id="@+id/ExtraQue1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/float_transparent"
-                    android:onClick="plusExtra"
-                    android:text="+" />
+                    android:id="@+id/textView13"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:gravity="left|center"
+                    android:hint="@string/roomLocateText"
+                    android:onClick="goLocate"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ExtraQuelinear"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                android:layout_height="48dp"
+                android:orientation="horizontal">
 
+                <io.chooco13.NotoTextView
+                    android:id="@+id/textView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="32dp"
+                    android:text="@string/roomPhoto"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:fontWeight="regular" />
+
+                <Button
+                    android:id="@+id/textView14"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:gravity="left|center"
+                    android:hint="@string/roomPhotoText"
+                    android:onClick="goWriteRoomImage"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- 펼쳐지는 내용(유형, 평수) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:onClick="showRoomType"
+                android:orientation="horizontal">
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/text3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="31dp"
+                    android:text="@string/roomType"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:fontWeight="regular" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:rotation="-90"
+                    app:srcCompat="@mipmap/certification_btn" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/roomType"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/typeOne"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="32dp"
+                    android:layout_weight="1"
+                    android:onClick="typeChecked"
+                    android:text="@string/typeOne"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:fontWeight="demilight" />
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/typeTwo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="32dp"
+                    android:layout_weight="1"
+                    android:onClick="typeChecked"
+                    android:text="@string/typeTwo"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:fontWeight="demilight" />
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/typeHouse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="32dp"
+                    android:layout_weight="1"
+                    android:onClick="typeChecked"
+                    android:text="@string/typeHouse"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:fontWeight="demilight" />
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/typeOffice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="32dp"
+                    android:layout_weight="1"
+                    android:onClick="typeChecked"
+                    android:text="@string/typeOffice"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:fontWeight="demilight" />
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/typeApart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="32dp"
+                    android:layout_weight="1"
+                    android:onClick="typeChecked"
+                    android:text="@string/typeApart"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:fontWeight="demilight" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:onClick="showRoomSize"
+                android:orientation="horizontal">
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/text4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="31dp"
+                    android:text="@string/roomSize"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:fontWeight="regular" />
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:rotation="-90"
+                    app:srcCompat="@mipmap/certification_btn" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/roomSize"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/sizeUnderTen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="typeChecked"
+                    android:text="@string/sizeUnderTen"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp"
+                    app:fontWeight="demilight" />
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/sizeTen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="typeChecked"
+                    android:text="@string/sizeTen"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp"
+                    app:fontWeight="demilight" />
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/sizeTwenty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="typeChecked"
+                    android:text="@string/sizeTwenty"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp"
+                    app:fontWeight="demilight" />
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/sizeThirty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="typeChecked"
+                    android:text="@string/sizeThirty"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp"
+                    app:fontWeight="demilight" />
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/sizeFirty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="typeChecked"
+                    android:text="@string/sizeFirty"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp"
+                    app:fontWeight="demilight" />
+            </LinearLayout>
+
+            <!-- 보증금 ~ 임대계약서/신분증 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
+
+                <io.chooco13.NotoTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="21dp"
+                    android:text="@string/roomPrice"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:fontWeight="regular" />
+
+                <EditText
+                    android:background="@android:color/transparent"
+                    android:id="@+id/editText3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:ems="10"
+                    android:hint="@string/roomPriceHint"
+                    android:inputType="number"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
+
+                <io.chooco13.NotoTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="32dp"
+                    android:text="@string/roomMonth"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:fontWeight="regular" />
+
+                <EditText
+                    android:background="@android:color/transparent"
+                    android:id="@+id/editText6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="@string/roomMonthHint"
+                    android:inputType="number"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
+
+                <io.chooco13.NotoTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="32dp"
+                    android:text="@string/roomHeight"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:fontWeight="regular" />
+
+                <EditText
+                    android:id="@+id/editText5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:ems="10"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/roomHeightHint"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:onClick="goIdentify"
+                android:orientation="horizontal">
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/button4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="32dp"
+                    android:text="@string/identify"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="13sp"
+                    app:fontWeight="regular" />
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:srcCompat="@mipmap/certification_btn" />
+            </LinearLayout>
+            <!-- 추가 정보 입력 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:onClick="ShowExtraInfo"
+                android:orientation="horizontal">
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/textView29"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="32dp"
+                    android:text="@string/roomExtraInfo"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:fontWeight="regular" />
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:rotation="-90"
+                    app:srcCompat="@mipmap/certification_btn" />
+            </LinearLayout>
+
+            <!-- 추가 정보 show/hide -->
+            <LinearLayout
+                android:id="@+id/extraInfo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <io.chooco13.NotoTextView
+                        android:id="@+id/textView32"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="32dp"
+                        android:text="@string/prefDate"
+                        android:textColor="@color/defaultTextColor"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        app:fontWeight="regular" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <io.chooco13.NotoTextView
+                        android:id="@+id/textView33"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="32dp"
+                        android:text="@string/pay"
+                        android:textColor="@color/defaultTextColor"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        app:fontWeight="regular" />
+
+                    <EditText
+                        android:id="@+id/editText2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:ems="10"
+                        android:hint="@string/payHint"
+                        android:inputType="number"
+                        android:textColor="@color/grayTextColor"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <ToggleButton
+                        android:id="@+id/textView39"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:onClick="togglePay"
+                        android:text="@string/pay"
+                        android:textColor="@color/grayTextColor"
+                        android:textOff="@string/waterPay"
+                        android:textOn="@string/waterPay"
+                        android:textSize="13sp" />
+
+                    <ToggleButton
+                        android:id="@+id/textView38"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:onClick="togglePay"
+                        android:textColor="@color/grayTextColor"
+                        android:textOff="@string/electPay"
+                        android:textOn="@string/electPay"
+                        android:textSize="13sp" />
+
+                    <ToggleButton
+                        android:id="@+id/textView37"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:onClick="togglePay"
+                        android:textColor="@color/grayTextColor"
+                        android:textOff="@string/internetPay"
+                        android:textOn="@string/internetPay"
+                        android:textSize="13sp" />
+
+                    <ToggleButton
+                        android:id="@+id/textView36"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:onClick="togglePay"
+                        android:textColor="@color/grayTextColor"
+                        android:textOff="@string/gasPay"
+                        android:textOn="@string/gasPay"
+                        android:textSize="13sp" />
+
+                    <ToggleButton
+                        android:id="@+id/textView35"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:onClick="togglePay"
+                        android:textColor="@color/grayTextColor"
+                        android:textOff="@string/tvPay"
+                        android:textOn="@string/tvPay"
+                        android:textSize="13sp" />
+
+                    <ToggleButton
+                        android:id="@+id/heatpay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:onClick="togglePay"
+                        android:textColor="@color/grayTextColor"
+                        android:textOff="@string/heatpay"
+                        android:textOn="@string/heatpay"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/textView40"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center|left"
+                    android:text="@string/option"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:fontWeight="regular" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <ToggleButton
+                        android:id="@+id/airconditon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/airconditon_icon"
+                        android:onClick="toggledOp"
+                        android:textOff="@null"
+                        android:layout_marginLeft="28dp"
+                        android:layout_weight="1"
+                        android:textOn="@null" />
+
+                    <ToggleButton
+                        android:id="@+id/bed"
+                        android:layout_marginLeft="70dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/bed_icon"
+                        android:onClick="toggledOp"
+                        android:textOff="@null"
+                        android:layout_weight="1"
+                        android:textOn="@null" />
+
+                    <ToggleButton
+                        android:layout_marginLeft="70dp"
+                        android:id="@+id/elevator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/elevator_icon"
+                        android:onClick="toggledOp"
+                        android:textOff="@null"
+                        android:layout_weight="1"
+                        android:textOn="@null" />
+
+                    <ToggleButton
+                        android:layout_marginLeft="70dp"
+                        android:id="@+id/microwave"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/microwave_icon"
+                        android:onClick="toggledOp"
+                        android:layout_marginRight="28dp"
+                        android:textOff="@null"
+                        android:layout_weight="1"
+                        android:textOn="@null" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <ToggleButton
+                        android:layout_marginRight="46dp"
+                        android:id="@+id/parking"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/parking_icon"
+                        android:onClick="toggledOp"
+                        android:textOff="@null"
+                        android:layout_weight="1"
+                        android:textOn="@null" />
+
+                    <ToggleButton
+                        android:layout_marginRight="46dp"
+                        android:id="@+id/refrige"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/refrige_icon"
+                        android:onClick="toggledOp"
+                        android:layout_weight="1"
+                        android:textOff="@null"
+                        android:textOn="@null" />
+
+                    <ToggleButton
+                        android:layout_marginRight="46dp"
+                        android:id="@+id/stove"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/stove_icon"
+                        android:onClick="toggledOp"
+                        android:textOff="@null"
+                        android:layout_weight="1"
+                        android:textOn="@null" />
+
+                    <ToggleButton
+                        android:layout_marginRight="46dp"
+                        android:id="@+id/tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/tv_icon"
+                        android:onClick="toggledOp"
+                        android:layout_weight="1"
+                        android:textOff="@null"
+                        android:textOn="@null" />
+
+                    <ToggleButton
+                        android:layout_marginRight="28dp"
+                        android:layout_weight="1"
+                        android:id="@+id/washmachine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/washmachine_icon"
+                        android:onClick="toggledOp"
+                        android:textOff="@null"
+                        android:textOn="@null" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <io.chooco13.NotoTextView
+                        android:id="@+id/textView41"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|center"
+                        android:text="@string/introduce"
+                        android:layout_marginRight="32dp"
+                        android:textColor="@color/defaultTextColor"
+                        android:textSize="13sp"
+                        app:fontWeight="regular" />
+
+                    <EditText
+                        android:id="@+id/editText4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:ems="10"
+                        android:textColor="@color/grayTextColor"
+                        android:textSize="13sp"
+                        android:hint="@string/introduceHint"
+                        android:inputType="textPersonName" />
+
+                </LinearLayout>
+
+                <io.chooco13.NotoTextView
+                    app:fontWeight="regular"
+                    android:textColor="@color/defaultTextColor"
+                    android:id="@+id/textView43"
+                    android:textSize="13sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:gravity="center|left"
+                    android:text="@string/extraQue"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/ExtraQue10"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/editText7"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="9"
+                        android:textSize="13sp"
+                        android:textColor="@color/grayTextColor"
+                        android:background="@android:color/transparent"
+                        android:ems="10"
+                        android:hint="@string/extraQueHint"
+                        android:inputType="textPersonName" />
+
+                    <Button
+                        android:id="@+id/ExtraQue1"
+                        android:layout_width="13dp"
+                        android:layout_marginRight="17dp"
+                        android:layout_height="13dp"
+                        android:onClick="plusExtra"
+                        android:background="@mipmap/plus_btn"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ExtraQuelinear"
+                    android:layout_width="match_parent"
+                    android:layout_height="96dp"
+                    android:orientation="vertical"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
