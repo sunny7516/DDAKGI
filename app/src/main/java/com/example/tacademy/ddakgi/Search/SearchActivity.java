@@ -8,16 +8,17 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.Search.fragment.SearchAll;
 import com.example.tacademy.ddakgi.Search.fragment.SearchMap;
+import com.example.tacademy.ddakgi.base.BaseActivity;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends BaseActivity {
 
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -30,20 +31,22 @@ public class SearchActivity extends AppCompatActivity {
 
         tabLayout = (TabLayout) findViewById(R.id.searchTablayout);
         viewPager = (ViewPager) findViewById(R.id.searchViewPager);
+        tabLayout.setTabTextColors(getResources().getColor(R.color.subTextColor), getResources().getColor(R.color.textpointColor));
 
         // SearchView Style
-        SearchView searchView = (SearchView) findViewById(R.id.fragSearchView);
+        SearchView searchView = (SearchView) findViewById(R.id.homeSearchView);
 
         EditText searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
-        searchEditText.setTextColor(getResources().getColor(R.color.black));
-        searchEditText.setHintTextColor(getResources().getColor(R.color.gray));
+        searchEditText.setTextColor(getResources().getColor(R.color.subTextColor));
+        searchEditText.setHintTextColor(getResources().getColor(R.color.grayTextColor));
+        searchEditText.setTextSize(13);
 
         ImageView search_close_btn = (ImageView) searchView.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
         ImageView search_icon = (ImageView) searchView.findViewById(android.support.v7.appcompat.R.id.search_mag_icon);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            search_close_btn.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.gray)));
-            search_icon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.gray)));
+            search_close_btn.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.subTextColor)));
+            search_icon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.subTextColor)));
         }
 
         // 검색필드를 항상 표시하고 싶으면 false, 아이콘으로 보이고 싶으면 true
@@ -52,6 +55,26 @@ public class SearchActivity extends AppCompatActivity {
         fragmentAdapter = new FragmentAdapter(getSupportFragmentManager());
         viewPager.setAdapter(fragmentAdapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                switch (tab.getPosition()) {
+                    case 1:
+                        Toast.makeText(getApplicationContext(), "내 위치와 50m 정도 차이 날 수 있습니다.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
     class FragmentAdapter extends FragmentPagerAdapter {
@@ -64,11 +87,10 @@ public class SearchActivity extends AppCompatActivity {
 
         // 프레그먼트 화면 제목 설정
         String[] titles = new String[]{
-                "전체 검색", "지도로 검색"
+                "통합 검색", "지도로 검색"
         };
 
         // 생성자
-
 
         public FragmentAdapter(FragmentManager fm) {
             super(fm);

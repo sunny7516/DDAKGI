@@ -63,16 +63,18 @@ public class HomeTab extends Fragment {
         // SearchView Style
         searchView = (SearchView) view.findViewById(R.id.searchView);
 
+        // SearchView Style
         searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
-        searchEditText.setTextColor(getResources().getColor(R.color.black));
-        searchEditText.setHintTextColor(getResources().getColor(R.color.gray));
+        searchEditText.setTextColor(getResources().getColor(R.color.subTextColor));
+        searchEditText.setHintTextColor(getResources().getColor(R.color.grayTextColor));
+        searchEditText.setTextSize(13);
 
         search_close_btn = (ImageView) searchView.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
         search_icon = (ImageView) searchView.findViewById(android.support.v7.appcompat.R.id.search_mag_icon);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            search_close_btn.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.gray)));
-            search_icon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.gray)));
+            search_close_btn.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.subTextColor)));
+            search_icon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.subTextColor)));
         }
 
         searchView.setIconifiedByDefault(false);
@@ -139,8 +141,8 @@ public class HomeTab extends Fragment {
             switch (v.getId()) {
                 // 검색창 눌렀을 때 search화면으로 intent
                 case gosearchBt:
-                    Intent Intent = new Intent(getContext(), SearchActivity.class);
-                    startActivity(Intent);
+                    Intent searchintent = new Intent(getContext(), SearchActivity.class);
+                    startActivity(searchintent);
                     break;
                 // 이미지 버튼 눌렀을 때 filter 화면으로 intent
                 case R.id.filter_menu:

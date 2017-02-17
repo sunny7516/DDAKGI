@@ -2,7 +2,6 @@ package com.example.tacademy.ddakgi.WriteTab.WriteRoom.activity;
 
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.example.tacademy.ddakgi.R;
+import com.example.tacademy.ddakgi.base.BaseActivity;
 import com.miguelbcr.ui.rx_paparazzo.RxPaparazzo;
 import com.miguelbcr.ui.rx_paparazzo.entities.size.ScreenSize;
 import com.squareup.picasso.Picasso;
@@ -19,7 +19,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class WriteRoomIdentify extends AppCompatActivity {
+public class WriteRoomIdentify extends BaseActivity {
     SweetAlertDialog alert;
 
     @Override

@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.tacademy.ddakgi.WriteTab.WriteRoom.activity.WriteRoomActivity">
+    <!-- 방 등록 화면 -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,8 +31,8 @@
                     android:id="@+id/writeroomBackBt"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:onClick="back"
-                    android:background="@mipmap/back_btn" />
+                    android:background="@mipmap/back_btn"
+                    android:onClick="back" />
 
                 <io.chooco13.NotoTextView
                     android:layout_width="wrap_content"
@@ -60,7 +61,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="8dp"
-            android:background="@color/grayTextColor"/>
+            android:background="@color/grayTextColor" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -85,10 +87,10 @@
                     app:fontWeight="regular" />
 
                 <EditText
-                    android:background="@android:color/transparent"
                     android:id="@+id/editText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
                     android:ems="10"
                     android:hint="@string/roomTitleHint"
                     android:inputType="textPersonName"
@@ -113,7 +115,7 @@
                     app:fontWeight="regular" />
 
                 <Button
-                    android:id="@+id/textView13"
+                    android:id="@+id/writelocateBt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
@@ -294,7 +296,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:onClick="typeChecked"
+                    android:onClick="sizeClicked"
                     android:text="@string/sizeUnderTen"
                     android:textColor="@color/grayTextColor"
                     android:textSize="13sp"
@@ -305,7 +307,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:onClick="typeChecked"
+                    android:onClick="sizeClicked"
                     android:text="@string/sizeTen"
                     android:textColor="@color/grayTextColor"
                     android:textSize="13sp"
@@ -316,7 +318,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:onClick="typeChecked"
+                    android:onClick="sizeClicked"
                     android:text="@string/sizeTwenty"
                     android:textColor="@color/grayTextColor"
                     android:textSize="13sp"
@@ -327,7 +329,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:onClick="typeChecked"
+                    android:onClick="sizeClicked"
                     android:text="@string/sizeThirty"
                     android:textColor="@color/grayTextColor"
                     android:textSize="13sp"
@@ -338,7 +340,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:onClick="typeChecked"
+                    android:onClick="sizeClicked"
                     android:text="@string/sizeFirty"
                     android:textColor="@color/grayTextColor"
                     android:textSize="13sp"
@@ -363,11 +365,11 @@
                     app:fontWeight="regular" />
 
                 <EditText
-                    android:background="@android:color/transparent"
                     android:id="@+id/editText3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    android:background="@android:color/transparent"
                     android:ems="10"
                     android:hint="@string/roomPriceHint"
                     android:inputType="number"
@@ -393,12 +395,12 @@
                     app:fontWeight="regular" />
 
                 <EditText
-                    android:background="@android:color/transparent"
                     android:id="@+id/editText6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
+                    android:background="@android:color/transparent"
                     android:ems="10"
                     android:hint="@string/roomMonthHint"
                     android:inputType="number"
@@ -427,8 +429,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:ems="10"
                     android:background="@android:color/transparent"
+                    android:ems="10"
                     android:hint="@string/roomHeightHint"
                     android:inputType="textPersonName"
                     android:textColor="@color/grayTextColor"
@@ -499,6 +501,7 @@
                     android:layout_height="48dp"
                     android:orientation="horizontal">
 
+                    <!-- 입주 가능일 -->
                     <io.chooco13.NotoTextView
                         android:id="@+id/textView32"
                         android:layout_width="wrap_content"
@@ -510,6 +513,19 @@
                         android:textSize="13sp"
                         android:textStyle="bold"
                         app:fontWeight="regular" />
+
+                    <!-- 입주 가능일 선택하는 dialog -->
+                    <Button
+                        android:id="@+id/prefDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:gravity="left|center"
+                        android:text="@string/prefDate"
+                        android:onClick="showDatePickerDialog"
+                        android:textColor="@color/grayTextColor"
+                        android:textSize="13sp" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -641,45 +657,45 @@
                         android:id="@+id/airconditon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="28dp"
+                        android:layout_weight="1"
                         android:background="@mipmap/airconditon_icon"
                         android:onClick="toggledOp"
                         android:textOff="@null"
-                        android:layout_marginLeft="28dp"
-                        android:layout_weight="1"
                         android:textOn="@null" />
 
                     <ToggleButton
                         android:id="@+id/bed"
-                        android:layout_marginLeft="70dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="70dp"
+                        android:layout_weight="1"
                         android:background="@mipmap/bed_icon"
                         android:onClick="toggledOp"
                         android:textOff="@null"
-                        android:layout_weight="1"
                         android:textOn="@null" />
 
                     <ToggleButton
-                        android:layout_marginLeft="70dp"
                         android:id="@+id/elevator"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="70dp"
+                        android:layout_weight="1"
                         android:background="@mipmap/elevator_icon"
                         android:onClick="toggledOp"
                         android:textOff="@null"
-                        android:layout_weight="1"
                         android:textOn="@null" />
 
                     <ToggleButton
-                        android:layout_marginLeft="70dp"
                         android:id="@+id/microwave"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="70dp"
+                        android:layout_marginRight="28dp"
+                        android:layout_weight="1"
                         android:background="@mipmap/microwave_icon"
                         android:onClick="toggledOp"
-                        android:layout_marginRight="28dp"
                         android:textOff="@null"
-                        android:layout_weight="1"
                         android:textOn="@null" />
 
                 </LinearLayout>
@@ -690,55 +706,55 @@
                     android:orientation="horizontal">
 
                     <ToggleButton
-                        android:layout_marginRight="46dp"
                         android:id="@+id/parking"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="46dp"
+                        android:layout_weight="1"
                         android:background="@mipmap/parking_icon"
                         android:onClick="toggledOp"
                         android:textOff="@null"
-                        android:layout_weight="1"
                         android:textOn="@null" />
 
                     <ToggleButton
-                        android:layout_marginRight="46dp"
                         android:id="@+id/refrige"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="46dp"
+                        android:layout_weight="1"
                         android:background="@mipmap/refrige_icon"
                         android:onClick="toggledOp"
-                        android:layout_weight="1"
                         android:textOff="@null"
                         android:textOn="@null" />
 
                     <ToggleButton
-                        android:layout_marginRight="46dp"
                         android:id="@+id/stove"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="46dp"
+                        android:layout_weight="1"
                         android:background="@mipmap/stove_icon"
                         android:onClick="toggledOp"
                         android:textOff="@null"
-                        android:layout_weight="1"
                         android:textOn="@null" />
 
                     <ToggleButton
-                        android:layout_marginRight="46dp"
                         android:id="@+id/tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="46dp"
+                        android:layout_weight="1"
                         android:background="@mipmap/tv_icon"
                         android:onClick="toggledOp"
-                        android:layout_weight="1"
                         android:textOff="@null"
                         android:textOn="@null" />
 
                     <ToggleButton
-                        android:layout_marginRight="28dp"
-                        android:layout_weight="1"
                         android:id="@+id/washmachine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="28dp"
+                        android:layout_weight="1"
                         android:background="@mipmap/washmachine_icon"
                         android:onClick="toggledOp"
                         android:textOff="@null"
@@ -755,9 +771,9 @@
                         android:id="@+id/textView41"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_marginRight="32dp"
                         android:gravity="center_vertical|center"
                         android:text="@string/introduce"
-                        android:layout_marginRight="32dp"
                         android:textColor="@color/defaultTextColor"
                         android:textSize="13sp"
                         app:fontWeight="regular" />
@@ -768,23 +784,23 @@
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
                         android:ems="10"
-                        android:textColor="@color/grayTextColor"
-                        android:textSize="13sp"
                         android:hint="@string/introduceHint"
-                        android:inputType="textPersonName" />
+                        android:inputType="textPersonName"
+                        android:textColor="@color/grayTextColor"
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
                 <io.chooco13.NotoTextView
-                    app:fontWeight="regular"
-                    android:textColor="@color/defaultTextColor"
                     android:id="@+id/textView43"
-                    android:textSize="13sp"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:gravity="center|left"
                     android:text="@string/extraQue"
-                    android:textStyle="bold" />
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:fontWeight="regular" />
 
                 <LinearLayout
                     android:id="@+id/ExtraQue10"
@@ -797,26 +813,27 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="9"
-                        android:textSize="13sp"
-                        android:textColor="@color/grayTextColor"
                         android:background="@android:color/transparent"
                         android:ems="10"
                         android:hint="@string/extraQueHint"
-                        android:inputType="textPersonName" />
+                        android:inputType="textPersonName"
+                        android:textColor="@color/grayTextColor"
+                        android:textSize="13sp" />
 
                     <Button
                         android:id="@+id/ExtraQue1"
                         android:layout_width="13dp"
-                        android:layout_marginRight="17dp"
                         android:layout_height="13dp"
-                        android:onClick="plusExtra"
-                        android:background="@mipmap/plus_btn"/>
+                        android:layout_marginRight="17dp"
+                        android:background="@mipmap/plus_btn"
+                        android:onClick="plusExtra" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/ExtraQuelinear"
                     android:layout_width="match_parent"
                     android:layout_height="96dp"
-                    android:orientation="vertical"/>
+                    android:orientation="vertical" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

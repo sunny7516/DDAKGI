@@ -6,37 +6,90 @@
     android:orientation="vertical"
     tools:context="com.example.tacademy.ddakgi.MyTab.fragment.MyTab">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/myTabTool"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@android:color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:weightSum="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:gravity="right">
+
+            <ImageButton
+                android:id="@+id/helpBt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="14dp"
+                android:layout_marginTop="7dp"
+                android:background="@mipmap/help_btn" />
+
+            <ImageButton
+                android:id="@+id/settingBt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:layout_toRightOf="@+id/helpBt"
+                android:background="@mipmap/setting_btn" />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
     <!-- 프로필사진, 닉네임, 버튼 -->
     <LinearLayout
+        android:background="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            app:srcCompat="@mipmap/profile" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="19dp"
+            app:srcCompat="@mipmap/profile_btn" />
 
-        <TextView
+        <io.chooco13.NotoTextView
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="nickName" />
+            android:layout_marginBottom="10dp"
+            android:text="nickName"
+            android:textColor="@color/defaultTextColor"
+            android:textSize="16sp"
+            app:fontWeight="medium" />
 
-        <TextView
-            android:id="@+id/textView10"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/darker_gray"
-            android:text="@string/myStory" />
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/grayTextColor" />
+
+            <io.chooco13.NotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/subTextColor"
+                android:textSize="13sp"
+                app:fontWeight="regular"
+                android:text="@string/myStory"
+                android:layout_marginLeft="16dp"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <include
             layout="@layout/fragment_timeline_recycler"

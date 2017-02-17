@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -64,8 +63,8 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
 
         TextView loginShadow;
         io.chooco13.NotoTextView loginBeforeText;
-        Button modifyBt;
-        Button deleteBt;
+        io.chooco13.NotoTextView modifyBt;
+        io.chooco13.NotoTextView deleteBt;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -73,8 +72,8 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
             this.loginShadow = (TextView) itemView.findViewById(R.id.beforeLoginShadow);
             this.loginBeforeText = (io.chooco13.NotoTextView) itemView.findViewById(R.id.loginBeforeText);
             this.linear = (LinearLayout) itemView.findViewById(R.id.timelineLinear);
-            this.modifyBt = (Button) itemView.findViewById(R.id.modifyBt);
-            this.deleteBt = (Button) itemView.findViewById(R.id.deleteBt);
+            this.modifyBt = (io.chooco13.NotoTextView) itemView.findViewById(R.id.modifyBt);
+            this.deleteBt = (io.chooco13.NotoTextView) itemView.findViewById(R.id.deleteBt);
         }
     }
 }

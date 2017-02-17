@@ -3,7 +3,7 @@ package com.example.tacademy.ddakgi.WriteTab.WriteRoom.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +14,13 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.example.tacademy.ddakgi.R;
+import com.example.tacademy.ddakgi.U.DatePickerFragment;
+import com.example.tacademy.ddakgi.base.BaseActivity;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-public class WriteRoomActivity extends AppCompatActivity {
+public class WriteRoomActivity extends BaseActivity{
     LinearLayout roomType;
     LinearLayout roomSize;
     LinearLayout extraInfo;
@@ -28,6 +30,8 @@ public class WriteRoomActivity extends AppCompatActivity {
     Boolean extraflag = true;
 
     Button plusExtraQue;
+
+    public static Button writelocateBt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,7 @@ public class WriteRoomActivity extends AppCompatActivity {
         roomType = (LinearLayout) findViewById(R.id.roomType);
         roomSize = (LinearLayout) findViewById(R.id.roomSize);
         extraInfo = (LinearLayout) findViewById(R.id.extraInfo);
+        writelocateBt = (Button) findViewById(R.id.writelocateBt);
     }
 
     public void showRoomType(View view) {
@@ -75,6 +80,10 @@ public class WriteRoomActivity extends AppCompatActivity {
 
     // 위치 등록
     public void goLocate(View view) {
+        //Toast.makeText(this, "goLocate", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(this, WriteLocateActivity.class);
+        startActivity(intent);
     }
 
     // 사진 등록화면으로 이동
@@ -89,9 +98,9 @@ public class WriteRoomActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // 뒤로 나가기
-    public void back(View view){
-        finish();
+    public void showDatePickerDialog(View v) {
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
     // 방 유형 단일 선택

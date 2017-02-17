@@ -2,7 +2,6 @@ package com.example.tacademy.ddakgi.WriteTab.WriteRoom.activity;
 
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.example.tacademy.ddakgi.R;
+import com.example.tacademy.ddakgi.base.BaseActivity;
 import com.miguelbcr.ui.rx_paparazzo.RxPaparazzo;
 import com.miguelbcr.ui.rx_paparazzo.entities.size.ScreenSize;
 import com.squareup.picasso.Picasso;
@@ -25,7 +25,7 @@ import static com.example.tacademy.ddakgi.R.mipmap.plus;
  * 방 사진 등록하는 화면
  */
 
-public class WriteRoomImage extends AppCompatActivity {
+public class WriteRoomImage extends BaseActivity {
     SweetAlertDialog alert;
 
     @Override
@@ -68,11 +68,6 @@ public class WriteRoomImage extends AppCompatActivity {
             alert.setCancelable(true);
             alert.show();
         }
-    }
-
-    // backbutton
-    public void back(View view){
-        finish();
     }
 
     // 사진 선택 방법 (포토앨범, 사진 촬영)

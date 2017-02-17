@@ -7,12 +7,29 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.tacademy.ddakgi.Search.SearchActivity">
+    <!-- 홈탭 -> 위치 검색 화면 -->
+    <!-- 전체 검색 / 지도검색 -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/searchBackBt"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:background="@mipmap/back_btn"
+            android:onClick="back" />
 
         <android.support.v7.widget.SearchView
-            android:id="@+id/fragSearchView"
+            android:id="@+id/homeSearchView"
+            android:layout_toRightOf="@id/searchBackBt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:queryHint="@string/searchLocation" />
+    </RelativeLayout>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/searchTablayout"

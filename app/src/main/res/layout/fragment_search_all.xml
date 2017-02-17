@@ -2,11 +2,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.tacademy.ddakgi.Search.fragment.SearchAll">
 
     <!-- 전체 검색 Fragment -->
 
-    <TextView
+    <io.chooco13.NotoTextView
+        app:fontWeight="regular"
+        android:textSize="13sp"
+        android:textColor="@color/grayTextColor"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="30dp"

@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.tacademy.ddakgi.Map.GpsCheckActivity;
 import com.example.tacademy.ddakgi.R;
 
 /**
@@ -23,7 +24,7 @@ public class SplashActivity extends AppCompatActivity {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
 
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                Intent intent = new Intent(SplashActivity.this, GpsCheckActivity.class);
                 startActivity(intent);
                 finish();
             }

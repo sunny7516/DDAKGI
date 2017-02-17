@@ -56,6 +56,7 @@
     <string name="sizeFirty">40평대 이상</string>
     <string name="identify">임대 계약서/신분증 인증(선택)</string>
     <string name="prefDate">입주 가능일</string>
+    <string name="prefDateText">입주 가능일 선택</string>
     <string name="pay">관리비</string>
     <string name="payHint">만원</string>
     <string name="waterPay">수도</string>
@@ -69,6 +70,11 @@
     <string name="introduceHint">간단하게 자기소개를 써보세요</string>
     <string name="extraQue">추가질문</string>
     <string name="extraQueHint">예비룸메이트에게 추가로 묻고싶은 질문을 써보세요!</string>
+
+    <!-- 룸메이트 등록하기 화면 -->
+    <string name="mateLocateText">원하는 방 위치 검색</string>
+    <string name="matePhoto">프로필 이미지 등록</string>
+
 
     <!-- 방 등록 화면-->
     <string name="writeroomTool">방 등록하기</string>
@@ -92,10 +98,11 @@
     <string name="plusContract">임대계약서\n사진을 추가하세요.</string>
 
     <!-- 검색 -->
-    <string name="searchLocation">검색</string>
+    <string name="searchLocation">희망 지역 또는 지하철 역을 검색해보세요.</string>
     <string name="searchAll">지하철 역 또는 지역명을 입력하세요. \n
                             ex) 신림역, 강남구, 논현동</string>
     <string name="title_activity_write_room_locate">Map</string>
+    <string name="title_activity_maps">Map</string>
 
 
 </resources>

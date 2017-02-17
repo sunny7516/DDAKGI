@@ -21,7 +21,9 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+    <!-- .WriteTab.MyApplication" -->
     <application
         android:name=".CameraApplication"
         android:allowBackup="true"
@@ -30,7 +32,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:replace="android:icon">
-        <activity android:name=".SplashIntro.MainActivity" />
+        <activity android:name=".SplashIntro.MainActivity"></activity>
         <activity android:name=".HomeActivity" />
         <activity android:name=".HomeTab.activity.FilterActivity" />
         <activity android:name=".SplashIntro.SplashActivity">
@@ -49,8 +51,30 @@
         </activity>
         <activity android:name=".WriteTab.WriteRoom.activity.WriteRoomImage" />
         <activity android:name=".WriteTab.WriteRoom.activity.WriteRoomIdentify" />
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
         <activity
-            android:name=".WriteTab.WriteRoom.activity.WriteRoomLocate"/>
+            android:name=".WriteTab.WriteRoom.activity.WriteLocateActivity"
+            android:label="@string/title_activity_maps" />
+        <activity android:name=".Map.GpsCheckActivity"></activity>
+
+        <service
+            android:name=".Service.GpsDetecting"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".MyTab.fragment.HelpActivity" />
+        <activity android:name=".MyTab.fragment.SettingActivity"></activity>
     </application>
 
 </manifest>

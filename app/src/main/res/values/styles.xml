@@ -16,8 +16,13 @@
 
     <!-- custom style for Tablayout -->
     <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
-        <item name="tabTextAppearance">@style/MyCustomTabText</item>
-        <item name="tabSelectedTextColor">@android:color/holo_green_dark</item>
+        <item name="tabTextAppearance">@color/subTextColor</item>
+        <item name="tabSelectedTextColor">@color/textpointColor</item>
+    </style>
+
+    <!-- dialog -->
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/pointColor</item>
     </style>
 
     <style name="MyCustomTabText" parent="TextAppearance.AppCompat.Button">
