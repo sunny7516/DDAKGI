@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_write_mate_identify"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.tacademy.ddakgi.WriteTab.WriteMate.activity.WriteMateIdentify">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/writeroomIdentifyTool"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@android:color/white"
+        android:minHeight="?attr/actionBarSize">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp">
+
+            <Button
+                android:id="@+id/identifyBackBt"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginRight="12dp"
+                android:background="@mipmap/back_btn"
+                android:onClick="back" />
+
+            <io.chooco13.NotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_toRightOf="@id/identifyBackBt"
+                android:gravity="center"
+                android:text="@string/roomidentifyTool"
+                android:textColor="@color/defaultTextColor"
+                android:textSize="16sp"
+                app:fontWeight="medium" />
+
+            <io.chooco13.NotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="16dp"
+                android:text="@string/finish"
+                android:textColor="@color/grayTextColor"
+                android:textSize="13sp"
+                app:fontWeight="regular" />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <io.chooco13.NotoTextView
+        android:id="@+id/textView30"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#efefef"
+        android:gravity="center"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        android:text="@string/identifyText"
+        android:textColor="@color/grayTextColor"
+        android:textSize="10sp"
+        app:fontWeight="regular" />
+
+    <io.chooco13.NotoTextView
+        android:id="@+id/textView31"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:text="@string/IDCard"
+        android:textColor="@color/defaultTextColor"
+        android:textSize="13sp"
+        app:fontWeight="regular" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <include
+            android:id="@+id/identifyOne"
+            layout="@layout/identiplusbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <io.chooco13.NotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/identifyOne"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            android:gravity="center"
+            android:text="@string/plusCard"
+            android:textColor="@color/grayTextColor"
+            android:textSize="13sp"
+            app:fontWeight="regular" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@color/grayTextColor" />
+</LinearLayout>

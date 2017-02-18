@@ -7,4 +7,484 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.tacademy.ddakgi.WriteTab.WriteMate.activity.WriteMateActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/writeMateTool"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@android:color/white"
+            android:minHeight="?attr/actionBarSize"
+            android:weightSum="1">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp">
+
+                <Button
+                    android:id="@+id/writeMateBackBt"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@mipmap/back_btn"
+                    android:onClick="back" />
+
+                <io.chooco13.NotoTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_toRightOf="@id/writeMateBackBt"
+                    android:gravity="center"
+                    android:text="@string/writeMateTitle"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="16sp"
+                    app:fontWeight="medium" />
+
+                <io.chooco13.NotoTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:text="@string/finish"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp"
+                    app:fontWeight="regular" />
+            </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="@color/grayTextColor" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:orientation="vertical">
+
+            <!-- 제목, 위치, 사진 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/text1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="32dp"
+                    android:text="@string/roomTitle"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:fontWeight="regular" />
+
+                <EditText
+                    android:id="@+id/editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:hint="@string/roomTitleHint"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/text2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="32dp"
+                    android:text="@string/roomLocate"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:fontWeight="regular" />
+
+                <Button
+                    android:id="@+id/writepreflocateBt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:gravity="left|center"
+                    android:hint="@string/mateLocateText"
+                    android:onClick="goLocate"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/textView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="32dp"
+                    android:text="@string/roomPhoto"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:fontWeight="regular" />
+
+                <Button
+                    android:id="@+id/textView14"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:gravity="left|center"
+                    android:hint="@string/matePhoto"
+                    android:onClick="goWriteRoomImage"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- 펼쳐지는 내용(유형, 평수) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:onClick="showPrefRoomType"
+                android:orientation="horizontal">
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/text3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="31dp"
+                    android:text="@string/roomType"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:fontWeight="regular" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:rotation="-90"
+                    app:srcCompat="@mipmap/certification_btn" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/prefroomType"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <ToggleButton
+                    android:background="@android:color/transparent"
+                    android:id="@+id/typeOne"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="1"
+                    android:onClick="preftypeChecked"
+                    android:textOn="@string/typeOne"
+                    android:textOff="@string/typeOne"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <ToggleButton
+                    android:background="@android:color/transparent"
+                    android:id="@+id/typeTwo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="25dp"
+                    android:layout_weight="1"
+                    android:onClick="preftypeChecked"
+                    android:textOn="@string/typeTwo"
+                    android:textOff="@string/typeTwo"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <ToggleButton
+                    android:background="@android:color/transparent"
+                    android:id="@+id/typeHouse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="25dp"
+                    android:layout_weight="1"
+                    android:onClick="preftypeChecked"
+                    android:textOn="@string/typeHouse"
+                    android:textOff="@string/typeHouse"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <ToggleButton
+                    android:background="@android:color/transparent"
+                    android:id="@+id/typeOffice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="25dp"
+                    android:layout_weight="1"
+                    android:onClick="preftypeChecked"
+                    android:textOn="@string/typeOffice"
+                    android:textOff="@string/typeOffice"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <ToggleButton
+                    android:background="@android:color/transparent"
+                    android:id="@+id/typeApart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="1"
+                    android:onClick="preftypeChecked"
+                    android:textOn="@string/typeApart"
+                    android:textOff="@string/typeApart"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- 보증금 ~ 임대계약서/신분증 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
+
+                <io.chooco13.NotoTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="21dp"
+                    android:text="@string/roomPrice"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:fontWeight="regular" />
+
+                <EditText
+                    android:id="@+id/editText3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:hint="@string/roomPriceHint"
+                    android:inputType="number"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
+
+                <io.chooco13.NotoTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="32dp"
+                    android:text="@string/roomMonth"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:fontWeight="regular" />
+
+                <EditText
+                    android:id="@+id/editText6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:hint="@string/roomMonthHint"
+                    android:inputType="number"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/button4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="32dp"
+                    android:text="@string/identifymate"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="13sp"
+                    app:fontWeight="regular" />
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:onClick="goMateIdentify"
+                    app:srcCompat="@mipmap/certification_btn" />
+            </LinearLayout>
+            <!-- 추가 정보 입력 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:onClick="ShowMateExtraInfo"
+                android:orientation="horizontal">
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/textView29"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="32dp"
+                    android:text="@string/roomExtraInfo"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:fontWeight="regular" />
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:rotation="-90"
+                    app:srcCompat="@mipmap/certification_btn" />
+            </LinearLayout>
+
+            <!-- 추가 정보 show/hide -->
+            <LinearLayout
+                android:id="@+id/mateextraInfo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <!-- 입주 가능일 -->
+                    <io.chooco13.NotoTextView
+                        android:id="@+id/textView32"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="32dp"
+                        android:text="@string/prefDate"
+                        android:textColor="@color/defaultTextColor"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        app:fontWeight="regular" />
+
+                    <!-- 입주 가능일 선택하는 dialog -->
+                    <Button
+                        android:id="@+id/prefDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:gravity="left|center"
+                        android:onClick="showDatePickerDialog"
+                        android:text="@string/prefDate"
+                        android:textColor="@color/grayTextColor"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <io.chooco13.NotoTextView
+                        android:id="@+id/textView41"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="32dp"
+                        android:gravity="center_vertical|center"
+                        android:text="@string/introduce"
+                        android:textColor="@color/defaultTextColor"
+                        android:textSize="13sp"
+                        app:fontWeight="regular" />
+
+                    <EditText
+                        android:id="@+id/editText4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:ems="10"
+                        android:hint="@string/introduceHint"
+                        android:inputType="textPersonName"
+                        android:textColor="@color/grayTextColor"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/textView43"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:gravity="center|left"
+                    android:text="@string/extraQue"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:fontWeight="regular" />
+
+                <LinearLayout
+                    android:id="@+id/ExtraQue10"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/editText7"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="9"
+                        android:background="@android:color/transparent"
+                        android:ems="10"
+                        android:hint="@string/extraQueHint"
+                        android:inputType="textPersonName"
+                        android:textColor="@color/grayTextColor"
+                        android:textSize="13sp" />
+
+                    <Button
+                        android:id="@+id/ExtraQue1"
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
+                        android:layout_marginRight="17dp"
+                        android:background="@mipmap/plus_btn"
+                        android:onClick="plusExtra" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ExtraMateQuelinear"
+                    android:layout_width="match_parent"
+                    android:layout_height="96dp"
+                    android:orientation="vertical" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 </ScrollView>

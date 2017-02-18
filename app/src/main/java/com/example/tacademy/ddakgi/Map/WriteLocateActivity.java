@@ -1,4 +1,4 @@
-package com.example.tacademy.ddakgi.WriteTab.WriteRoom.activity;
+package com.example.tacademy.ddakgi.Map;
 
 import android.app.Activity;
 import android.content.res.ColorStateList;
@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.U.U;
+import com.example.tacademy.ddakgi.WriteTab.WriteMate.activity.WriteMateActivity;
+import com.example.tacademy.ddakgi.WriteTab.WriteRoom.activity.WriteRoomActivity;
 import com.example.tacademy.ddakgi.widget.NotoTextView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -33,7 +35,6 @@ import java.util.List;
 
 import static com.example.tacademy.ddakgi.Map.GpsCheckActivity.gpscheckActivity;
 import static com.example.tacademy.ddakgi.R.id.map;
-
 
 /**
  * GoogleMap 띄우는 화면
@@ -94,7 +95,7 @@ public class WriteLocateActivity extends FragmentActivity implements OnMapReadyC
 
         // 주소 <-> 위도,경도
         final Geocoder geocoder = new Geocoder(this);
-        writelocateFinish = (io.chooco13.NotoTextView)findViewById(R.id.writelocateFinish);
+        writelocateFinish = (io.chooco13.NotoTextView) findViewById(R.id.writelocateFinish);
 
         // 검색창에 주소 검색, 주소의 위도 경도값 변환해서 해당 위치로 지도 이동
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -200,9 +201,11 @@ public class WriteLocateActivity extends FragmentActivity implements OnMapReadyC
     // 완료 버튼 눌렀을 때
     // 위치 정보 임시 저장, 이전 화면으로 주소값 전달하기
     public void writelocateFinish(View view) {
-        WriteRoomActivity.writelocateBt.setText(myAddr);
-        WriteRoomActivity.writelocateBt.setTextColor(getResources().getColor(R.color.subTextColor));
-        gpscheckActivity.finish();
-        finish();
+        if (WriteRoomActivity.writelocateBt != null) {
+            WriteRoomActivity.writelocateBt.setText(myAddr);
+            WriteRoomActivity.writelocateBt.setTextColor(getResources().getColor(R.color.subTextColor));
+            gpscheckActivity.finish();
+            finish();
+        }
     }
 }

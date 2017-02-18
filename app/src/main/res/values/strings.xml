@@ -21,7 +21,6 @@
     <string name="writeMateTitle">룸메이트 등록하기</string>
     <string name="writeMateHelp">내 글을 보고 방이 있는 룸메가 연락을 할 거에요!</string>
 
-
     <!-- Mytab -->
     <string name="myStory">내가 등록한 글</string>
     <string name="modifyBt">수정</string>
@@ -38,6 +37,7 @@
     <string name="roomPrice">보증금</string>
     <string name="roomPriceHint">만원</string>
     <string name="roomMonth">월세</string>
+    <string name="roomYear">전세</string>
     <string name="roomMonthHint">만원(전세일 경우 0으로 입력)</string>
     <string name="roomHeight">층수</string>
     <string name="roomHeightHint">층(반 지하는 0, 지하는 -1)</string>
@@ -55,6 +55,7 @@
     <string name="sizeThirty">30평대</string>
     <string name="sizeFirty">40평대 이상</string>
     <string name="identify">임대 계약서/신분증 인증(선택)</string>
+    <string name="identifymate">신분증 인증(선택)</string>
     <string name="prefDate">입주 가능일</string>
     <string name="prefDateText">입주 가능일 선택</string>
     <string name="pay">관리비</string>
@@ -74,7 +75,6 @@
     <!-- 룸메이트 등록하기 화면 -->
     <string name="mateLocateText">원하는 방 위치 검색</string>
     <string name="matePhoto">프로필 이미지 등록</string>
-
 
     <!-- 방 등록 화면-->
     <string name="writeroomTool">방 등록하기</string>
@@ -103,6 +103,12 @@
                             ex) 신림역, 강남구, 논현동</string>
     <string name="title_activity_write_room_locate">Map</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_go_mate_identify">goMateIdentify</string>
 
+    <!-- 필터 -->
+    <string name="filterRoomType">방 종류</string>
+
+    <!-- Mytab -->
+    <string name="likeTool">찜 목록</string>
 
 </resources>

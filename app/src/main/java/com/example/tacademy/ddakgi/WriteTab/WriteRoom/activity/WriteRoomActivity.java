@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.example.tacademy.ddakgi.Map.WriteLocateActivity;
 import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.U.DatePickerFragment;
 import com.example.tacademy.ddakgi.base.BaseActivity;
@@ -45,6 +46,7 @@ public class WriteRoomActivity extends BaseActivity{
         roomType = (LinearLayout) findViewById(R.id.roomType);
         roomSize = (LinearLayout) findViewById(R.id.roomSize);
         extraInfo = (LinearLayout) findViewById(R.id.extraInfo);
+
         writelocateBt = (Button) findViewById(R.id.writelocateBt);
     }
 

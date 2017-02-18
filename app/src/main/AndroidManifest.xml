@@ -32,7 +32,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:replace="android:icon">
-        <activity android:name=".SplashIntro.MainActivity"></activity>
+        <activity android:name=".SplashIntro.MainActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".HomeTab.activity.FilterActivity" />
         <activity android:name=".SplashIntro.SplashActivity">
@@ -64,9 +64,9 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".WriteTab.WriteRoom.activity.WriteLocateActivity"
+            android:name=".Map.WriteLocateActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".Map.GpsCheckActivity"></activity>
+        <activity android:name=".Map.GpsCheckActivity" />
 
         <service
             android:name=".Service.GpsDetecting"
@@ -74,7 +74,8 @@
             android:exported="true" />
 
         <activity android:name=".MyTab.fragment.HelpActivity" />
-        <activity android:name=".MyTab.fragment.SettingActivity"></activity>
+        <activity android:name=".MyTab.fragment.SettingActivity" />
+        <activity android:name=".WriteTab.WriteMate.activity.WriteMateIdentify"></activity>
     </application>
 
 </manifest>

@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 
 import com.example.tacademy.ddakgi.TabFragment.ChatTab;
 import com.example.tacademy.ddakgi.HomeTab.fragment.HomeTab;
-import com.example.tacademy.ddakgi.TabFragment.LikeTab;
+import com.example.tacademy.ddakgi.LikeTab.LikeTab;
 import com.example.tacademy.ddakgi.MyTab.fragment.MyTab;
 import com.example.tacademy.ddakgi.WriteTab.WriteTab;
 
