@@ -84,6 +84,7 @@ public class GpsCheckActivity extends AppCompatActivity {
                 @Override
                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                     sweetAlertDialog.dismissWithAnimation();
+                    finish();
                     // gps 사용 허가 체크 (6.0 이상일 때)
                 }
             });
@@ -172,6 +173,7 @@ public class GpsCheckActivity extends AppCompatActivity {
     }
 
     boolean flag;
+
     // GPS 최신 갱신 내용 수신
     @Subscribe
     public void FinishLoad(Location location) {
@@ -182,10 +184,11 @@ public class GpsCheckActivity extends AppCompatActivity {
             // 위치 정보가 한번이라도 왔다는 뜻
             flag = true;
             // 지도를 띄운다.
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-            }
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
+        finish();
+    }
 
     // GPS를 입력받으면 주소 획득
     public void getAddress(Location location) {

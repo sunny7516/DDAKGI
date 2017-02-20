@@ -35,8 +35,9 @@ public class HomeTab extends Fragment {
     private boolean activityStartup = true;
     final int ITEM_SIZE = 3;
 
-    RecyclerView recyclerView;
+    RecyclerView recyclerviewHomeTab;
     LinearLayoutManager linearLayoutManager;
+    RecyclerAdapter recyclerAdapter;
 
     SearchView searchView;
     EditText searchEditText;
@@ -114,11 +115,11 @@ public class HomeTab extends Fragment {
         mate.setOnClickListener(clickBtListener);
 
         // Inflate the layout for this fragment
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
+        recyclerviewHomeTab = (RecyclerView) view.findViewById(R.id.recyclerviewHomeTab);
 
         linearLayoutManager = new LinearLayoutManager(this.getContext());
         linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerviewHomeTab.setLayoutManager(linearLayoutManager);
 
         // 가데이터 > 수정해야됨
         List<TimelineItem> items = new ArrayList<>();
@@ -130,11 +131,13 @@ public class HomeTab extends Fragment {
         for (int i = 0; i < ITEM_SIZE; i++) {
             items.add(item[i]);
         }
-        recyclerView.setAdapter(new RecyclerAdapter(getContext(), items, R.layout.home_timeline));
+        recyclerviewHomeTab.setAdapter(new RecyclerAdapter(getContext(), items, R.layout.home_timeline));
+
+
         return view;
     }
 
-    // Click Event
+    // Toolbar Click Event
     private View.OnClickListener toolBtListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

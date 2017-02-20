@@ -1,11 +1,13 @@
 package com.example.tacademy.ddakgi.Adapter;
 
+import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.tacademy.ddakgi.HomeTab.activity.HomeRoomDetailPageActivity;
 import com.example.tacademy.ddakgi.R;
 
 /**
@@ -51,9 +53,17 @@ public class CustomAdapter extends PagerAdapter{
 
         //ViewPager에 만들어 낸 view 추가
         container.addView(view);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent detailPage = new Intent(v.getContext(), HomeRoomDetailPageActivity.class);
+                v.getContext().startActivity(detailPage);
+            }
+        });
         return view;
         //return super.instantiateItem(container, position);
     }
+
 
     //화면에 보이지 않은 View 파괴
     //첫번째 파라미터 : ViewPager

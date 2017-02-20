@@ -75,7 +75,9 @@
 
         <activity android:name=".MyTab.fragment.HelpActivity" />
         <activity android:name=".MyTab.fragment.SettingActivity" />
-        <activity android:name=".WriteTab.WriteMate.activity.WriteMateIdentify"></activity>
+        <activity android:name=".WriteTab.WriteMate.activity.WriteMateIdentify" />
+        <activity android:name=".HomeTab.activity.HomeRoomDetailPageActivity" />
+        <activity android:name=".HomeTab.activity.HomemateDetailPageActivity"></activity>
     </application>
 
 </manifest>

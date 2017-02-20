@@ -45,7 +45,7 @@ public class HomeActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setIcon(R.mipmap.home_ic_on));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.mipmap.chat_ic_off));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.mipmap.write_ic_off));
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.mipmap.heart_ic_off));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.mipmap.heart_off_btn));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.mipmap.person_ic));
         tabLayout.setBackgroundColor(Color.WHITE);
         tabLayout.setTabTextColors(getResources().getColor(R.color.black), getResources().getColor(R.color.colorAccent));
@@ -67,7 +67,7 @@ public class HomeActivity extends AppCompatActivity {
                     tab.setIcon(R.mipmap.write_ic_on);
                 } else if (tab.getPosition() == 3) {
                     replaceFragment(new LikeTab());
-                    tab.setIcon(R.mipmap.heart_ic_on);
+                    tab.setIcon(R.mipmap.heart_on_btn);
                 } else if (tab.getPosition() == 4) {
                     replaceFragment(new MyTab());
                     tab.setIcon(R.mipmap.person_ic_on);
@@ -83,7 +83,7 @@ public class HomeActivity extends AppCompatActivity {
                 } else if (tab.getPosition() == 2) {
                     tab.setIcon(R.mipmap.write_ic_off);
                 } else if (tab.getPosition() == 3) {
-                    tab.setIcon(R.mipmap.heart_ic_off);
+                    tab.setIcon(R.mipmap.heart_off_btn);
                 } else if (tab.getPosition() == 4) {
                     tab.setIcon(R.mipmap.person_ic);
                 }

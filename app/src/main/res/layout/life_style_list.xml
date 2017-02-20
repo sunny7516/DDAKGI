@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- 생활패턴 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="vertical">
+
+        <io.chooco13.NotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Life style"
+            android:textColor="@color/defaultTextColor"
+            android:textSize="13sp"
+            app:fontWeight="medium" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:textColor="@color/grayTextColor" />
+
+        <!-- 청소 Que -->
+        <io.chooco13.NotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="9dp"
+            android:text="@string/lifeStyleQue1"
+            android:textColor="@color/subTextColor"
+            android:textSize="13sp"
+            app:fontWeight="regular" />
+
+        <io.chooco13.NotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="답변"
+            android:textColor="@color/textpointColor"
+            android:textSize="13sp"
+            app:fontWeight="regular" />
+
+        <!-- 흡연 Que -->
+        <io.chooco13.NotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="9dp"
+            android:text="@string/lifeStyleQue2"
+            android:textColor="@color/subTextColor"
+            android:textSize="13sp"
+            app:fontWeight="regular" />
+
+        <io.chooco13.NotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="답변"
+            android:textColor="@color/textpointColor"
+            android:textSize="13sp"
+            app:fontWeight="regular" />
+
+        <!-- 취침시간 Que -->
+        <io.chooco13.NotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="9dp"
+            android:text="@string/lifeStyleQue3"
+            android:textColor="@color/subTextColor"
+            android:textSize="13sp"
+            app:fontWeight="regular" />
+
+        <io.chooco13.NotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="답변"
+            android:textColor="@color/textpointColor"
+            android:textSize="13sp"
+            app:fontWeight="regular" />
+
+        <!-- 외부인 초대 Que -->
+        <io.chooco13.NotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="9dp"
+            android:text="@string/lifeStyleQue4"
+            android:textColor="@color/subTextColor"
+            android:textSize="13sp"
+            app:fontWeight="regular" />
+
+        <io.chooco13.NotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="답변"
+            android:textColor="@color/textpointColor"
+            android:textSize="13sp"
+            app:fontWeight="regular" />
+
+        <!-- 기상시간 Que -->
+        <io.chooco13.NotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="9dp"
+            android:text="@string/lifeStyleQue5"
+            android:textColor="@color/subTextColor"
+            android:textSize="13sp"
+            app:fontWeight="regular" />
+
+        <io.chooco13.NotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="답변"
+            android:textColor="@color/textpointColor"
+            android:textSize="13sp"
+            app:fontWeight="regular" />
+
+        <!-- 애완동물 Que -->
+        <io.chooco13.NotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="9dp"
+            android:text="@string/lifeStyleQue6"
+            android:textColor="@color/subTextColor"
+            android:textSize="13sp"
+            app:fontWeight="regular" />
+
+        <io.chooco13.NotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="답변"
+            android:textColor="@color/textpointColor"
+            android:textSize="13sp"
+            app:fontWeight="regular" />
+
+        <!-- 식사방식 Que -->
+        <io.chooco13.NotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="9dp"
+            android:text="@string/lifeStyleQue7"
+            android:textColor="@color/subTextColor"
+            android:textSize="13sp"
+            app:fontWeight="regular" />
+
+        <io.chooco13.NotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="답변"
+            android:textColor="@color/textpointColor"
+            android:textSize="13sp"
+            app:fontWeight="regular" />
+
+        <!-- 공동품 구매 Que -->
+        <io.chooco13.NotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="9dp"
+            android:text="@string/lifeStyleQue8"
+            android:textColor="@color/subTextColor"
+            android:textSize="13sp"
+            app:fontWeight="regular" />
+
+        <io.chooco13.NotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="답변"
+            android:textColor="@color/textpointColor"
+            android:textSize="13sp"
+            app:fontWeight="regular" />
+
+        <!-- 생활소음 Que -->
+        <io.chooco13.NotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="9dp"
+            android:text="@string/lifeStyleQue9"
+            android:textColor="@color/subTextColor"
+            android:textSize="13sp"
+            app:fontWeight="regular" />
+
+        <io.chooco13.NotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="답변"
+            android:textColor="@color/textpointColor"
+            android:textSize="13sp"
+            app:fontWeight="regular" />
+
+        <!-- 주말생활 Que -->
+        <io.chooco13.NotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="9dp"
+            android:text="@string/lifeStyleQue10"
+            android:textColor="@color/subTextColor"
+            android:textSize="13sp"
+            app:fontWeight="regular" />
+
+        <io.chooco13.NotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="답변"
+            android:textColor="@color/textpointColor"
+            android:textSize="13sp"
+            app:fontWeight="regular" />
+    </LinearLayout>
+</LinearLayout>

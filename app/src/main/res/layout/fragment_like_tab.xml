@@ -17,29 +17,20 @@
             android:background="@android:color/white"
             android:minHeight="?attr/actionBarSize" />
 
-        <Button
-            android:id="@+id/likeBackBt"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="12dp"
-            android:background="@mipmap/back_btn"
-            android:onClick="back" />
-
         <io.chooco13.NotoTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/likeBackBt"
+            android:layout_marginLeft="16dp"
             android:text="@string/likeTool"
             android:textColor="@color/defaultTextColor"
             android:textSize="16sp"
             app:fontWeight="medium" />
     </RelativeLayout>
 
-    <include
-        layout="@layout/fragment_timeline_recycler"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerviewLikeTab"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        tools:listitem="@layout/home_timeline" />
 </LinearLayout>

@@ -18,14 +18,17 @@ import com.example.tacademy.ddakgi.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.chooco13.NotoTextView;
+
 
 public class LikeTab extends Fragment {
 
     final int ITEM_SIZE = 3;
-    RecyclerView recyclerView;
+    RecyclerView recyclerviewLikeTab;
     LinearLayoutManager linearLayoutManager;
 
     Toolbar toolbar;
+    NotoTextView deleteBt;
 
     public LikeTab() {
         // Required empty public constructor
@@ -42,11 +45,13 @@ public class LikeTab extends Fragment {
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
 
+        deleteBt = (NotoTextView)getActivity().findViewById(R.id.deleteBt);
+
         // Inflate the layout for this fragment
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
+        recyclerviewLikeTab = (RecyclerView) view.findViewById(R.id.recyclerviewLikeTab);
         linearLayoutManager = new LinearLayoutManager(this.getContext());
         linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerviewLikeTab.setLayoutManager(linearLayoutManager);
 
         // 가데이터
         List<MyTimelineItem> items = new ArrayList<>();
@@ -58,7 +63,7 @@ public class LikeTab extends Fragment {
         for (int i = 0; i < ITEM_SIZE; i++) {
             items.add(item[i]);
         }
-        recyclerView.setAdapter(new LikeRecyclerAdapter(getContext(), items, R.layout.home_timeline));
+        recyclerviewLikeTab.setAdapter(new LikeRecyclerAdapter(getContext(), items, R.layout.home_timeline));
 
         return view;
     }

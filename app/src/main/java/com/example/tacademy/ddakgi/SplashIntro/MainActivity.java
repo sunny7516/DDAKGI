@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         pager.setClipToPadding(false);
         pager.setPadding(40, 0, 40, 0);
         pager.setPageMargin(getResources().getDisplayMetrics().widthPixels / -30);
+
+
     }
 
     // 액티비티 종료 시 애니메이션

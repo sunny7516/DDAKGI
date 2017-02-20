@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_home_detail_page"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.tacademy.ddakgi.HomeTab.activity.HomeRoomDetailPageActivity">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!--Toolbar-->
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/writeroomImageTool"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@android:color/white"
+            android:minHeight="?attr/actionBarSize">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/detailPageBackBt"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@mipmap/back_btn"
+                    android:onClick="back" />
+
+                <io.chooco13.NotoTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_toRightOf="@id/detailPageBackBt"
+                    android:gravity="center"
+                    android:text="NickName"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="16sp"
+                    app:fontWeight="medium" />
+            </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
+
+        <!-- 상단 이미지 부분 -->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <!-- 화면을 꽉채워서 좌우 스크롤(페이지단위) -->
+            <ImageView
+                android:id="@+id/detailPageImg"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/testroom0" />
+
+            <Button
+                android:id="@+id/room_contract_ic"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="7dp"
+                android:background="@mipmap/room_contract_ic" />
+
+            <Button
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="7dp"
+                android:layout_toRightOf="@+id/room_contract_ic"
+                android:background="@mipmap/identify_icon" />
+
+            <Button
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_toLeftOf="@+id/roomDetailPageLikeNum"
+                android:background="@mipmap/heart_off_btn" />
+
+            <io.chooco13.NotoTextView
+                android:id="@+id/roomDetailPageLikeNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="14dp"
+                android:gravity="center"
+                android:text="likeNum"
+                android:textColor="@color/subTextColor"
+                android:textSize="13sp"
+                app:fontWeight="demilight" />
+        </RelativeLayout>
+
+        <!-- 매칭율, 회원정보, 프로필사진 -->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <!-- 매칭율, 회원 정보 -->
+            <RelativeLayout
+                android:id="@+id/infoText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:orientation="vertical">
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/detailLoginBefore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/DetailberforeLogin"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="10sp"
+                    app:fontWeight="demilight" />
+
+                <io.chooco13.NotoTextView
+                    android:layout_marginTop="13dp"
+                    android:id="@+id/percentTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/percent"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="10sp"
+                    android:visibility="gone"
+                    app:fontWeight="demilight" />
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/percent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/percentTitle"
+                    android:layout_marginTop="7dp"
+                    android:text="percentNum%"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    app:fontWeight="medium" />
+
+                <LinearLayout
+                    android:layout_marginTop="6dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/percent"
+                    android:orientation="horizontal">
+
+                    <io.chooco13.NotoTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="NickName"
+                        android:textColor="@color/subTextColor"
+                        android:textSize="13sp"
+                        app:fontWeight="regular" />
+
+                    <io.chooco13.NotoTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="Age"
+                        android:textColor="@color/subTextColor"
+                        android:textSize="13sp"
+                        app:fontWeight="regular" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <ImageButton
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="18dp"
+                android:background="@mipmap/profile" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="@color/grayTextColor" />
+
+        <!-- 채팅버튼 -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="11dp"
+            android:gravity="center">
+
+            <io.chooco13.NotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/detailChatHint"
+                android:textColor="@color/textpointColor"
+                android:textSize="13sp"
+                app:fontWeight="medium" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="11dp"
+                android:background="@mipmap/go_chat_btn" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/grayTextColor" />
+
+        <!-- 방 Details -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical">
+
+            <io.chooco13.NotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Detail"
+                android:textColor="@color/defaultTextColor"
+                android:textSize="13sp"
+                app:fontWeight="medium" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/stringColor" />
+
+            <io.chooco13.NotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:layout_marginTop="9dp"
+                android:text="Price"
+                android:textColor="@color/subTextColor"
+                android:textSize="13sp"
+                app:fontWeight="regular" />
+
+            <io.chooco13.NotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:text="Locate"
+                android:textColor="@color/subTextColor"
+                android:textSize="13sp"
+                app:fontWeight="regular" />
+
+            <io.chooco13.NotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:text="RoomType"
+                android:textColor="@color/subTextColor"
+                android:textSize="13sp"
+                app:fontWeight="regular" />
+
+            <io.chooco13.NotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:text="Pay"
+                android:textColor="@color/subTextColor"
+                android:textSize="13sp"
+                app:fontWeight="regular" />
+
+            <io.chooco13.NotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:text="Options"
+                android:textColor="@color/subTextColor"
+                android:textSize="13sp"
+                app:fontWeight="regular" />
+
+            <io.chooco13.NotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:text="RoomHeight"
+                android:textColor="@color/subTextColor"
+                android:textSize="13sp"
+                app:fontWeight="regular" />
+
+            <io.chooco13.NotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:text="RoomSize"
+                android:textColor="@color/subTextColor"
+                android:textSize="13sp"
+                app:fontWeight="regular" />
+
+            <io.chooco13.NotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:text="PrefDate"
+                android:textColor="@color/subTextColor"
+                android:textSize="13sp"
+                app:fontWeight="regular" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/grayTextColor" />
+
+        <!-- 방 Details -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="91dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            android:paddingTop="8dp">
+
+            <!-- 자기소개 -->
+            <io.chooco13.NotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Introduction"
+                android:textColor="@color/defaultTextColor"
+                android:textSize="13sp"
+                app:fontWeight="medium" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/stringColor" />
+
+            <io.chooco13.NotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:text="깨끗하고 조용하게 지낼 룸메이트구해요~"
+                android:textColor="@color/subTextColor"
+                android:textSize="13sp"
+                app:fontWeight="medium" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/grayTextColor" />
+
+        <include
+            android:id="@+id/life_style_list"
+            layout="@layout/life_style_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+    </LinearLayout>
+</ScrollView>

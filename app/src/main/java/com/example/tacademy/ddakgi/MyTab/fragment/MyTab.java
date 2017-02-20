@@ -24,7 +24,7 @@ import java.util.List;
 public class MyTab extends Fragment {
 
     final int ITEM_SIZE = 3;
-    RecyclerView recyclerView;
+    RecyclerView recyclerviewMyTab;
     LinearLayoutManager linearLayoutManager;
 
     Toolbar toolbar;
@@ -52,10 +52,10 @@ public class MyTab extends Fragment {
         settingBt.setOnClickListener(onClickListener);
 
         // Inflate the layout for this fragment
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
+        recyclerviewMyTab = (RecyclerView) view.findViewById(R.id.recyclerviewMyTab);
         linearLayoutManager = new LinearLayoutManager(this.getContext());
         linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerviewMyTab.setLayoutManager(linearLayoutManager);
 
         // 가데이터
         List<MyTimelineItem> items = new ArrayList<>();
@@ -67,7 +67,7 @@ public class MyTab extends Fragment {
         for (int i = 0; i < ITEM_SIZE; i++) {
             items.add(item[i]);
         }
-        recyclerView.setAdapter(new MyRecyclerAdapter(getContext(), items, R.layout.home_timeline));
+        recyclerviewMyTab.setAdapter(new MyRecyclerAdapter(getContext(), items, R.layout.home_timeline));
 
         return view;
     }
