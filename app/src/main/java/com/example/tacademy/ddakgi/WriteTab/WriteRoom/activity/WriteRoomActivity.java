@@ -15,8 +15,10 @@ import android.widget.ToggleButton;
 
 import com.example.tacademy.ddakgi.Map.WriteLocateActivity;
 import com.example.tacademy.ddakgi.R;
-import com.example.tacademy.ddakgi.U.DatePickerFragment;
+import com.example.tacademy.ddakgi.Util.DatePickerFragment;
 import com.example.tacademy.ddakgi.base.BaseActivity;
+
+import io.chooco13.NotoTextView;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -106,20 +108,20 @@ public class WriteRoomActivity extends BaseActivity{
     }
 
     // 방 유형 단일 선택
-    TextView clickedType = null;
+    NotoTextView clickedType = null;
 
     public void typeChecked(View view) {
         // 선택된 텍스트가 없으면,
         // 처음으로 선택한 텍스트를 clickedView에 넣고 색상을 적용한다.
         if (clickedType == null) {
-            clickedType = (TextView) view;
+            clickedType = (NotoTextView) view;
             clickedType.setTextColor(getResources().getColor(R.color.textpointColor));
         } else if (clickedType != view) {
             // 선택된 텍스트가 저장된 텍스트와 다르면
             // 저장했던 텍스트 색을 default로 변경하고,
             // 현재 선택된 텍스트를 저장 변수에 넣는다. (포인트 색상으로 적용)
             clickedType.setTextColor(getResources().getColor(R.color.grayTextColor));
-            clickedType = (TextView) view;
+            clickedType = (NotoTextView) view;
             clickedType.setTextColor(getResources().getColor(R.color.textpointColor));
         }
     }

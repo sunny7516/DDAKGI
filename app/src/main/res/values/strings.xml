@@ -21,6 +21,7 @@
     <string name="prefDetail">원하는 Details</string>
 
     <!-- 생활패턴 질문 -->
+    <string name="lifeStyle">생활패턴</string>
     <string name="lifeStyleQue1">1. 공동공간 청소는 얼마나 자주 하나요?</string>
     <string name="lifeStyleQue2">2. 흡연을 하나요?</string>
     <string name="lifeStyleQue3">3. 취침 시간은 언제인가요?</string>
@@ -31,6 +32,52 @@
     <string name="lifeStyleQue8">8. 소모품이나 식료품을 함께 구매하고 싶나요?</string>
     <string name="lifeStyleQue9">9. 집에서 발생하는 생활 소음에 대해 어떻게 생각하나요?</string>
     <string name="lifeStyleQue10">10. 주말은 주로 어디서 보내나요?</string>
+
+    <string name="lifeStyleAns1_1">1주에 2번 이상</string>
+    <string name="lifeStyleAns1_2">1주에 1번</string>
+    <string name="lifeStyleAns1_3">2주에 1번</string>
+    <string name="lifeStyleAns1_4">1달에 1번</string>
+
+    <string name="lifeStyleAns2_1">비흡연자에요</string>
+    <string name="lifeStyleAns2_2">집 밖에서만 피워요</string>
+    <string name="lifeStyleAns2_3">집 안에서 피워요</string>
+
+    <string name="lifeStyleAns3_1">~10시</string>
+    <string name="lifeStyleAns3_2">10시~12시</string>
+    <string name="lifeStyleAns3_3">12시~오전 2시</string>
+    <string name="lifeStyleAns3_4">2시~</string>
+    <string name="lifeStyleAns3_5">불규칙해요</string>
+
+    <string name="lifeStyleAns4_1">1달 3번↑</string>
+    <string name="lifeStyleAns4_2">1달 1~2번</string>
+    <string name="lifeStyleAns4_3">2~3달 1번</string>
+    <string name="lifeStyleAns4_4">데려오지 않아요</string>
+
+    <string name="lifeStyleAns5_1">6시 이전</string>
+    <string name="lifeStyleAns5_2">6시에서 8시</string>
+    <string name="lifeStyleAns5_3">8시 이후</string>
+    <string name="lifeStyleAns5_4">불규칙해요</string>
+
+    <string name="lifeStyleAns6_1">네!키워요</string>
+    <string name="lifeStyleAns6_2">아뇨!룸메가 키우는 건 괜찮아요</string>
+    <string name="lifeStyleAns6_3">아뇨!곤란해요</string>
+
+    <string name="lifeStyleAns7_1">직접 만들어 먹어요</string>
+    <string name="lifeStyleAns7_2">배달 시켜요</string>
+    <string name="lifeStyleAns7_3">밖에서 먹어요</string>
+
+    <string name="lifeStyleAns8_1">함께 구매할래요</string>
+    <string name="lifeStyleAns8_2">일부만 함께 구매할래요</string>
+    <string name="lifeStyleAns8_3">개별 구매할래요</string>
+
+    <string name="lifeStyleAns9_1">밤낮 모두 조용</string>
+    <string name="lifeStyleAns9_2">밤에는 조용</string>
+    <string name="lifeStyleAns9_3">내 방만 조용</string>
+    <string name="lifeStyleAns9_4">옆 집에 들리지 않을 정도면 괜찮아요</string>
+
+    <string name="lifeStyleAns10_1">집에서 보내요</string>
+    <string name="lifeStyleAns10_2">하루 정도는 밖에서 보내요</string>
+    <string name="lifeStyleAns10_3">대부분 밖에 있어요</string>
 
     <!-- writetab -->
     <string name="writeHelp">글을 등록하고 나만의 룸메이트를 찾아보세요</string>
@@ -130,4 +177,8 @@
     <!-- Mytab -->
     <string name="likeTool">찜 목록</string>
 
+    <!-- 카카오 로그인 -->
+    <string name="kakao_app_key">2a53a7a89edf17b188fd0f110c5b427f</string>
+    <string name="kakao_scheme">kakao2a53a7a89edf17b188fd0f110c5b427f</string>
+    <string name="kakaolink_host">kakaolink</string>
 </resources>

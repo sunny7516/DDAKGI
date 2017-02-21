@@ -1,6 +1,5 @@
 package com.example.tacademy.ddakgi.Search.fragment;
 
-import android.app.Activity;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
@@ -11,11 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.tacademy.ddakgi.R;
-import com.example.tacademy.ddakgi.U.U;
-import com.google.android.gms.identity.intents.Address;
+import com.example.tacademy.ddakgi.Util.U;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;

@@ -15,7 +15,7 @@ import android.widget.ToggleButton;
 
 import com.example.tacademy.ddakgi.Map.WriteLocateActivity;
 import com.example.tacademy.ddakgi.R;
-import com.example.tacademy.ddakgi.U.DatePickerFragment;
+import com.example.tacademy.ddakgi.Util.DatePickerFragment;
 import com.example.tacademy.ddakgi.WriteTab.WriteRoom.activity.WriteRoomActivity;
 import com.example.tacademy.ddakgi.WriteTab.WriteRoom.activity.WriteRoomImage;
 

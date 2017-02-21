@@ -1,4 +1,4 @@
-package com.example.tacademy.ddakgi.U;
+package com.example.tacademy.ddakgi.Util;
 
 import android.location.Location;
 

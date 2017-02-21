@@ -1,6 +1,5 @@
 package com.example.tacademy.ddakgi.Map;
 
-import android.app.Activity;
 import android.content.res.ColorStateList;
 import android.location.Geocoder;
 import android.location.Location;
@@ -10,16 +9,13 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.tacademy.ddakgi.R;
-import com.example.tacademy.ddakgi.U.U;
-import com.example.tacademy.ddakgi.WriteTab.WriteMate.activity.WriteMateActivity;
+import com.example.tacademy.ddakgi.Util.U;
 import com.example.tacademy.ddakgi.WriteTab.WriteRoom.activity.WriteRoomActivity;
-import com.example.tacademy.ddakgi.widget.NotoTextView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;

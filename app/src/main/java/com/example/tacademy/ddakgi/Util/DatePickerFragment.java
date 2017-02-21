@@ -1,4 +1,4 @@
-package com.example.tacademy.ddakgi.U;
+package com.example.tacademy.ddakgi.Util;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -30,6 +30,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Button prefDate = (Button) getActivity().findViewById(R.id.prefDate);
-        prefDate.setText(year + "년 " + month+1 + "월 " + dayOfMonth + "일");
+        int Month = month + 1;
+        prefDate.setText(year + "년 " + Month + "월 " + dayOfMonth + "일");
     }
 }

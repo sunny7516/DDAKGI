@@ -9,7 +9,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 
-import com.example.tacademy.ddakgi.U.U;
+import com.example.tacademy.ddakgi.Util.U;
 
 public class GpsDetecting extends Service implements LocationListener {
     Context context;

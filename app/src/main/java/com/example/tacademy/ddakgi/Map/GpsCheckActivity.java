@@ -18,7 +18,7 @@ import android.util.Log;
 import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.Service.GpsDetecting;
 import com.example.tacademy.ddakgi.SplashIntro.MainActivity;
-import com.example.tacademy.ddakgi.U.U;
+import com.example.tacademy.ddakgi.Util.U;
 import com.squareup.otto.Subscribe;
 
 import java.util.List;

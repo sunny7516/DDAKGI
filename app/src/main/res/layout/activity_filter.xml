@@ -1,285 +1,294 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_filter"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.example.tacademy.ddakgi.HomeTab.activity.FilterActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/filterToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@android:color/white"
-        android:minHeight="?attr/actionBarSize">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageButton
-                android:onClick="back"
-                android:id="@+id/filterBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:background="@mipmap/x_btn_ww" />
-
-            <io.chooco13.NotoTextView
-                android:onClick="reset"
-                android:id="@+id/resetBt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="27.67dp"
-                android:layout_toLeftOf="@+id/applyBt"
-                android:text="@string/filter_reset"
-                android:textColor="@color/subTextColor"
-                android:textSize="13sp"
-                app:fontWeight="regular" />
-
-            <io.chooco13.NotoTextView
-                android:onClick="apply"
-                android:id="@+id/applyBt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="16dp"
-                android:text="@string/filter_apply"
-                android:textColor="@color/subTextColor"
-                android:textSize="13sp"
-                app:fontWeight="regular" />
-        </RelativeLayout>
-    </android.support.v7.widget.Toolbar>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:background="@color/grayTextColor" />
+    <!-- HomeTab > 필터 화면 -->
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="25dp"
         android:orientation="vertical">
-        <!-- 방 종류 -->
 
-        <io.chooco13.NotoTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/filterRoomType"
-            android:textColor="@color/defaultTextColor"
-            android:textSize="16sp"
-            app:fontWeight="medium" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/filterToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@android:color/white"
+            android:minHeight="?attr/actionBarSize">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <ImageButton
+                    android:id="@+id/filterBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:background="@mipmap/x_btn_ww"
+                    android:onClick="back" />
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/resetBt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="27.67dp"
+                    android:layout_toLeftOf="@+id/applyBt"
+                    android:onClick="reset"
+                    android:text="@string/filter_reset"
+                    android:textColor="@color/subTextColor"
+                    android:textSize="13sp"
+                    app:fontWeight="regular" />
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/applyBt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:onClick="apply"
+                    android:text="@string/filter_apply"
+                    android:textColor="@color/subTextColor"
+                    android:textSize="13sp"
+                    app:fontWeight="regular" />
+            </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="@color/grayTextColor" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <ToggleButton
-                android:id="@+id/typeOne"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:onClick="filterChecked"
-                android:textColor="@color/subTextColor"
-                android:textOff="@string/typeOne"
-                android:textOn="@string/typeOne"
-                android:textSize="13sp" />
-
-            <ToggleButton
-                android:id="@+id/typeTwo"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:onClick="filterChecked"
-                android:textColor="@color/subTextColor"
-                android:textOff="@string/typeTwo"
-                android:textOn="@string/typeTwo"
-                android:textSize="13sp" />
-
-            <ToggleButton
-                android:id="@+id/typeHouse"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:onClick="filterChecked"
-                android:textColor="@color/subTextColor"
-                android:textOff="@string/typeHouse"
-                android:textOn="@string/typeHouse"
-                android:textSize="13sp" />
-
-            <ToggleButton
-                android:id="@+id/typeOffice"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:onClick="filterChecked"
-                android:textColor="@color/subTextColor"
-                android:textOff="@string/typeOffice"
-                android:textOn="@string/typeOffice"
-                android:textSize="13sp" />
-
-            <ToggleButton
-                android:id="@+id/typeApart"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:onClick="filterChecked"
-                android:textColor="@color/subTextColor"
-                android:textOff="@string/typeApart"
-                android:textOn="@string/typeApart"
-                android:textSize="13sp" />
-        </LinearLayout>
-
-        <!-- 보증금 -->
-        <io.chooco13.NotoTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:layout_marginTop="25dp"
-            android:text="@string/roomPrice"
-            android:textColor="@color/defaultTextColor"
-            android:textSize="16sp"
-            app:fontWeight="medium" />
-
-        <SeekBar
-            android:id="@+id/seekBar"
-            style="@style/Widget.AppCompat.SeekBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="26dp" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+            <!-- 방 종류 -->
 
             <io.chooco13.NotoTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="13dp"
-                android:text="0"
-                android:textColor="@color/subTextColor"
-                android:textSize="13sp"
-                app:fontWeight="regular" />
-
-            <io.chooco13.NotoTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="Any"
-                android:textColor="@color/subTextColor"
-                android:textSize="13sp"
-                app:fontWeight="regular" />
-        </RelativeLayout>
-        <!-- 월세, 전세 -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:orientation="horizontal">
-            <!-- 월세 -->
-            <io.chooco13.NotoTextView
-                android:id="@+id/priceMonth"
-                android:onClick="priceType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="26dp"
-                android:text="@string/roomMonth"
-                android:textColor="@color/defaultTextColor"
-                android:textSize="16sp"
-                app:fontWeight="medium" />
-            <!-- 전세 -->
-            <io.chooco13.NotoTextView
-                android:id="@+id/priceYear"
-                android:onClick="priceType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/roomYear"
-                android:textColor="@color/subTextColor"
-                android:textSize="13sp"
-                app:fontWeight="regular" />
-
-        </LinearLayout>
-
-        <SeekBar
-            android:id="@+id/PriceseekBar"
-            style="@style/Widget.AppCompat.SeekBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="26dp" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <io.chooco13.NotoTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="13dp"
-                android:text="0"
-                android:textColor="@color/subTextColor"
-                android:textSize="13sp"
-                app:fontWeight="regular" />
-
-            <io.chooco13.NotoTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="Any"
-                android:textColor="@color/subTextColor"
-                android:textSize="13sp"
-                app:fontWeight="regular" />
-        </RelativeLayout>
-
-        <!-- 입주가능일 -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:onClick="showFilterprefDate"
-            android:orientation="horizontal">
-
-            <io.chooco13.NotoTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="26dp"
-                android:text="@string/prefDate"
+                android:text="@string/filterRoomType"
                 android:textColor="@color/defaultTextColor"
                 android:textSize="16sp"
                 app:fontWeight="medium" />
 
-            <ImageView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@mipmap/certification_btn"
-                android:rotation="90" />
-        </LinearLayout>
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
-        <!-- 입주가능일 hide/show 부분 -->
-        <Button
-            android:id="@+id/prefDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@android:color/transparent"
-            android:onClick="showDatePickerDialog"
-            android:text="예) 2017년 2월 16일"
-            android:textColor="@color/defaultTextColor"
-            android:textSize="13sp"
-            android:visibility="gone" />
+                <ToggleButton
+                    android:id="@+id/typeOne"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:onClick="filterChecked"
+                    android:textColor="@color/subTextColor"
+                    android:textOff="@string/typeOne"
+                    android:textOn="@string/typeOne"
+                    android:textSize="13sp" />
+
+                <ToggleButton
+                    android:id="@+id/typeTwo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:onClick="filterChecked"
+                    android:textColor="@color/subTextColor"
+                    android:textOff="@string/typeTwo"
+                    android:textOn="@string/typeTwo"
+                    android:textSize="13sp" />
+
+                <ToggleButton
+                    android:id="@+id/typeHouse"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:onClick="filterChecked"
+                    android:textColor="@color/subTextColor"
+                    android:textOff="@string/typeHouse"
+                    android:textOn="@string/typeHouse"
+                    android:textSize="13sp" />
+
+                <ToggleButton
+                    android:id="@+id/typeOffice"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:onClick="filterChecked"
+                    android:textColor="@color/subTextColor"
+                    android:textOff="@string/typeOffice"
+                    android:textOn="@string/typeOffice"
+                    android:textSize="13sp" />
+
+                <ToggleButton
+                    android:id="@+id/typeApart"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:onClick="filterChecked"
+                    android:textColor="@color/subTextColor"
+                    android:textOff="@string/typeApart"
+                    android:textOn="@string/typeApart"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- 보증금 -->
+            <io.chooco13.NotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/roomPrice"
+                android:textColor="@color/defaultTextColor"
+                android:textSize="16sp"
+                app:fontWeight="medium" />
+
+            <SeekBar
+                android:id="@+id/seekBar"
+                style="@style/Widget.AppCompat.SeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <io.chooco13.NotoTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="13dp"
+                    android:text="0"
+                    android:textColor="@color/subTextColor"
+                    android:textSize="13sp"
+                    app:fontWeight="regular" />
+
+                <io.chooco13.NotoTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="Any"
+                    android:textColor="@color/subTextColor"
+                    android:textSize="13sp"
+                    app:fontWeight="regular" />
+            </RelativeLayout>
+            <!-- 월세, 전세 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:orientation="horizontal">
+                <!-- 월세 -->
+                <io.chooco13.NotoTextView
+                    android:id="@+id/priceMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="26dp"
+                    android:onClick="priceType"
+                    android:text="@string/roomMonth"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="16sp"
+                    app:fontWeight="medium" />
+                <!-- 전세 -->
+                <io.chooco13.NotoTextView
+                    android:id="@+id/priceYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="priceType"
+                    android:text="@string/roomYear"
+                    android:textColor="@color/subTextColor"
+                    android:textSize="13sp"
+                    app:fontWeight="regular" />
+
+            </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/PriceseekBar"
+                style="@style/Widget.AppCompat.SeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <io.chooco13.NotoTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="13dp"
+                    android:text="0"
+                    android:textColor="@color/subTextColor"
+                    android:textSize="13sp"
+                    app:fontWeight="regular" />
+
+                <io.chooco13.NotoTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="Any"
+                    android:textColor="@color/subTextColor"
+                    android:textSize="13sp"
+                    app:fontWeight="regular" />
+            </RelativeLayout>
+
+            <!-- 입주가능일 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:onClick="showFilterprefDate"
+                android:orientation="horizontal">
+
+                <io.chooco13.NotoTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="26dp"
+                    android:text="@string/prefDate"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="16sp"
+                    app:fontWeight="medium" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@mipmap/certification_btn"
+                    android:rotation="90" />
+            </LinearLayout>
+
+            <!-- 입주가능일 hide/show 부분 -->
+            <Button
+                android:id="@+id/prefDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:onClick="showDatePickerDialog"
+                android:text="예) 2017년 2월 16일"
+                android:textColor="@color/defaultTextColor"
+                android:textSize="13sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</ScrollView>

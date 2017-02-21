@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.ToggleButton;
 
 import com.example.tacademy.ddakgi.R;
-import com.example.tacademy.ddakgi.U.DatePickerFragment;
+import com.example.tacademy.ddakgi.Util.DatePickerFragment;
 import com.example.tacademy.ddakgi.base.BaseActivity;
 
 /**
@@ -44,12 +44,6 @@ public class FilterActivity extends BaseActivity {
         filterFlag = false;
     }
 
-    // 입주가능일 DatePickerDialog 띄우기
-    public void showDatePickerDialog(View v) {
-        DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "datePicker");
-    }
-
     // 방 유형 필터링 선택하기(중복)
     public void filterChecked(View view) {
         filterRoomType = (ToggleButton) view;
@@ -58,6 +52,12 @@ public class FilterActivity extends BaseActivity {
         } else {
             filterRoomType.setTextColor(getResources().getColor(R.color.subTextColor));
         }
+    }
+
+    // 입주가능일 DatePickerDialog 띄우기
+    public void showDatePickerDialog(View v) {
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
     // 월세 / 전세 선택하기
@@ -81,11 +81,13 @@ public class FilterActivity extends BaseActivity {
     }
 
     // 필터 리셋
-    public void reset(View view){
+    public void reset(View view) {
 
     }
+
     // 필터 적용
-    public void apply(View view){
+    public void apply(View view) {
 
     }
+
 }

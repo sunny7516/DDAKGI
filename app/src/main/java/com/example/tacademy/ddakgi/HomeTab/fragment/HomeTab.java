@@ -23,6 +23,7 @@ import com.example.tacademy.ddakgi.HomeTab.activity.FilterActivity;
 import com.example.tacademy.ddakgi.HomeTab.util.TimelineItem;
 import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.Search.SearchActivity;
+import com.example.tacademy.ddakgi.SignUp.SignUpActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -149,6 +150,7 @@ public class HomeTab extends Fragment {
                     break;
                 // 이미지 버튼 눌렀을 때 filter 화면으로 intent
                 case R.id.filter_menu:
+                    getActivity().finish();
                     Intent intent = new Intent(getActivity(), FilterActivity.class);
                     startActivity(intent);
                     break;
@@ -186,7 +188,10 @@ public class HomeTab extends Fragment {
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        alert.dismissWithAnimation();
                         // 로그인 화면으로
+                        Intent intent = new Intent(getContext(), SignUpActivity.class);
+                        startActivity(intent);
                     }
                 })
                 .setCancelText("나중에 하기")
