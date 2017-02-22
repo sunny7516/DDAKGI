@@ -1,4 +1,4 @@
-package com.example.tacademy.ddakgi.Adapter;
+package com.example.tacademy.ddakgi.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,8 +12,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.tacademy.ddakgi.HomeTab.activity.HomeRoomDetailPageActivity;
-import com.example.tacademy.ddakgi.MyTab.util.MyTimelineItem;
+import com.example.tacademy.ddakgi.view.Home.act.HomeRoomDetailPageActivity;
+import com.example.tacademy.ddakgi.view.My.model.MyTimelineItem;
 import com.example.tacademy.ddakgi.R;
 
 import java.util.List;

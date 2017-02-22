@@ -5,7 +5,7 @@
     android:id="@+id/activity_filter"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.tacademy.ddakgi.HomeTab.activity.FilterActivity">
+    tools:context="com.example.tacademy.ddakgi.view.Filter.FilterActivity">
 
     <!-- HomeTab > 필터 화면 -->
 

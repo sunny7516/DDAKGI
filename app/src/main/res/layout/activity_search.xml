@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.tacademy.ddakgi.Search.SearchActivity">
+    tools:context="com.example.tacademy.ddakgi.view.Search.act.SearchActivity">
     <!-- 홈탭 -> 위치 검색 화면 -->
     <!-- 전체 검색 / 지도검색 -->
 

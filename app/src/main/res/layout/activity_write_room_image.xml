@@ -5,7 +5,7 @@
     android:id="@+id/activity_write_room_image"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.tacademy.ddakgi.WriteTab.WriteRoom.activity.WriteRoomImage">
+    tools:context="com.example.tacademy.ddakgi.view.Write.act.WriteRoomImage">
 
     <LinearLayout
         android:layout_width="match_parent"

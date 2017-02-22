@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.tacademy.ddakgi.WriteTab.WriteTab">
+    tools:context="com.example.tacademy.ddakgi.view.Write.frag.WriteTab">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/writeTool"

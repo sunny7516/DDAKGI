@@ -24,32 +24,32 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
-        android:name=".MyApplication"
+        android:name=".util.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:replace="android:icon">
-        <activity android:name=".SplashIntro.MainActivity" />
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".HomeTab.activity.FilterActivity" />
-        <activity android:name=".SplashIntro.SplashActivity">
+        <activity android:name=".view.SplashIntro.MainActivity" />
+        <activity android:name=".data.HomeActivity" />
+        <activity android:name=".view.Filter.FilterActivity" />
+        <activity android:name=".view.SplashIntro.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".WriteTab.WriteRoom.activity.WriteRoomActivity" />
-        <activity android:name=".WriteTab.WriteMate.activity.WriteMateActivity" />
-        <activity android:name=".Search.SearchActivity">
+        <activity android:name=".view.Write.act.WriteRoomActivity" />
+        <activity android:name=".view.Write.act.WriteMateActivity" />
+        <activity android:name=".view.Search.act.SearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
-        <activity android:name=".WriteTab.WriteRoom.activity.WriteRoomImage" />
-        <activity android:name=".WriteTab.WriteRoom.activity.WriteRoomIdentify" />
+        <activity android:name=".view.Write.act.WriteRoomImage" />
+        <activity android:name=".view.Write.act.WriteRoomIdentify" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -68,21 +68,28 @@
             android:value="@string/kakao_app_key" />
 
         <activity
-            android:name=".Map.WriteLocateActivity"
+            android:name=".view.Write.act.WriteLocateActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".Map.GpsCheckActivity" />
+        <activity android:name=".util.GpsCheckActivity" />
 
         <service
             android:name=".Service.GpsDetecting"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".MyTab.fragment.HelpActivity" />
-        <activity android:name=".MyTab.fragment.SettingActivity" />
-        <activity android:name=".WriteTab.WriteMate.activity.WriteMateIdentify" />
-        <activity android:name=".HomeTab.activity.HomeRoomDetailPageActivity" />
-        <activity android:name=".HomeTab.activity.HomemateDetailPageActivity" />
-        <activity android:name=".SignUp.SignUpActivity"></activity>
+        <activity android:name=".view.Help.HelpActivity" />
+        <activity android:name=".view.Setting.SettingActivity" />
+        <activity android:name=".view.Write.act.WriteMateIdentify" />
+        <activity android:name=".view.Home.act.HomeRoomDetailPageActivity" />
+        <activity android:name=".view.Home.act.HomemateDetailPageActivity" />
+        <activity android:name=".view.SignUp.act.SignUpActivity">
+            <data
+                android:host="@string/kakaolink_host"
+                android:scheme="@string/kakao_scheme" />
+        </activity>
+        <activity android:name=".view.SignUp.act.RegisterProfileActivity" />
+        <activity android:name=".view.SignUp.act.RegisterLifeStyleActivity" />
+        <activity android:name=".view.SignUp.act.TermsActivity"></activity>
     </application>
 
 </manifest>

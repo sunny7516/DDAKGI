@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:background="@color/introBack"
     android:orientation="vertical"
-    tools:context="com.example.tacademy.ddakgi.SplashIntro.MainActivity"
+    tools:context="com.example.tacademy.ddakgi.view.SplashIntro.MainActivity"
     android:weightSum="1">
 
     <RelativeLayout

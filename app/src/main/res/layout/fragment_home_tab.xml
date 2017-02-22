@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical"
-    tools:context="com.example.tacademy.ddakgi.HomeTab.fragment.HomeTab">
+    tools:context="com.example.tacademy.ddakgi.view.Home.frag.HomeTab">
     <!-- HomeTab의 timeline(fragment_my) -->
 
     <RelativeLayout

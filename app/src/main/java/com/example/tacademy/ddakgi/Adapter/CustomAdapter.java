@@ -1,4 +1,4 @@
-package com.example.tacademy.ddakgi.Adapter;
+package com.example.tacademy.ddakgi.adapter;
 
 import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.tacademy.ddakgi.HomeTab.activity.HomeRoomDetailPageActivity;
+import com.example.tacademy.ddakgi.view.Home.act.HomeRoomDetailPageActivity;
 import com.example.tacademy.ddakgi.R;
 
 /**

@@ -4,7 +4,7 @@
     android:id="@+id/activity_gps_check"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.tacademy.ddakgi.Map.GpsCheckActivity">
+    tools:context="com.example.tacademy.ddakgi.util.GpsCheckActivity">
 
     <ImageView
         android:layout_width="match_parent"

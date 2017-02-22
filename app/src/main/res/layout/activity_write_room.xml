@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.tacademy.ddakgi.WriteTab.WriteRoom.activity.WriteRoomActivity">
+    tools:context="com.example.tacademy.ddakgi.view.Write.act.WriteRoomActivity">
     <!-- 방 등록 화면 -->
 
     <LinearLayout

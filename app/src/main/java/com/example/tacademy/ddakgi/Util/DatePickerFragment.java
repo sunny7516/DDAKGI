@@ -1,4 +1,4 @@
-package com.example.tacademy.ddakgi.Util;
+package com.example.tacademy.ddakgi.util;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;

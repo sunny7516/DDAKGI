@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_register_profile"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.SignUp.act.RegisterProfileActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/registerProfileTool"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@android:color/white"
+        android:minHeight="?attr/actionBarSize">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/registerProfileBackBt"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginRight="12dp"
+                android:background="@mipmap/back_btn"
+                android:onClick="back" />
+
+            <io.chooco13.NotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_toRightOf="@id/registerProfileBackBt"
+                android:gravity="center"
+                android:text="@string/registerProfileTool"
+                android:textColor="@color/defaultTextColor"
+                android:textSize="16sp"
+                app:fontWeight="medium" />
+
+            <io.chooco13.NotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="16dp"
+                android:text="@string/finish"
+                android:onClick="registerMemberDB"
+                android:textColor="@color/grayTextColor"
+                android:textSize="13sp"
+                app:fontWeight="regular" />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/userProfile"
+            android:onClick="checkNull"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="31dp"
+            android:src="@mipmap/profile" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:layout_marginTop="41dp"
+            android:orientation="horizontal">
+
+            <io.chooco13.NotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="21dp"
+                android:text="@string/nickname"
+                android:textColor="@color/subTextColor"
+                android:textSize="13sp"
+                app:fontWeight="regular" />
+
+            <EditText
+                android:id="@+id/userNickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="21dp"
+                android:background="@android:color/transparent"
+                android:text="NickName"
+                android:textColor="@color/defaultTextColor"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/string" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:orientation="horizontal">
+
+            <io.chooco13.NotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:text="@string/Age"
+                android:textColor="@color/subTextColor"
+                android:textSize="13sp"
+                app:fontWeight="regular" />
+
+            <EditText
+                android:id="@+id/userAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="Age"
+                android:textColor="@color/defaultTextColor"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/string" />
+
+        <LinearLayout
+            android:onClick="goRegisterLifeStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:orientation="horizontal">
+
+            <io.chooco13.NotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:text="@string/registerLifestyle"
+                android:textColor="@color/defaultTextColor"
+                android:textSize="13sp"
+                app:fontWeight="medium" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@mipmap/certification_btn" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="55dp"
+            android:background="@color/string" />
+
+        <io.chooco13.NotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:layout_marginRight="30dp"
+            android:text="@string/termsHint"
+            android:textColor="@color/defaultTextColor"
+            android:textSize="13sp"
+            app:fontWeight="medium" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/string" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="28dp" />
+
+            <io.chooco13.NotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/allterms"
+                android:textColor="@color/defaultTextColor"
+                android:textSize="13sp"
+                app:fontWeight="regular" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/string" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="28dp" />
+
+            <io.chooco13.NotoTextView
+                android:id="@+id/InfoTerms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Infoterms"
+                android:onClick="goTerms"
+                android:textColor="@color/defaultTextColor"
+                android:textSize="13sp"
+                app:fontWeight="regular" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/string" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="28dp" />
+
+            <io.chooco13.NotoTextView
+                android:onClick="goTerms"
+                android:id="@+id/ServiceTerms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Serviceterms"
+                android:textColor="@color/defaultTextColor"
+                android:textSize="13sp"
+                app:fontWeight="regular" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

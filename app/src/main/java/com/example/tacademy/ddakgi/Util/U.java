@@ -1,8 +1,10 @@
-package com.example.tacademy.ddakgi.Util;
+package com.example.tacademy.ddakgi.util;
 
 import android.location.Location;
 
 import com.squareup.otto.Bus;
+
+import java.lang.reflect.Member;
 
 /**
  * Created by Tacademy on 2017-01-26.
@@ -23,6 +25,7 @@ public class U {
         return bus;
     }
 
+    // 지도 ========================================================================================
     double myLat, myLng;
     Location myLocation;
 
@@ -48,6 +51,17 @@ public class U {
 
     public void setMyLocation(Location myLocation) {
         this.myLocation = myLocation;
+    }
+
+    // 회원정보 로그인 후 전역적으로 접근하기 위한 객체 =====================================================
+    Member member;
+
+    public Member getMember() {
+        return member;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
     }
 }
 

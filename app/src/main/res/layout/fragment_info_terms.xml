@@ -1,0 +1,54 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.tacademy.ddakgi.view.SignUp.frag.InfoFrag">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/writeroomImageTool"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@android:color/white"
+            android:minHeight="?attr/actionBarSize">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/writeroomBackBt"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@mipmap/back_btn"
+                    android:onClick="back" />
+
+                <io.chooco13.NotoTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_toRightOf="@id/writeroomBackBt"
+                    android:gravity="center"
+                    android:text="@string/Infoterms"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="16sp"
+                    app:fontWeight="medium" />
+            </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
+
+        <io.chooco13.NotoTextView
+            android:id="@+id/infoText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:textColor="@color/subTextColor"
+            android:textSize="13sp"
+            app:fontWeight="regular" />
+    </LinearLayout>
+</ScrollView>

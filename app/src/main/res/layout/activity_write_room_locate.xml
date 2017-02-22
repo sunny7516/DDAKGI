@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context="com.example.tacademy.ddakgi.Map.WriteLocateActivity">
+    tools:context="com.example.tacademy.ddakgi.view.Write.act.WriteLocateActivity">
     <!-- 방 등록 시 위치 지도 화면 -->
 
     <RelativeLayout

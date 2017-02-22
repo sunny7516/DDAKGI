@@ -181,4 +181,17 @@
     <string name="kakao_app_key">2a53a7a89edf17b188fd0f110c5b427f</string>
     <string name="kakao_scheme">kakao2a53a7a89edf17b188fd0f110c5b427f</string>
     <string name="kakaolink_host">kakaolink</string>
+
+    <!-- 회원가입 -->
+    <string name="registerProfileTool">프로필 등록</string>
+    <string name="nickname">닉네임</string>
+    <string name="Age">나이</string>
+    <string name="registerLifestyle">생활패턴 등록하기</string>
+
+    <string name="termsHint">딱지 서비스 이용을 위해 다음의 약관에 동의해주세요.</string>
+    <string name="allterms">전체 동의합니다.</string>
+    <string name="Infoterms">개인 정보 수집 및 이용에 대한 동의</string>
+    <string name="Serviceterms">서비스 이용 약관에 대한 동의</string>
+    <string name="InfoAgree">개인 정보 수집 및 이용에 동의합니다.</string>
+    <string name="ServiceAgree">서비스 이용 약관에 동의합니다.</string>
 </resources>

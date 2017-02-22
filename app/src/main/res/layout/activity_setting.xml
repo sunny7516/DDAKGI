@@ -8,11 +8,13 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.tacademy.ddakgi.MyTab.fragment.SettingActivity">
+    tools:context="com.example.tacademy.ddakgi.view.Setting.SettingActivity">
 
-    <TextView
-        android:text="SettingActivity"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/logoutBt"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView15" />
+        android:layout_marginTop="26dp"
+        android:onClick="onClickLogout"
+        android:text="Logout" />
 </RelativeLayout>

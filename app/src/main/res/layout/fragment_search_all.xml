@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.tacademy.ddakgi.Search.fragment.SearchAll">
+    tools:context="com.example.tacademy.ddakgi.view.Search.frag.SearchAll">
 
     <!-- 전체 검색 Fragment -->
 
