@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.RelativeLayout;
 
 import com.example.tacademy.ddakgi.R;
 
@@ -15,18 +17,48 @@ import io.chooco13.NotoTextView;
  * A simple {@link Fragment} subclass.
  */
 public class ServiceFrag extends Fragment {
-
+    NotoTextView serviceText;
+    RelativeLayout serviceBt;
+    CheckBox serviceCheckBox;
 
     public ServiceFrag() {
         // Required empty public constructor
     }
+
+    // 약관 동의 버튼 클릭 시 버튼 색상 변경
+    boolean flag = true;
+
+    private View.OnClickListener ServiceBtClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (flag) {
+                // 이전 화면의 체크박스 체크!
+
+                // 버튼 색상 변경
+                serviceBt.setBackgroundColor(getResources().getColor(R.color.textpointColor));
+                flag = false;
+            } else {
+                // 이전 화면의 체크박스 체크 해제!
+
+                // 버튼 색상 초기화
+                serviceBt.setBackgroundColor(getResources().getColor(R.color.subTextColor));
+                flag = true;
+            }
+        }
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_service_terms, container, false);
-        NotoTextView serviceText = (NotoTextView)view.findViewById(R.id.serviceText);
+        View registerView = inflater.inflate(R.layout.activity_register_profile, container, false);
+        serviceCheckBox = (CheckBox) registerView.findViewById(R.id.serviceCheckBox);
+
+        serviceText = (NotoTextView) view.findViewById(R.id.serviceText);
+        serviceBt = (RelativeLayout) view.findViewById(R.id.serviceBt);
+        serviceBt.setOnClickListener(ServiceBtClickListener);
+
         serviceText.setText("제 1 조 목적\n" +
                 "이 약관은 딱지(이하 “회사”라 함)가 운영하는 모바일 어플리케이션에서 제공하는 서비스 접속과 서비스 이용에 관한 권리 및 의무와 책임사항, 사용자에 의해서 업로드 및 다운로드 되어 표시되는 모든 정보와 기타 필요한 사항을 규정하는 것을 목적으로 합니다.\n" +
                 "\n" +
@@ -180,5 +212,4 @@ public class ServiceFrag extends Fragment {
                 "본 약관은 2017년 3월 13일부터 적용됩니다.\n");
         return view;
     }
-
 }

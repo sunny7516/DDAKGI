@@ -3,9 +3,12 @@ package com.example.tacademy.ddakgi.view.SignUp.frag;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.RelativeLayout;
 
 import com.example.tacademy.ddakgi.R;
 
@@ -16,11 +19,36 @@ import io.chooco13.NotoTextView;
  */
 public class InfoFrag extends Fragment {
 
+    RelativeLayout infoBt;
+    CheckBox infoCheckBox;
 
     public InfoFrag() {
         // Required empty public constructor
     }
 
+    // 약관 동의 버튼 클릭 시 버튼 색상 변경
+    boolean flag = true;
+
+    private View.OnClickListener InfoBtClicklistener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (flag) {
+                // 이전 화면의 체크박스 체크!
+
+                Log.i("infochecked", "true");
+                // 버튼 색상 변경
+                infoBt.setBackgroundColor(getResources().getColor(R.color.textpointColor));
+                flag = false;
+            } else {
+                Log.i("infochecked", "false");
+                // 이전 화면의 체크박스 체크 해제!
+
+                // 버튼 색상 초기화
+                infoBt.setBackgroundColor(getResources().getColor(R.color.subTextColor));
+                flag = true;
+            }
+        }
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,7 +56,12 @@ public class InfoFrag extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_info_terms, container, false);
 
-        NotoTextView terms = (NotoTextView)view.findViewById(R.id.infoText);
+        View registerView = inflater.inflate(R.layout.activity_register_profile, container, false);
+        infoCheckBox = (CheckBox) registerView.findViewById(R.id.infoCheckBox);
+        infoBt = (RelativeLayout) view.findViewById(R.id.infoBt);
+        infoBt.setOnClickListener(InfoBtClicklistener);
+
+        NotoTextView terms = (NotoTextView) view.findViewById(R.id.infoText);
         terms.setText("<딱지>은(는) 개인정보보호법에 따라 이용자의 개인정보 보호 및 권익을 보호하고 개인정보와 관련한 이용자의 고충을 원활하게 처리할 수 있도록 다음과 같은 처리방침을 두고 있습니다.\n" +
                 "<딱지>은(는) 회사는 개인정보처리방침을 개정하는 경우 웹사이트 공지사항(또는 개별공지)을 통하여 공지할 것입니다.\n" +
                 "○ 본 방침은부터 2017년 3월 13일부터 시행됩니다.\n" +

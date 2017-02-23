@@ -34,4 +34,23 @@
     <style name="AppTheme.NoActionBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!-- 생활패턴 등록-->
+    <style name="lifeStyleQue" parent="TextAppearance.AppCompat.Button">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/defaultTextColor</item>
+        <item name="android:gravity">center|left</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">40dp</item>
+    </style>
+
+    <style name="lifeStyleAns" parent="TextAppearance.AppCompat.Button">
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/subTextColor</item>
+        <item name="android:gravity">center|left</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">40dp</item>
+
+    </style>
 </resources>

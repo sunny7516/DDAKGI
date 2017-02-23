@@ -3,10 +3,13 @@ package com.example.tacademy.ddakgi.view.SignUp.act;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.base.BaseActivity;
@@ -17,6 +20,7 @@ import com.squareup.picasso.Picasso;
 import com.yalantis.ucrop.UCrop;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import io.chooco13.NotoTextView;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -31,18 +35,28 @@ public class RegisterProfileActivity extends BaseActivity {
 
     ImageView userProfile;
     EditText userNickname;
+    EditText userAge;
+    CheckBox infoCheckBox;
+    CheckBox serviceCheckBox;
+    CheckBox allCheckBox;
+    NotoTextView registerMemberFinish;
 
     String kakaoProfile, kakaoNickname;
     String havePhoto = null;
+
+    // 생활 패턴 응답 완료했는지 확인하는 변수
+    public static boolean isLifeStyleFinish = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_profile);
-
+        Log.i("isLifeStyleFinish1", isLifeStyleFinish + "");
         // layout에 있는 프로필 사진, 닉네임
         userProfile = (ImageView) findViewById(R.id.userProfile);
         userNickname = (EditText) findViewById(R.id.userNickname);
+        userAge = (EditText) findViewById(R.id.userAge);
+        registerMemberFinish = (NotoTextView) findViewById(R.id.registerMemberFinish);
 
         // 이전 화면에서 sns 연동 로그인 시 보내준 정보
         kakaoProfile = getIntent().getStringExtra("kakaoProfile");
@@ -51,8 +65,26 @@ public class RegisterProfileActivity extends BaseActivity {
         // 이전 화면에서 전달받은 정보들을 현재 layout에 넣어준다.
         ImageProc.getInstance().drawImage(kakaoProfile, userProfile);
         userNickname.setText(kakaoNickname);
+
+        infoCheckBox = (CheckBox) findViewById(R.id.infoCheckBox);
+        serviceCheckBox = (CheckBox) findViewById(R.id.serviceCheckBox);
+        allCheckBox = (CheckBox) findViewById(R.id.allCheckBox);
+        allCheckBox.setChecked(allCheckBox.isChecked());
     }
 
+    // 전체 동의 체크박스 눌렀을 때, 하위 박스 이벤트 처리
+    public void allChecked(View view) {
+        CheckBox all = (CheckBox) view;
+        if (all.isChecked()) {
+            infoCheckBox.setChecked(true);
+            serviceCheckBox.setChecked(true);
+        } else {
+            infoCheckBox.setChecked(false);
+            serviceCheckBox.setChecked(false);
+        }
+    }
+
+    // 카메라 =======================================================================================
     // 사진이 있는지 없는지 확인(있으면 삭제 혹은 재설정, 없으면 사진선택)
     public void checkNull(View view) {
         if (havePhoto == null) {
@@ -183,6 +215,7 @@ public class RegisterProfileActivity extends BaseActivity {
         alert.dismissWithAnimation();
     }
 
+    // 클릭 이벤트 ===================================================================================
     // 생활패턴 등록하러가는 클릭 이벤트
     public void goRegisterLifeStyle(View view) {
         Intent intent = new Intent(this, RegisterLifeStyleActivity.class);
@@ -203,9 +236,52 @@ public class RegisterProfileActivity extends BaseActivity {
         startActivity(termsIntent);
     }
 
-    public void registerMemberDB(View view){
-        // 회원가입 정보 db로 전송
-        // 홈탭 로그인 유도 팝업 안뜨게 설정
-        isLogin = true;
+    // 완료 버튼 눌렀을 때
+    public void registerMemberDB(View view) {
+        Log.i("CHECK","CHECK");
+
+        // 모든 답변 응답했는지 확인
+        if (!isValidate()) {
+            Log.i("CHECK","FALSEVALIDATE");
+            return;
+        } else
+            Log.i("CHECK","TRUEVALIDATE");
+            // 모두 답변했으면
+            // 회원가입 정보 db로 전송
+            // 홈탭 로그인 유도 팝업 더이상 안뜨게 설정
+            isLogin = true;
+        // 회원가입 화면 닫기
+        finish();
+    }
+
+    //모든 답변했는지 확인
+    public boolean isValidate() {
+        // 닉네임 입력 확인
+        if (TextUtils.isEmpty(userNickname.getText().toString())) {
+            userNickname.setError("닉네임을 입력하세요!");
+            return false;
+        } else {
+            userNickname.setError(null);
+        }
+        // 나이 입력 확인
+        if (TextUtils.isEmpty(userAge.getText().toString())) {
+            userAge.setError("나이를 입력하세요!");
+            return false;
+        } else {
+            userAge.setError(null);
+        }
+        // 생활패턴 입력 확인
+        if (!isLifeStyleFinish) {
+            Log.i("isLifeStyleFinish3", isLifeStyleFinish + "");
+            Toast.makeText(this, "모든 생활패턴에 답해주세요!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        // 약관 동의 여부 확인
+        if (!infoCheckBox.isChecked() && !serviceCheckBox.isChecked()) {
+            Toast.makeText(this, "약관동의는 필수 사항입니다.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        registerMemberFinish.setTextColor(ContextCompat.getColor(this, R.color.defaultTextColor));
+        return true;
     }
 }

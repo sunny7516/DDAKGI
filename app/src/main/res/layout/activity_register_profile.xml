@@ -38,6 +38,7 @@
                 app:fontWeight="medium" />
 
             <io.chooco13.NotoTextView
+                android:id="@+id/registerMemberFinish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -118,7 +119,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:text="Age"
+                android:hint="Age"
                 android:textColor="@color/defaultTextColor"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -178,6 +179,8 @@
             android:orientation="horizontal">
 
             <CheckBox
+                android:id="@+id/allCheckBox"
+                android:onClick="allChecked"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="28dp" />
@@ -202,6 +205,7 @@
             android:orientation="horizontal">
 
             <CheckBox
+                android:id="@+id/infoCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="28dp" />
@@ -228,6 +232,7 @@
             android:orientation="horizontal">
 
             <CheckBox
+                android:id="@+id/serviceCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="28dp" />

@@ -149,7 +149,6 @@ public class HomeTab extends Fragment {
                     break;
                 // 이미지 버튼 눌렀을 때 filter 화면으로 intent
                 case R.id.filter_menu:
-                    getActivity().finish();
                     Intent intent = new Intent(getActivity(), FilterActivity.class);
                     startActivity(intent);
                     break;

@@ -20,6 +20,8 @@
     <color name="pointColor">#ef3263</color>
     <color name="textpointColor">#e52356</color>
 
+    <color name="clickedObjectColor">#c5efe4</color>
+
     <!-- intro -->
     <color name="introBack">#d5d4d5</color>
     <color name="inroTextcolor">#262630</color>

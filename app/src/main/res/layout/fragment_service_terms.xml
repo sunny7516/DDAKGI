@@ -52,12 +52,14 @@
             app:fontWeight="regular" />
 
         <RelativeLayout
+            android:id="@+id/serviceBt"
             android:onClick="serviceAgree"
             android:background="@color/subTextColor"
             android:layout_width="match_parent"
             android:layout_height="48dp">
 
             <io.chooco13.NotoTextView
+                android:id="@+id/serviceBtText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
