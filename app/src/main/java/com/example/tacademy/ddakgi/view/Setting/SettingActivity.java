@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ToggleButton;
 
 import com.example.tacademy.ddakgi.R;
 import com.kakao.usermgmt.UserManagement;
@@ -13,10 +14,15 @@ import static com.example.tacademy.ddakgi.view.Home.frag.HomeTab.isLogin;
 
 public class SettingActivity extends AppCompatActivity {
 
+    ToggleButton pushSettingToggleBt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+
+        pushSettingToggleBt = (ToggleButton)findViewById(R.id.pushSettingToggleBt);
+        //pushSettingToggleBt
     }
 
     // 세션이 열렸을 때만 활성화

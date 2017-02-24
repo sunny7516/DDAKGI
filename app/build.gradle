@@ -71,5 +71,7 @@ dependencies {
     compile 'com.android.support:multidex:1.0.1'
     testCompile 'junit:junit:4.12'
     retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:+'
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
 }
 apply plugin: 'com.google.gms.google-services'

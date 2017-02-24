@@ -51,6 +51,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="16dp"
                     android:text="@string/finish"
+                    android:onClick="finishRegisterRoom"
                     android:textColor="@color/grayTextColor"
                     android:textSize="13sp"
                     app:fontWeight="regular" />
@@ -87,7 +88,7 @@
                     app:fontWeight="regular" />
 
                 <EditText
-                    android:id="@+id/editText"
+                    android:id="@+id/registerRoomTitle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
@@ -365,7 +366,7 @@
                     app:fontWeight="regular" />
 
                 <EditText
-                    android:id="@+id/editText3"
+                    android:id="@+id/registerRoomDeposit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -395,7 +396,7 @@
                     app:fontWeight="regular" />
 
                 <EditText
-                    android:id="@+id/editText6"
+                    android:id="@+id/registerRoomRent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -425,7 +426,7 @@
                     app:fontWeight="regular" />
 
                 <EditText
-                    android:id="@+id/editText5"
+                    android:id="@+id/registerRoomFloor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -503,7 +504,6 @@
 
                     <!-- 입주 가능일 -->
                     <io.chooco13.NotoTextView
-                        android:id="@+id/textView32"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -546,7 +546,7 @@
                         app:fontWeight="regular" />
 
                     <EditText
-                        android:id="@+id/editText2"
+                        android:id="@+id/registerRoomManageCost"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
@@ -564,7 +564,7 @@
                     android:orientation="horizontal">
 
                     <ToggleButton
-                        android:id="@+id/textView39"
+                        android:id="@+id/registerRoomManageCostOne"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -577,7 +577,7 @@
                         android:textSize="13sp" />
 
                     <ToggleButton
-                        android:id="@+id/textView38"
+                        android:id="@+id/registerRoomManageCostTwo"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -589,7 +589,7 @@
                         android:textSize="13sp" />
 
                     <ToggleButton
-                        android:id="@+id/textView37"
+                        android:id="@+id/registerRoomManageCostThree"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -601,7 +601,7 @@
                         android:textSize="13sp" />
 
                     <ToggleButton
-                        android:id="@+id/textView36"
+                        android:id="@+id/registerRoomManageCostFour"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -613,7 +613,7 @@
                         android:textSize="13sp" />
 
                     <ToggleButton
-                        android:id="@+id/textView35"
+                        android:id="@+id/registerRoomManageCostFive"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -625,7 +625,7 @@
                         android:textSize="13sp" />
 
                     <ToggleButton
-                        android:id="@+id/heatpay"
+                        android:id="@+id/registerRoomManageCostSix"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -779,7 +779,7 @@
                         app:fontWeight="regular" />
 
                     <EditText
-                        android:id="@+id/editText4"
+                        android:id="@+id/registerRoomDescription"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
@@ -809,7 +809,7 @@
                     android:orientation="horizontal">
 
                     <EditText
-                        android:id="@+id/editText7"
+                        android:id="@+id/registerRoomExtraQueOne"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="9"

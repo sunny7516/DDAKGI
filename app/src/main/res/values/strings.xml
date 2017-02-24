@@ -194,4 +194,11 @@
     <string name="Serviceterms">서비스 이용 약관에 대한 동의</string>
     <string name="InfoAgree">개인 정보 수집 및 이용에 동의합니다.</string>
     <string name="ServiceAgree">서비스 이용 약관에 동의합니다.</string>
+
+    <!-- 설정 -->
+    <string name="settingTool">설정</string>
+    <string name="pushText">푸시알림</string>
+    <string name="logoutText">로그아웃</string>
+    <string name="getoutText">회원탈퇴</string>
+    <string name="versionText">버전 정보 1.0.1</string>
 </resources>

@@ -32,7 +32,7 @@
         android:theme="@style/AppTheme.NoActionBar"
         tools:replace="android:icon">
         <activity android:name=".view.SplashIntro.MainActivity" />
-        <activity android:name=".data.HomeActivity"/>
+        <activity android:name=".base.HomeActivity"/>
         <activity android:name=".view.Filter.FilterActivity" />
         <activity android:name=".view.SplashIntro.SplashActivity">
             <intent-filter>

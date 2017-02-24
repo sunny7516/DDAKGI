@@ -284,7 +284,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@android:color/transparent"
                 android:onClick="showDatePickerDialog"
-                android:text="예) 2017년 2월 16일"
+                android:text="예) 2017-2-16"
                 android:textColor="@color/defaultTextColor"
                 android:textSize="13sp"
                 android:visibility="gone" />

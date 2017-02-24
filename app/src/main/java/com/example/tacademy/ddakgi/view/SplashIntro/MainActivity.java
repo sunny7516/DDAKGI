@@ -11,7 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.tacademy.ddakgi.adapter.CustomAdapter;
-import com.example.tacademy.ddakgi.data.HomeActivity;
+import com.example.tacademy.ddakgi.base.HomeActivity;
 import com.example.tacademy.ddakgi.R;
 
 public class MainActivity extends AppCompatActivity {

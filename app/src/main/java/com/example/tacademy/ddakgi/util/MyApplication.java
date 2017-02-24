@@ -3,6 +3,7 @@ package com.example.tacademy.ddakgi.util;
 import android.content.Context;
 import android.support.multidex.MultiDexApplication;
 
+import com.example.tacademy.ddakgi.data.NetSSL;
 import com.kakao.auth.ApprovalType;
 import com.kakao.auth.AuthType;
 import com.kakao.auth.IApplicationConfig;
@@ -32,6 +33,8 @@ public class MyApplication extends MultiDexApplication {
         // 카카오톡
         instance = this;
         KakaoSDK.init(new KakaoSDKAdapter());
+        // 보안 통신 초기화
+        NetSSL.getInstance().launch(getApplicationContext());
     }
 
     private static class KakaoSDKAdapter extends KakaoAdapter {

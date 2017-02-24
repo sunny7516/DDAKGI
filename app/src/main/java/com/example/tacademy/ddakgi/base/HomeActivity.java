@@ -1,4 +1,4 @@
-package com.example.tacademy.ddakgi.data;
+package com.example.tacademy.ddakgi.base;
 
 /**
  * Tab 변경해주면서 해당 Fragment 지정해주는 밑바탕 Activity

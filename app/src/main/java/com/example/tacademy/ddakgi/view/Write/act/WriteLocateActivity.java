@@ -30,6 +30,8 @@ import java.util.List;
 
 import static com.example.tacademy.ddakgi.util.GpsCheckActivity.gpscheckActivity;
 import static com.example.tacademy.ddakgi.R.id.map;
+import static com.example.tacademy.ddakgi.view.Write.act.WriteRoomActivity.room_latitude;
+import static com.example.tacademy.ddakgi.view.Write.act.WriteRoomActivity.room_longitude;
 
 /**
  * GoogleMap 띄우는 화면
@@ -197,7 +199,11 @@ public class WriteLocateActivity extends FragmentActivity implements OnMapReadyC
     // 위치 정보 임시 저장, 이전 화면으로 주소값 전달하기
     public void writelocateFinish(View view) {
         if (WriteRoomActivity.writelocateBt != null) {
+            room_latitude = AddrAddress.getLatitude();
+            room_longitude = AddrAddress.getLongitude();
+
             WriteRoomActivity.writelocateBt.setText(myAddr);
+
             WriteRoomActivity.writelocateBt.setTextColor(getResources().getColor(R.color.subTextColor));
             gpscheckActivity.finish();
             finish();
