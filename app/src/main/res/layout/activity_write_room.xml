@@ -28,6 +28,7 @@
                 android:layout_marginLeft="16dp">
 
                 <Button
+                    android:layout_centerVertical="true"
                     android:id="@+id/writeroomBackBt"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
@@ -35,6 +36,7 @@
                     android:onClick="back" />
 
                 <io.chooco13.NotoTextView
+                    android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="24dp"
                     android:layout_marginLeft="12dp"
@@ -46,8 +48,9 @@
                     app:fontWeight="medium" />
 
                 <io.chooco13.NotoTextView
+                    android:gravity="center"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="16dp"
                     android:text="@string/finish"
@@ -568,6 +571,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:checked="false"
                         android:background="@android:color/transparent"
                         android:onClick="togglePay"
                         android:text="@string/pay"
@@ -577,6 +581,7 @@
                         android:textSize="13sp" />
 
                     <ToggleButton
+                        android:checked="false"
                         android:id="@+id/registerRoomManageCostTwo"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -589,6 +594,7 @@
                         android:textSize="13sp" />
 
                     <ToggleButton
+                        android:checked="false"
                         android:id="@+id/registerRoomManageCostThree"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -601,6 +607,7 @@
                         android:textSize="13sp" />
 
                     <ToggleButton
+                        android:checked="false"
                         android:id="@+id/registerRoomManageCostFour"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -613,6 +620,7 @@
                         android:textSize="13sp" />
 
                     <ToggleButton
+                        android:checked="false"
                         android:id="@+id/registerRoomManageCostFive"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -625,6 +633,7 @@
                         android:textSize="13sp" />
 
                     <ToggleButton
+                        android:checked="false"
                         android:id="@+id/registerRoomManageCostSix"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -820,19 +829,30 @@
                         android:textColor="@color/grayTextColor"
                         android:textSize="13sp" />
 
-                    <Button
-                        android:id="@+id/ExtraQue1"
-                        android:layout_width="13dp"
-                        android:layout_height="13dp"
-                        android:layout_marginRight="17dp"
-                        android:background="@mipmap/plus_btn"
-                        android:onClick="plusExtra" />
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:onClick="plusExtra"/>
+                        <ImageView
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:id="@+id/plusExtraQueBt"
+                            android:layout_width="13dp"
+                            android:layout_height="13dp"
+                            android:layout_marginRight="17dp"
+                            android:background="@mipmap/plus_btn" />
+                    </RelativeLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/ExtraQuelinear"
                     android:layout_width="match_parent"
-                    android:layout_height="96dp"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical" />
             </LinearLayout>
         </LinearLayout>

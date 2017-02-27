@@ -49,6 +49,7 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="40dp"
+        android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp">
 
         <io.chooco13.NotoTextView
@@ -60,16 +61,14 @@
             android:textSize="13sp"
             app:fontWeight="regular" />
 
-        <ToggleButton
-            android:textOff=""
-            android:textOn=""
-            android:checked="true"
-            android:background="@android:color/transparent"
-            android:drawableTop="@mipmap/pushbtn_on"
-            android:id="@+id/pushSettingToggleBt"
+        <Switch
+            android:id="@+id/pushSettingSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true" />
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:checked="true" />
+
     </RelativeLayout>
 
     <TextView
@@ -98,6 +97,7 @@
         android:layout_height="40dp"
         android:layout_marginLeft="16dp"
         android:gravity="center"
+        android:onClick="onClickGetOut"
         android:text="@string/getoutText"
         android:textColor="@color/subTextColor"
         android:textSize="13sp"

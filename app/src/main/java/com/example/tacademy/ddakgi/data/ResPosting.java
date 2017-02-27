@@ -1,18 +1,20 @@
 package com.example.tacademy.ddakgi.data;
 
+import java.util.ArrayList;
+
 /**
- * 방 등록하기 응답
+ * 인트로 글 조회
  */
 
-public class ResRegisterRoom {
-    String result;
+public class ResPosting {
+    ArrayList<PostingModel> result;
     String error;
 
-    public String getResult() {
+    public ArrayList<PostingModel> getResult() {
         return result;
     }
 
-    public void setResult(String result) {
+    public void setResult(ArrayList<PostingModel> result) {
         this.result = result;
     }
 

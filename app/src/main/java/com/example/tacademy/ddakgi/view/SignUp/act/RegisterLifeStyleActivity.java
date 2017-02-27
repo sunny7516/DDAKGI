@@ -3,7 +3,6 @@ package com.example.tacademy.ddakgi.view.SignUp.act;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckedTextView;
 
@@ -116,7 +115,6 @@ public class RegisterLifeStyleActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // 프로필 등록화면에 설문패턴 응답이 끝났음을 알려준다.
                 isLifeStyleFinish = true;
-                Log.i("isLifeStyleFinish2",isLifeStyleFinish+"");
                 // 설문패턴 DB로 저장
                 finish();
             }

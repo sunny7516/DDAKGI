@@ -19,8 +19,8 @@ import android.widget.ToggleButton;
 import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.base.BaseActivity;
 import com.example.tacademy.ddakgi.data.NetSSL;
-import com.example.tacademy.ddakgi.data.ReqRegisterRoom;
-import com.example.tacademy.ddakgi.data.ResRegisterRoom;
+import com.example.tacademy.ddakgi.data.RegisterRoom.ReqRegisterRoom;
+import com.example.tacademy.ddakgi.data.RegisterRoom.ResRegisterRoom;
 import com.example.tacademy.ddakgi.util.DatePickerFragment;
 
 import io.chooco13.NotoTextView;
@@ -35,6 +35,7 @@ public class WriteRoomActivity extends BaseActivity {
     LinearLayout roomType;
     LinearLayout roomSize;
     LinearLayout extraInfo;
+    LinearLayout newLinear;
 
     Boolean roomflag = true;
     Boolean sizeflag = true;
@@ -49,6 +50,8 @@ public class WriteRoomActivity extends BaseActivity {
     EditText registerRoomManageCost;
     EditText registerRoomDescription;
     EditText registerRoomExtraQueOne;
+    EditText registerRoomExtraQueTwo;
+    EditText registerRoomExtraQueThree;
 
     // 저장할 변수
     String title;
@@ -65,8 +68,11 @@ public class WriteRoomActivity extends BaseActivity {
     int floor;
     String available_date;
     int manage_cost;
+    int options;
     String description;
     String extra_q1;
+    String extra_q2;
+    String extra_q3;
 
     public static Button writelocateBt;
 
@@ -89,17 +95,24 @@ public class WriteRoomActivity extends BaseActivity {
         registerRoomDeposit = (EditText) findViewById(R.id.registerRoomDeposit);        // 보증금
         registerRoomRent = (EditText) findViewById(R.id.registerRoomRent);              // 월세 전세
         registerRoomFloor = (EditText) findViewById(R.id.registerRoomFloor);            // 층수
-        prefDate = (Button) findViewById(R.id.prefDate);                                 // 입주 가능일
-        registerRoomManageCost = (EditText) findViewById(R.id.registerRoomManageCost);   // 관리비
-        registerRoomDescription = (EditText) findViewById(R.id.registerRoomDescription);  //자기소개
-        registerRoomExtraQueOne =(EditText)findViewById(R.id.registerRoomExtraQueOne);      // 추가질문1
+        prefDate = (Button) findViewById(R.id.prefDate);            // 입주 가능일
+        registerRoomManageCost = (EditText) findViewById(R.id.registerRoomManageCost);  // 관리비
+        registerRoomDescription = (EditText) findViewById(R.id.registerRoomDescription);//자기소개
+        registerRoomExtraQueOne = (EditText) findViewById(R.id.registerRoomExtraQueOne);// 추가질문1
 
         registerRoomTitle.setTextColor(ContextCompat.getColor(this, R.color.subTextColor));
+        // 빈 공간 (새롭게 생길 부분)
+        newLinear = (LinearLayout) findViewById(R.id.ExtraQuelinear);
     }
 
     // 완료 버튼
     public void finishRegisterRoom(View view) {
         // 모든 답변이 완료됐는지 확인 후
+
+        registerRoomExtraQueTwo = (EditText) newLinear.findViewById(R.id.descriptionEditText + 1);    // 추가질문2
+        registerRoomExtraQueThree = (EditText) newLinear.findViewById(R.id.descriptionEditText + 2);  // 추가질문3
+        extra_q2 = registerRoomExtraQueTwo.getText().toString();
+        extra_q3 = registerRoomExtraQueThree.getText().toString();
 
         // 완료 됐으면
         // 데이터 뽑기
@@ -121,14 +134,15 @@ public class WriteRoomActivity extends BaseActivity {
         floor = Integer.parseInt(registerRoomFloor.getText().toString());               // 층수
         available_date = prefDate.getText().toString();                                 // 입주 가능일
         manage_cost = Integer.parseInt(registerRoomManageCost.getText().toString());    // 관리비
+        options = OptionNum();                                                          // 옵션
         description = registerRoomDescription.getText().toString();                     // 자기소개
         extra_q1 = registerRoomExtraQueOne.getText().toString();                        // 추가질문1
 
         // 디비에 정보 저장
         Call<ResRegisterRoom> resRegisterRoomCall = NetSSL.getInstance().getMemberImpFactory()
                 .registerRoom(new ReqRegisterRoom(title, local1, local2, local3, detailed_local,
-                        room_latitude, room_longitude, room_type, size, deposit, rent, floor, available_date, manage_cost, 15, 21, description,
-                        extra_q1, "술을 자주 드시나요?", "집에 몇시에 들어오나요?"));
+                        room_latitude, room_longitude, room_type, size, deposit, rent, floor, available_date, manage_cost, costNum, options, description,
+                        extra_q1, extra_q2, extra_q3));
         resRegisterRoomCall.enqueue(new Callback<ResRegisterRoom>() {
             @Override
             public void onResponse(Call<ResRegisterRoom> call, Response<ResRegisterRoom> response) {
@@ -283,90 +297,170 @@ public class WriteRoomActivity extends BaseActivity {
     }
 
     // 중복 선택 가능 (관리비 내용)
+    int costNum=0;
+
     public void togglePay(View view) {
         ToggleButton toggleButton = (ToggleButton) view;
         if (toggleButton.isChecked()) {
+            switch (toggleButton.getId()) {
+                case R.id.registerRoomManageCostOne:
+                    costNum +=1;
+                    break;
+                case R.id.registerRoomManageCostTwo:
+                    costNum +=2;
+                    break;
+                case R.id.registerRoomManageCostThree:
+                    costNum +=4;
+                    break;
+                case R.id.registerRoomManageCostFour:
+                    costNum +=8;
+                    break;
+                case R.id.registerRoomManageCostFive:
+                    costNum +=16;
+                    break;
+                case R.id.registerRoomManageCostSix:
+                    costNum +=32;
+                    break;
+            }
             toggleButton.setTextColor(getResources().getColor(R.color.textpointColor));
-        } else {
+        } else if(!toggleButton.isChecked()){
+            switch (toggleButton.getId()) {
+                case R.id.registerRoomManageCostOne:
+                    costNum -=1;
+                    break;
+                case R.id.registerRoomManageCostTwo:
+                    costNum -=2;
+                    break;
+                case R.id.registerRoomManageCostThree:
+                    costNum -=4;
+                    break;
+                case R.id.registerRoomManageCostFour:
+                    costNum -=8;
+                    break;
+                case R.id.registerRoomManageCostFive:
+                    costNum -=16;
+                    break;
+                case R.id.registerRoomManageCostSix:
+                    costNum -=32;
+                    break;
+            }
             toggleButton.setTextColor(getResources().getColor(R.color.grayTextColor));
         }
     }
 
+    int[] clickedOptions = new int[10];
+
     // 중복 선택 가능 (옵션 내용)
     public void toggledOp(View view) {
         ToggleButton toggleButton = (ToggleButton) view;
-        if (toggleButton.isChecked()) {
+        if (!toggleButton.isChecked()) {
             switch (toggleButton.getId()) {
                 case R.id.airconditon:
+                    clickedOptions[0] = 0;
                     toggleButton.setBackground(getResources().getDrawable(R.mipmap.airconditon_icon));
                     break;
                 case R.id.bed:
+                    clickedOptions[1] = 0;
                     toggleButton.setBackground(getResources().getDrawable(R.mipmap.bed_icon));
                     break;
                 case R.id.elevator:
+                    clickedOptions[2] = 0;
                     toggleButton.setBackground(getResources().getDrawable(R.mipmap.elevator_icon));
                     break;
                 case R.id.microwave:
+                    clickedOptions[3] = 0;
                     toggleButton.setBackground(getResources().getDrawable(R.mipmap.microwave_icon));
                     break;
                 case R.id.parking:
+                    clickedOptions[4] = 0;
                     toggleButton.setBackground(getResources().getDrawable(R.mipmap.parking_icon));
                     break;
                 case R.id.refrige:
+                    clickedOptions[5] = 0;
                     toggleButton.setBackground(getResources().getDrawable(R.mipmap.refrige_icon));
                     break;
                 case R.id.stove:
+                    clickedOptions[6] = 0;
                     toggleButton.setBackground(getResources().getDrawable(R.mipmap.stove_icon));
                     break;
                 case R.id.tv:
+                    clickedOptions[7] = 0;
                     toggleButton.setBackground(getResources().getDrawable(R.mipmap.tv_icon));
                     break;
                 case R.id.washmachine:
+                    clickedOptions[8] = 0;
                     toggleButton.setBackground(getResources().getDrawable(R.mipmap.washmachine_icon));
                     break;
             }
         } else {
             switch (toggleButton.getId()) {
                 case R.id.airconditon:
+                    clickedOptions[0] = 1;
                     toggleButton.setBackground(getResources().getDrawable(R.mipmap.airconditon_on_icon));
                     break;
                 case R.id.bed:
+                    clickedOptions[1] = 2;
                     toggleButton.setBackground(getResources().getDrawable(R.mipmap.bed_on_icon));
                     break;
                 case R.id.elevator:
+                    clickedOptions[2] = 4;
                     toggleButton.setBackground(getResources().getDrawable(R.mipmap.elevator_on_icon));
                     break;
                 case R.id.microwave:
+                    clickedOptions[3] = 8;
                     toggleButton.setBackground(getResources().getDrawable(R.mipmap.microwave_on_icon));
                     break;
                 case R.id.parking:
+                    clickedOptions[4] = 16;
                     toggleButton.setBackground(getResources().getDrawable(R.mipmap.parking_on_icon));
                     break;
                 case R.id.refrige:
+                    clickedOptions[5] = 32;
                     toggleButton.setBackground(getResources().getDrawable(R.mipmap.refrige_on_icon));
                     break;
                 case R.id.stove:
+                    clickedOptions[6] = 64;
                     toggleButton.setBackground(getResources().getDrawable(R.mipmap.stove_on_icon));
                     break;
                 case R.id.tv:
+                    clickedOptions[7] = 128;
                     toggleButton.setBackground(getResources().getDrawable(R.mipmap.tv_on_icon));
                     break;
                 case R.id.washmachine:
+                    clickedOptions[8] = 256;
                     toggleButton.setBackground(getResources().getDrawable(R.mipmap.washmachine_on_icon));
                     break;
             }
         }
     }
 
-    public void plusExtra(View view) {
-        // 빈 공간 (새롭게 생길 부분)
-        LinearLayout newLinear = (LinearLayout) findViewById(R.id.ExtraQuelinear);
-        // 새롭게 생긴 listview에 들어갈 구성물
-        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        LinearLayout contentLinear = (LinearLayout) inflater.inflate(R.layout.extraque_view, null);
+    // 옵션 중복 선택 Set 값
+    int setNum;
 
-        contentLinear.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
-        contentLinear.setOrientation(LinearLayout.HORIZONTAL);
-        newLinear.addView(contentLinear);
+    public int OptionNum() {
+        for (int i = 0; i < clickedOptions.length; i++) {
+            setNum += clickedOptions[i];
+        }
+        Log.i("setNum",setNum+"");
+        return setNum;
+    }
+
+    int plusNum;
+    EditText descriptionEditText;   // 추가질문 받는 칸
+
+    // 추가질문 생성하고 각 질문의 EditText에 ID값 설정
+    public void plusExtra(View view) {
+        plusNum++;
+        if (plusNum < 3) {
+            LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            // 새롭게 생긴 listview에 들어갈 구성물
+            LinearLayout contentLinear = (LinearLayout) inflater.inflate(R.layout.extraque_view, null);
+
+            contentLinear.setOrientation(LinearLayout.HORIZONTAL);
+            newLinear.addView(contentLinear, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
+
+            descriptionEditText = (EditText) contentLinear.findViewById(R.id.descriptionEditText);
+            descriptionEditText.setId(R.id.descriptionEditText + plusNum);
+        }
     }
 }

@@ -1,7 +1,11 @@
 package com.example.tacademy.ddakgi.data;
 
+import com.example.tacademy.ddakgi.data.RegisterRoom.ReqRegisterRoom;
+import com.example.tacademy.ddakgi.data.RegisterRoom.ResRegisterRoom;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 /**
@@ -33,7 +37,12 @@ import retrofit2.http.POST;
  */
 
 public interface MemberImpFactory {
-    // 로그인 후 me로 변경될 예정
+    // 방 등록하기
     @POST("roommates/room/3")
     Call<ResRegisterRoom> registerRoom(@Body ReqRegisterRoom reqRegisterRoom);
+
+    // 인트로 조회
+    @GET("postings/beforelogin")
+    Call<ResPosting> resPosting();
+
 }

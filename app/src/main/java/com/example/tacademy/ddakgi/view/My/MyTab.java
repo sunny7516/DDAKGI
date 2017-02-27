@@ -12,12 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
+import com.example.tacademy.ddakgi.R;
+import com.example.tacademy.ddakgi.adapter.MyRecyclerAdapter;
+import com.example.tacademy.ddakgi.view.Help.HelpActivity;
 import com.example.tacademy.ddakgi.view.My.model.MyTimelineItem;
 import com.example.tacademy.ddakgi.view.Setting.SettingActivity;
-import com.example.tacademy.ddakgi.adapter.MyRecyclerAdapter;
-import com.example.tacademy.ddakgi.R;
-import com.example.tacademy.ddakgi.view.Help.HelpActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,7 @@ public class MyTab extends Fragment {
     Toolbar toolbar;
     ImageButton helpBt;
     ImageButton settingBt;
+    ImageView modifyProfileBt;
 
     public MyTab() {
         // Required empty public constructor
@@ -52,6 +54,10 @@ public class MyTab extends Fragment {
         settingBt = (ImageButton) view.findViewById(R.id.settingBt);
         helpBt.setOnClickListener(onClickListener);
         settingBt.setOnClickListener(onClickListener);
+
+        // 프로필 수정으로 이동
+        modifyProfileBt = (ImageView)view.findViewById(R.id.modifyProfileBt);
+        modifyProfileBt.setOnClickListener(onClickListener);
 
         // Inflate the layout for this fragment
         recyclerviewMyTab = (RecyclerView) view.findViewById(R.id.recyclerviewMyTab);
@@ -86,6 +92,9 @@ public class MyTab extends Fragment {
                     Intent mateIntent = new Intent(getContext(), SettingActivity.class);
                     startActivity(mateIntent);
                     break;
+                case R.id.modifyProfileBt:
+                    Intent modifyProfile = new Intent(getContext(), ModifyProfileActivity.class);
+                    startActivity(modifyProfile);
             }
         }
     };

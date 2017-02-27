@@ -217,4 +217,9 @@ public class SignUpActivity extends KakaoLoginActivity {
                     }
                 });
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

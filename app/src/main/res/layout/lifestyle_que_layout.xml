@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="vertical">
+
+        <!-- 공동청소 -->
+        <io.chooco13.NotoTextView
+            app:fontWeight="medium"
+            style="@style/lifeStyleQue"
+            android:layout_marginTop="22dp"
+            android:text="@string/lifeStyleQue1" />
+
+        <CheckedTextView
+            android:tag="num1"
+            style="@style/lifeStyleAns"
+            android:onClick="styleCheck"
+            android:layout_weight="1"
+            android:text="@string/lifeStyleAns1_1" />
+
+        <CheckedTextView
+            android:tag="num1"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns1_2" />
+
+        <CheckedTextView
+            android:tag="num1"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns1_3" />
+
+        <CheckedTextView
+            android:tag="num1"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns1_4" />
+
+        <!-- 흡연 -->
+        <io.chooco13.NotoTextView
+            app:fontWeight="medium"
+            style="@style/lifeStyleQue"
+            android:layout_marginTop="22dp"
+            android:text="@string/lifeStyleQue2" />
+
+        <CheckedTextView
+            android:tag="num2"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns2_1" />
+
+        <CheckedTextView
+            android:tag="num2"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns2_2" />
+
+        <CheckedTextView
+            android:tag="num2"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns2_3" />
+
+        <!-- 취침 시간 -->
+        <io.chooco13.NotoTextView
+            app:fontWeight="medium"
+            style="@style/lifeStyleQue"
+            android:layout_marginTop="22dp"
+            android:text="@string/lifeStyleQue3" />
+
+        <CheckedTextView
+            android:tag="num3"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns3_1" />
+
+        <CheckedTextView
+            android:tag="num3"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns3_2" />
+
+        <CheckedTextView
+            android:tag="num3"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns3_3" />
+
+        <CheckedTextView
+            android:tag="num3"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns3_4" />
+
+        <CheckedTextView
+            android:tag="num3"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns3_5" />
+
+        <!-- 외부인 -->
+        <io.chooco13.NotoTextView
+            app:fontWeight="medium"
+            style="@style/lifeStyleQue"
+            android:layout_marginTop="22dp"
+            android:text="@string/lifeStyleQue4" />
+
+        <CheckedTextView
+            android:tag="num4"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns4_1" />
+
+        <CheckedTextView
+            android:tag="num4"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns4_2" />
+
+        <CheckedTextView
+            android:tag="num4"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns4_3" />
+
+        <CheckedTextView
+            android:tag="num4"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns4_4" />
+
+        <!-- 기상 시간 -->
+        <io.chooco13.NotoTextView
+            app:fontWeight="medium"
+            style="@style/lifeStyleQue"
+            android:layout_marginTop="22dp"
+            android:text="@string/lifeStyleQue5" />
+
+        <CheckedTextView
+            android:tag="num5"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns5_1" />
+
+        <CheckedTextView
+            android:tag="num5"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns5_2" />
+
+        <CheckedTextView
+            android:tag="num5"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns5_3" />
+
+        <CheckedTextView
+            android:tag="num5"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns5_4" />
+
+        <!-- 애완동물 -->
+        <io.chooco13.NotoTextView
+            app:fontWeight="medium"
+            style="@style/lifeStyleQue"
+            android:layout_marginTop="22dp"
+            android:text="@string/lifeStyleQue6" />
+
+        <CheckedTextView
+            android:tag="num6"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns6_1" />
+
+        <CheckedTextView
+            android:tag="num6"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns6_2" />
+
+        <CheckedTextView
+            android:tag="num6"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns6_3" />
+
+        <!-- 식사 -->
+        <io.chooco13.NotoTextView
+            app:fontWeight="medium"
+            style="@style/lifeStyleQue"
+            android:layout_marginTop="22dp"
+            android:text="@string/lifeStyleQue7" />
+
+        <CheckedTextView
+            android:tag="num7"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns7_1" />
+
+        <CheckedTextView
+            android:tag="num7"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns7_2" />
+
+        <CheckedTextView
+            android:tag="num7"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns7_3" />
+
+        <!-- 소모품 구매 -->
+        <io.chooco13.NotoTextView
+            app:fontWeight="medium"
+            style="@style/lifeStyleQue"
+            android:layout_marginTop="22dp"
+            android:text="@string/lifeStyleQue8" />
+
+        <CheckedTextView
+            android:tag="num8"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns8_1" />
+
+        <CheckedTextView
+            android:tag="num8"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns8_2" />
+
+        <CheckedTextView
+            android:tag="num8"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns8_3" />
+
+        <!-- 생활소음 -->
+        <io.chooco13.NotoTextView
+            app:fontWeight="medium"
+            style="@style/lifeStyleQue"
+            android:layout_marginTop="22dp"
+            android:text="@string/lifeStyleQue9" />
+
+        <CheckedTextView
+            android:tag="num9"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns9_1" />
+
+        <CheckedTextView
+            android:tag="num9"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns9_2" />
+
+        <CheckedTextView
+            android:tag="num9"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns9_3" />
+
+        <CheckedTextView
+            android:tag="num9"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns9_4" />
+
+        <!-- 주말 -->
+        <io.chooco13.NotoTextView
+            app:fontWeight="medium"
+            style="@style/lifeStyleQue"
+            android:layout_marginTop="22dp"
+            android:text="@string/lifeStyleQue10" />
+
+        <CheckedTextView
+            android:tag="num10"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns10_1" />
+
+        <CheckedTextView
+            android:tag="num10"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns10_2" />
+
+        <CheckedTextView
+            android:tag="num10"
+            android:onClick="styleCheck"
+            style="@style/lifeStyleAns"
+            android:text="@string/lifeStyleAns10_3" />
+    </LinearLayout>
+</ScrollView>

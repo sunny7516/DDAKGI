@@ -5,20 +5,33 @@
     android:orientation="horizontal">
 
     <EditText
+        android:id="@+id/descriptionEditText"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_weight="9"
-        android:textSize="13sp"
-        android:textColor="@color/grayTextColor"
         android:background="@android:color/transparent"
         android:ems="10"
         android:hint="@string/extraQueHint"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:textColor="@color/grayTextColor"
+        android:textSize="13sp" />
 
-    <Button
-        android:layout_width="13dp"
-        android:layout_marginRight="17dp"
-        android:layout_height="13dp"
-        android:onClick="plusExtra"
-        android:background="@mipmap/plus_btn"/>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:onClick="plusExtra"/>
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/plusExtraQueBt"
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:layout_marginRight="17dp"
+            android:background="@mipmap/plus_btn" />
+    </RelativeLayout>
 </LinearLayout>

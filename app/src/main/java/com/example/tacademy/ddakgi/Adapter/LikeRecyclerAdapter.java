@@ -68,9 +68,6 @@ public class LikeRecyclerAdapter extends RecyclerView.Adapter<LikeRecyclerAdapte
             }
         });
         holder.image.setImageDrawable(photo);
-
-        holder.loginShadow.setVisibility(View.GONE);
-        holder.loginBeforeText.setVisibility(View.GONE);
     }
 
     @Override
@@ -90,7 +87,6 @@ public class LikeRecyclerAdapter extends RecyclerView.Adapter<LikeRecyclerAdapte
             super(itemView);
             this.image = (ImageView) itemView.findViewById(R.id.mPhoto);
             this.loginShadow = (TextView) itemView.findViewById(R.id.beforeLoginShadow);
-            this.loginBeforeText = (io.chooco13.NotoTextView) itemView.findViewById(R.id.loginBeforeText);
             this.linear = (LinearLayout) itemView.findViewById(R.id.timelineLinear);
             this.deleteBt = (io.chooco13.NotoTextView) itemView.findViewById(R.id.deleteBt);
         }

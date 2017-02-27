@@ -189,75 +189,70 @@
                 android:orientation="horizontal"
                 android:visibility="visible">
 
-                <ToggleButton
-                    android:background="@android:color/transparent"
+                <io.chooco13.NotoTextView
                     android:id="@+id/typeOne"
                     android:layout_width="wrap_content"
+                    app:fontWeight="medium"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
                     android:layout_weight="1"
-                    android:onClick="preftypeChecked"
-                    android:textOn="@string/typeOne"
-                    android:textOff="@string/typeOne"
-                    android:textColor="@color/grayTextColor"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
-
-                <ToggleButton
                     android:background="@android:color/transparent"
+                    android:onClick="preftypeChecked"
+                    android:text="@string/typeOne"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp" />
+
+                <io.chooco13.NotoTextView
+                    app:fontWeight="medium"
                     android:id="@+id/typeTwo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="25dp"
                     android:layout_weight="1"
-                    android:onClick="preftypeChecked"
-                    android:textOn="@string/typeTwo"
-                    android:textOff="@string/typeTwo"
-                    android:textColor="@color/grayTextColor"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
-
-                <ToggleButton
                     android:background="@android:color/transparent"
+                    android:onClick="preftypeChecked"
+                    android:text="@string/typeTwo"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp" />
+
+                <io.chooco13.NotoTextView
                     android:id="@+id/typeHouse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="25dp"
+                    app:fontWeight="medium"
                     android:layout_weight="1"
-                    android:onClick="preftypeChecked"
-                    android:textOn="@string/typeHouse"
-                    android:textOff="@string/typeHouse"
-                    android:textColor="@color/grayTextColor"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
-
-                <ToggleButton
                     android:background="@android:color/transparent"
+                    android:onClick="preftypeChecked"
+                    android:text="@string/typeHouse"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp"/>
+
+                <io.chooco13.NotoTextView
+                    app:fontWeight="medium"
                     android:id="@+id/typeOffice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="25dp"
                     android:layout_weight="1"
-                    android:onClick="preftypeChecked"
-                    android:textOn="@string/typeOffice"
-                    android:textOff="@string/typeOffice"
-                    android:textColor="@color/grayTextColor"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
-
-                <ToggleButton
                     android:background="@android:color/transparent"
+                    android:onClick="preftypeChecked"
+                    android:textColor="@color/grayTextColor"
+                    android:text="@string/typeOffice"
+                    android:textSize="13sp" />
+
+                <io.chooco13.NotoTextView
                     android:id="@+id/typeApart"
+                    app:fontWeight="medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
                     android:layout_weight="1"
+                    android:background="@android:color/transparent"
                     android:onClick="preftypeChecked"
-                    android:textOn="@string/typeApart"
-                    android:textOff="@string/typeApart"
                     android:textColor="@color/grayTextColor"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
+                    android:text="@string/typeApart"
+                    android:textSize="13sp" />
             </LinearLayout>
 
             <!-- 보증금 ~ 임대계약서/신분증 -->

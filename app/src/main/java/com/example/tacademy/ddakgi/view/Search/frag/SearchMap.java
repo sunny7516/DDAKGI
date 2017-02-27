@@ -1,129 +1,187 @@
 package com.example.tacademy.ddakgi.view.Search.frag;
 
-import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tacademy.ddakgi.R;
-import com.example.tacademy.ddakgi.util.U;
+import com.example.tacademy.ddakgi.view.Search.adapter.PlaceAutocompleteAdapter;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.location.places.AutocompletePrediction;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.PlaceBuffer;
+import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.io.IOException;
-import java.util.List;
+public class SearchMap extends Fragment implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener {
 
-public class SearchMap extends Fragment implements OnMapReadyCallback {
-
+    protected GoogleApiClient mGoogleApiClient;
+    private PlaceAutocompleteAdapter mAdapter;
+    private AutoCompleteTextView mAutocompleteView;
+    MapView map;
     private GoogleMap mMap;
-    Marker marker;
+    boolean alwaysCameraflag = true;    // 처음 위치를 잡기 위한 flag
+    Location mLocation;                 // 계속 갱신되는 나의 주소
+    Marker marker;                      // 자신의 장소에대한 마커
+    LatLng queriedLocation;             // 검색한 장소에대한 GPS정보
+    String locationName;                // 검색한 장소의 이름
 
-    SearchView searchView;
-
-    String strAddress;
-    List<android.location.Address> listAddress;
-    EditText searchEditText;
-    android.location.Address AddrAddress;
-
-    public SearchMap() {
-        // Required empty public constructor
-    }
+    private static final LatLngBounds BOUNDS_GREATER_SYDNEY = new LatLngBounds(
+            new LatLng(-34.041458, 150.790100), new LatLng(-33.682247, 151.383362));
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search_map, container, false);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+                .enableAutoManage(getActivity(), this)
+                .addApi(Places.GEO_DATA_API)
+                .build();
 
-        // 주소 <-> 위도,경도
-        final Geocoder geocoder = new Geocoder(getActivity());
+        mAutocompleteView = (AutoCompleteTextView) getActivity().findViewById(R.id.autocomplete_places);
+        mAutocompleteView.setOnItemClickListener(mAutocompleteClickListener);
 
-        // 검색창에 주소 검색, 주소의 위도 경도값 변환해서 해당 위치로 지도 이동
-        searchView = (SearchView) getActivity().findViewById(R.id.homeSearchView);
-        searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        mAdapter = new PlaceAutocompleteAdapter(getContext(), mGoogleApiClient, BOUNDS_GREATER_SYDNEY, null);
+        mAutocompleteView.setAdapter(mAdapter);
+
+        // 초기화
+        map = (MapView) view.findViewById(R.id.search_map);
+        map.onCreate(savedInstanceState);
+        map.onResume();
+        map.getMapAsync(this);
+
+        mAutocompleteView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                // 검색창에서 입력받은 주소를 가져와서 변수 strAddress에 저장
-                strAddress = searchEditText.getText().toString();
-                // geocoder는 주소를 통해 위도와 경도의 값을 연산
-                try {
-                    // 받아온 주소값을 구글맵이 이해할 수 있는 주소값으로 변환 후 listAddress에 저장
-                    listAddress = geocoder.getFromLocationName(strAddress, 10);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Log.e("test", "입출력 오류 - 서버에서 주소변환시 에러발생");
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    newPosition();
+                    return true;
                 }
-                if (listAddress != null) {
-                    if (listAddress.size() == 0) {
-                        // 해당되는 주소 정보 없음
-                    } else {
-                        // 동까지만 위도 경도 나타나고, 상세주소는 서울 위도 경도로 찍힘
-                        // 해당되는 주소로 이동
-                        double lat = 0;
-                        double lng = 0;
-                        AddrAddress = listAddress.get(0);
-                        lat = AddrAddress.getLatitude();
-                        lng = AddrAddress.getLongitude();
-                        LatLng newPosition = new LatLng(lat, lng);
-
-                        // 검색한 위치 이전 화면으로 넘기기 위해 정확한 주소 받아오기
-                        // 새로운 위치 찍기
-                        marker.setPosition(newPosition);
-                        marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
-                        // 카메라 이동
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newPosition, 12));
-                        CameraPosition MARKER_POS = new CameraPosition.Builder()
-                                .target(newPosition)
-                                .zoom(16)
-                                .build();
-                        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(MARKER_POS));
-                    }
-                }
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
                 return false;
             }
         });
-
         return view;
     }
 
+    // 검색하는 글에 따라 나오는 아이템 중 하나 클릭시
+    private AdapterView.OnItemClickListener mAutocompleteClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            final AutocompletePrediction item = mAdapter.getItem(position);
+            final String placeId = item.getPlaceId();
+            final CharSequence primaryText = item.getPrimaryText(null);
+
+            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
+                    .getPlaceById(mGoogleApiClient, placeId);
+            placeResult.setResultCallback(mUpdatePlaceDetailsCallback);
+
+            Toast.makeText(getContext(), "Clicked: " + primaryText,
+                    Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    // 장소불러오기 성공 실패 -> 성공일 경우 검색한 장소에대한 정보를 가지고 있음
+    private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback = new ResultCallback<PlaceBuffer>() {
+        @Override
+        public void onResult(PlaceBuffer places) {
+            if (!places.getStatus().isSuccess()) {
+                // 실패
+                places.release();
+                return;
+            }
+
+            // 장소 이름     : place.getName()
+            // 장소 ID       : place.getId()
+            // 장소 주소     : place.getAddress()
+            // 장소 전화번호  : place.getPhoneNumber()
+            // 장소 url      : place.getWebsiteUri()
+
+            // 성공
+            final Place place = places.get(0);
+
+            // 장소에 대한 GPS 정보
+            queriedLocation = place.getLatLng();
+            locationName = "" + place.getName();
+
+            // 장소 클릭했을 때 뜨는 위치 명
+            Log.i("검색한 위치명: ", place.getName()+"");
+
+            places.release();
+        }
+    };
+
+    // 장소 연결 실패
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        Toast.makeText(getContext(), "장소를 다시 검색하세요", Toast.LENGTH_SHORT).show();
+    }
+
+    // 장소 검색을 받고 정보에대한 위치를 마커로 나타내는 부분
+    public void newPosition() {
+        marker.setPosition(queriedLocation);
+        marker.setTitle(locationName);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(queriedLocation, 12));
+        CameraPosition MARKER_POS = new CameraPosition.Builder()
+                .target(queriedLocation)
+                .zoom(16)
+                .build();
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(MARKER_POS));
+    }
+
+    // 지도 띄우기
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        Location location;
-        // Add a marker in Sydney and move the camera
-        LatLng myPosition = new LatLng(U.getInstance().getMyLat(), U.getInstance().getMyLng());
-        // 마킹
-        marker =
-                mMap.addMarker(new MarkerOptions().position(myPosition)
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE))); // 지도 위에 점 찍기
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 12)); // 위치를 중심으로 이동 / 코드 제거 시 위치 상에 표시만
+        // 지도상에서 내위치 정보 표시 및 획득 -> 빨간줄 : 퍼미션문제
         mMap.setMyLocationEnabled(true);
         mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
             @Override
-            public void onMyLocationChange(Location location) {
+            public void onMyLocationChange(Location location) {/*
+                Log.i("구글지도상내위치정보:", location.getLatitude()
+                        + "," + location.getLongitude());*/
+
+                mLocation = location;
+
+                // 내 위치 세팅
+                if (alwaysCameraflag) {
+                    LatLng myPosision
+                            = new LatLng(location.getLatitude(),
+                            location.getLongitude());
+
+                    marker = mMap.addMarker(new MarkerOptions().position(myPosision).title("현재 나의 위치"));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myPosision, 12));
+                    alwaysCameraflag = false;
+                }
             }
         });
     }
+
+    // 완료 버튼을 눌렀을 경우
+    // 위치 정보 임시 저장, 이전 화면으로 주소값 전달하기
+    public void onNextBtn(View view) {
+        getActivity().finish();
+    }
+
 }

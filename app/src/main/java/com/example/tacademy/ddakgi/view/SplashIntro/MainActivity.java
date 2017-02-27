@@ -10,9 +10,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.adapter.CustomAdapter;
 import com.example.tacademy.ddakgi.base.HomeActivity;
-import com.example.tacademy.ddakgi.R;
 
 public class MainActivity extends AppCompatActivity {
     ViewPager pager;
@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
         pager.setClipToPadding(false);
         pager.setPadding(40, 0, 40, 0);
         pager.setPageMargin(getResources().getDisplayMetrics().widthPixels / -30);
-
-
     }
 
     // 액티비티 종료 시 애니메이션

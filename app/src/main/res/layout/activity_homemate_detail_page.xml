@@ -316,9 +316,8 @@
 
         <include
             android:id="@+id/life_style_list"
-            layout="@layout/life_style_list"
+            layout="@layout/lifestyle_qna_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </RelativeLayout>

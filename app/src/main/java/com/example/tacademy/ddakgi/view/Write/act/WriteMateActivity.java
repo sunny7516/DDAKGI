@@ -11,10 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ToggleButton;
 
 import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.util.DatePickerFragment;
+
+import io.chooco13.NotoTextView;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -49,6 +50,7 @@ public class WriteMateActivity extends AppCompatActivity {
         }
     }
 
+    // 추가 질문 펼치기
     public void ShowMateExtraInfo(View view) {
         if (extraflag) {
             extraflag = false;
@@ -79,21 +81,32 @@ public class WriteMateActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // 입주 가능일
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
-    // 희망하는 방의 유형 중복으로 선택하기
+    // 방 유형 단일 선택
+    NotoTextView clickedType = null;
+
     public void preftypeChecked(View view) {
-        ToggleButton preftype = (ToggleButton) view;
-        if (preftype.isChecked()) {
-            preftype.setTextColor(getResources().getColor(R.color.textpointColor));
-        } else {
-            preftype.setTextColor(getResources().getColor(R.color.grayTextColor));
+        // 선택된 텍스트가 없으면,
+        // 처음으로 선택한 텍스트를 clickedView에 넣고 색상을 적용한다.
+        if (clickedType == null) {
+            clickedType = (NotoTextView) view;
+            clickedType.setTextColor(getResources().getColor(R.color.textpointColor));
+        } else if (clickedType != view) {
+            // 선택된 텍스트가 저장된 텍스트와 다르면
+            // 저장했던 텍스트 색을 default로 변경하고,
+            // 현재 선택된 텍스트를 저장 변수에 넣는다. (포인트 색상으로 적용)
+            clickedType.setTextColor(getResources().getColor(R.color.grayTextColor));
+            clickedType = (NotoTextView) view;
+            clickedType.setTextColor(getResources().getColor(R.color.textpointColor));
         }
     }
 
+    // 추가 질문 받는 부분
     public void plusExtra(View view) {
         // 빈 공간 (새롭게 생길 부분)
         LinearLayout newLinear = (LinearLayout) findViewById(R.id.ExtraMateQuelinear);

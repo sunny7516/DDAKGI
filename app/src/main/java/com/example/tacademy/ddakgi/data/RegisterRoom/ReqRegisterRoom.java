@@ -1,4 +1,4 @@
-package com.example.tacademy.ddakgi.data;
+package com.example.tacademy.ddakgi.data.RegisterRoom;
 
 /**
  * 방 등록하기 요청

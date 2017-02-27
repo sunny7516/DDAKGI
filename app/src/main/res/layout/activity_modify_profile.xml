@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_modify_profile"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context="com.example.tacademy.ddakgi.view.My.ModifyProfileActivity">
+    <!-- 프로필 수정 화면 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/writeroomImageTool"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@android:color/white"
+            android:minHeight="?attr/actionBarSize">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/myTabBackBt"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@mipmap/back_btn"
+                    android:onClick="back" />
+
+                <io.chooco13.NotoTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_toRightOf="@id/myTabBackBt"
+                    android:gravity="center"
+                    android:text="@string/myToolText"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="16sp"
+                    app:fontWeight="medium" />
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/modifyProfileFinish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:text="@string/finish"
+                    android:textColor="@color/grayTextColor"
+                    android:textSize="13sp"
+                    app:fontWeight="regular" />
+            </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
+
+        <ImageView
+            android:id="@+id/modifyProfileImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="modifyProfileImage"
+            android:layout_marginTop="24dp"
+            android:src="@mipmap/profile" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginTop="34dp"
+            android:orientation="horizontal">
+
+            <io.chooco13.NotoTextView
+                android:id="@+id/profileNickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="22dp"
+                android:text="@string/nickname"
+                android:textColor="@color/subTextColor"
+                android:textSize="13sp"
+                app:fontWeight="regular" />
+
+            <EditText
+                android:id="@+id/modifyNickname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/defaultTextColor"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:textColor="@color/string" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:orientation="horizontal">
+
+            <io.chooco13.NotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="33dp"
+                android:text="@string/Age"
+                android:textColor="@color/subTextColor"
+                android:textSize="13sp"
+                app:fontWeight="regular" />
+
+            <EditText
+                android:id="@+id/modifyAge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/defaultTextColor"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:textColor="@color/string" />
+
+        <io.chooco13.NotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="64dp"
+            android:text="@string/QnA"
+            android:textColor="@color/subTextColor"
+            android:textSize="13sp"
+            app:fontWeight="regular" />
+
+        <TextView
+            android:layout_marginTop="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:textColor="@color/string" />
+
+        <include
+            layout="@layout/lifestyle_que_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</ScrollView>

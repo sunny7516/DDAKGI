@@ -135,7 +135,7 @@
     <string name="option">옵션</string>
     <string name="introduce">자기소개</string>
     <string name="introduceHint">간단하게 자기소개를 써보세요</string>
-    <string name="extraQue">추가질문</string>
+    <string name="extraQue">추가질문(최대 3개)</string>
     <string name="extraQueHint">예비룸메이트에게 추가로 묻고싶은 질문을 써보세요!</string>
 
     <!-- 룸메이트 등록하기 화면 -->
@@ -174,8 +174,12 @@
     <!-- 필터 -->
     <string name="filterRoomType">방 종류</string>
 
-    <!-- Mytab -->
+    <!-- LikeTab -->
     <string name="likeTool">찜 목록</string>
+
+    <!-- MyTab -->
+    <string name="myToolText">프로필 수정</string>
+    <string name="QnA">Q &amp; A</string>
 
     <!-- 카카오 로그인 -->
     <string name="kakao_app_key">2a53a7a89edf17b188fd0f110c5b427f</string>
@@ -201,4 +205,23 @@
     <string name="logoutText">로그아웃</string>
     <string name="getoutText">회원탈퇴</string>
     <string name="versionText">버전 정보 1.0.1</string>
+
+    <!-- 도움말 -->
+    <string name="helpTool">도움말</string>
+    <string name="helpQueOne">\n 1. 생활패턴 질문은 어떻게 선정되었나요?\n</string>
+    <string name="helpAnsOne">설문조사를 통해 룸메이트와 함께 생활할 경우 가장 중요한 10가지 생활 패턴을 선정했습니다. 글을 등록할 경우 내가 원하는 추가 질문 3가지를 등록할 수 있습니다.</string>
+    <string name="helpQueTwo">\n2. 생활패턴 일치율은 어떻게 계산되나요?\n</string>
+    <string name="helpAnsTwo">10가지 생활패턴 질문에 대해 상대방과 나의 답변이 일치하는 정도를 계산합니다. </string>
+    <string name="helpQueThree">\n3. 글을 등록하면 어떻게 되나요?\n</string>
+    <string name="helpAnsThree">등록한 글은 다른 사용자의 홈에 노출됩니다. 이를 보고 나와 비슷한 조건을 원하는 룸메이트가 1:1 대화를 신청할 수 있습니다. 따라서 검색 없이도 좀 더 빨리 룸메이트를 찾을 수 있습니다.</string>
+    <string name="helpQueFour">\n4. 개인 정보는 안전하게 보관되고 있나요?\n</string>
+    <string name="helpAnsFour">딱지는 사용자의 이메일과 비밀번호를 암호화해 관리하고 있습니다. 본인 인증, 임대 계약서, 신분증 인증에서 사용된 정보 역시 보안 처리하고 있습니다.</string>
+    <string name="helpQueFive">\n5. 허위 정보 또는 부적절한 정보를 기재한 룸메이트를 만나면 어떡하죠?\n</string>
+    <string name="helpAnsFive">딱지는 허위 정보를 방지하기 위해 임대 계약서와 신분증 인증 배지 제도를 시행합니다. 가급적 인증 배지가 있는 사용자와 연락할 것을 추천합니다. 그 외에도 부적절한 정보를 기재한 룸메이트를 만나면 신고해주세요. 딱지에서 확인 후 즉시 제재 처리 하겠습니다. </string>
+    <string name="helpQueSix">\n6. 어플리케이션에서만 룸메이트와 대화할 수 있나요?\n</string>
+    <string name="helpAnsSix">1:1 채팅방에서 대화를 해본 후 룸메이트가 마음에 든다면, 메신저 아이디 또는 핸드폰 번호를 주고 받으세요. 다만 룸메이트가 확정되기 전에는 최소한의 정보만을 주고 받는 것을 추천합니다.</string>
+    <string name="helpQueSeven">\n7. 더 이상 연락을 받고 싶지 않아요.\n</string>
+    <string name="helpAnsSeven">룸메이트를 구했거나 더 이상 연락을 받고 싶지 않은 경우 마이페이지에서 해당 게시글을 삭제해주세요. 이후에는 다른 사용자에게 정보가 노출되지 않습니다.</string>
+    <string name="helpQueEight">\n8. 그 외에도 궁금한 점 / 건의하고 싶은 점이 있어요.\n</string>
+    <string name="helpAnsEight">ttakjiapp@gmail.com으로 언제든지 연락주세요. 딱지는 여러분의 문의와 건의를 사랑합니다!</string>
 </resources>

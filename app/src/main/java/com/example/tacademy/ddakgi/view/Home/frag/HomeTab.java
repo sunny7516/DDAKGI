@@ -177,15 +177,14 @@ public class HomeTab extends Fragment {
         }
     };
 
-    public static boolean isLogin = true;
+    public static boolean isLogin=true;
 
     // 로그인 유도 팝업 띄우기
     public void letLogin() {
         if (!isLogin) {
             // 로그인 상태가 아니면
             alert = new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
-                    .setTitleText("로그인 유도")
-                    .setContentText("로그인 하시겠습니까?")
+                    .setContentText("유용한 정보를 확인하기 위해서 로그인을 해주세요!")
                     .setConfirmText("로그인")
                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                         @Override
@@ -195,18 +194,11 @@ public class HomeTab extends Fragment {
                             Intent intent = new Intent(getContext(), SignUpActivity.class);
                             startActivity(intent);
                         }
-                    })
-                    .setCancelText("나중에 하기")
-                    .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                        @Override
-                        public void onClick(SweetAlertDialog sweetAlertDialog) {
-                            alert.dismissWithAnimation();
-                        }
                     });
-            alert.setCancelable(true);
+            alert.setCancelable(false);
             alert.show();
         } else {
-            // 로그인 상태이면
+            // 자동 로그인 상태이면
         }
     }
 }

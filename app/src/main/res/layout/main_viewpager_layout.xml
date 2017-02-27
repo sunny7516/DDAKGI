@@ -64,29 +64,28 @@
                     android:orientation="vertical">
 
                     <io.chooco13.NotoTextView
-                        android:id="@+id/textView2"
+                        android:id="@+id/introTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
                         android:text="Title"
                         android:textColor="@color/defaultTextColor"
                         android:textSize="16sp"
                         app:fontWeight="medium" />
 
                     <io.chooco13.NotoTextView
-                        android:id="@+id/textView3"
+                        android:id="@+id/introLocation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Price"
+                        android:text="Location"
                         android:textColor="@color/subTextColor"
                         android:textSize="13sp"
                         app:fontWeight="regular" />
 
                     <io.chooco13.NotoTextView
-                        android:id="@+id/textView4"
+                        android:id="@+id/introPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Location"
+                        android:text="Price"
                         android:textColor="@color/subTextColor"
                         android:textSize="13sp"
                         app:fontWeight="regular" />
@@ -119,7 +118,7 @@
                             android:weightSum="1">
 
                             <io.chooco13.NotoTextView
-                                android:id="@+id/textView5"
+                                android:id="@+id/introNickname"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="NickName"
@@ -128,7 +127,7 @@
                                 app:fontWeight="medium" />
 
                             <io.chooco13.NotoTextView
-                                android:id="@+id/textView7"
+                                android:id="@+id/introDate"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Date"
@@ -157,7 +156,7 @@
                             app:srcCompat="@mipmap/heart_off_btn" />
 
                         <io.chooco13.NotoTextView
-                            android:id="@+id/LikeNum"
+                            android:id="@+id/introHeartNum"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"

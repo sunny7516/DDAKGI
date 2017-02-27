@@ -31,6 +31,6 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Button prefDate = (Button) getActivity().findViewById(R.id.prefDate);
         int Month = month + 1;
-        prefDate.setText(year + "- " + Month + "-" + dayOfMonth);
+        prefDate.setText(year + "-0" + Month + "-" + dayOfMonth);
     }
 }

@@ -48,11 +48,19 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
 
         holder.modifyBt.setVisibility(View.VISIBLE);
         holder.deleteBt.setVisibility(View.VISIBLE);
+        holder.deleteBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 삭제 버튼 누르면 화면에서 글 삭제
+                items.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, items.size());
+                holder.itemView.setVisibility(View.GONE);
+                // 데이터 삭제도 구현해야 함
+            }
+        });
         holder.image.setImageDrawable(photo);
 
-        holder.loginShadow.setVisibility(View.GONE);
-        holder.loginBeforeText.setVisibility(View.GONE);
-        
         holder.linear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +90,6 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
             super(itemView);
             this.image = (ImageView) itemView.findViewById(R.id.mPhoto);
             this.loginShadow = (TextView) itemView.findViewById(R.id.beforeLoginShadow);
-            this.loginBeforeText = (io.chooco13.NotoTextView) itemView.findViewById(R.id.loginBeforeText);
             this.linear = (LinearLayout) itemView.findViewById(R.id.timelineLinear);
             this.modifyBt = (io.chooco13.NotoTextView) itemView.findViewById(R.id.modifyBt);
             this.deleteBt = (io.chooco13.NotoTextView) itemView.findViewById(R.id.deleteBt);

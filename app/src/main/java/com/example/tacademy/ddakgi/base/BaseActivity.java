@@ -1,14 +1,20 @@
 package com.example.tacademy.ddakgi.base;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Toast;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by Tacademy on 2017-02-17.
  */
 
 public class BaseActivity extends AppCompatActivity {
+    private Activity activity;
 
     // 프로그레스바 선언
     private ProgressDialog pd;
@@ -38,5 +44,35 @@ public class BaseActivity extends AppCompatActivity {
 
     public void back(View view) {
         finish();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                Toast.makeText(this, "뒤로가기 버튼 눌림", Toast.LENGTH_SHORT).show();
+
+                final SweetAlertDialog alertDialog = new SweetAlertDialog(this);
+                alertDialog.setTitle("어플리케이션 종료");
+                alertDialog.setContentText("딱지를 종료하시겠습니까?");
+                alertDialog.setConfirmText("그만 할래요");
+                alertDialog.setCancelText("뒤로 갈래요");
+                alertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        moveTaskToBack(true);
+                        finish();
+                        android.os.Process.killProcess(android.os.Process.myPid());
+                    }
+                }).setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        sweetAlertDialog.dismissWithAnimation();
+                        finish();
+                    }
+                });
+                alertDialog.show();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

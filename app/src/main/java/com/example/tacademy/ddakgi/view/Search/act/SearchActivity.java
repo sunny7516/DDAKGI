@@ -1,16 +1,11 @@
 package com.example.tacademy.ddakgi.view.Search.act;
 
-import android.content.res.ColorStateList;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.SearchView;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.tacademy.ddakgi.R;
@@ -32,25 +27,6 @@ public class SearchActivity extends BaseActivity {
         tabLayout = (TabLayout) findViewById(R.id.searchTablayout);
         viewPager = (ViewPager) findViewById(R.id.searchViewPager);
         tabLayout.setTabTextColors(getResources().getColor(R.color.subTextColor), getResources().getColor(R.color.textpointColor));
-
-        // SearchView Style
-        SearchView searchView = (SearchView) findViewById(R.id.homeSearchView);
-
-        EditText searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
-        searchEditText.setTextColor(getResources().getColor(R.color.subTextColor));
-        searchEditText.setHintTextColor(getResources().getColor(R.color.grayTextColor));
-        searchEditText.setTextSize(13);
-
-        ImageView search_close_btn = (ImageView) searchView.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
-        ImageView search_icon = (ImageView) searchView.findViewById(android.support.v7.appcompat.R.id.search_mag_icon);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            search_close_btn.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.subTextColor)));
-            search_icon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.subTextColor)));
-        }
-
-        // 검색필드를 항상 표시하고 싶으면 false, 아이콘으로 보이고 싶으면 true
-        searchView.setIconifiedByDefault(false);
 
         fragmentAdapter = new FragmentAdapter(getSupportFragmentManager());
         viewPager.setAdapter(fragmentAdapter);
