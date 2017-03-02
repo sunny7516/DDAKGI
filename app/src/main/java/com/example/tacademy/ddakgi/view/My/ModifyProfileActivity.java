@@ -11,6 +11,10 @@ import android.widget.ImageView;
 
 import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.base.BaseActivity;
+import com.example.tacademy.ddakgi.data.Member.ReqUpdateMemberInfo;
+import com.example.tacademy.ddakgi.data.Member.ResMember;
+import com.example.tacademy.ddakgi.data.NetSSL;
+import com.example.tacademy.ddakgi.data.RegisterRoom.ResStringString;
 import com.miguelbcr.ui.rx_paparazzo.RxPaparazzo;
 import com.miguelbcr.ui.rx_paparazzo.entities.size.ScreenSize;
 import com.squareup.picasso.Picasso;
@@ -18,6 +22,9 @@ import com.yalantis.ucrop.UCrop;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import io.chooco13.NotoTextView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -31,19 +38,48 @@ public class ModifyProfileActivity extends BaseActivity {
 
     String havePhoto = null;
 
+    // 저장할 변수
+    String nickname;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_profile);
 
+        // 자신의 정보 조회
+        getMemberInfo();
+
         modifyProfileFinish = (NotoTextView) findViewById(R.id.modifyProfileFinish);
         modifyNickname = (EditText) findViewById(R.id.modifyNickname);
         modifyAge = (EditText) findViewById(R.id.modifyAge);
-        modifyProfileImage =(ImageView)findViewById(R.id.modifyProfileImage);
+        modifyProfileImage = (ImageView) findViewById(R.id.modifyProfileImage);
 
         for (int i = 1; i < CheckObj.length; i++) {
             CheckObj[i] = false;
         }
+    }
+
+    // DB에서 data get ==========================================================================
+    public void getMemberInfo() {
+        Call<ResMember> resMemberCall = NetSSL.getInstance().getMemberImpFactory().resMember();
+        resMemberCall.enqueue(new Callback<ResMember>() {
+            @Override
+            public void onResponse(Call<ResMember> call, Response<ResMember> response) {
+                if(response.body().getResult() != null){
+                    Log.i("RF:MEModify", "SUCCESS" + response.body().getResult());
+                    modifyNickname.setText(response.body().getResult().getNickname());
+                    modifyAge.setText(String.valueOf(response.body().getResult().getAge()));
+                }else{
+                    Log.i("RF:MEModify", "FAIL" + response.body().getError());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResMember> call, Throwable t) {
+                Log.i("RF:MEModify", "ERR" + t.getMessage());
+            }
+        });
+
     }
 
     // 프로필 사진 재선택 ==============================================================================
@@ -267,8 +303,31 @@ public class ModifyProfileActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 // 수정된 설문패턴 DB로 저장
+                nickname = modifyNickname.getText().toString();
+                updateMemberDB(nickname);
                 // 화면 종료
                 finish();
+            }
+        });
+    }
+
+    // 마이 정보 수정 후 디비로 업데이트
+    public void updateMemberDB(String nickname){
+        Call<ResStringString> resUpdateMemberCall = NetSSL.getInstance().getMemberImpFactory()
+                .resUpdateMember(new ReqUpdateMemberInfo(nickname, 1,2,3,4,5,6,7,8,9,10,"profile_image"));
+        resUpdateMemberCall.enqueue(new Callback<ResStringString>() {
+            @Override
+            public void onResponse(Call<ResStringString> call, Response<ResStringString> response) {
+                if(response.body().getResult() != null){
+                    Log.i("RF:UpdateMe", "SUCCESS" + response.body().getResult());
+                }else{
+                    Log.i("RF:UpdateMe", "FAIL" + response.body().getError());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResStringString> call, Throwable t) {
+                Log.i("RF:UPDATE", "ERROR" + t.getMessage());
             }
         });
     }

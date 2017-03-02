@@ -24,7 +24,7 @@
                 android:layout_weight="0.7">
 
                 <ImageView
-                    android:id="@+id/roomImage"
+                    android:id="@+id/introRoomImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"
@@ -40,6 +40,7 @@
                     app:srcCompat="@drawable/testroom0" />
 
                 <io.chooco13.NotoTextView
+                    android:id="@+id/introRoomImageText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -103,8 +104,9 @@
                         android:layout_height="match_parent"
                         android:gravity="center|left">
 
-                        <ImageView
-                            android:id="@+id/imageView4"
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/introProfile"
                             android:layout_width="38dp"
                             android:layout_height="38dp"
                             android:layout_marginRight="5dp"
@@ -113,7 +115,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toRightOf="@+id/imageView4"
+                            android:layout_toRightOf="@+id/introProfile"
                             android:orientation="vertical"
                             android:weightSum="1">
 

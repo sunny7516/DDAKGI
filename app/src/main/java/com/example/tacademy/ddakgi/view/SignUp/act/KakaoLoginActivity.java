@@ -58,8 +58,6 @@ public class KakaoLoginActivity extends BaseActivity {
     // 로그인 수행 후 돌아왔을 때 호출된다 (데이터를 가지고)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.i("KAKA", "requestCode:" + requestCode);
-        Log.i("KAKA", "resultCode:" + resultCode);
         if (data != null)
             Log.i("KAKAO", "Intent:" + data.toString());
 

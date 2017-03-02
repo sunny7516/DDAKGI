@@ -20,7 +20,7 @@ import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.base.BaseActivity;
 import com.example.tacademy.ddakgi.data.NetSSL;
 import com.example.tacademy.ddakgi.data.RegisterRoom.ReqRegisterRoom;
-import com.example.tacademy.ddakgi.data.RegisterRoom.ResRegisterRoom;
+import com.example.tacademy.ddakgi.data.RegisterRoom.ResStringString;
 import com.example.tacademy.ddakgi.util.DatePickerFragment;
 
 import io.chooco13.NotoTextView;
@@ -139,13 +139,13 @@ public class WriteRoomActivity extends BaseActivity {
         extra_q1 = registerRoomExtraQueOne.getText().toString();                        // 추가질문1
 
         // 디비에 정보 저장
-        Call<ResRegisterRoom> resRegisterRoomCall = NetSSL.getInstance().getMemberImpFactory()
+        Call<ResStringString> resRegisterRoomCall = NetSSL.getInstance().getMemberImpFactory()
                 .registerRoom(new ReqRegisterRoom(title, local1, local2, local3, detailed_local,
                         room_latitude, room_longitude, room_type, size, deposit, rent, floor, available_date, manage_cost, costNum, options, description,
                         extra_q1, extra_q2, extra_q3));
-        resRegisterRoomCall.enqueue(new Callback<ResRegisterRoom>() {
+        resRegisterRoomCall.enqueue(new Callback<ResStringString>() {
             @Override
-            public void onResponse(Call<ResRegisterRoom> call, Response<ResRegisterRoom> response) {
+            public void onResponse(Call<ResStringString> call, Response<ResStringString> response) {
                 if (response.body().getResult() != null) {
                     Log.i("RF", "SUCCESS" + response.body().getResult());
                 } else {
@@ -154,7 +154,7 @@ public class WriteRoomActivity extends BaseActivity {
             }
 
             @Override
-            public void onFailure(Call<ResRegisterRoom> call, Throwable t) {
+            public void onFailure(Call<ResStringString> call, Throwable t) {
                 Log.i("RF", "ERR" + t.getMessage());
             }
         });

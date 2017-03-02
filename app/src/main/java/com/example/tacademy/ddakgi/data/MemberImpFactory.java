@@ -1,12 +1,18 @@
 package com.example.tacademy.ddakgi.data;
 
+import com.example.tacademy.ddakgi.data.IntroTimeline.ResPosting;
+import com.example.tacademy.ddakgi.data.Kakao.ReqKaKaoLogin;
+import com.example.tacademy.ddakgi.data.Kakao.ResKaKaoLogin;
+import com.example.tacademy.ddakgi.data.Member.ReqUpdateMemberInfo;
+import com.example.tacademy.ddakgi.data.Member.ResMember;
 import com.example.tacademy.ddakgi.data.RegisterRoom.ReqRegisterRoom;
-import com.example.tacademy.ddakgi.data.RegisterRoom.ResRegisterRoom;
+import com.example.tacademy.ddakgi.data.RegisterRoom.ResStringString;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 
 /**
  * 1. 페북 로그인 및 최초사용자 등록
@@ -37,12 +43,25 @@ import retrofit2.http.POST;
  */
 
 public interface MemberImpFactory {
-    // 방 등록하기
-    @POST("roommates/room/3")
-    Call<ResRegisterRoom> registerRoom(@Body ReqRegisterRoom reqRegisterRoom);
+    // 임의 숫자는 로그인 후 me로 바뀌거나 생략할 예정
 
-    // 인트로 조회
+    // 2. 카카오톡 로그인 및 최초사용자 등록
+    @POST("auth/kakao/token")
+    Call<ResKaKaoLogin> resKaKaoLogin(@Body ReqKaKaoLogin reqKaKaoLogin);
+
+    // 5. 회원 정보 조회
+    @GET("members/3")
+    Call<ResMember> resMember();
+
+    // 6. 회원정보 수정
+    @PUT("members/3")
+    Call<ResStringString> resUpdateMember(@Body ReqUpdateMemberInfo reqUpdateMemberInfo);
+
+    // 8. 방있는 룸메이트 등록하기(room)
+    @POST("roommates/room/3")
+    Call<ResStringString> registerRoom(@Body ReqRegisterRoom reqRegisterRoom);
+
+    // 13. 게시글 목록보기 (인트로)
     @GET("postings/beforelogin")
     Call<ResPosting> resPosting();
-
 }

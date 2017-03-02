@@ -59,7 +59,7 @@
                 app:srcCompat="@mipmap/profile_btn" />
 
             <io.chooco13.NotoTextView
-                android:id="@+id/textView9"
+                android:id="@+id/myTabNickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

@@ -49,7 +49,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="16dp"
                     android:text="@string/finish"
-                    android:textColor="@color/defaultTextColor"
+                    android:textColor="@color/grayTextColor"
                     android:textSize="13sp"
                     app:fontWeight="regular" />
             </RelativeLayout>

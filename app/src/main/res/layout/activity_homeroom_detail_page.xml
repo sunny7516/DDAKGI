@@ -203,7 +203,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginTop="11dp"
-                android:background="@mipmap/go_chat_btn" />
+                android:background="@mipmap/go_chat_btn"
+                android:onClick="onChatRequest"/>
         </RelativeLayout>
 
         <TextView
@@ -357,7 +358,6 @@
             android:background="@color/grayTextColor" />
 
         <include
-            android:id="@+id/life_style_list"
             layout="@layout/lifestyle_qna_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

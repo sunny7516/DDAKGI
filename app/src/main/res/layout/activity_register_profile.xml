@@ -45,7 +45,7 @@
                 android:layout_marginRight="16dp"
                 android:text="@string/finish"
                 android:onClick="registerMemberDB"
-                android:textColor="@color/grayTextColor"
+                android:textColor="@color/defaultTextColor"
                 android:textSize="13sp"
                 app:fontWeight="regular" />
         </RelativeLayout>
@@ -58,11 +58,11 @@
         android:layout_marginRight="16dp"
         android:orientation="vertical">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/userProfile"
             android:onClick="checkNull"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_gravity="center"
             android:layout_marginTop="31dp"
             android:src="@mipmap/profile" />

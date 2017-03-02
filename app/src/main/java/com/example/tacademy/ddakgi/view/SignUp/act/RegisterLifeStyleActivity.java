@@ -2,17 +2,17 @@ package com.example.tacademy.ddakgi.view.SignUp.act;
 
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckedTextView;
 
 import com.example.tacademy.ddakgi.R;
+import com.example.tacademy.ddakgi.base.BaseActivity;
 
 import io.chooco13.NotoTextView;
 
 import static com.example.tacademy.ddakgi.view.SignUp.act.RegisterProfileActivity.isLifeStyleFinish;
 
-public class RegisterLifeStyleActivity extends AppCompatActivity {
+public class RegisterLifeStyleActivity extends BaseActivity {
     NotoTextView lifestyleFinish;
 
     @Override

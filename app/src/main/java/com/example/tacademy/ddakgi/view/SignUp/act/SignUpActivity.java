@@ -177,17 +177,42 @@ public class SignUpActivity extends KakaoLoginActivity {
 
             // 가입 진행! > 프로필 등록화면으로 이동(카카오 기본 정보 넘겨줌)
             ImageProc.getInstance().getImageLoader(this);
+
             Intent intent = new Intent(this, RegisterProfileActivity.class);
             intent.putExtra("kakaoNickname", nickname);
             intent.putExtra("kakaoProfile", profile);
             startActivity(intent);
+/*
+            // 카카오 로그인 시 정보 넣어주기
+            registerKaKao();*/
 
             // 프로그레스바 닫아주기
             hideProgress();
             finish();
         }
     }
+/*
+    public void registerKaKao() {
+        Call<ResKaKaoLogin> resKaKaoLoginCall = NetSSL.getInstance().getMemberImpFactory()
+                .resKaKaoLogin(new ReqKaKaoLogin(db_token));
+        resKaKaoLoginCall.enqueue(new Callback<ResKaKaoLogin>() {
+            @Override
+            public void onResponse(Call<ResKaKaoLogin> call, Response<ResKaKaoLogin> response) {
+                if(response.body().getResult() != null){
+                    Log.i("RF:KaKaoLogin", "SUCCESS" + response.body().getResult());
+                }else{
+                    Log.i("RF:KaKaoLogin", "FAIL" + response.body().getError());
+                }
+            }
 
+            @Override
+            public void onFailure(Call<ResKaKaoLogin> call, Throwable t) {
+                Log.i("RF:KaKaoLogin", "ERROR" + t.getMessage());
+            }
+        });
+    }*/
+
+    // 회원 정보 디비에 입력
     public void onUserSaved(String nickname, String profile) {
         String token = FirebaseInstanceId.getInstance().getToken();
         // 토큰이 활성화 될 때까지 못 넘어간다 -> 블럭 코드라서 앱이 먹통이 된다!
@@ -198,10 +223,9 @@ public class SignUpActivity extends KakaoLoginActivity {
                 e.printStackTrace();
             }
         }
-        // 회원 정보 디비에 입력
+
         String db_nickname = nickname;
         String db_profile = profile;
-
         // 회원정보 생성
         User user = new User(db_nickname, db_profile, FirebaseInstanceId.getInstance().getToken());
         // 디비 입력

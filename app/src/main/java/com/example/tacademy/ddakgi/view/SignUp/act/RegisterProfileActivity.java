@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.tacademy.ddakgi.R;
@@ -20,6 +19,7 @@ import com.squareup.picasso.Picasso;
 import com.yalantis.ucrop.UCrop;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.chooco13.NotoTextView;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -33,7 +33,7 @@ import static com.example.tacademy.ddakgi.view.Home.frag.HomeTab.isLogin;
 public class RegisterProfileActivity extends BaseActivity {
     SweetAlertDialog alert;
 
-    ImageView userProfile;
+    CircleImageView userProfile;
     EditText userNickname;
     EditText userAge;
     CheckBox infoCheckBox;
@@ -52,8 +52,9 @@ public class RegisterProfileActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_profile);
         Log.i("isLifeStyleFinish1", isLifeStyleFinish + "");
+
         // layout에 있는 프로필 사진, 닉네임
-        userProfile = (ImageView) findViewById(R.id.userProfile);
+        userProfile = (CircleImageView) findViewById(R.id.userProfile);
         userNickname = (EditText) findViewById(R.id.userNickname);
         userAge = (EditText) findViewById(R.id.userAge);
         registerMemberFinish = (NotoTextView) findViewById(R.id.registerMemberFinish);
@@ -238,19 +239,18 @@ public class RegisterProfileActivity extends BaseActivity {
 
     // 완료 버튼 눌렀을 때
     public void registerMemberDB(View view) {
-        Log.i("CHECK","CHECK");
-
         // 모든 답변 응답했는지 확인
         if (!isValidate()) {
-            Log.i("CHECK","FALSEVALIDATE");
+            Toast.makeText(this, "모든 문항에 답변해주세요!", Toast.LENGTH_SHORT).show();
             return;
         } else
-            Log.i("CHECK","TRUEVALIDATE");
             // 모두 답변했으면
-            // 회원가입 정보 db로 전송
             // 홈탭 로그인 유도 팝업 더이상 안뜨게 설정
             isLogin = true;
-        // 회원가입 화면 닫기
+        // 로딩화면 보여주고 회원가입 화면 닫기
+        showProgress("회원 정보를 등록중입니다");
+        // 회원가입 정보 db로 전송
+        hideProgress();
         finish();
     }
 
@@ -281,7 +281,6 @@ public class RegisterProfileActivity extends BaseActivity {
             Toast.makeText(this, "약관동의는 필수 사항입니다.", Toast.LENGTH_SHORT).show();
             return false;
         }
-        registerMemberFinish.setTextColor(ContextCompat.getColor(this, R.color.defaultTextColor));
         return true;
     }
 }

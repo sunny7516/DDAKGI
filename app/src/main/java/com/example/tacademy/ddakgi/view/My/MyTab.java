@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +17,19 @@ import android.widget.ImageView;
 
 import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.adapter.MyRecyclerAdapter;
+import com.example.tacademy.ddakgi.data.Member.ResMember;
+import com.example.tacademy.ddakgi.data.NetSSL;
 import com.example.tacademy.ddakgi.view.Help.HelpActivity;
 import com.example.tacademy.ddakgi.view.My.model.MyTimelineItem;
 import com.example.tacademy.ddakgi.view.Setting.SettingActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.chooco13.NotoTextView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class MyTab extends Fragment {
@@ -34,6 +42,7 @@ public class MyTab extends Fragment {
     ImageButton helpBt;
     ImageButton settingBt;
     ImageView modifyProfileBt;
+    NotoTextView myTabNickname;
 
     public MyTab() {
         // Required empty public constructor
@@ -43,6 +52,10 @@ public class MyTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_tab, container, false);
+
+        // 내 정보(사진, 닉네임) 가져와서 적용
+        getMyInfo();
+        myTabNickname = (NotoTextView)view.findViewById(R.id.myTabNickname);
 
         // Fragment toolbar 적용하기
         toolbar = (Toolbar) getActivity().findViewById(R.id.myTabTool);
@@ -56,7 +69,7 @@ public class MyTab extends Fragment {
         settingBt.setOnClickListener(onClickListener);
 
         // 프로필 수정으로 이동
-        modifyProfileBt = (ImageView)view.findViewById(R.id.modifyProfileBt);
+        modifyProfileBt = (ImageView) view.findViewById(R.id.modifyProfileBt);
         modifyProfileBt.setOnClickListener(onClickListener);
 
         // Inflate the layout for this fragment
@@ -78,6 +91,27 @@ public class MyTab extends Fragment {
         recyclerviewMyTab.setAdapter(new MyRecyclerAdapter(getContext(), items, R.layout.home_timeline));
 
         return view;
+    }
+
+    // DB에서 data get ==========================================================================
+    public void getMyInfo() {
+        Call<ResMember> resMemberCall = NetSSL.getInstance().getMemberImpFactory().resMember();
+        resMemberCall.enqueue(new Callback<ResMember>() {
+            @Override
+            public void onResponse(Call<ResMember> call, Response<ResMember> response) {
+                if (response.body().getResult() != null) {
+                    Log.i("RF:ME", "SUCCESS" + response.body().getResult().getNickname());
+                    myTabNickname.setText(response.body().getResult().getNickname());
+                } else {
+                    Log.i("RF:ME", "FAIL" + response.body().getError());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResMember> call, Throwable t) {
+                Log.i("RF:ME", "ERR" + t.getMessage());
+            }
+        });
     }
 
     private View.OnClickListener onClickListener = new View.OnClickListener() {
