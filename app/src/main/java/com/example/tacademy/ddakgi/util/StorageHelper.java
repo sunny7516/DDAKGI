@@ -3,12 +3,25 @@ package com.example.tacademy.ddakgi.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.Set;
+
 /**
  * 앱 구동간 필요에 의해서 저장하는 저장소 기능
  */
 public class StorageHelper {
     // 저장소 메인 키
     public static final String STORAGE_KEY = "pref";
+
+    Context context;
+    //getter and setter
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
 
     private static StorageHelper ourInstance = new StorageHelper();
 
@@ -20,7 +33,16 @@ public class StorageHelper {
     }
 
     // ========================= 저장 타입별 기능 제공 ===========================
-/*
+
+    public void setCookies(String key, Set<String> value){
+        SharedPreferences.Editor editor = context.getSharedPreferences(STORAGE_KEY, 0).edit();
+        editor.putStringSet(key, value);
+        editor.commit();
+    }
+    public Set<String> getCookies(String key){
+        return context.getSharedPreferences(STORAGE_KEY, 0).getStringSet(key, null);
+    }
+    /*
     static {
         // NDK로 만들어는 lib, o 등등 파일을(c/c++ 라이브러리) 로드할 때 사용
         // libxxxxxx.o

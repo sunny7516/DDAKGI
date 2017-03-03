@@ -12,6 +12,7 @@
     <string name="filter_reset">리셋</string>
     <string name="filter_apply">적용</string>
     <string name="berforeLogin">로그인 후 \n 매칭율을 확인해보세요.</string>
+    <string name="homeLifeStyleText">생활패턴 일치율</string>
 
     <!-- HomeTab 상세페이지 -->
     <string name="percent">매칭율</string>

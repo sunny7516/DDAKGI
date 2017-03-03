@@ -11,6 +11,7 @@ import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,25 +21,26 @@ import android.widget.ImageView;
 
 import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.adapter.RecyclerAdapter;
+import com.example.tacademy.ddakgi.data.HomeTimeline.ResHomePosting;
+import com.example.tacademy.ddakgi.data.NetSSL;
+import com.example.tacademy.ddakgi.data.Ottobus;
 import com.example.tacademy.ddakgi.view.Filter.FilterActivity;
-import com.example.tacademy.ddakgi.view.Home.model.TimelineItem;
 import com.example.tacademy.ddakgi.view.Search.act.SearchActivity;
 import com.example.tacademy.ddakgi.view.SignUp.act.SignUpActivity;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.squareup.otto.Subscribe;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.example.tacademy.ddakgi.R.id.gosearchBt;
 
 public class HomeTab extends Fragment {
     private boolean activityStartup = true;
-    final int ITEM_SIZE = 3;
 
     RecyclerView recyclerviewHomeTab;
     LinearLayoutManager linearLayoutManager;
-    RecyclerAdapter recyclerAdapter;
 
     SearchView searchView;
     EditText searchEditText;
@@ -51,6 +53,10 @@ public class HomeTab extends Fragment {
     io.chooco13.NotoTextView room;
     io.chooco13.NotoTextView mate;
 
+    ResHomePosting items;
+
+    boolean ottoflag = false;
+
     public HomeTab() {
     }
 
@@ -59,13 +65,20 @@ public class HomeTab extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_tab, container, false);
 
+        // 레트로핏 통신 ==============================================================================
+        if (!ottoflag) {
+            Ottobus.getInstance().getMaingfrag_bus().register(this);
+            ottoflag = true;
+        }
+
+        AllPostingSet();
+
         // 홈화면 유입 시 로그인 유도 팝업
         letLogin();
 
-        // SearchView Style
+        // SearchView Style ========================================================================
         searchView = (SearchView) view.findViewById(R.id.searchView);
 
-        // SearchView Style
         searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         searchEditText.setTextColor(getResources().getColor(R.color.subTextColor));
         searchEditText.setHintTextColor(getResources().getColor(R.color.grayTextColor));
@@ -93,7 +106,7 @@ public class HomeTab extends Fragment {
             }
         });
 
-        // Fragment toolbar
+        // Fragment toolbar ========================================================================
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.MainToolbar);
 
         // Toolbar에 OptionMenu 지정
@@ -101,13 +114,13 @@ public class HomeTab extends Fragment {
         activity.setSupportActionBar(toolbar);
         activity.getSupportActionBar().hide();
 
-        // search화면으로 가는 ClickListener 적용
+        // search화면으로 가는 ClickListener 적용 ======================================================
         Button gosearchBt = (Button) view.findViewById(R.id.gosearchBt);
         Button filter_menu = (Button) view.findViewById(R.id.filter_menu);
         gosearchBt.setOnClickListener(toolBtListener);
         filter_menu.setOnClickListener(toolBtListener);
 
-        // 홈탭 all/room/mate 버튼
+        // 홈탭 all/room/mate 버튼 ===================================================================
         all = (io.chooco13.NotoTextView) view.findViewById(R.id.all);
         room = (io.chooco13.NotoTextView) view.findViewById(R.id.room);
         mate = (io.chooco13.NotoTextView) view.findViewById(R.id.mate);
@@ -122,19 +135,65 @@ public class HomeTab extends Fragment {
         linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
         recyclerviewHomeTab.setLayoutManager(linearLayoutManager);
 
-        // 가데이터 > 수정해야됨
-        List<TimelineItem> items = new ArrayList<>();
-        TimelineItem[] item = new TimelineItem[ITEM_SIZE];
-        item[0] = new TimelineItem(R.drawable.testroom0);
-        item[1] = new TimelineItem(R.drawable.testroom1);
-        item[2] = new TimelineItem(R.drawable.testroom2);
-
-        for (int i = 0; i < ITEM_SIZE; i++) {
-            items.add(item[i]);
-        }
-        recyclerviewHomeTab.setAdapter(new RecyclerAdapter(getContext(), items, R.layout.home_timeline));
-
         return view;
+    }
+
+    public void AllPostingSet() {
+        Call<ResHomePosting> resAllPostingCall = NetSSL.getInstance().getMemberImpFactory().resAllPosting();
+        resAllPostingCall.enqueue(new Callback<ResHomePosting>() {
+            @Override
+            public void onResponse(Call<ResHomePosting> call, Response<ResHomePosting> response) {
+                if (response.body().getResult() != null) {
+                    Log.i("RF:Main/Room", "SUCCESS" + response.body().getResult());
+                    if (response.body().getResult() != null) {
+                        Ottobus.getInstance().getMaingfrag_bus().post(response.body());
+                    }
+                } else {
+                    Log.i("RF:Main/Room", "FAIL" + response.body().getError());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResHomePosting> call, Throwable t) {
+                Log.i("RF:INTRO", "ERR" + t.getMessage());
+            }
+        });
+    }
+
+    public void RoomOrMateSet(int roomming) {
+        Call<ResHomePosting> resRoomMatePosting = NetSSL.getInstance().getMemberImpFactory().resRoomMatePosting(roomming);
+        resRoomMatePosting.enqueue(new Callback<ResHomePosting>() {
+            @Override
+            public void onResponse(Call<ResHomePosting> call, Response<ResHomePosting> response) {
+                if (response.body().getResult() != null) {
+                    Log.i("RF:RoomMate", "SUCCESS" + response.body().getResult());
+                    if (response.body().getResult() != null) {
+                        Log.i("RF:RoomMate", items.getResult() + "");
+                        Ottobus.getInstance().getMaingfrag_bus().post(response.body());
+                    }
+                } else {
+                    Log.i("RF:RoomMate", "FAIL" + response.body().getError());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResHomePosting> call, Throwable t) {
+                Log.i("RF:RoomMate", "ERR" + t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        // Ottobus 연결 끊어주기
+        Ottobus.getInstance().getMaingfrag_bus().unregister(this);
+    }
+
+    @Subscribe
+    public void FinishLoad(ResHomePosting data) {
+        items = data;
+        recyclerviewHomeTab.setAdapter(new RecyclerAdapter(getContext(), items, R.layout.home_timeline));
     }
 
     // Toolbar Click Event
@@ -174,10 +233,20 @@ public class HomeTab extends Fragment {
                 clickedText.setTextColor(getResources().getColor(R.color.white));
                 clickedText.setBackgroundColor(getResources().getColor(R.color.pointColor));
             }
+            switch (view.getId()) {
+                case R.id.room:
+                    RoomOrMateSet(1);
+                    break;
+                case R.id.mate:
+                    RoomOrMateSet(0);
+                    break;
+                case R.id.all:
+                    AllPostingSet();
+            }
         }
     };
 
-    public static boolean isLogin=true;
+    public static boolean isLogin = true;
 
     // 로그인 유도 팝업 띄우기
     public void letLogin() {

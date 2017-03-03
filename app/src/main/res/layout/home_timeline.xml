@@ -21,7 +21,7 @@
             android:layout_centerVertical="true"
             android:orientation="horizontal">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/mProfile"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
@@ -35,7 +35,7 @@
                 android:orientation="vertical">
 
                 <io.chooco13.NotoTextView
-                    android:id="@+id/nickname"
+                    android:id="@+id/mNickname"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -46,7 +46,7 @@
                     app:fontWeight="medium" />
 
                 <io.chooco13.NotoTextView
-                    android:id="@+id/date"
+                    android:id="@+id/mDate"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -102,11 +102,38 @@
             android:scaleType="fitXY"
             app:srcCompat="@drawable/testroom0" />
 
-        <TextView
-            android:id="@+id/beforeLoginShadow"
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            app:srcCompat="@drawable/testroom0" />
+            android:scaleType="fitXY"
+            android:alpha="0.4"
+            android:background="#131313"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <io.chooco13.NotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/homeLifeStyleText"
+                android:textColor="@color/grayTextColor"
+                android:textSize="12sp"
+                app:fontWeight="demilight" />
+
+            <io.chooco13.NotoTextView
+                android:id="@+id/matching_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fontWeight="medium"
+                android:textSize="20sp"
+                android:text="80%"
+                android:textColor="@color/percentColor"/>
+        </LinearLayout>
     </RelativeLayout>
 
     <LinearLayout
@@ -124,20 +151,30 @@
             android:orientation="vertical">
 
             <io.chooco13.NotoTextView
-                android:id="@+id/mAge"
+                android:id="@+id/mTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Age"
+                android:layout_marginTop="10dp"
+                android:text="Title"
                 android:textColor="@color/defaultTextColor"
                 android:textSize="16sp"
                 app:fontWeight="medium" />
 
             <io.chooco13.NotoTextView
-                android:id="@+id/Age"
+                android:id="@+id/mPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Price"
+                android:textColor="@color/subTextColor"
+                android:textSize="13sp"
+                android:visibility="visible"
+                app:fontWeight="regular" />
+
+            <io.chooco13.NotoTextView
+                android:id="@+id/mAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Age"
                 android:textColor="@color/subTextColor"
                 android:textSize="13sp"
                 app:fontWeight="regular" />
@@ -146,10 +183,12 @@
                 android:id="@+id/mLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:text="Location"
                 android:textColor="@color/subTextColor"
-                android:textSize="16sp"
+                android:textSize="13sp"
                 app:fontWeight="regular" />
+
 
         </LinearLayout>
 
@@ -171,7 +210,7 @@
                 app:srcCompat="@mipmap/heart_off_btn" />
 
             <io.chooco13.NotoTextView
-                android:id="@+id/mLikenum"
+                android:id="@+id/mLikeNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

@@ -35,6 +35,8 @@ public class MyApplication extends MultiDexApplication {
         KakaoSDK.init(new KakaoSDKAdapter());
         // 보안 통신 초기화
         NetSSL.getInstance().launch(getApplicationContext());
+        // 저장소에 저장된 것을 앱 구동되고 바로 들고오게
+        StorageHelper.getInstance().setContext(getApplicationContext());
     }
 
     private static class KakaoSDKAdapter extends KakaoAdapter {

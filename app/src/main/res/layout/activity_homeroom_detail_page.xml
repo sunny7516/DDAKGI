@@ -183,9 +183,10 @@
         <!-- 채팅버튼 -->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="11dp"
+            android:onClick="onChatRequest"
             android:gravity="center">
 
             <io.chooco13.NotoTextView
@@ -195,6 +196,7 @@
                 android:text="@string/detailChatHint"
                 android:textColor="@color/textpointColor"
                 android:textSize="13sp"
+                android:onClick="onChatRequest"
                 app:fontWeight="medium" />
 
             <ImageButton
@@ -203,8 +205,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginTop="11dp"
-                android:background="@mipmap/go_chat_btn"
-                android:onClick="onChatRequest"/>
+                android:onClick="onChatRequest"
+                android:background="@mipmap/go_chat_btn"/>
         </RelativeLayout>
 
         <TextView

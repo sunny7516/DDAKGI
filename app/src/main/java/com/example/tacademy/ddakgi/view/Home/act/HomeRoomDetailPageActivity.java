@@ -20,8 +20,12 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+* getUid -> getKakaoId로 대체
+* */
+
 public class HomeRoomDetailPageActivity extends BaseActivity {
-    String auth_uid;
+    String auth_uid="378025574";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +42,7 @@ public class HomeRoomDetailPageActivity extends BaseActivity {
         // 내 아이디가 유효하면
         databaseReference
                 .child("users")
-                .child(getUid())
+                .child(getKaKaoId())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -72,7 +76,7 @@ public class HomeRoomDetailPageActivity extends BaseActivity {
                             Toast.makeText(HomeRoomDetailPageActivity.this, "이미 탈퇴한 회원입니다.", Toast.LENGTH_SHORT).show();
                         } else {
                             // 나와 채팅방을 개설한 적 있는가
-                            databaseReference.child("channel").child(getUid()).child(you_id)
+                            databaseReference.child("channel").child(getKaKaoId()).child(you_id)
                                     .addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -120,8 +124,8 @@ public class HomeRoomDetailPageActivity extends BaseActivity {
         Map<String, Object> postMap = ccm.toChannelMap();
         // 입력 데이터 준비
         Map<String, Object> updates = new HashMap<String, Object>();
-        updates.put("/channel/" + getUid() +"/" + you_id, postMap);
-        updates.put("/channel/" + you_id + "/" + getUid(), postMap);
+        updates.put("/channel/" + getKaKaoId() +"/" + you_id, postMap);
+        updates.put("/channel/" + you_id + "/" + getKaKaoId(), postMap);
         // 추가
         databaseReference.updateChildren(updates, new DatabaseReference.CompletionListener(){
             @Override

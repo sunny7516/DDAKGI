@@ -174,7 +174,7 @@ public class SignUpActivity extends KakaoLoginActivity {
             showProgress("프로필 등록 화면으로 이동 중");
             // firebase에 회원 정보 저장
             onUserSaved(nickname, profile);
-
+            String email = nickname+"@Kakao.com";
             // 가입 진행! > 프로필 등록화면으로 이동(카카오 기본 정보 넘겨줌)
             ImageProc.getInstance().getImageLoader(this);
 

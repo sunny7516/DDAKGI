@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.tacademy.ddakgi.util.StorageHelper;
-import com.google.firebase.auth.FirebaseAuth;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -79,10 +78,18 @@ public class BaseActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    // 내 아이디
-    public String getUid() {
-        if (FirebaseAuth.getInstance().getCurrentUser() == null) return null;
-        return FirebaseAuth.getInstance().getCurrentUser().getUid();
+    /*
+
+        // 내 아이디
+        public String getUid() {
+            if (FirebaseAuth.getInstance().getCurrentUser() == null) return null;
+            return FirebaseAuth.getInstance().getCurrentUser().getUid();
+        }
+
+    */
+    // 내 kakaoId 획득
+    public String getKaKaoId() {
+        return StorageHelper.getInstance().getString(this, "kakaoID");
     }
 
     // 내 닉네임 획득

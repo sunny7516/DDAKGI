@@ -151,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
                 Picasso
                         .with(getApplicationContext())
                         .load(items.getResult().get(position).getRoommate_image()[0])
+                        .fit()
                         .into(introRoomImage);
             }
             // 프로필 사진 적용하기
@@ -160,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
                 Picasso
                         .with(getApplicationContext())
                         .load(items.getResult().get(position).getThumbnail_image())
+                        .fit()
                         .into(introProfile);
             }
 

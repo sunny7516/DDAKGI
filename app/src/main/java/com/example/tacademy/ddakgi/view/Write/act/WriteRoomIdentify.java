@@ -150,7 +150,8 @@ public class WriteRoomIdentify extends BaseActivity {
         Picasso.with(this).setLoggingEnabled(true);
         Picasso.with(this).setIndicatorsEnabled(true);
         Picasso.with(this).invalidate(url);
-        Picasso.with(this).load(url).into(roomIdentifyBt);
+        Picasso.with(this).load(url)
+                .fit().into(roomIdentifyBt);
 
         roomIdentifyBt.setTag(path);
         //havePhoto = path;

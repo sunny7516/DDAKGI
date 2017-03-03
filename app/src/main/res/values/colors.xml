@@ -26,4 +26,7 @@
     <color name="introBack">#d5d4d5</color>
     <color name="inroTextcolor">#262630</color>
 
+    <!-- homeTab -->
+    <color name="percentColor">#40CBA6</color>
+
 </resources>

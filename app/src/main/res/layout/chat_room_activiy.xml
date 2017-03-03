@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_chat_room_activiy"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.tacademy.ddakgi.view.Chat.ChatRoomActivity">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/writeroomImageTool"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@android:color/white"
+            android:minHeight="?attr/actionBarSize">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/writeroomBackBt"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@mipmap/back_btn"
+                    android:onClick="back" />
+
+                <io.chooco13.NotoTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_toRightOf="@id/writeroomBackBt"
+                    android:gravity="center"
+                    android:text="Nickname"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="16sp"
+                    app:fontWeight="medium" />
+
+                <io.chooco13.NotoTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:text="@string/report"
+                    android:textColor="@color/subTextColor"
+                    android:textSize="13sp"
+                    app:fontWeight="regular" />
+            </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00000000"
+            android:weightSum="1"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="#00000000"
+                android:scrollbars="vertical"
+                tools:listitem="@layout/sendbird_view_group_user_message" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_weight="0"
+                android:orientation="horizontal">
+
+                <AutoCompleteTextView
+                    android:id="@+id/msg_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="메시지를 입력하세요"
+                    android:textStyle="normal|bold" />
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:onClick="onSend"
+                    android:background="#40cba6"
+                    android:text="전송" />
+            </LinearLayout>
+        </LinearLayout>
+</LinearLayout>

@@ -204,7 +204,8 @@ public class RegisterProfileActivity extends BaseActivity {
         Picasso.with(this).setLoggingEnabled(true);
         Picasso.with(this).setIndicatorsEnabled(true);
         Picasso.with(this).invalidate(url);
-        Picasso.with(this).load(url).into(userProfile);
+        Picasso.with(this).load(url)
+                .fit().into(userProfile);
 
         havePhoto = path;
     }
