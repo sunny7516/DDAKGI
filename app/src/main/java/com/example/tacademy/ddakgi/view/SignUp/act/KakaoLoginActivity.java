@@ -16,6 +16,7 @@ import com.kakao.util.helper.log.Logger;
 
 public class KakaoLoginActivity extends BaseActivity {
     private SessionCallback callback;
+    String accessToken;
 
     // 액티비티가 떴을 때 한번 로그인하면 자동로그인하도록 설정하는 부분
     class SessionCallback implements ISessionCallback {
@@ -23,6 +24,8 @@ public class KakaoLoginActivity extends BaseActivity {
         @Override
         public void onSessionOpened() {
             Log.i("KAKA", "onSessionOpened() call");
+            accessToken =Session.getCurrentSession().getAccessToken();
+            Log.i("accessToken", accessToken);
             redirectSignupActivity();
         }
 
@@ -34,6 +37,7 @@ public class KakaoLoginActivity extends BaseActivity {
             }
         }
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

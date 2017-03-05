@@ -11,10 +11,13 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.tacademy.ddakgi.R;
+import com.example.tacademy.ddakgi.data.Kakao.ResKaKaoLogin;
+import com.example.tacademy.ddakgi.data.NetSSL;
 import com.example.tacademy.ddakgi.util.ImageProc;
 import com.example.tacademy.ddakgi.view.SignUp.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -27,6 +30,10 @@ import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.MeResponseCallback;
 import com.kakao.usermgmt.response.model.UserProfile;
 import com.kakao.util.helper.log.Logger;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * sns 연동 가입 후 프로필 등록화면으로 연결
@@ -63,6 +70,9 @@ public class SignUpActivity extends KakaoLoginActivity {
         }
     }
 
+    /**
+     * fb 인증으로 가입이 성공하면, fb 데이터베이스의 users 밑으로 회원 정보를 등록한다.
+     */
     // 답변과 상관없이 응답하면 불러오는 부분
     @Override
     public void onRequestPermissionsResult(int requestCode,
@@ -151,6 +161,7 @@ public class SignUpActivity extends KakaoLoginActivity {
                 long userId = accessTokenInfoResponse.getUserId();
                 Logger.d("this access token is for userId=" + userId);
                 kakaoID = "" + userId;
+                Log.i("kakaoID", kakaoID);
 
                 long expiresInMilis = accessTokenInfoResponse.getExpiresInMillis();
                 Logger.d("this access token expires after " + expiresInMilis + " milliseconds.");
@@ -170,11 +181,29 @@ public class SignUpActivity extends KakaoLoginActivity {
             return;
         } else {
             // 로그인 유도 팝업 뜨지 않게하는 변수
+
             // 진행 프로그레스바
             showProgress("프로필 등록 화면으로 이동 중");
-            // firebase에 회원 정보 저장
-            onUserSaved(nickname, profile);
-            String email = nickname+"@Kakao.com";
+
+            // 인증쪽에 데이터 저장
+            String email = kakaoID + "@Kakao.com";
+            String pwd = kakaoID + "password";
+
+            firebaseAuth.createUserWithEmailAndPassword(email, pwd)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Log.i("auth", "성공");
+                                // firebase 디비에 회원 정보 저장
+                                onUserSaved(email, nickname, profile);
+                            } else {
+                                Log.i("auth", "실패" + task.getException().getMessage());
+                                Toast.makeText(SignUpActivity.this, "회원가입 실패:" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
             // 가입 진행! > 프로필 등록화면으로 이동(카카오 기본 정보 넘겨줌)
             ImageProc.getInstance().getImageLoader(this);
 
@@ -191,16 +220,17 @@ public class SignUpActivity extends KakaoLoginActivity {
             finish();
         }
     }
-/*
+
     public void registerKaKao() {
         Call<ResKaKaoLogin> resKaKaoLoginCall = NetSSL.getInstance().getMemberImpFactory()
-                .resKaKaoLogin(new ReqKaKaoLogin(db_token));
+                .resKaKaoLogin(accessToken);
         resKaKaoLoginCall.enqueue(new Callback<ResKaKaoLogin>() {
             @Override
             public void onResponse(Call<ResKaKaoLogin> call, Response<ResKaKaoLogin> response) {
-                if(response.body().getResult() != null){
+                if (response.body().getResult() != null) {
                     Log.i("RF:KaKaoLogin", "SUCCESS" + response.body().getResult());
-                }else{
+                    Log.i("SIGNUPaccessToken", accessToken);
+                } else {
                     Log.i("RF:KaKaoLogin", "FAIL" + response.body().getError());
                 }
             }
@@ -210,11 +240,13 @@ public class SignUpActivity extends KakaoLoginActivity {
                 Log.i("RF:KaKaoLogin", "ERROR" + t.getMessage());
             }
         });
-    }*/
+    }
 
     // 회원 정보 디비에 입력
-    public void onUserSaved(String nickname, String profile) {
+    public void onUserSaved(String authEmail, String nickname, String profile) {
         String token = FirebaseInstanceId.getInstance().getToken();
+        registerKaKao();
+
         // 토큰이 활성화 될 때까지 못 넘어간다 -> 블럭 코드라서 앱이 먹통이 된다!
         while (token == null) {
             try {
@@ -224,12 +256,10 @@ public class SignUpActivity extends KakaoLoginActivity {
             }
         }
 
-        String db_nickname = nickname;
-        String db_profile = profile;
         // 회원정보 생성
-        User user = new User(db_nickname, db_profile, FirebaseInstanceId.getInstance().getToken());
+        User user = new User(authEmail, nickname, profile, FirebaseInstanceId.getInstance().getToken());
         // 디비 입력
-        databaseReference.child("users").child(kakaoID).setValue(user)
+        databaseReference.child("users").child(getUid()).setValue(user)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

@@ -5,6 +5,7 @@ package com.example.tacademy.ddakgi.view.SignUp.model;
  */
 
 public class User {
+    String authEmail;
     String nickname;
     String profile;
     String token;
@@ -12,7 +13,8 @@ public class User {
     public User() {
     }
 
-    public User(String nickname, String profile, String token) {
+    public User(String authEmail, String nickname, String profile, String token) {
+        this.authEmail = authEmail;
         this.nickname = nickname;
         this.profile = profile;
         this.token = token;
@@ -24,6 +26,14 @@ public class User {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getAuthEmail() {
+        return authEmail;
+    }
+
+    public void setAuthEmail(String authEmail) {
+        this.authEmail = authEmail;
     }
 
     public String getNickname() {

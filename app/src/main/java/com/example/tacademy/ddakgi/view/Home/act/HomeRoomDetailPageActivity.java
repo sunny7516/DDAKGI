@@ -21,11 +21,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
-* getUid -> getKakaoId로 대체
-* */
+ * getUid -> getKakaoId로 대체
+ */
 
 public class HomeRoomDetailPageActivity extends BaseActivity {
-    String auth_uid="378025574";
+    String auth_uid = "sME6Ek3vsCWwK8fKEo5K3tgJTr03";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +37,14 @@ public class HomeRoomDetailPageActivity extends BaseActivity {
     DatabaseReference databaseReference;
 
     public void onChatRequest(View view) {
+        showProgress("채팅방으로 이동합니다");
+
         // x. 채팅 신청하기
         databaseReference = FirebaseDatabase.getInstance().getReference();
         // 내 아이디가 유효하면
         databaseReference
                 .child("users")
-                .child(getKaKaoId())
+                .child(getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -76,14 +78,14 @@ public class HomeRoomDetailPageActivity extends BaseActivity {
                             Toast.makeText(HomeRoomDetailPageActivity.this, "이미 탈퇴한 회원입니다.", Toast.LENGTH_SHORT).show();
                         } else {
                             // 나와 채팅방을 개설한 적 있는가
-                            databaseReference.child("channel").child(getKaKaoId()).child(you_id)
+                            databaseReference.child("channel").child(getUid()).child(you_id)
                                     .addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot) {
                                             ChatChannelModel checkKey = dataSnapshot.getValue(ChatChannelModel.class);
                                             if (checkKey != null) {
                                                 // 이미 존재함 => 채팅방으로 이동: checkKey
-                                                Toast.makeText(HomeRoomDetailPageActivity.this, "채팅방으로 이동합니다", Toast.LENGTH_SHORT).show();
+                                                //Toast.makeText(HomeRoomDetailPageActivity.this, "채팅방으로 이동합니다", Toast.LENGTH_SHORT).show();
                                                 goChatting(checkKey.getChatting_channel());
                                             } else {
                                                 // 채팅방 존재하지 않음 => 채널 생성 => 채팅방으로 이동
@@ -93,7 +95,6 @@ public class HomeRoomDetailPageActivity extends BaseActivity {
 
                                         @Override
                                         public void onCancelled(DatabaseError databaseError) {
-
                                         }
                                     });
                         }
@@ -104,16 +105,19 @@ public class HomeRoomDetailPageActivity extends BaseActivity {
 
                     }
                 });
+        hideProgress();
     }
-    public void makeChannel(String you_id, String you_profile){
+
+    public void makeChannel(String you_id, String you_profile) {
         // channel에 데이터 설정
         ChatChannelModel ccm = new ChatChannelModel(
                 you_id,
-                getNickName()+"님이 채팅을 요청합니다",
+                getNickName() + "님이 채팅을 요청합니다",
                 1,
                 System.currentTimeMillis(),
                 you_profile
         );
+        Log.i("CHAT", getUid() + "/" + you_id);
 
         // 입력 준비
         final String key = databaseReference.child("chatting").child("rooms").push().getKey();
@@ -124,15 +128,15 @@ public class HomeRoomDetailPageActivity extends BaseActivity {
         Map<String, Object> postMap = ccm.toChannelMap();
         // 입력 데이터 준비
         Map<String, Object> updates = new HashMap<String, Object>();
-        updates.put("/channel/" + getKaKaoId() +"/" + you_id, postMap);
-        updates.put("/channel/" + you_id + "/" + getKaKaoId(), postMap);
+        updates.put("/channel/" + getUid() + "/" + you_id, postMap);
+        updates.put("/channel/" + you_id + "/" + getUid(), postMap);
         // 추가
-        databaseReference.updateChildren(updates, new DatabaseReference.CompletionListener(){
+        databaseReference.updateChildren(updates, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                if(databaseError != null){
+                if (databaseError != null) {
                     Log.i("CHAT", "오류" + databaseError.getMessage());
-                }else{
+                } else {
                     // 채팅 채널 생성이 완료!
                     Toast.makeText(HomeRoomDetailPageActivity.this, "채팅방으로 이동합니다", Toast.LENGTH_SHORT).show();
                     goChatting(key);
@@ -140,7 +144,8 @@ public class HomeRoomDetailPageActivity extends BaseActivity {
             }
         });
     }
-    public void goChatting(String roomKey){
+
+    public void goChatting(String roomKey) {
         Intent intent = new Intent(this, ChatRoomActivity.class);
         intent.putExtra("chatting_room_key", roomKey);
         //intent.putExtra("you", model);

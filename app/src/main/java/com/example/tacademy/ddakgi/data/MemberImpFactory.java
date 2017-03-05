@@ -2,7 +2,6 @@ package com.example.tacademy.ddakgi.data;
 
 import com.example.tacademy.ddakgi.data.HomeTimeline.ResHomePosting;
 import com.example.tacademy.ddakgi.data.IntroTimeline.ResPosting;
-import com.example.tacademy.ddakgi.data.Kakao.ReqKaKaoLogin;
 import com.example.tacademy.ddakgi.data.Kakao.ResKaKaoLogin;
 import com.example.tacademy.ddakgi.data.Member.ReqUpdateMemberInfo;
 import com.example.tacademy.ddakgi.data.Member.ResMember;
@@ -15,6 +14,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * 2. 카카오톡 로그인 및 최초사용자 등록
@@ -46,8 +46,8 @@ public interface MemberImpFactory {
     // 임의 숫자는 로그인 후 me로 바뀌거나 생략할 예정
 
     // 2. 카카오톡 로그인 및 최초사용자 등록
-    @POST("auth/kakao/token")
-    Call<ResKaKaoLogin> resKaKaoLogin(@Body ReqKaKaoLogin reqKaKaoLogin);
+    @GET("auth/kakao/token")
+    Call<ResKaKaoLogin> resKaKaoLogin(@Query("access_token") String access_token);
 
     // 5. 회원 정보 조회
     @GET("members/3")
