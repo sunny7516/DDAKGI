@@ -178,6 +178,17 @@
     <!-- ChatTab -->
     <string name="report">신고</string>
 
+    <!-- 신고 -->
+    <string name="reportTool">신고하기</string>
+    <string name="reportFinish">제출</string>
+    <string name="reportOne">욕설 또는 비방</string>
+    <string name="reportTwo">음란물</string>
+    <string name="reportThree">광고</string>
+    <string name="reportFour">허위매물</string>
+    <string name="reportFive">기타</string>
+    <string name="reportReason">사유를 입력해주세요</string>
+
+
     <!-- LikeTab -->
     <string name="likeTool">찜 목록</string>
 

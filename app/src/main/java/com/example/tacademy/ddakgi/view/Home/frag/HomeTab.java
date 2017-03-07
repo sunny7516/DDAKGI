@@ -81,6 +81,10 @@ public class HomeTab extends Fragment {
         searchEditText.setHintTextColor(getResources().getColor(R.color.grayTextColor));
         searchEditText.setTextSize(13);
 
+        // 검색할 수 없도록 막아두기
+        searchEditText.setEnabled(false);
+        searchEditText.setClickable(false);
+
         search_close_btn = (ImageView) searchView.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
         search_icon = (ImageView) searchView.findViewById(android.support.v7.appcompat.R.id.search_mag_icon);
 
@@ -139,7 +143,9 @@ public class HomeTab extends Fragment {
     }
 
     public void AllPostingSet() {
-        Call<ResHomePosting> resAllPostingCall = NetSSL.getInstance().getMemberImpFactory().resAllPosting();
+        Call<ResHomePosting> resAllPostingCall = NetSSL.getInstance().getMemberImpFactory().resAllPosting(
+                "0", "0", "0", 1,2,3,4,5,999999,999999,"1111-11-11"
+        );
         resAllPostingCall.enqueue(new Callback<ResHomePosting>() {
             @Override
             public void onResponse(Call<ResHomePosting> call, Response<ResHomePosting> response) {

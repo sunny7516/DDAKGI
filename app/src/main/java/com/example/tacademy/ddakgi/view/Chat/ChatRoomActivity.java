@@ -1,5 +1,6 @@
 package com.example.tacademy.ddakgi.view.Chat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import android.widget.AutoCompleteTextView;
 import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.base.BaseActivity;
 import com.example.tacademy.ddakgi.util.U;
+import com.example.tacademy.ddakgi.view.Report.reportActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
@@ -24,6 +26,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
+import io.chooco13.NotoTextView;
+
 public class ChatRoomActivity extends BaseActivity {
 
     // UI
@@ -31,6 +35,8 @@ public class ChatRoomActivity extends BaseActivity {
     AutoCompleteTextView msg_input;
     ChatRoomActivity.MyAdapter myAdapter = new ChatRoomActivity.MyAdapter();
     LinearLayoutManager linearLayoutManager;
+
+    NotoTextView txt_left_time;
 
     // FireBase
     FirebaseDatabase firebaseDatabase;
@@ -104,6 +110,14 @@ public class ChatRoomActivity extends BaseActivity {
                     }
                 });
     }
+    int other_member_id;
+    public void goReport(View view) {
+        other_member_id = getIntent().getExtras().getInt("int other_member_id");
+        Intent intent = new Intent(this, reportActivity.class);
+        intent.putExtra("other_member_id", other_member_id);
+        startActivity(intent);
+        this.finish();
+    }
 
     // 전송 버튼 누르면 호출
     public void onSend(View view) {
@@ -117,6 +131,7 @@ public class ChatRoomActivity extends BaseActivity {
                 sendTime,
                 1
         );
+
         // 2. 서버 전송 => 여기서는 데이터 직접 추가
         databaseReference.child("chatting").child("rooms").child(chatting_room_key)
                 .child(sendTime + "")
@@ -157,17 +172,17 @@ public class ChatRoomActivity extends BaseActivity {
             // 일단 초기화
             ph.initProfile();
             if (position > 0) {
-                ChatModel cmPre = arrayList.get(position-1);
+                ChatModel cmPre = arrayList.get(position - 1);
                 ChatModel cmCur = arrayList.get(position);
-                Log.i("CHAT", "cmPre.getSender():"+cmPre.getSender());
-                Log.i("CHAT", "cmCur.getSender():"+cmCur.getSender());
-                Log.i("CHAT", "getNickName():"+getNickName());
-                if(cmPre.getSender().equals(cmCur.getSender())){
+                Log.i("CHAT", "cmPre.getSender():" + cmPre.getSender());
+                Log.i("CHAT", "cmCur.getSender():" + cmCur.getSender());
+                Log.i("CHAT", "getNickName():" + getNickName());
+                if (cmPre.getSender().equals(cmCur.getSender())) {
                     // 이전과 동일한 사람이 보낸것이면
-                    if(cmCur.getSender().equals(getNickName())){
+                    if (cmCur.getSender().equals(getNickName())) {
                         Log.i("CHAT", "나 숨겨");
                         ph.hideProfile(1);
-                    }else{
+                    } else {
                         Log.i("CHAT", "너 숨겨");
                         ph.hideProfile(2);
                     }

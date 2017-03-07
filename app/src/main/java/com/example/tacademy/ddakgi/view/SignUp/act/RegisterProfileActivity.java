@@ -16,7 +16,6 @@ import com.example.tacademy.ddakgi.base.HomeActivity;
 import com.example.tacademy.ddakgi.data.LifeStyleLogin.ReqLifeStyleLogin;
 import com.example.tacademy.ddakgi.data.NetSSL;
 import com.example.tacademy.ddakgi.data.RegisterRoom.ResStringString;
-import com.example.tacademy.ddakgi.util.ImageProc;
 import com.example.tacademy.ddakgi.util.StorageHelper;
 import com.example.tacademy.ddakgi.util.U;
 import com.miguelbcr.ui.rx_paparazzo.RxPaparazzo;
@@ -86,7 +85,7 @@ public class RegisterProfileActivity extends BaseActivity {
         kakaoNickname = getIntent().getStringExtra("kakaoNickname");
 
         // 이전 화면에서 전달받은 정보들을 현재 layout에 넣어준다.
-        ImageProc.getInstance().drawImage(kakaoProfile, userProfile);
+        Picasso.with(this).load(kakaoProfile).fit().into(userProfile);
         userNickname.setText(kakaoNickname);
 
         infoCheckBox = (CheckBox) findViewById(R.id.infoCheckBox);

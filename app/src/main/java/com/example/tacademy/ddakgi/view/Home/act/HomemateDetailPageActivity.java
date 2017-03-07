@@ -86,10 +86,10 @@ public class HomemateDetailPageActivity extends BaseActivity {
     }
 
     public void setData(DetailPosting detailPosting) {
-        if (String.valueOf(detailPosting.getHeart_state()) != null) {
-            heart_state.setImageResource(R.mipmap.heart_on_btn);
-        } else {
+        if (detailPosting.getHeart_state()==0) {
             heart_state.setImageResource(R.mipmap.heart_off_btn);
+        } else {
+            heart_state.setImageResource(R.mipmap.heart_on_btn);
         }
         Picasso.with(this)
                 .load(detailPosting.getRoommate_image().get(0))

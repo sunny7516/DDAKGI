@@ -255,7 +255,7 @@ public class HomeRoomDetailPageActivity extends BaseActivity {
                 System.currentTimeMillis(),
                 you_profile
         );
-        Log.i("CHAT", getUid() + "/" + you_id);
+        Log.i("CHAT", detailPosting.getMid() + "/" + getUid() + "/" + you_id);
 
         // 입력 준비
         final String key = databaseReference.child("chatting").child("rooms").push().getKey();
@@ -288,6 +288,7 @@ public class HomeRoomDetailPageActivity extends BaseActivity {
         Intent intent = new Intent(this, ChatRoomActivity.class);
         intent.putExtra("chatting_room_key", roomKey);
         intent.putExtra("you", detailPosting);
+        intent.putExtra("other_member_id", detailPosting.getMid());
         startActivity(intent);
     }
 }

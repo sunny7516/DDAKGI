@@ -43,6 +43,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="16dp"
                     android:text="@string/report"
+                    android:onClick="goReport"
                     android:textColor="@color/subTextColor"
                     android:textSize="13sp"
                     app:fontWeight="regular" />

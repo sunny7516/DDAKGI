@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_report"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.tacademy.ddakgi.view.Report.reportActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/writeroomIdentifyTool"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@android:color/white"
+        android:minHeight="?attr/actionBarSize">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp">
+
+            <Button
+                android:id="@+id/identifyBackBt"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginRight="12dp"
+                android:background="@mipmap/back_btn"
+                android:onClick="back" />
+
+            <io.chooco13.NotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_toRightOf="@id/identifyBackBt"
+                android:gravity="center"
+                android:text="@string/reportTool"
+                android:textColor="@color/defaultTextColor"
+                android:textSize="16sp"
+                app:fontWeight="medium" />
+
+            <io.chooco13.NotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="16dp"
+                android:text="@string/reportFinish"
+                android:textColor="@color/defaultTextColor"
+                android:textSize="13sp"
+                android:onClick="setReport"
+                app:fontWeight="regular" />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/stringColor" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/string" />
+
+        <RadioButton
+            android:id="@+id/reportReasonOne"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="32dp"
+            android:text="@string/reportOne" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/string" />
+
+        <RadioButton
+            android:id="@+id/reportReasonTwo"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="32dp"
+            android:text="@string/reportTwo" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/string" />
+
+        <RadioButton
+            android:id="@+id/reportReasonThree"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="32dp"
+            android:text="@string/reportThree" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/string" />
+
+        <RadioButton
+            android:id="@+id/reportReasonFour"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="32dp"
+            android:text="@string/reportFour" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/string" />
+
+        <RadioButton
+            android:id="@+id/reportReasonFive"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="32dp"
+            android:text="@string/reportFive" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/string" />
+        
+        <EditText
+            android:id="@+id/reportReason"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="122dp"
+            android:textSize="13sp"
+            android:gravity="top"
+            android:textColor="@color/grayTextColor"
+            android:hint="@string/reportReason"/>
+    </RadioGroup>
+</LinearLayout>

@@ -73,6 +73,7 @@ public class ChatTab extends Fragment {
                         // 채팅방으로 이동
                         Intent intent = new Intent(getContext(), ChatRoomActivity.class);
                         intent.putExtra("chatting_room_key", model.getChatting_channel());
+                        //intent.putExtra("other_member_id", model.getMid());
                         // 채팅방으로 갈 때 상대방 정보에 대한 class를 담는게 정석이고,
                         // 여기서는 코드를 많이 변경하지 않는 범위에서 Post를 재활용하는 측면으로 구성된다.
                         //intent.putExtra("you", new DetailPosting());

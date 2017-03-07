@@ -92,7 +92,8 @@
         <activity android:name=".view.SignUp.act.RegisterLifeStyleActivity" />
         <activity android:name=".view.SignUp.act.TermsActivity" />
         <activity android:name=".view.My.ModifyProfileActivity" />
-        <activity android:name=".view.Chat.ChatRoomActivity"></activity>
+        <activity android:name=".view.Chat.ChatRoomActivity" />
+        <activity android:name=".view.Report.reportActivity"></activity>
     </application>
 
 </manifest>

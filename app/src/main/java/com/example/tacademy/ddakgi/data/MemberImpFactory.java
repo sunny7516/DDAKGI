@@ -10,6 +10,7 @@ import com.example.tacademy.ddakgi.data.Member.ReqUpdateMemberInfo;
 import com.example.tacademy.ddakgi.data.Member.ResMember;
 import com.example.tacademy.ddakgi.data.RegisterRoom.ReqRegisterRoom;
 import com.example.tacademy.ddakgi.data.RegisterRoom.ResStringString;
+import com.example.tacademy.ddakgi.data.Report.ReqReport;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -78,18 +79,18 @@ public interface MemberImpFactory {
 
     // 15. 게시글 목록보기 (all)
     @GET("postings/list/3")
-    Call<ResHomePosting> resAllPosting();
-                                    /*@Query("location1") String location1,
-                                      @Query("location2") String location2,
-                                      @Query("location3") String location3,
-                                      @Query("roomtype1") int roomtype1,
-                                      @Query("roomtype2") int roomtype2,
-                                      @Query("roomtype3") int roomtype3,
-                                      @Query("roomtype4") int roomtype4,
-                                      @Query("roomtype5") int roomtype5,
-                                      @Query("deposit") int deposit,
-                                      @Query("rent") int rent,
-                                      @Query("available_date") String available_date);*/
+    Call<ResHomePosting> resAllPosting(
+            @Query("location1") String location1,
+            @Query("location2") String location2,
+            @Query("location3") String location3,
+            @Query("roomtype1") int roomtype1,
+            @Query("roomtype2") int roomtype2,
+            @Query("roomtype3") int roomtype3,
+            @Query("roomtype4") int roomtype4,
+            @Query("roomtype5") int roomtype5,
+            @Query("deposit") int deposit,
+            @Query("rent") int rent,
+            @Query("available_date") String available_date);
 
     // 16. 게시글 목록보기(room/mate)
     @GET("postings/listroom/{roomming}")
@@ -109,4 +110,8 @@ public interface MemberImpFactory {
     // 17. 게시글 상세페이지 조회하기
     @GET("postings/detail/{roommate_id}/125")
     Call<ResDetailPosting> resDetailPosting(@Path("roommate_id") int roommate_id);
+
+    // 22. 신고하기
+    @POST("report/3")
+    Call<ResStringString> resReport(@Body ReqReport reqReport);
 }
