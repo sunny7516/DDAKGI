@@ -26,16 +26,17 @@ import com.example.tacademy.ddakgi.data.NetSSL;
 import com.example.tacademy.ddakgi.data.Ottobus;
 import com.example.tacademy.ddakgi.view.Filter.FilterActivity;
 import com.example.tacademy.ddakgi.view.Search.act.SearchActivity;
-import com.example.tacademy.ddakgi.view.SignUp.act.SignUpActivity;
 import com.squareup.otto.Subscribe;
 
-import cn.pedant.SweetAlert.SweetAlertDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.example.tacademy.ddakgi.R.id.gosearchBt;
 
+/**
+ * 홈화면 > all/room/mate 타임라인 보여줌
+ */
 public class HomeTab extends Fragment {
     private boolean activityStartup = true;
 
@@ -46,7 +47,6 @@ public class HomeTab extends Fragment {
     EditText searchEditText;
     ImageView search_close_btn;
     ImageView search_icon;
-    SweetAlertDialog alert;
 
     // all/room/mate 버튼
     io.chooco13.NotoTextView all;
@@ -72,9 +72,6 @@ public class HomeTab extends Fragment {
         }
 
         AllPostingSet();
-
-        // 홈화면 유입 시 로그인 유도 팝업
-        letLogin();
 
         // SearchView Style ========================================================================
         searchView = (SearchView) view.findViewById(R.id.searchView);
@@ -128,9 +125,12 @@ public class HomeTab extends Fragment {
         room.setOnClickListener(clickBtListener);
         mate.setOnClickListener(clickBtListener);
 
-        // Inflate the layout for this fragment
+        // 화면 구성 세팅..
         recyclerviewHomeTab = (RecyclerView) view.findViewById(R.id.recyclerviewHomeTab);
-
+        // 리사이클러뷰 위로 뭔가가 있어서 자동으로 올라가서 가려지면
+        // 이것을 넣어서 현재 위치로 유지시킨다.
+        recyclerviewHomeTab.setFocusable(false);
+        // 레이아웃 세팅
         linearLayoutManager = new LinearLayoutManager(this.getContext());
         linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
         recyclerviewHomeTab.setLayoutManager(linearLayoutManager);
@@ -245,29 +245,4 @@ public class HomeTab extends Fragment {
             }
         }
     };
-
-    public static boolean isLogin = true;
-
-    // 로그인 유도 팝업 띄우기
-    public void letLogin() {
-        if (!isLogin) {
-            // 로그인 상태가 아니면
-            alert = new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
-                    .setContentText("유용한 정보를 확인하기 위해서 로그인을 해주세요!")
-                    .setConfirmText("로그인")
-                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                        @Override
-                        public void onClick(SweetAlertDialog sweetAlertDialog) {
-                            alert.dismissWithAnimation();
-                            // 로그인 화면으로
-                            Intent intent = new Intent(getContext(), SignUpActivity.class);
-                            startActivity(intent);
-                        }
-                    });
-            alert.setCancelable(false);
-            alert.show();
-        } else {
-            // 자동 로그인 상태이면
-        }
-    }
 }

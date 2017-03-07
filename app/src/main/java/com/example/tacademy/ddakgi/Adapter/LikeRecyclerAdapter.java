@@ -80,7 +80,6 @@ public class LikeRecyclerAdapter extends RecyclerView.Adapter<LikeRecyclerAdapte
         LinearLayout linear;
 
         TextView loginShadow;
-        io.chooco13.NotoTextView loginBeforeText;
         io.chooco13.NotoTextView deleteBt;
 
         public ViewHolder(View itemView) {

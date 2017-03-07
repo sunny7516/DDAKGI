@@ -16,6 +16,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+/**
+ * 채팅 목록
+ */
 
 public class ChatTab extends Fragment {
     RecyclerView chat_channel_recyclerView;
@@ -59,7 +62,7 @@ public class ChatTab extends Fragment {
                 query
         ) {
             @Override
-            protected void populateViewHolder(ChatChannelViewHolder viewHolder, ChatChannelModel model, int position) {
+            protected void populateViewHolder(ChatChannelViewHolder viewHolder, final ChatChannelModel model, int position) {
                 // 1. position -> 데이터 획득 (참조 획득)
                 final DatabaseReference databaseReference = getRef(position);
                 // 1. 채팅방 키 획득 작성 실습
@@ -72,13 +75,15 @@ public class ChatTab extends Fragment {
                         intent.putExtra("chatting_room_key", model.getChatting_channel());
                         // 채팅방으로 갈 때 상대방 정보에 대한 class를 담는게 정석이고,
                         // 여기서는 코드를 많이 변경하지 않는 범위에서 Post를 재활용하는 측면으로 구성된다.
-                        // intent.putExtra("you", new Post("", "", model.getUid(), "quest"));
+                        //intent.putExtra("you", new DetailPosting());
                         startActivity(intent);
                     }
                 });
                 viewHolder.bindToPost(getContext(), model);
             }
         };
+        chat_channel_recyclerView.setAdapter( firebaseRecyclerAdapter );
+
         return view;
     }
 

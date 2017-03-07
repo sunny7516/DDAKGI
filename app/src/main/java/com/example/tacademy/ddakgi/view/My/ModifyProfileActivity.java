@@ -79,7 +79,6 @@ public class ModifyProfileActivity extends BaseActivity {
                 Log.i("RF:MEModify", "ERR" + t.getMessage());
             }
         });
-
     }
 
     // 프로필 사진 재선택 ==============================================================================

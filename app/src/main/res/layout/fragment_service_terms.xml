@@ -50,7 +50,7 @@
             android:textColor="@color/subTextColor"
             android:textSize="13sp"
             app:fontWeight="regular" />
-
+<!--
         <RelativeLayout
             android:id="@+id/serviceBt"
             android:onClick="serviceAgree"
@@ -68,6 +68,6 @@
                 android:textColor="@color/textWhiteColor"
                 android:textSize="13sp"
                 app:fontWeight="medium" />
-        </RelativeLayout>
+        </RelativeLayout>-->
     </LinearLayout>
 </ScrollView>

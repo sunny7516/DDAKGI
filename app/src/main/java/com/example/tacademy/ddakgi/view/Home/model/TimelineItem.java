@@ -1,39 +1,65 @@
 package com.example.tacademy.ddakgi.view.Home.model;
 
-import android.widget.Button;
 import android.widget.ImageButton;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * HomeTab 타임라인의 글에 들어갈 구성
  */
 
-public class TimelineItem {
+public class TimelineItem implements Serializable {
 
     int profileImg;
     String nickName;
-    Button modifyBt;
-    Button deleteBt;
-    int roomImg;
-    String age;
-    String price;
-    String location;
     String date;
+    int roomImg;
+    String title;
+    String price;
+    String age;
+    String location;
     ImageButton like;
     String likeNum;
 
     public TimelineItem() {
     }
 
-    public TimelineItem(int roomImg) {
-        //this.profileImg = profileImg;
-        //this.nickName = nickName;
+    public TimelineItem(int profileImg, String nickName, String date, int roomImg, String title, String price, String age, String location, ImageButton like, String likeNum) {
+        this.profileImg = profileImg;
+        this.nickName = nickName;
+        this.date = date;
         this.roomImg = roomImg;
-        //this.age = age;
-        //this.price = price;
-        //this.location = location;
-        //this.date = date;
-        //this.like = like;
-        //this.likeNum = likeNum;
+        this.title = title;
+        this.price = price;
+        this.age = age;
+        this.location = location;
+        this.like = like;
+        this.likeNum = likeNum;
+    }
+
+    public Map<String, Object> toPostMap() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("profileImg", profileImg);
+        map.put("nickName", nickName);
+        map.put("date", date);
+        map.put("roomImg", roomImg);
+        map.put("title", title);
+        map.put("price", price);
+        map.put("age", age);
+        map.put("location", location);
+        map.put("like", like);
+        map.put("likeNum", likeNum);
+        return map;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getProfileImg() {
@@ -50,22 +76,6 @@ public class TimelineItem {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
-    }
-
-    public Button getModifyBt() {
-        return modifyBt;
-    }
-
-    public void setModifyBt(Button modifyBt) {
-        this.modifyBt = modifyBt;
-    }
-
-    public Button getDeleteBt() {
-        return deleteBt;
-    }
-
-    public void setDeleteBt(Button deleteBt) {
-        this.deleteBt = deleteBt;
     }
 
     public int getRoomImg() {

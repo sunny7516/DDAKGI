@@ -56,9 +56,9 @@ public class ServiceFrag extends Fragment {
         serviceCheckBox = (CheckBox) registerView.findViewById(R.id.serviceCheckBox);
 
         serviceText = (NotoTextView) view.findViewById(R.id.serviceText);
-        serviceBt = (RelativeLayout) view.findViewById(R.id.serviceBt);
+        /*serviceBt = (RelativeLayout) view.findViewById(R.id.serviceBt);
         serviceBt.setOnClickListener(ServiceBtClickListener);
-
+*/
         serviceText.setText("제 1 조 목적\n" +
                 "이 약관은 딱지(이하 “회사”라 함)가 운영하는 모바일 어플리케이션에서 제공하는 서비스 접속과 서비스 이용에 관한 권리 및 의무와 책임사항, 사용자에 의해서 업로드 및 다운로드 되어 표시되는 모든 정보와 기타 필요한 사항을 규정하는 것을 목적으로 합니다.\n" +
                 "\n" +

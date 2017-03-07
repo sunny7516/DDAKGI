@@ -1,5 +1,6 @@
 package com.example.tacademy.ddakgi.view.Setting;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,12 +10,17 @@ import android.widget.Toast;
 
 import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.base.BaseActivity;
+import com.example.tacademy.ddakgi.data.Kakao.ResKaKaoLogout;
+import com.example.tacademy.ddakgi.data.NetSSL;
+import com.example.tacademy.ddakgi.util.StorageHelper;
+import com.example.tacademy.ddakgi.view.SplashIntro.MainActivity;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
-
-import static com.example.tacademy.ddakgi.view.Home.frag.HomeTab.isLogin;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SettingActivity extends BaseActivity {
 
@@ -63,17 +69,38 @@ public class SettingActivity extends BaseActivity {
     }
 
     public void goLogout() {
-        // 로그인 유도 팝업창 다시 뜨게하는 변수
-        isLogin = false;
-
         UserManagement.requestLogout(new LogoutResponseCallback() {
             @Override
             public void onCompleteLogout() {
                 Log.i("Logout", "logout!");
-                // 저장된 로그인 정보도 모두 삭제
+                // 서버에 저장된 로그인 정보도 모두 삭제
+                LogoutDb();
+                // 자동 로그인 삭제
+                StorageHelper.getInstance().setBoolean(getApplicationContext(), "AUTOLOGIN", false);
+
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
             }
         });
         Toast.makeText(this, "로그아웃이 완료되었습니다", Toast.LENGTH_SHORT).show();
+    }
+
+    public void LogoutDb(){
+
+        Call<ResKaKaoLogout> resKaKaoLogout = NetSSL.getInstance().getMemberImpFactory().resKaKaoLogout();
+        resKaKaoLogout.enqueue(new Callback<ResKaKaoLogout>() {
+            @Override
+            public void onResponse(Call<ResKaKaoLogout> call, Response<ResKaKaoLogout> response) {
+                if(response.body().getResult() != null){
+                    Log.i("RF:kakaoLogout", "SUCCESS" + response.body().getResult());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResKaKaoLogout> call, Throwable t) {
+                Log.i("RF:kakaoLogout", "ERR" + t.getMessage());
+            }
+        });
     }
 
     // 회원 탈퇴 팝업 띄우기

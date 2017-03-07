@@ -29,6 +29,7 @@
             android:id="@+id/gosearchBt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
             android:layout_alignLeft="@+id/searchView"
             android:layout_marginRight="10dp"
             android:layout_toLeftOf="@+id/filter_menu"

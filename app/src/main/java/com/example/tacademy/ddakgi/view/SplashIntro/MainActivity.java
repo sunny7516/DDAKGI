@@ -21,12 +21,14 @@ import com.example.tacademy.ddakgi.data.IntroTimeline.PostingModel;
 import com.example.tacademy.ddakgi.data.IntroTimeline.ResPosting;
 import com.example.tacademy.ddakgi.data.NetSSL;
 import com.example.tacademy.ddakgi.data.Ottobus;
-import com.example.tacademy.ddakgi.view.Home.act.HomeRoomDetailPageActivity;
+import com.example.tacademy.ddakgi.util.StorageHelper;
+import com.example.tacademy.ddakgi.view.SignUp.act.SignUpActivity;
 import com.squareup.otto.Subscribe;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.chooco13.NotoTextView;
 import retrofit2.Call;
@@ -51,7 +53,15 @@ public class MainActivity extends AppCompatActivity {
             ottoflag = true;
         }
 
-        getIntroData();
+        // 자동 로그인 상태이면 홈화면으로 바로 이동
+        if (StorageHelper.getInstance().getBoolean(this, "AUTOLOGIN") == true) {
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+            this.finish();
+        } else {
+            // 자동 로그인 아니면 인트로
+            getIntroData();
+        }
 
         // intent 애니메이션
         overridePendingTransition(R.anim.act_slide_in_from_bottom, R.anim.act_slide_out_to_top);
@@ -129,12 +139,12 @@ public class MainActivity extends AppCompatActivity {
             NotoTextView introHeartNum = (NotoTextView) view.findViewById(R.id.introHeartNum);
             NotoTextView introPrice = (NotoTextView) view.findViewById(R.id.introPrice);
             ImageView introRoomImage = (ImageView) view.findViewById(R.id.introRoomImage);
-            CircleImageView introProfile = (CircleImageView)view.findViewById(R.id.introProfile);
+            CircleImageView introProfile = (CircleImageView) view.findViewById(R.id.introProfile);
 
             introTitle.setText(items.getResult().get(position).getTitle());
             introLocation.setText(items.getResult().get(position).getAddress());
             introNickname.setText(items.getResult().get(position).getNickname());
-            introDate.setText(items.getResult().get(position).getCtime());
+            introDate.setText(items.getResult().get(position).getCtime().split("T")[0]);
             introHeartNum.setText(String.valueOf(items.getResult().get(position).getHeart_count()));
 
             // deposit 정보나 rent정보가 0이면 가격정보를 나타내지 않는다.
@@ -146,8 +156,8 @@ public class MainActivity extends AppCompatActivity {
                         + String.valueOf(items.getResult().get(position).getRent()));
             }
             // 사진이 null이 아니면 적용시킨다.
-            if (items.getResult().get(position).getRoommate_image()==null) {
-            }else{
+            if (items.getResult().get(position).getRoommate_image() == null) {
+            } else {
                 Picasso
                         .with(getApplicationContext())
                         .load(items.getResult().get(position).getRoommate_image()[0])
@@ -155,9 +165,9 @@ public class MainActivity extends AppCompatActivity {
                         .into(introRoomImage);
             }
             // 프로필 사진 적용하기
-            if(items.getResult().get(position).getThumbnail_image()== null){
+            if (items.getResult().get(position).getThumbnail_image() == null) {
                 introProfile.setImageResource(R.mipmap.profile);
-            }else{
+            } else {
                 Picasso
                         .with(getApplicationContext())
                         .load(items.getResult().get(position).getThumbnail_image())
@@ -171,8 +181,26 @@ public class MainActivity extends AppCompatActivity {
             view.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-                                            Intent detailPage = new Intent(v.getContext(), HomeRoomDetailPageActivity.class);
-                                            v.getContext().startActivity(detailPage);
+                                            final SweetAlertDialog alertDialog = new SweetAlertDialog(MainActivity.this);
+                                            alertDialog.setContentText("로그인을 해주세요!");
+                                            alertDialog.setConfirmText("로그인하기");
+                                            alertDialog.setCancelText("취소");
+                                            alertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                                @Override
+                                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                    sweetAlertDialog.dismissWithAnimation();
+                                                    // 로그인화면으로 이동
+                                                    Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+                                                    startActivity(intent);
+                                                    finish();
+                                                }
+                                            }).setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                                @Override
+                                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                    sweetAlertDialog.dismissWithAnimation();
+                                                }
+                                            });
+                                            alertDialog.show();
                                         }
                                     }
             );
@@ -216,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Main화면으로 이동하는 onClick함수(기본 HomeTab으로 이동)
     public void goHome(View view) {
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
 
         this.finish();

@@ -33,6 +33,7 @@
                     android:onClick="back" />
 
                 <io.chooco13.NotoTextView
+                    android:id="@+id/DetailToolbarNickname"
                     android:layout_width="wrap_content"
                     android:layout_height="24dp"
                     android:layout_toRightOf="@id/detailPageBackBt"
@@ -55,23 +56,24 @@
                 android:layout_height="300dp"
                 android:scaleType="fitXY"
                 app:srcCompat="@drawable/testroom0" />
+            <!--
+                        <Button
+                            android:id="@+id/room_contract_ic"
+                            android:layout_width="60dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="7dp"
+                            android:background="@mipmap/room_contract_ic" />
 
-            <Button
-                android:id="@+id/room_contract_ic"
-                android:layout_width="60dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="7dp"
-                android:background="@mipmap/room_contract_ic" />
+                        <Button
+                            android:layout_width="60dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_toRightOf="@+id/room_contract_ic"
+                            android:background="@mipmap/identify_icon" />-->
 
-            <Button
-                android:layout_width="60dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="7dp"
-                android:layout_toRightOf="@+id/room_contract_ic"
-                android:background="@mipmap/identify_icon" />
-
-            <Button
+            <ImageView
+                android:id="@+id/roomHeart_state"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginRight="4dp"
@@ -106,24 +108,15 @@
                 android:layout_marginLeft="16dp"
                 android:orientation="vertical">
 
-                <io.chooco13.NotoTextView
-                    android:id="@+id/detailLoginBefore"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/DetailberforeLogin"
-                    android:textColor="@color/grayTextColor"
-                    android:textSize="10sp"
-                    app:fontWeight="demilight" />
 
                 <io.chooco13.NotoTextView
-                    android:layout_marginTop="13dp"
                     android:id="@+id/percentTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="13dp"
                     android:text="@string/percent"
                     android:textColor="@color/grayTextColor"
                     android:textSize="10sp"
-                    android:visibility="gone"
                     app:fontWeight="demilight" />
 
                 <io.chooco13.NotoTextView
@@ -131,48 +124,38 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/percentTitle"
-                    android:layout_marginTop="7dp"
                     android:text="percentNum%"
                     android:textColor="@color/defaultTextColor"
                     android:textSize="16sp"
-                    android:visibility="gone"
                     app:fontWeight="medium" />
 
                 <LinearLayout
-                    android:layout_marginTop="6dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/percent"
+                    android:layout_marginTop="6dp"
                     android:orientation="horizontal">
 
                     <io.chooco13.NotoTextView
+                        android:id="@+id/detailNicknameAge"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:text="NickName"
-                        android:textColor="@color/subTextColor"
-                        android:textSize="13sp"
-                        app:fontWeight="regular" />
-
-                    <io.chooco13.NotoTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:text="Age"
+                        android:layout_marginBottom="13dp"
+                        android:text="NickName / Age"
                         android:textColor="@color/subTextColor"
                         android:textSize="13sp"
                         app:fontWeight="regular" />
                 </LinearLayout>
             </RelativeLayout>
 
-            <ImageButton
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/detailProfile"
                 android:layout_width="38dp"
                 android:layout_height="38dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="16dp"
-                android:layout_marginTop="18dp"
-                android:background="@mipmap/profile" />
+                android:layout_marginTop="18dp" />
         </RelativeLayout>
 
         <TextView
@@ -186,7 +169,6 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="11dp"
-            android:onClick="onChatRequest"
             android:gravity="center">
 
             <io.chooco13.NotoTextView
@@ -196,17 +178,17 @@
                 android:text="@string/detailChatHint"
                 android:textColor="@color/textpointColor"
                 android:textSize="13sp"
-                android:onClick="onChatRequest"
                 app:fontWeight="medium" />
 
             <ImageButton
+                android:id="@+id/chatBt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginTop="11dp"
-                android:onClick="onChatRequest"
-                android:background="@mipmap/go_chat_btn"/>
+                android:background="@mipmap/go_chat_btn"
+                android:onClick="onChatRequest" />
         </RelativeLayout>
 
         <TextView
@@ -239,6 +221,7 @@
                 android:background="@color/stringColor" />
 
             <io.chooco13.NotoTextView
+                android:id="@+id/detailPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -249,6 +232,7 @@
                 app:fontWeight="regular" />
 
             <io.chooco13.NotoTextView
+                android:id="@+id/detailLocate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -258,6 +242,7 @@
                 app:fontWeight="regular" />
 
             <io.chooco13.NotoTextView
+                android:id="@+id/detailRoomType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -267,6 +252,7 @@
                 app:fontWeight="regular" />
 
             <io.chooco13.NotoTextView
+                android:id="@+id/detailPay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -276,6 +262,7 @@
                 app:fontWeight="regular" />
 
             <io.chooco13.NotoTextView
+                android:id="@+id/detailOptions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -285,6 +272,7 @@
                 app:fontWeight="regular" />
 
             <io.chooco13.NotoTextView
+                android:id="@+id/detailRoomHeight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -294,6 +282,7 @@
                 app:fontWeight="regular" />
 
             <io.chooco13.NotoTextView
+                android:id="@+id/detailRoomSize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -303,6 +292,7 @@
                 app:fontWeight="regular" />
 
             <io.chooco13.NotoTextView
+                android:id="@+id/detailPrefDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -344,6 +334,7 @@
                 android:background="@color/stringColor" />
 
             <io.chooco13.NotoTextView
+                android:id="@+id/detailDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
@@ -362,6 +353,6 @@
         <include
             layout="@layout/lifestyle_qna_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </ScrollView>

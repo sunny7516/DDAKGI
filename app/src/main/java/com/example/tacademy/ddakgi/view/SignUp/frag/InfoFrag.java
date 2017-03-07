@@ -58,8 +58,8 @@ public class InfoFrag extends Fragment {
 
         View registerView = inflater.inflate(R.layout.activity_register_profile, container, false);
         infoCheckBox = (CheckBox) registerView.findViewById(R.id.infoCheckBox);
-        infoBt = (RelativeLayout) view.findViewById(R.id.infoBt);
-        infoBt.setOnClickListener(InfoBtClicklistener);
+        /*infoBt = (RelativeLayout) view.findViewById(R.id.infoBt);
+        infoBt.setOnClickListener(InfoBtClicklistener);*/
 
         NotoTextView terms = (NotoTextView) view.findViewById(R.id.infoText);
         terms.setText("<딱지>은(는) 개인정보보호법에 따라 이용자의 개인정보 보호 및 권익을 보호하고 개인정보와 관련한 이용자의 고충을 원활하게 처리할 수 있도록 다음과 같은 처리방침을 두고 있습니다.\n" +

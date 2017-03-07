@@ -12,7 +12,9 @@ import android.widget.Toast;
 
 import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.base.BaseActivity;
+import com.example.tacademy.ddakgi.base.HomeActivity;
 import com.example.tacademy.ddakgi.util.ImageProc;
+import com.example.tacademy.ddakgi.util.StorageHelper;
 import com.miguelbcr.ui.rx_paparazzo.RxPaparazzo;
 import com.miguelbcr.ui.rx_paparazzo.entities.size.ScreenSize;
 import com.squareup.picasso.Picasso;
@@ -23,8 +25,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import io.chooco13.NotoTextView;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-
-import static com.example.tacademy.ddakgi.view.Home.frag.HomeTab.isLogin;
 
 /**
  * sns 연동 가입 후 프로필 등록 화면
@@ -246,13 +246,18 @@ public class RegisterProfileActivity extends BaseActivity {
             return;
         } else
             // 모두 답변했으면
-            // 홈탭 로그인 유도 팝업 더이상 안뜨게 설정
-            isLogin = true;
-        // 로딩화면 보여주고 회원가입 화면 닫기
-        showProgress("회원 정보를 등록중입니다");
+            // 로딩화면 보여주고 회원가입 화면 닫기
+            showProgress("회원 정보를 등록중입니다");
+
+        // 자동로그인을 위해서 Storagehelper 이용
+        StorageHelper.getInstance().setBoolean(this, "AUTOLOGIN", true);
+
         // 회원가입 정보 db로 전송
         hideProgress();
-        finish();
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+
+        this.finish();
     }
 
     //모든 답변했는지 확인

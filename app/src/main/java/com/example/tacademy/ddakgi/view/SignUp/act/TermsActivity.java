@@ -3,15 +3,15 @@ package com.example.tacademy.ddakgi.view.SignUp.act;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 
 import com.example.tacademy.ddakgi.R;
+import com.example.tacademy.ddakgi.base.BaseActivity;
 import com.example.tacademy.ddakgi.view.SignUp.frag.InfoFrag;
 import com.example.tacademy.ddakgi.view.SignUp.frag.ServiceFrag;
 
 import static com.example.tacademy.ddakgi.view.SignUp.act.RegisterProfileActivity.termFragment;
 
-public class TermsActivity extends AppCompatActivity {
+public class TermsActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

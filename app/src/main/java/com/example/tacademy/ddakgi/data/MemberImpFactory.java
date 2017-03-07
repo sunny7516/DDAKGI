@@ -1,8 +1,10 @@
 package com.example.tacademy.ddakgi.data;
 
+import com.example.tacademy.ddakgi.data.DetailPost.ResDetailPosting;
 import com.example.tacademy.ddakgi.data.HomeTimeline.ResHomePosting;
 import com.example.tacademy.ddakgi.data.IntroTimeline.ResPosting;
 import com.example.tacademy.ddakgi.data.Kakao.ResKaKaoLogin;
+import com.example.tacademy.ddakgi.data.Kakao.ResKaKaoLogout;
 import com.example.tacademy.ddakgi.data.Member.ReqUpdateMemberInfo;
 import com.example.tacademy.ddakgi.data.Member.ResMember;
 import com.example.tacademy.ddakgi.data.RegisterRoom.ReqRegisterRoom;
@@ -49,6 +51,10 @@ public interface MemberImpFactory {
     @GET("auth/kakao/token")
     Call<ResKaKaoLogin> resKaKaoLogin(@Query("access_token") String access_token);
 
+    // 3. 로그아웃
+    @GET("auth/logout")
+    Call<ResKaKaoLogout> resKaKaoLogout();
+
     // 5. 회원 정보 조회
     @GET("members/3")
     Call<ResMember> resMember();
@@ -81,7 +87,7 @@ public interface MemberImpFactory {
                                       @Query("available_date") String available_date);*/
 
     // 16. 게시글 목록보기(room/mate)
-    @GET("postings/list/{roomming}/3")
+    @GET("postings/listroom/{roomming}")
     Call<ResHomePosting> resRoomMatePosting(@Path("roomming") int roomming);
                                     /*@Query("location1") String location1,
                                       @Query("location2") String location2,
@@ -94,4 +100,8 @@ public interface MemberImpFactory {
                                       @Query("deposit") int deposit,
                                       @Query("rent") int rent,
                                       @Query("available_date") String available_date);*/
+
+    // 17. 게시글 상세페이지 조회하기
+    @GET("postings/detail/{roommate_id}/123")
+    Call<ResDetailPosting> resDetailPosting(@Path("roommate_id") int roommate_id);
 }

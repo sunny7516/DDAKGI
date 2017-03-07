@@ -3,14 +3,11 @@ package com.example.tacademy.ddakgi.base;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.tacademy.ddakgi.util.StorageHelper;
 import com.google.firebase.auth.FirebaseAuth;
-
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by Tacademy on 2017-02-17.
@@ -49,49 +46,27 @@ public class BaseActivity extends AppCompatActivity {
         finish();
     }
 
+    private long backKeyPressedTime = 0;
+    Toast toast;
+    // back버튼을 2초 이내에 누르면 어플을 종료시킨다.
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        switch (keyCode) {
-            case KeyEvent.KEYCODE_BACK:
-                Toast.makeText(this, "뒤로가기 버튼 눌림", Toast.LENGTH_SHORT).show();
-
-                final SweetAlertDialog alertDialog = new SweetAlertDialog(this);
-                alertDialog.setTitle("어플리케이션 종료");
-                alertDialog.setContentText("딱지를 종료하시겠습니까?");
-                alertDialog.setConfirmText("그만 할래요");
-                alertDialog.setCancelText("뒤로 갈래요");
-                alertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        moveTaskToBack(true);
-                        finish();
-                        android.os.Process.killProcess(android.os.Process.myPid());
-                    }
-                }).setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        sweetAlertDialog.dismissWithAnimation();
-                        finish();
-                    }
-                });
-                alertDialog.show();
+    public void onBackPressed() {
+        if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
+            backKeyPressedTime = System.currentTimeMillis();
+            finish();
+            //toast = Toast.makeText(getApplicationContext(), "\'뒤로\'버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT);
+            //toast.show();
+            return;
         }
-        return super.onKeyDown(keyCode, event);
+        if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
+            this.finish();
+            toast.cancel();
+        }
     }
 
-    /*
-
-        // 내 아이디
-        public String getUid() {
-            if (FirebaseAuth.getInstance().getCurrentUser() == null) return null;
-            return FirebaseAuth.getInstance().getCurrentUser().getUid();
-        }
-
-    */
     // 나의 아이디
-    public String getUid()
-    {
-        if(FirebaseAuth.getInstance().getCurrentUser() == null ) return null;
+    public String getUid() {
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) return null;
         return FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 

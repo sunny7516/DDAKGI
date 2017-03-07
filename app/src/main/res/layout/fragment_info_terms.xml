@@ -50,24 +50,24 @@
             android:textColor="@color/subTextColor"
             android:textSize="13sp"
             app:fontWeight="regular" />
+        <!--
+                <RelativeLayout
+                    android:id="@+id/infoBt"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@color/subTextColor"
+                    android:onClick="infoAgree">
 
-        <RelativeLayout
-            android:id="@+id/infoBt"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@color/subTextColor"
-            android:onClick="infoAgree">
-
-            <io.chooco13.NotoTextView
-                android:id="@+id/infoBtText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="@string/InfoAgree"
-                android:textColor="@color/textWhiteColor"
-                android:textSize="13sp"
-                app:fontWeight="medium" />
-        </RelativeLayout>
+                    <io.chooco13.NotoTextView
+                        android:id="@+id/infoBtText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/InfoAgree"
+                        android:textColor="@color/textWhiteColor"
+                        android:textSize="13sp"
+                        app:fontWeight="medium" />
+        </RelativeLayout>-->
     </LinearLayout>
 </ScrollView>

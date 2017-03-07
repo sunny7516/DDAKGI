@@ -14,23 +14,27 @@
         android:background="@android:color/white"
         android:minHeight="?attr/actionBarSize">
 
-            <io.chooco13.NotoTextView
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:layout_toRightOf="@id/writeroomBackBt"
-                android:gravity="center"
-                android:layout_marginLeft="30dp"
-                android:text="1:1 대화"
-                android:textColor="@color/defaultTextColor"
-                android:textSize="16sp"
-                app:fontWeight="medium" />
+        <io.chooco13.NotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_marginLeft="30dp"
+            android:layout_toRightOf="@id/writeroomBackBt"
+            android:gravity="center"
+            android:text="1:1 대화"
+            android:textColor="@color/defaultTextColor"
+            android:textSize="16sp"
+            app:fontWeight="medium" />
     </android.support.v7.widget.Toolbar>
 
-    <android.support.v7.widget.RecyclerView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/chat_channel_recyclerView"
-        tools:listitem="@layout/cell_chat_channel_layout"
-        android:scrollbars="vertical" />
+        android:layout_height="wrap_content">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/chat_channel_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            tools:listitem="@layout/cell_chat_channel_layout" />
+    </ScrollView>
 </LinearLayout>

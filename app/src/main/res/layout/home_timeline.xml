@@ -207,6 +207,7 @@
                 android:layout_marginRight="4dp"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
+                android:onClick="clickHeart"
                 app:srcCompat="@mipmap/heart_off_btn" />
 
             <io.chooco13.NotoTextView

@@ -14,6 +14,7 @@ import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.data.Kakao.ResKaKaoLogin;
 import com.example.tacademy.ddakgi.data.NetSSL;
 import com.example.tacademy.ddakgi.util.ImageProc;
+import com.example.tacademy.ddakgi.util.StorageHelper;
 import com.example.tacademy.ddakgi.view.SignUp.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -188,7 +189,9 @@ public class SignUpActivity extends KakaoLoginActivity {
             // 인증쪽에 데이터 저장
             String email = kakaoID + "@Kakao.com";
             String pwd = kakaoID + "password";
-
+            // 실서버 디비에 저장
+            registerKaKao();
+            // firebase 인증에 회원 정보 저장
             firebaseAuth.createUserWithEmailAndPassword(email, pwd)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -199,7 +202,7 @@ public class SignUpActivity extends KakaoLoginActivity {
                                 onUserSaved(email, nickname, profile);
                             } else {
                                 Log.i("auth", "실패" + task.getException().getMessage());
-                                Toast.makeText(SignUpActivity.this, "회원가입 실패:" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(SignUpActivity.this, "회원가입 실패:" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -208,6 +211,7 @@ public class SignUpActivity extends KakaoLoginActivity {
             ImageProc.getInstance().getImageLoader(this);
 
             Intent intent = new Intent(this, RegisterProfileActivity.class);
+            StorageHelper.getInstance().setString(this, "nickname", nickname);
             intent.putExtra("kakaoNickname", nickname);
             intent.putExtra("kakaoProfile", profile);
             startActivity(intent);
@@ -219,6 +223,34 @@ public class SignUpActivity extends KakaoLoginActivity {
             hideProgress();
             finish();
         }
+    }
+
+    // 회원 정보 디비에 입력
+    public void onUserSaved(String authEmail, String nickname, String profile) {
+        String token = FirebaseInstanceId.getInstance().getToken();
+
+        // 토큰이 활성화 될 때까지 못 넘어간다 -> 블럭 코드라서 앱이 먹통이 된다!
+        while (token == null) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // 회원정보 생성
+        User user = new User(authEmail, nickname, profile, FirebaseInstanceId.getInstance().getToken());
+        // 파베 디비 입력
+        databaseReference.child("users").child(getUid()).setValue(user)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                        } else {
+
+                        }
+                    }
+                });
     }
 
     public void registerKaKao() {
@@ -240,40 +272,5 @@ public class SignUpActivity extends KakaoLoginActivity {
                 Log.i("RF:KaKaoLogin", "ERROR" + t.getMessage());
             }
         });
-    }
-
-    // 회원 정보 디비에 입력
-    public void onUserSaved(String authEmail, String nickname, String profile) {
-        String token = FirebaseInstanceId.getInstance().getToken();
-        registerKaKao();
-
-        // 토큰이 활성화 될 때까지 못 넘어간다 -> 블럭 코드라서 앱이 먹통이 된다!
-        while (token == null) {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        // 회원정보 생성
-        User user = new User(authEmail, nickname, profile, FirebaseInstanceId.getInstance().getToken());
-        // 디비 입력
-        databaseReference.child("users").child(getUid()).setValue(user)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            //로그인
-                        } else {
-
-                        }
-                    }
-                });
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
     }
 }
