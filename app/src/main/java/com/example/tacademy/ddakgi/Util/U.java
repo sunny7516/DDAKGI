@@ -74,5 +74,16 @@ public class U {
     public void setChattingRoomInside(boolean chattingRoomInside) {
         isChattingRoomInside = chattingRoomInside;
     }
+
+    // 생활패턴
+    int[] lifestyleNum = new int[11];
+
+    public int[] getLifestyleNum() {
+        return lifestyleNum;
+    }
+
+    public void setLifestyleNum(int[] lifestyleNum) {
+        this.lifestyleNum = lifestyleNum;
+    }
 }
 

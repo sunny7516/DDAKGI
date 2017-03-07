@@ -95,7 +95,7 @@ public class WriteRoomActivity extends BaseActivity {
         registerRoomDeposit = (EditText) findViewById(R.id.registerRoomDeposit);        // 보증금
         registerRoomRent = (EditText) findViewById(R.id.registerRoomRent);              // 월세 전세
         registerRoomFloor = (EditText) findViewById(R.id.registerRoomFloor);            // 층수
-        prefDate = (Button) findViewById(R.id.prefDate);            // 입주 가능일
+        prefDate = (Button) findViewById(R.id.prefDate);                                // 입주 가능일
         registerRoomManageCost = (EditText) findViewById(R.id.registerRoomManageCost);  // 관리비
         registerRoomDescription = (EditText) findViewById(R.id.registerRoomDescription);//자기소개
         registerRoomExtraQueOne = (EditText) findViewById(R.id.registerRoomExtraQueOne);// 추가질문1

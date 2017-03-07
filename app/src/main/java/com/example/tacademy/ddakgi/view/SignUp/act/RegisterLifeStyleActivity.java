@@ -7,6 +7,7 @@ import android.widget.CheckedTextView;
 
 import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.base.BaseActivity;
+import com.example.tacademy.ddakgi.util.U;
 
 import io.chooco13.NotoTextView;
 
@@ -28,7 +29,7 @@ public class RegisterLifeStyleActivity extends BaseActivity {
 
     // 항목 단일 선택하는 부분
     public void styleCheck(View view) {
-        switch (view.getTag().toString()) {
+        switch (view.getTag().toString().split("/")[0]) {
             case "num1":
                 ClickedOne(view, 1);
                 break;
@@ -66,6 +67,7 @@ public class RegisterLifeStyleActivity extends BaseActivity {
     CheckedTextView clickedObject;
     CheckedTextView[] AnsObj = new CheckedTextView[11];
     Boolean[] CheckObj = new Boolean[11];
+    int[] lifestyleAnswer = new int[11];
 
     public void ClickedOne(View view, int position) {
         clickedObject = AnsObj[position];
@@ -86,6 +88,7 @@ public class RegisterLifeStyleActivity extends BaseActivity {
             clickedObject.setBackgroundColor(ContextCompat.getColor(this, R.color.clickedObjectColor));
             setTrue(position);
         }
+        lifestyleAnswer[position-1] = Integer.parseInt(view.getTag().toString().split("/")[1]);
     }
 
     // 답변한 문항 체크
@@ -107,7 +110,7 @@ public class RegisterLifeStyleActivity extends BaseActivity {
     }
 
     // 완료 버튼 이벤트
-    public void finishBt(){
+    public void finishBt() {
         // 모든 문항의 답변이 끝나면 완료 버튼을 활성화한다.
         lifestyleFinish.setTextColor(ContextCompat.getColor(this, R.color.defaultTextColor));
         lifestyleFinish.setOnClickListener(new View.OnClickListener() {
@@ -116,6 +119,7 @@ public class RegisterLifeStyleActivity extends BaseActivity {
                 // 프로필 등록화면에 설문패턴 응답이 끝났음을 알려준다.
                 isLifeStyleFinish = true;
                 // 설문패턴 DB로 저장
+                U.getInstance().setLifestyleNum(lifestyleAnswer);
                 finish();
             }
         });

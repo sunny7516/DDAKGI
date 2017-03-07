@@ -11,6 +11,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.tacademy.ddakgi.R;
+import com.example.tacademy.ddakgi.base.HomeActivity;
 import com.example.tacademy.ddakgi.data.Kakao.ResKaKaoLogin;
 import com.example.tacademy.ddakgi.data.NetSSL;
 import com.example.tacademy.ddakgi.util.ImageProc;
@@ -181,16 +182,16 @@ public class SignUpActivity extends KakaoLoginActivity {
                     Toast.LENGTH_SHORT);
             return;
         } else {
-            // 로그인 유도 팝업 뜨지 않게하는 변수
-
             // 진행 프로그레스바
             showProgress("프로필 등록 화면으로 이동 중");
 
             // 인증쪽에 데이터 저장
             String email = kakaoID + "@Kakao.com";
             String pwd = kakaoID + "password";
+
             // 실서버 디비에 저장
             registerKaKao();
+
             // firebase 인증에 회원 정보 저장
             firebaseAuth.createUserWithEmailAndPassword(email, pwd)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -262,6 +263,12 @@ public class SignUpActivity extends KakaoLoginActivity {
                 if (response.body().getResult() != null) {
                     Log.i("RF:KaKaoLogin", "SUCCESS" + response.body().getResult());
                     Log.i("SIGNUPaccessToken", accessToken);
+                    if (Integer.parseInt(response.body().getResult()) == 1) {
+                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }else{
+                    }
                 } else {
                     Log.i("RF:KaKaoLogin", "FAIL" + response.body().getError());
                 }

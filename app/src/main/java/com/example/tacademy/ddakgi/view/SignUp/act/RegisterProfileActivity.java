@@ -13,8 +13,12 @@ import android.widget.Toast;
 import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.base.BaseActivity;
 import com.example.tacademy.ddakgi.base.HomeActivity;
+import com.example.tacademy.ddakgi.data.LifeStyleLogin.ReqLifeStyleLogin;
+import com.example.tacademy.ddakgi.data.NetSSL;
+import com.example.tacademy.ddakgi.data.RegisterRoom.ResStringString;
 import com.example.tacademy.ddakgi.util.ImageProc;
 import com.example.tacademy.ddakgi.util.StorageHelper;
+import com.example.tacademy.ddakgi.util.U;
 import com.miguelbcr.ui.rx_paparazzo.RxPaparazzo;
 import com.miguelbcr.ui.rx_paparazzo.entities.size.ScreenSize;
 import com.squareup.picasso.Picasso;
@@ -23,6 +27,9 @@ import com.yalantis.ucrop.UCrop;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.chooco13.NotoTextView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -43,6 +50,21 @@ public class RegisterProfileActivity extends BaseActivity {
 
     String kakaoProfile, kakaoNickname;
     String havePhoto = null;
+
+    // 저장할 변수
+    String dbNickname;
+    int dbAge;
+    int lifestyle_q1;
+    int lifestyle_q2;
+    int lifestyle_q3;
+    int lifestyle_q4;
+    int lifestyle_q5;
+    int lifestyle_q6;
+    int lifestyle_q7;
+    int lifestyle_q8;
+    int lifestyle_q9;
+    int lifestyle_q10;
+    String[] profile_photos = new String[3];
 
     // 생활 패턴 응답 완료했는지 확인하는 변수
     public static boolean isLifeStyleFinish = false;
@@ -253,11 +275,54 @@ public class RegisterProfileActivity extends BaseActivity {
         StorageHelper.getInstance().setBoolean(this, "AUTOLOGIN", true);
 
         // 회원가입 정보 db로 전송
+        registerMemberData();
+
         hideProgress();
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
-
+        Toast.makeText(this, userNickname.getText().toString() + " 님 환영합니다.", Toast.LENGTH_SHORT).show();
         this.finish();
+    }
+
+    public void registerMemberData() {
+        dbNickname = userNickname.getText().toString();
+        dbAge = Integer.parseInt(userAge.getText().toString());
+        int[] lifestyleAnswer = U.getInstance().getLifestyleNum();
+        lifestyle_q1 = lifestyleAnswer[0];
+        lifestyle_q2 = lifestyleAnswer[1];
+        lifestyle_q3 = lifestyleAnswer[2];
+        lifestyle_q4 = lifestyleAnswer[3];
+        lifestyle_q5 = lifestyleAnswer[4];
+        lifestyle_q6 = lifestyleAnswer[5];
+        lifestyle_q7 = lifestyleAnswer[6];
+        lifestyle_q8 = lifestyleAnswer[7];
+        lifestyle_q9 = lifestyleAnswer[8];
+        lifestyle_q10 = lifestyleAnswer[9];
+        String profileImg = userProfile.toString();
+        String thumnailImg = userProfile.toString();
+        profile_photos[0] = profileImg;
+        profile_photos[1] = thumnailImg;
+
+        // 디비에 정보 저장
+        Call<ResStringString> resLifeStyleLogin = NetSSL.getInstance().getMemberImpFactory()
+                .resLifeStyleLogin(new ReqLifeStyleLogin(dbNickname, getUid(), dbAge, lifestyle_q1, lifestyle_q2,
+                        lifestyle_q3, lifestyle_q4, lifestyle_q5, lifestyle_q6, lifestyle_q7, lifestyle_q8,
+                        lifestyle_q9, lifestyle_q10, profile_photos));
+        resLifeStyleLogin.enqueue(new Callback<ResStringString>() {
+            @Override
+            public void onResponse(Call<ResStringString> call, Response<ResStringString> response) {
+                if (response.body().getResult() != null) {
+                    Log.i("RF:PROFILE", "SUCCESS" + response.body().getResult());
+                } else {
+                    Log.i("RF:PROFILE", "FAIL" + response.body().getError());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResStringString> call, Throwable t) {
+                Log.i("RF", "ERR" + t.getMessage());
+            }
+        });
     }
 
     //모든 답변했는지 확인

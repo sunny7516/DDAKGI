@@ -48,6 +48,7 @@ public class BaseActivity extends AppCompatActivity {
 
     private long backKeyPressedTime = 0;
     Toast toast;
+
     // back버튼을 2초 이내에 누르면 어플을 종료시킨다.
     @Override
     public void onBackPressed() {

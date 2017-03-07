@@ -39,7 +39,7 @@ import static android.view.View.GONE;
 
 public class HomeRoomDetailPageActivity extends BaseActivity {
     String postKey;
-    String auth_uid = "HdTmcEkECNVTm4Ng6SqVLsK1zat2";   // 상대방의 you_id를 임시로 설정해줌
+    String auth_uid;   // 상대방의 you_id를 임시로 설정해줌
 
     public int roommate_id;
 
@@ -96,7 +96,7 @@ public class HomeRoomDetailPageActivity extends BaseActivity {
 
     // 통신 ===========================================================================
     public void setDetail(int roommate_id) {
-        Call<ResDetailPosting> resDetailPostingCall = NetSSL.getInstance().getMemberImpFactory().resDetailPosting(roommate_id);
+        Call<ResDetailPosting> resDetailPostingCall = NetSSL.getInstance().getMemberImpFactory().resDetailPosting(117);
         resDetailPostingCall.enqueue(new Callback<ResDetailPosting>() {
             @Override
             public void onResponse(Call<ResDetailPosting> call, Response<ResDetailPosting> response) {
@@ -120,7 +120,7 @@ public class HomeRoomDetailPageActivity extends BaseActivity {
     }
 
     public void setData(DetailPosting detailPosting) {
-        auth_uid = detailPosting.getNickname();
+        auth_uid = detailPosting.getUid();  // 게시글 작성자의 uid
         if (detailPosting.getHeart_state() == 0) {
             roomHeart_state.setImageResource(R.mipmap.heart_off_btn);
         } else {

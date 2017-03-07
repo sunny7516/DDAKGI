@@ -1,13 +1,11 @@
 package com.example.tacademy.ddakgi.data.Member;
 
-import static com.kakao.usermgmt.StringSet.profile_image;
-
 /**
  * 회원정보
  */
 
 public class MemberModel {
-    int id;
+    int mid;
     String nickname;
     int age;
     String lifestyle_q1;
@@ -22,12 +20,12 @@ public class MemberModel {
     String lifestyle_q10;
     String thumbnail_image;
 
-    public int getId() {
-        return id;
+    public int getMid() {
+        return mid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setMid(int mid) {
+        this.mid = mid;
     }
 
     public String getNickname() {

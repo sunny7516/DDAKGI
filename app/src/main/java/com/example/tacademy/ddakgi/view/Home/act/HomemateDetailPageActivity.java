@@ -63,7 +63,7 @@ public class HomemateDetailPageActivity extends BaseActivity {
     }
 
     public void setRetrofit(int roommate_id) {
-        Call<ResDetailPosting> resDetailPostingCall = NetSSL.getInstance().getMemberImpFactory().resDetailPosting(111);
+        Call<ResDetailPosting> resDetailPostingCall = NetSSL.getInstance().getMemberImpFactory().resDetailPosting(117);
         resDetailPostingCall.enqueue(new Callback<ResDetailPosting>() {
             @Override
             public void onResponse(Call<ResDetailPosting> call, Response<ResDetailPosting> response) {

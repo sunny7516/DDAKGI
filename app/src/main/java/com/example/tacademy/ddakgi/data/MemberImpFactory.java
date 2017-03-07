@@ -5,6 +5,7 @@ import com.example.tacademy.ddakgi.data.HomeTimeline.ResHomePosting;
 import com.example.tacademy.ddakgi.data.IntroTimeline.ResPosting;
 import com.example.tacademy.ddakgi.data.Kakao.ResKaKaoLogin;
 import com.example.tacademy.ddakgi.data.Kakao.ResKaKaoLogout;
+import com.example.tacademy.ddakgi.data.LifeStyleLogin.ReqLifeStyleLogin;
 import com.example.tacademy.ddakgi.data.Member.ReqUpdateMemberInfo;
 import com.example.tacademy.ddakgi.data.Member.ResMember;
 import com.example.tacademy.ddakgi.data.RegisterRoom.ReqRegisterRoom;
@@ -55,6 +56,10 @@ public interface MemberImpFactory {
     @GET("auth/logout")
     Call<ResKaKaoLogout> resKaKaoLogout();
 
+    // 4. 회원 등록
+    @PUT("members/login/123")
+    Call<ResStringString> resLifeStyleLogin(@Body ReqLifeStyleLogin reqLifeStyleLogin);
+
     // 5. 회원 정보 조회
     @GET("members/3")
     Call<ResMember> resMember();
@@ -102,6 +107,6 @@ public interface MemberImpFactory {
                                       @Query("available_date") String available_date);*/
 
     // 17. 게시글 상세페이지 조회하기
-    @GET("postings/detail/{roommate_id}/123")
+    @GET("postings/detail/{roommate_id}/125")
     Call<ResDetailPosting> resDetailPosting(@Path("roommate_id") int roommate_id);
 }

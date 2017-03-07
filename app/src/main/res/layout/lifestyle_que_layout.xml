@@ -19,26 +19,26 @@
             android:text="@string/lifeStyleQue1" />
 
         <CheckedTextView
-            android:tag="num1"
+            android:tag="num1/1"
             style="@style/lifeStyleAns"
             android:onClick="styleCheck"
             android:layout_weight="1"
             android:text="@string/lifeStyleAns1_1" />
 
         <CheckedTextView
-            android:tag="num1"
+            android:tag="num1/2"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns1_2" />
 
         <CheckedTextView
-            android:tag="num1"
+            android:tag="num1/3"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns1_3" />
 
         <CheckedTextView
-            android:tag="num1"
+            android:tag="num1/4"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns1_4" />
@@ -51,19 +51,19 @@
             android:text="@string/lifeStyleQue2" />
 
         <CheckedTextView
-            android:tag="num2"
+            android:tag="num2/1"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns2_1" />
 
         <CheckedTextView
-            android:tag="num2"
+            android:tag="num2/2"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns2_2" />
 
         <CheckedTextView
-            android:tag="num2"
+            android:tag="num2/3"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns2_3" />
@@ -76,31 +76,31 @@
             android:text="@string/lifeStyleQue3" />
 
         <CheckedTextView
-            android:tag="num3"
+            android:tag="num3/1"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns3_1" />
 
         <CheckedTextView
-            android:tag="num3"
+            android:tag="num3/2"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns3_2" />
 
         <CheckedTextView
-            android:tag="num3"
+            android:tag="num3/3"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns3_3" />
 
         <CheckedTextView
-            android:tag="num3"
+            android:tag="num3/4"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns3_4" />
 
         <CheckedTextView
-            android:tag="num3"
+            android:tag="num3/5"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns3_5" />
@@ -113,25 +113,25 @@
             android:text="@string/lifeStyleQue4" />
 
         <CheckedTextView
-            android:tag="num4"
+            android:tag="num4/1"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns4_1" />
 
         <CheckedTextView
-            android:tag="num4"
+            android:tag="num4/2"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns4_2" />
 
         <CheckedTextView
-            android:tag="num4"
+            android:tag="num4/3"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns4_3" />
 
         <CheckedTextView
-            android:tag="num4"
+            android:tag="num4/4"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns4_4" />
@@ -144,25 +144,25 @@
             android:text="@string/lifeStyleQue5" />
 
         <CheckedTextView
-            android:tag="num5"
+            android:tag="num5/1"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns5_1" />
 
         <CheckedTextView
-            android:tag="num5"
+            android:tag="num5/2"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns5_2" />
 
         <CheckedTextView
-            android:tag="num5"
+            android:tag="num5/3"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns5_3" />
 
         <CheckedTextView
-            android:tag="num5"
+            android:tag="num5/4"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns5_4" />
@@ -175,19 +175,19 @@
             android:text="@string/lifeStyleQue6" />
 
         <CheckedTextView
-            android:tag="num6"
+            android:tag="num6/1"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns6_1" />
 
         <CheckedTextView
-            android:tag="num6"
+            android:tag="num6/2"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns6_2" />
 
         <CheckedTextView
-            android:tag="num6"
+            android:tag="num6/3"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns6_3" />
@@ -200,19 +200,19 @@
             android:text="@string/lifeStyleQue7" />
 
         <CheckedTextView
-            android:tag="num7"
+            android:tag="num7/1"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns7_1" />
 
         <CheckedTextView
-            android:tag="num7"
+            android:tag="num7/2"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns7_2" />
 
         <CheckedTextView
-            android:tag="num7"
+            android:tag="num7/3"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns7_3" />
@@ -225,19 +225,19 @@
             android:text="@string/lifeStyleQue8" />
 
         <CheckedTextView
-            android:tag="num8"
+            android:tag="num8/1"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns8_1" />
 
         <CheckedTextView
-            android:tag="num8"
+            android:tag="num8/2"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns8_2" />
 
         <CheckedTextView
-            android:tag="num8"
+            android:tag="num8/3"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns8_3" />
@@ -250,25 +250,25 @@
             android:text="@string/lifeStyleQue9" />
 
         <CheckedTextView
-            android:tag="num9"
+            android:tag="num9/1"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns9_1" />
 
         <CheckedTextView
-            android:tag="num9"
+            android:tag="num9/2"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns9_2" />
 
         <CheckedTextView
-            android:tag="num9"
+            android:tag="num9/3"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns9_3" />
 
         <CheckedTextView
-            android:tag="num9"
+            android:tag="num9/4"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns9_4" />
@@ -281,19 +281,19 @@
             android:text="@string/lifeStyleQue10" />
 
         <CheckedTextView
-            android:tag="num10"
+            android:tag="num10/1"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns10_1" />
 
         <CheckedTextView
-            android:tag="num10"
+            android:tag="num10/2"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns10_2" />
 
         <CheckedTextView
-            android:tag="num10"
+            android:tag="num10/3"
             android:onClick="styleCheck"
             style="@style/lifeStyleAns"
             android:text="@string/lifeStyleAns10_3" />

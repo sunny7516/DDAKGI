@@ -7,9 +7,10 @@ import java.util.ArrayList;
  * 상세페이지 응답 성공 모델
  */
 
-public class DetailPosting implements Serializable{
+public class DetailPosting implements Serializable {
     int rid;
     int mid;
+    String uid;
     int roomming;
     String nickname;
     int age;
@@ -40,6 +41,14 @@ public class DetailPosting implements Serializable{
     String profile_image;
     String thumbnail_image;
     ArrayList<String> roommate_image;
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
     public int getHeart_state() {
         return heart_state;
