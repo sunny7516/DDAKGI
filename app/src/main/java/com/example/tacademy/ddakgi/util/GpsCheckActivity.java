@@ -167,6 +167,7 @@ public class GpsCheckActivity extends AppCompatActivity {
 
     // Service화면으로 이동(GpsDetecting)
     public void startService() {
+        flag = false;
         Intent intent = new Intent(this, GpsDetecting.class);
         startService(intent);
     }

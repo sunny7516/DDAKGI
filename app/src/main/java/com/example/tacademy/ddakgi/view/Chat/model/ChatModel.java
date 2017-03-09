@@ -1,4 +1,4 @@
-package com.example.tacademy.ddakgi.view.Chat;
+package com.example.tacademy.ddakgi.view.Chat.model;
 
 /**
  * 채팅창에서 필요한 데이터

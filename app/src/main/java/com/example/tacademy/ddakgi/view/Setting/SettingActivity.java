@@ -10,8 +10,10 @@ import android.widget.Toast;
 
 import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.base.BaseActivity;
+import com.example.tacademy.ddakgi.data.DeleteMe.ReqDeleteMe;
 import com.example.tacademy.ddakgi.data.Kakao.ResKaKaoLogout;
 import com.example.tacademy.ddakgi.data.NetSSL;
+import com.example.tacademy.ddakgi.data.RegisterRoom.ResStringString;
 import com.example.tacademy.ddakgi.util.StorageHelper;
 import com.example.tacademy.ddakgi.view.SplashIntro.MainActivity;
 import com.kakao.usermgmt.UserManagement;
@@ -85,13 +87,13 @@ public class SettingActivity extends BaseActivity {
         Toast.makeText(this, "로그아웃이 완료되었습니다", Toast.LENGTH_SHORT).show();
     }
 
-    public void LogoutDb(){
+    public void LogoutDb() {
 
         Call<ResKaKaoLogout> resKaKaoLogout = NetSSL.getInstance().getMemberImpFactory().resKaKaoLogout();
         resKaKaoLogout.enqueue(new Callback<ResKaKaoLogout>() {
             @Override
             public void onResponse(Call<ResKaKaoLogout> call, Response<ResKaKaoLogout> response) {
-                if(response.body().getResult() != null){
+                if (response.body().getResult() != null) {
                     Log.i("RF:kakaoLogout", "SUCCESS" + response.body().getResult());
                 }
             }
@@ -115,6 +117,7 @@ public class SettingActivity extends BaseActivity {
                 sweetAlertDialog.dismissWithAnimation();
                 // 회원 탈퇴
                 // db에서 회원 정보 삭제
+                // deleteMe();
             }
         }).setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
             @Override
@@ -123,5 +126,29 @@ public class SettingActivity extends BaseActivity {
             }
         });
         alertDialog.show();
+    }
+
+    public void deleteMe() {
+        // MyTab에서 회원아이디 넘겨받음
+        int id = getIntent().getExtras().getInt("id");
+
+        Call<ResStringString> resDeleteMe = NetSSL.getInstance().getMemberImpFactory()
+                .resDeleteMe(new ReqDeleteMe(id));
+        resDeleteMe.enqueue(new Callback<ResStringString>() {
+            @Override
+            public void onResponse(Call<ResStringString> call, Response<ResStringString> response) {
+                if(response.body().getResult() != null){
+                    Log.i("RF:DeleteMe", "SUCCESS" + response.body().getResult());
+                    Toast.makeText(getApplicationContext(), "회원 탈퇴가 완료되었습니다", Toast.LENGTH_SHORT).show();
+                }else{
+                    Log.i("RF:DeleteMe", "FAIL" + response.body().getError());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResStringString> call, Throwable t) {
+                Log.i("RF:DeleteMe", "ERROR" + t.getMessage());
+            }
+        });
     }
 }

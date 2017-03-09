@@ -1,10 +1,11 @@
-package com.example.tacademy.ddakgi.view.Chat;
+package com.example.tacademy.ddakgi.view.Chat.holder;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.example.tacademy.ddakgi.R;
+import com.example.tacademy.ddakgi.view.Chat.model.ChatChannelModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;

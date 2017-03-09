@@ -4,28 +4,49 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.tacademy.ddakgi.R;
+import com.example.tacademy.ddakgi.data.NetSSL;
+import com.example.tacademy.ddakgi.data.RegisterMate.ReqRegisterMate;
+import com.example.tacademy.ddakgi.data.RegisterRoom.ResStringString;
 import com.example.tacademy.ddakgi.util.DatePickerFragment;
 
 import io.chooco13.NotoTextView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 public class WriteMateActivity extends AppCompatActivity {
-    LinearLayout prefroomType;
-    LinearLayout mateextraInfo;
+    LinearLayout prefroomType, mateextraInfo;
 
     Boolean roomflag = true;
     Boolean extraflag = true;
+
+    // 받아올 값
+    EditText registerMateTitle, registerMateDeposit, registerMateRent, registerMateDescription;
+    EditText registerMateExtraQueOne, registerMateExtraQueTwo, registerMateExtraQueThree;
+    Button writepreflocateBt, prefDate;
+
+    // 저장할 변수
+    String title, local1, local2, local3, available_date, description;
+    String extra_q1, extra_q2, extra_q3;
+    int room_type, deposit, rent;
+
+    public static Button writeMatelocateBt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +58,70 @@ public class WriteMateActivity extends AppCompatActivity {
         // 펼쳐지는 메뉴 visibility 설정하기 위해서
         prefroomType = (LinearLayout) findViewById(R.id.prefroomType);
         mateextraInfo = (LinearLayout) findViewById(R.id.mateextraInfo);
+
+        registerMateTitle = (EditText) findViewById(R.id.registerMateTitle);
+        registerMateDeposit = (EditText) findViewById(R.id.registerMateDeposit);
+        registerMateRent = (EditText) findViewById(R.id.registerMateRent);
+        registerMateDescription = (EditText) findViewById(R.id.registerMateDescription);
+
+        registerMateExtraQueOne = (EditText) findViewById(R.id.registerMateExtraQueOne);
+
+        prefDate = (Button) findViewById(R.id.prefDate);
+
+        registerMateTitle.setTextColor(ContextCompat.getColor(this, R.color.subTextColor));
+        // 빈 공간 (새롭게 생길 부분)
+        mateextraInfo = (LinearLayout) findViewById(R.id.ExtraMateQuelinear);
+    }
+
+    // 완료 버튼
+    public void registerMate(View view) {
+        // 모든 답변 완료했는지 확인하고
+        registerMateExtraQueTwo = (EditText) mateextraInfo.findViewById(R.id.descriptionEditText + 1);    // 추가질문2
+        registerMateExtraQueThree = (EditText) mateextraInfo.findViewById(R.id.descriptionEditText + 2);  // 추가질문3
+        if (registerMateExtraQueTwo.getText() != null) {
+            extra_q2 = registerMateExtraQueTwo.getText().toString();
+        }
+        if (registerMateExtraQueThree.getText() != null) {
+            extra_q3 = registerMateExtraQueThree.getText().toString();
+        }
+
+        // 완료 됐으면 데이터 뽑기
+        title = registerMateTitle.getText().toString();
+        String location = writeMatelocateBt.getText().toString();   // 위치
+        String[] locationSplit = location.split(" ");
+        String Ko = locationSplit[0];   // '대한민국'을 제외한 주소값을 보내기 위해서
+        local1 = locationSplit[1];
+        local2 = locationSplit[2];
+        local3 = locationSplit[3];
+
+        roomTypeNum(clickedType);
+        deposit = Integer.parseInt(registerMateDeposit.getText().toString());           // 보증금
+        rent = Integer.parseInt(registerMateRent.getText().toString());
+        available_date = prefDate.getText().toString();                                 // 입주 가능일
+        description = registerMateDescription.getText().toString();                     // 자기소개
+
+        extra_q1 = registerMateExtraQueOne.getText().toString();
+
+        Call<ResStringString> resRegisterMateCall = NetSSL.getInstance().getMemberImpFactory()
+                .registerMate(new ReqRegisterMate(title, local1, local2, local3, room_type, deposit, rent, available_date,
+                        description, extra_q1, extra_q2, extra_q3));
+        resRegisterMateCall.enqueue(new Callback<ResStringString>() {
+            @Override
+            public void onResponse(Call<ResStringString> call, Response<ResStringString> response) {
+                if (response.body().getResult() != null) {
+                    Log.i("RF:RegisterMate", "SUCCESS" + response.body().getResult());
+                    Toast.makeText(WriteMateActivity.this, "룸메이트 등록이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Log.i("RF:RegisterMate", "FAIL" + response.body().getError());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResStringString> call, Throwable t) {
+                Log.i("RF:RegisterMate", "ERR" + t.getMessage());
+            }
+        });
     }
 
     // 방 유형 펼치기
@@ -64,7 +149,7 @@ public class WriteMateActivity extends AppCompatActivity {
     // 위치 등록
     public void goLocate(View view) {
         //Toast.makeText(this, "goLocate", Toast.LENGTH_SHORT).show();
-        WriteRoomActivity.writelocateBt = (Button) view;
+        WriteMateActivity.writeMatelocateBt = (Button) view;
         Intent intent = new Intent(this, WriteLocateActivity.class);
         startActivity(intent);
     }
@@ -106,20 +191,48 @@ public class WriteMateActivity extends AppCompatActivity {
         }
     }
 
-    // 추가 질문 받는 부분
-    public void plusExtra(View view) {
-        // 빈 공간 (새롭게 생길 부분)
-        LinearLayout newLinear = (LinearLayout) findViewById(R.id.ExtraMateQuelinear);
-        // 새롭게 생긴 listview에 들어갈 구성물
-        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        LinearLayout contentLinear = (LinearLayout) inflater.inflate(R.layout.extraque_view, null);
-
-        contentLinear.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
-        contentLinear.setOrientation(LinearLayout.HORIZONTAL);
-        newLinear.addView(contentLinear);
+    // 선택된 방 유형에 따라 enum값 결정
+    public void roomTypeNum(NotoTextView view) {
+        switch (view.getId()) {
+            case R.id.typeOne:
+                room_type = 1;
+                break;
+            case R.id.typeTwo:
+                room_type = 2;
+                break;
+            case R.id.typeHouse:
+                room_type = 4;
+                break;
+            case R.id.typeOffice:
+                room_type = 8;
+                break;
+            case R.id.typeApart:
+                room_type = 16;
+                break;
+        }
     }
 
-    public void back(View view){
+    int plusNum;
+    EditText descriptionEditText;   // 추가질문 받는 칸
+
+    // 추가 질문 생성하고 각 질문의 EditText에 ID값 설정
+    public void plusExtra(View view) {
+        plusNum++;
+        if (plusNum < 3) {
+            LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            // 새롭게 생긴 listview에 들어갈 구성물
+            LinearLayout contentLinear = (LinearLayout) inflater.inflate(R.layout.extraque_view, null);
+
+            contentLinear.setOrientation(LinearLayout.HORIZONTAL);
+            contentLinear.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
+            mateextraInfo.addView(contentLinear);
+
+            descriptionEditText = (EditText) contentLinear.findViewById(R.id.descriptionEditText);
+            descriptionEditText.setId(R.id.descriptionEditText + plusNum);
+        }
+    }
+
+    public void back(View view) {
         finish();
     }
 }

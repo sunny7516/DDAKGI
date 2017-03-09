@@ -79,7 +79,8 @@
                 android:layout_marginRight="4dp"
                 android:layout_marginTop="8dp"
                 android:layout_toLeftOf="@+id/roomDetailPageLikeNum"
-                android:background="@mipmap/heart_off_btn" />
+                android:background="@mipmap/heart_off_btn"
+                android:onClick="clickHeart" />
 
             <io.chooco13.NotoTextView
                 android:id="@+id/roomDetailPageLikeNum"
@@ -165,6 +166,7 @@
 
         <!-- 채팅버튼 -->
         <RelativeLayout
+            android:id="@+id/chatLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="16dp"
@@ -192,115 +194,148 @@
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/chatString"
             android:layout_width="match_parent"
             android:layout_height="8dp"
             android:layout_marginTop="16dp"
             android:background="@color/grayTextColor" />
 
-        <!-- 방 Details -->
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="8dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <io.chooco13.NotoTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Detail"
-                android:textColor="@color/defaultTextColor"
+                android:id="@+id/roomModifyBt"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="23dp"
+                android:layout_toLeftOf="@+id/roomDeleteBt"
+                android:gravity="center"
+                android:text="@string/modifyBt"
+                android:textColor="@color/grayTextColor"
                 android:textSize="13sp"
-                app:fontWeight="medium" />
+                android:visibility="invisible"
+                app:fontWeight="regular" />
 
-            <TextView
+            <io.chooco13.NotoTextView
+                android:id="@+id/roomDeleteBt"
+                android:layout_width="40dp"
+                android:onClick="deleteRoomPosting"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="16dp"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:text="@string/deleteBt"
+                android:textColor="@color/grayTextColor"
+                android:textSize="13sp"
+                android:visibility="invisible"
+                app:fontWeight="regular" />
+            <!-- 방 Details -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="16dp"
-                android:background="@color/stringColor" />
-
-            <io.chooco13.NotoTextView
-                android:id="@+id/detailPrice"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:layout_marginTop="9dp"
-                android:text="Price"
-                android:textColor="@color/subTextColor"
-                android:textSize="13sp"
-                app:fontWeight="regular" />
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical">
 
-            <io.chooco13.NotoTextView
-                android:id="@+id/detailLocate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:text="Locate"
-                android:textColor="@color/subTextColor"
-                android:textSize="13sp"
-                app:fontWeight="regular" />
+                <io.chooco13.NotoTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Detail"
+                    android:textColor="@color/defaultTextColor"
+                    android:textSize="13sp"
+                    app:fontWeight="medium" />
 
-            <io.chooco13.NotoTextView
-                android:id="@+id/detailRoomType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:text="RoomType"
-                android:textColor="@color/subTextColor"
-                android:textSize="13sp"
-                app:fontWeight="regular" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/stringColor" />
 
-            <io.chooco13.NotoTextView
-                android:id="@+id/detailPay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:text="Pay"
-                android:textColor="@color/subTextColor"
-                android:textSize="13sp"
-                app:fontWeight="regular" />
+                <io.chooco13.NotoTextView
+                    android:id="@+id/detailPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginTop="9dp"
+                    android:text="Price"
+                    android:textColor="@color/subTextColor"
+                    android:textSize="13sp"
+                    app:fontWeight="regular" />
 
-            <io.chooco13.NotoTextView
-                android:id="@+id/detailOptions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:text="Options"
-                android:textColor="@color/subTextColor"
-                android:textSize="13sp"
-                app:fontWeight="regular" />
+                <io.chooco13.NotoTextView
+                    android:id="@+id/detailLocate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:text="Locate"
+                    android:textColor="@color/subTextColor"
+                    android:textSize="13sp"
+                    app:fontWeight="regular" />
 
-            <io.chooco13.NotoTextView
-                android:id="@+id/detailRoomHeight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:text="RoomHeight"
-                android:textColor="@color/subTextColor"
-                android:textSize="13sp"
-                app:fontWeight="regular" />
+                <io.chooco13.NotoTextView
+                    android:id="@+id/detailRoomType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:text="RoomType"
+                    android:textColor="@color/subTextColor"
+                    android:textSize="13sp"
+                    app:fontWeight="regular" />
 
-            <io.chooco13.NotoTextView
-                android:id="@+id/detailRoomSize"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:text="RoomSize"
-                android:textColor="@color/subTextColor"
-                android:textSize="13sp"
-                app:fontWeight="regular" />
+                <io.chooco13.NotoTextView
+                    android:id="@+id/detailPay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:text="Pay"
+                    android:textColor="@color/subTextColor"
+                    android:textSize="13sp"
+                    app:fontWeight="regular" />
 
-            <io.chooco13.NotoTextView
-                android:id="@+id/detailPrefDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:text="PrefDate"
-                android:textColor="@color/subTextColor"
-                android:textSize="13sp"
-                app:fontWeight="regular" />
-        </LinearLayout>
+                <io.chooco13.NotoTextView
+                    android:id="@+id/detailOptions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:text="Options"
+                    android:textColor="@color/subTextColor"
+                    android:textSize="13sp"
+                    app:fontWeight="regular" />
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/detailRoomHeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:text="RoomHeight"
+                    android:textColor="@color/subTextColor"
+                    android:textSize="13sp"
+                    app:fontWeight="regular" />
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/detailRoomSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:text="RoomSize"
+                    android:textColor="@color/subTextColor"
+                    android:textSize="13sp"
+                    app:fontWeight="regular" />
+
+                <io.chooco13.NotoTextView
+                    android:id="@+id/detailPrefDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:text="PrefDate"
+                    android:textColor="@color/subTextColor"
+                    android:textSize="13sp"
+                    app:fontWeight="regular" />
+            </LinearLayout>
+        </RelativeLayout>
 
         <TextView
             android:layout_width="match_parent"

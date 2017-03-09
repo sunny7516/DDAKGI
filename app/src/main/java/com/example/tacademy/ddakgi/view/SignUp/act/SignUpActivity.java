@@ -55,6 +55,16 @@ public class SignUpActivity extends KakaoLoginActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        // 벳지 ============================================================
+        // 벳지 초기화 (앱을 구동하면 무조건 벳지를 0으로 만든다)
+        // 만약 특정 메세지를 확인한 후 없애는 방식이면 그 지점으로 이동시킨다.
+        Intent intent = new Intent("android.intent.action.BADGE_COUNT_UPDATE");
+        intent.putExtra("badge_count", 0);
+        intent.putExtra("badge_count_package_name", getPackageName());
+        intent.putExtra("badge_count_class_name", getComponentName().getClassName());
+        sendBroadcast(intent);
+        StorageHelper.getInstance().setInt(this, "APP_NOREAD_MSG", 0);  //저장값 초기화
+
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
@@ -182,8 +192,10 @@ public class SignUpActivity extends KakaoLoginActivity {
                     Toast.LENGTH_SHORT);
             return;
         } else {
-            // 진행 프로그레스바
-            showProgress("프로필 등록 화면으로 이동 중");
+            if (!this.isFinishing()) {
+                // 진행 프로그레스바
+                showProgress("프로필 등록 화면으로 이동 중");
+            }
 
             // 인증쪽에 데이터 저장
             String email = kakaoID + "@Kakao.com";
@@ -192,36 +204,44 @@ public class SignUpActivity extends KakaoLoginActivity {
             // 실서버 디비에 저장
             registerKaKao();
 
-            // firebase 인증에 회원 정보 저장
-            firebaseAuth.createUserWithEmailAndPassword(email, pwd)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                Log.i("auth", "성공");
-                                // firebase 디비에 회원 정보 저장
-                                onUserSaved(email, nickname, profile);
-                            } else {
-                                Log.i("auth", "실패" + task.getException().getMessage());
-                                //Toast.makeText(SignUpActivity.this, "회원가입 실패:" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+            if (getUid() != null) {
+                // 이미 가입한 회원이면 firebase 인증 안함
+
+            } else {
+                // 처음 가입하는 회원
+                // firebase 인증에 회원 정보 저장
+                firebaseAuth.createUserWithEmailAndPassword(email, pwd)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    Log.i("auth", "성공");
+                                    // firebase 디비에 회원 정보 저장
+                                    onUserSaved(email, nickname, profile);
+                                } else {
+                                    Log.i("auth", "실패" + task.getException().getMessage());
+                                    //Toast.makeText(SignUpActivity.this, "회원가입 실패:" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        }
-                    });
+                        });
+            }
 
             // 가입 진행! > 프로필 등록화면으로 이동(카카오 기본 정보 넘겨줌)
             ImageProc.getInstance().getImageLoader(this);
+
+            // 프로그레스바 닫아주기
+            hideProgress();
 
             Intent intent = new Intent(this, RegisterProfileActivity.class);
             StorageHelper.getInstance().setString(this, "nickname", nickname);
             intent.putExtra("kakaoNickname", nickname);
             intent.putExtra("kakaoProfile", profile);
             startActivity(intent);
-/*
+
+            /*
             // 카카오 로그인 시 정보 넣어주기
             registerKaKao();*/
 
-            // 프로그레스바 닫아주기
-            hideProgress();
             finish();
         }
     }
@@ -247,8 +267,9 @@ public class SignUpActivity extends KakaoLoginActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
+                            Log.i("SUCCESS", "회원정보 firebase 입력");
                         } else {
-
+                            Log.i("Fail", "회원정보 firebase 실패");
                         }
                     }
                 });
@@ -267,7 +288,7 @@ public class SignUpActivity extends KakaoLoginActivity {
                         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                         startActivity(intent);
                         finish();
-                    }else{
+                    } else {
                     }
                 } else {
                     Log.i("RF:KaKaoLogin", "FAIL" + response.body().getError());

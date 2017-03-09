@@ -292,7 +292,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:gravity="center"
-                android:orientation="horizontal"
                 android:visibility="visible">
 
                 <io.chooco13.NotoTextView
@@ -440,7 +439,7 @@
                     android:textColor="@color/grayTextColor"
                     android:textSize="13sp" />
             </LinearLayout>
-
+<!--
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -464,7 +463,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     app:srcCompat="@mipmap/certification_btn" />
-            </LinearLayout>
+            </LinearLayout>-->
             <!-- 추가 정보 입력 -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -834,8 +833,9 @@
                         android:layout_height="wrap_content">
 
                         <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
                             android:background="@android:color/transparent"
                             android:onClick="plusExtra"/>
                         <ImageView

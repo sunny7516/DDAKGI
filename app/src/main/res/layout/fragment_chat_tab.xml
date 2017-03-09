@@ -26,15 +26,28 @@
             app:fontWeight="medium" />
     </android.support.v7.widget.Toolbar>
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/chat_channel_recyclerView"
+        <io.chooco13.NotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/noChat"
+            app:fontWeight="medium"
+            android:layout_margin="16dp"
+            android:textColor="@color/subTextColor"
+            android:textSize="13sp"/>
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical"
-            tools:listitem="@layout/cell_chat_channel_layout" />
-    </ScrollView>
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/chat_channel_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"
+                tools:listitem="@layout/cell_chat_channel_layout" />
+        </ScrollView>
+    </RelativeLayout>
 </LinearLayout>

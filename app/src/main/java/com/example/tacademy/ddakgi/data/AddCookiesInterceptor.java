@@ -27,11 +27,11 @@ public class AddCookiesInterceptor implements Interceptor {
         if (preferences != null)
             for (String cookie : preferences) {
                 Log.i("COOK", "획득쿠키" + cookie);
+                builder.addHeader("Cookie", cookie);
             }
 
         // Web, Android, iOS 구분을 위해 User-Agent 세팅
         // builder.removeHeader("User-Agent").addHeader("User-Agent", "Android");
-
         return chain.proceed(builder.build());
     }
 }

@@ -208,5 +208,15 @@ public class WriteLocateActivity extends FragmentActivity implements OnMapReadyC
             gpscheckActivity.finish();
             finish();
         }
+        if (WriteMateActivity.writeMatelocateBt != null) {
+            room_latitude = AddrAddress.getLatitude();
+            room_longitude = AddrAddress.getLongitude();
+
+            WriteMateActivity.writeMatelocateBt.setText(myAddr);
+
+            WriteMateActivity.writeMatelocateBt.setTextColor(getResources().getColor(R.color.subTextColor));
+            gpscheckActivity.finish();
+            finish();
+        }
     }
 }

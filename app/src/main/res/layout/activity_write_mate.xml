@@ -27,6 +27,7 @@
                 android:layout_marginLeft="16dp">
 
                 <Button
+                    android:layout_centerVertical="true"
                     android:id="@+id/writeMateBackBt"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
@@ -34,6 +35,7 @@
                     android:onClick="back" />
 
                 <io.chooco13.NotoTextView
+                    android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="24dp"
                     android:layout_marginLeft="12dp"
@@ -45,8 +47,10 @@
                     app:fontWeight="medium" />
 
                 <io.chooco13.NotoTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:onClick="registerMate"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="16dp"
                     android:text="@string/finish"
@@ -86,7 +90,7 @@
                     app:fontWeight="regular" />
 
                 <EditText
-                    android:id="@+id/editText"
+                    android:id="@+id/registerMateTitle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
@@ -273,7 +277,7 @@
                     app:fontWeight="regular" />
 
                 <EditText
-                    android:id="@+id/editText3"
+                    android:id="@+id/registerMateDeposit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -303,7 +307,7 @@
                     app:fontWeight="regular" />
 
                 <EditText
-                    android:id="@+id/editText6"
+                    android:id="@+id/registerMateRent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -315,7 +319,7 @@
                     android:textColor="@color/grayTextColor"
                     android:textSize="13sp" />
             </LinearLayout>
-
+<!--
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -339,7 +343,7 @@
                     android:layout_gravity="center"
                     android:onClick="goMateIdentify"
                     app:srcCompat="@mipmap/certification_btn" />
-            </LinearLayout>
+            </LinearLayout>-->
             <!-- 추가 정보 입력 -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -424,7 +428,7 @@
                         app:fontWeight="regular" />
 
                     <EditText
-                        android:id="@+id/editText4"
+                        android:id="@+id/registerMateDescription"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
@@ -454,7 +458,7 @@
                     android:orientation="horizontal">
 
                     <EditText
-                        android:id="@+id/editText7"
+                        android:id="@+id/registerMateExtraQueOne"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="9"
@@ -467,8 +471,9 @@
 
                     <Button
                         android:id="@+id/ExtraQue1"
-                        android:layout_width="13dp"
-                        android:layout_height="13dp"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
                         android:layout_marginRight="17dp"
                         android:background="@mipmap/plus_btn"
                         android:onClick="plusExtra" />

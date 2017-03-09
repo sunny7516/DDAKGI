@@ -91,11 +91,25 @@
             </RelativeLayout>
         </LinearLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <io.chooco13.NotoTextView
+                android:layout_margin="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/noMyPosting"
+                android:textColor="@color/subTextColor"
+                android:textSize="13sp"
+                app:fontWeight="medium" />
+
             <android.support.v7.widget.RecyclerView
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 android:id="@+id/recyclerviewMyTab"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 tools:listitem="@layout/home_timeline" />
+        </RelativeLayout>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

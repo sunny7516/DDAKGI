@@ -28,9 +28,23 @@
             app:fontWeight="medium" />
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerviewLikeTab"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/home_timeline" />
+        android:layout_height="wrap_content">
+
+        <io.chooco13.NotoTextView
+            app:fontWeight="medium"
+            android:textColor="@color/subTextColor"
+            android:textSize="13sp"
+            android:text="@string/noLike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerviewLikeTab"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/home_timeline" />
+    </RelativeLayout>
 </LinearLayout>

@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
 
 import com.example.tacademy.ddakgi.R;
@@ -17,9 +16,10 @@ import com.example.tacademy.ddakgi.view.Chat.ChatTab;
 import com.example.tacademy.ddakgi.view.Home.frag.HomeTab;
 import com.example.tacademy.ddakgi.view.Like.LikeTab;
 import com.example.tacademy.ddakgi.view.My.MyTab;
+import com.example.tacademy.ddakgi.view.SignUp.act.KakaoLoginActivity;
 import com.example.tacademy.ddakgi.view.Write.frag.WriteTab;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends KakaoLoginActivity {
     private TabLayout tabLayout;
     public LinearLayout fragment_container;
 

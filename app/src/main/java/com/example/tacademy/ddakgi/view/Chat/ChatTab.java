@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.tacademy.ddakgi.R;
+import com.example.tacademy.ddakgi.view.Chat.holder.ChatChannelViewHolder;
+import com.example.tacademy.ddakgi.view.Chat.model.ChatChannelModel;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -17,7 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 /**
- * 채팅 목록
+ * 채팅 목록 (두 번째 탭)
  */
 
 public class ChatTab extends Fragment {
@@ -73,7 +75,8 @@ public class ChatTab extends Fragment {
                         // 채팅방으로 이동
                         Intent intent = new Intent(getContext(), ChatRoomActivity.class);
                         intent.putExtra("chatting_room_key", model.getChatting_channel());
-                        //intent.putExtra("other_member_id", model.getMid());
+                        // 신고할 때 필요한 상대 회원번호
+                        intent.putExtra("other_member_id", model.getMid());
                         // 채팅방으로 갈 때 상대방 정보에 대한 class를 담는게 정석이고,
                         // 여기서는 코드를 많이 변경하지 않는 범위에서 Post를 재활용하는 측면으로 구성된다.
                         //intent.putExtra("you", new DetailPosting());
@@ -83,13 +86,14 @@ public class ChatTab extends Fragment {
                 viewHolder.bindToPost(getContext(), model);
             }
         };
-        chat_channel_recyclerView.setAdapter( firebaseRecyclerAdapter );
+        chat_channel_recyclerView.setAdapter(firebaseRecyclerAdapter);
 
         return view;
     }
 
     // 나의 아이디
     public String getUid() {
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) return null;
         return FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 }

@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.tacademy.ddakgi.R;
@@ -111,8 +112,12 @@ public class WriteRoomActivity extends BaseActivity {
 
         registerRoomExtraQueTwo = (EditText) newLinear.findViewById(R.id.descriptionEditText + 1);    // 추가질문2
         registerRoomExtraQueThree = (EditText) newLinear.findViewById(R.id.descriptionEditText + 2);  // 추가질문3
-        extra_q2 = registerRoomExtraQueTwo.getText().toString();
-        extra_q3 = registerRoomExtraQueThree.getText().toString();
+        if (registerRoomExtraQueTwo.getText() != null) {
+            extra_q2 = registerRoomExtraQueTwo.getText().toString();
+        }
+        if (registerRoomExtraQueTwo.getText() != null) {
+            extra_q3 = registerRoomExtraQueThree.getText().toString();
+        }
 
         // 완료 됐으면
         // 데이터 뽑기
@@ -138,6 +143,10 @@ public class WriteRoomActivity extends BaseActivity {
         description = registerRoomDescription.getText().toString();                     // 자기소개
         extra_q1 = registerRoomExtraQueOne.getText().toString();                        // 추가질문1
 
+        setData();
+    }
+
+    public void setData() {
         // 디비에 정보 저장
         Call<ResStringString> resRegisterRoomCall = NetSSL.getInstance().getMemberImpFactory()
                 .registerRoom(new ReqRegisterRoom(title, local1, local2, local3, detailed_local,
@@ -147,15 +156,17 @@ public class WriteRoomActivity extends BaseActivity {
             @Override
             public void onResponse(Call<ResStringString> call, Response<ResStringString> response) {
                 if (response.body().getResult() != null) {
-                    Log.i("RF", "SUCCESS" + response.body().getResult());
+                    Log.i("RF:RegisterRoom", "SUCCESS" + response.body().getResult());
+                    Toast.makeText(WriteRoomActivity.this, "방 등록이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                    finish();
                 } else {
-                    Log.i("RF", "FAIL" + response.body().getError());
+                    Log.i("RF:RegisterRoom", "FAIL" + response.body().getError());
                 }
             }
 
             @Override
             public void onFailure(Call<ResStringString> call, Throwable t) {
-                Log.i("RF", "ERR" + t.getMessage());
+                Log.i("RF:RegisterRoom", "ERR" + t.getMessage());
             }
         });
     }
@@ -297,51 +308,51 @@ public class WriteRoomActivity extends BaseActivity {
     }
 
     // 중복 선택 가능 (관리비 내용)
-    int costNum=0;
+    int costNum = 0;
 
     public void togglePay(View view) {
         ToggleButton toggleButton = (ToggleButton) view;
         if (toggleButton.isChecked()) {
             switch (toggleButton.getId()) {
                 case R.id.registerRoomManageCostOne:
-                    costNum +=1;
+                    costNum += 1;
                     break;
                 case R.id.registerRoomManageCostTwo:
-                    costNum +=2;
+                    costNum += 2;
                     break;
                 case R.id.registerRoomManageCostThree:
-                    costNum +=4;
+                    costNum += 4;
                     break;
                 case R.id.registerRoomManageCostFour:
-                    costNum +=8;
+                    costNum += 8;
                     break;
                 case R.id.registerRoomManageCostFive:
-                    costNum +=16;
+                    costNum += 16;
                     break;
                 case R.id.registerRoomManageCostSix:
-                    costNum +=32;
+                    costNum += 32;
                     break;
             }
             toggleButton.setTextColor(getResources().getColor(R.color.textpointColor));
-        } else if(!toggleButton.isChecked()){
+        } else if (!toggleButton.isChecked()) {
             switch (toggleButton.getId()) {
                 case R.id.registerRoomManageCostOne:
-                    costNum -=1;
+                    costNum -= 1;
                     break;
                 case R.id.registerRoomManageCostTwo:
-                    costNum -=2;
+                    costNum -= 2;
                     break;
                 case R.id.registerRoomManageCostThree:
-                    costNum -=4;
+                    costNum -= 4;
                     break;
                 case R.id.registerRoomManageCostFour:
-                    costNum -=8;
+                    costNum -= 8;
                     break;
                 case R.id.registerRoomManageCostFive:
-                    costNum -=16;
+                    costNum -= 16;
                     break;
                 case R.id.registerRoomManageCostSix:
-                    costNum -=32;
+                    costNum -= 32;
                     break;
             }
             toggleButton.setTextColor(getResources().getColor(R.color.grayTextColor));
@@ -441,7 +452,7 @@ public class WriteRoomActivity extends BaseActivity {
         for (int i = 0; i < clickedOptions.length; i++) {
             setNum += clickedOptions[i];
         }
-        Log.i("setNum",setNum+"");
+        Log.i("setNum", setNum + "");
         return setNum;
     }
 

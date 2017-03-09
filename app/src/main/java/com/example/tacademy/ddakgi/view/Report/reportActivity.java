@@ -91,7 +91,7 @@ public class reportActivity extends BaseActivity {
         } else {
             etc_content = null;
         }
-
+        showProgress("신고 접수 중입니다.");
         Call<ResStringString> resReport = NetSSL.getInstance().getMemberImpFactory()
                 .resReport(new ReqReport(other_member_id, report_content, etc_content));
         resReport.enqueue(new Callback<ResStringString>() {
@@ -99,6 +99,7 @@ public class reportActivity extends BaseActivity {
             public void onResponse(Call<ResStringString> call, Response<ResStringString> response) {
                 if (response.body().getResult() != null) {
                     Log.i("RF:Report", "SUCCESS" + response.body().getResult());
+                    hideProgress();
                     Toast.makeText(reportActivity.this, "신고가 접수되었습니다. 감사합니다.", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
@@ -108,7 +109,9 @@ public class reportActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call<ResStringString> call, Throwable t) {
-                Log.i("RF", "ERR" + t.getMessage());
+                Log.i("RF:Report", "ERR" + t.getMessage());
+                hideProgress();
+                Toast.makeText(reportActivity.this, "신고가 취소되었습니다. 다시 신청해주세요", Toast.LENGTH_SHORT).show();
             }
         });
     }

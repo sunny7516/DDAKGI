@@ -7,28 +7,34 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.tacademy.ddakgi.adapter.LikeRecyclerAdapter;
-import com.example.tacademy.ddakgi.view.My.model.MyTimelineItem;
 import com.example.tacademy.ddakgi.R;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.tacademy.ddakgi.adapter.LikeRecyclerAdapter;
+import com.example.tacademy.ddakgi.data.Heart.ResHeartPosting;
+import com.example.tacademy.ddakgi.data.NetSSL;
+import com.example.tacademy.ddakgi.data.Ottobus;
+import com.squareup.otto.Subscribe;
 
 import io.chooco13.NotoTextView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class LikeTab extends Fragment {
 
-    final int ITEM_SIZE = 3;
     RecyclerView recyclerviewLikeTab;
     LinearLayoutManager linearLayoutManager;
 
     Toolbar toolbar;
     NotoTextView deleteBt;
+
+    boolean ottoflag = false;
+    ResHeartPosting items;
 
     public LikeTab() {
         // Required empty public constructor
@@ -40,31 +46,66 @@ public class LikeTab extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_like_tab, container, false);
 
+        // 레트로핏 통신 ==============================================================================
+        if (!ottoflag) {
+            Ottobus.getInstance().getMaingfrag_bus().register(this);
+            ottoflag = true;
+        }
+
         // Fragment toolbar 적용하기
         toolbar = (Toolbar) getActivity().findViewById(R.id.likeToolbar);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
 
-        deleteBt = (NotoTextView)getActivity().findViewById(R.id.deleteBt);
+        deleteBt = (NotoTextView) getActivity().findViewById(R.id.deleteBt);
 
         // Inflate the layout for this fragment
         recyclerviewLikeTab = (RecyclerView) view.findViewById(R.id.recyclerviewLikeTab);
         linearLayoutManager = new LinearLayoutManager(this.getContext());
         linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
+        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setReverseLayout(true);
         recyclerviewLikeTab.setLayoutManager(linearLayoutManager);
 
-        // 가데이터
-        List<MyTimelineItem> items = new ArrayList<>();
-        MyTimelineItem[] item = new MyTimelineItem[ITEM_SIZE];
-        item[0] = new MyTimelineItem(R.drawable.testroom0);
-        item[1] = new MyTimelineItem(R.drawable.testroom1);
-        item[2] = new MyTimelineItem(R.drawable.testroom2);
-
-        for (int i = 0; i < ITEM_SIZE; i++) {
-            items.add(item[i]);
-        }
-        recyclerviewLikeTab.setAdapter(new LikeRecyclerAdapter(getContext(), items, R.layout.home_timeline));
-
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Call<ResHeartPosting> resHeartPostingCall = NetSSL.getInstance().getMemberImpFactory().resHeartPosting();
+        resHeartPostingCall.enqueue(new Callback<ResHeartPosting>() {
+            @Override
+            public void onResponse(Call<ResHeartPosting> call, Response<ResHeartPosting> response) {
+                if (response.body().getResult() != null) {
+                    Log.i("RF:MyPage", "SUCCESS" + response.body().getResult());
+                    if (response.body().getResult() != null) {
+                        Ottobus.getInstance().getMaingfrag_bus().post(response.body());
+                    }
+                } else {
+                    Log.i("RF:MyPage", "FAIL" + response.body().getError());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResHeartPosting> call, Throwable t) {
+                Log.i("RF:INTRO", "ERR" + t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        // Ottobus 연결 끊어주기
+        Ottobus.getInstance().getMaingfrag_bus().unregister(this);
+    }
+
+    @Subscribe
+    public void FinishLoad(ResHeartPosting data) {
+        items = data;
+        LikeRecyclerAdapter recyclerAdapter = new LikeRecyclerAdapter(getContext(), items, R.layout.home_timeline);
+        recyclerAdapter.notifyDataSetChanged();
+        recyclerviewLikeTab.setAdapter(recyclerAdapter);
     }
 }

@@ -15,6 +15,8 @@ import android.widget.AutoCompleteTextView;
 import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.base.BaseActivity;
 import com.example.tacademy.ddakgi.util.U;
+import com.example.tacademy.ddakgi.view.Chat.holder.PostHolder;
+import com.example.tacademy.ddakgi.view.Chat.model.ChatModel;
 import com.example.tacademy.ddakgi.view.Report.reportActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,8 +28,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-import io.chooco13.NotoTextView;
-
 public class ChatRoomActivity extends BaseActivity {
 
     // UI
@@ -35,8 +35,6 @@ public class ChatRoomActivity extends BaseActivity {
     AutoCompleteTextView msg_input;
     ChatRoomActivity.MyAdapter myAdapter = new ChatRoomActivity.MyAdapter();
     LinearLayoutManager linearLayoutManager;
-
-    NotoTextView txt_left_time;
 
     // FireBase
     FirebaseDatabase firebaseDatabase;
@@ -112,7 +110,8 @@ public class ChatRoomActivity extends BaseActivity {
     }
     int other_member_id;
     public void goReport(View view) {
-        other_member_id = getIntent().getExtras().getInt("int other_member_id");
+        // 상세페이지에서 채팅 신고했을 경우
+        other_member_id = getIntent().getExtras().getInt("other_member_id");
         Intent intent = new Intent(this, reportActivity.class);
         intent.putExtra("other_member_id", other_member_id);
         startActivity(intent);

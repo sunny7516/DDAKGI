@@ -1,4 +1,4 @@
-package com.example.tacademy.ddakgi.view.Chat;
+package com.example.tacademy.ddakgi.view.Chat.model;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +13,7 @@ import java.util.Map;
  */
 
 public class ChatChannelModel {
+    int mid;    // 신고할 때 상대방 회원번호
     String uid;
     String lastMsg;
     int readCount;
@@ -23,7 +24,8 @@ public class ChatChannelModel {
     public ChatChannelModel() {
     }
 
-    public ChatChannelModel(String uid, String lastMsg, int readCount, long time, String profile) {
+    public ChatChannelModel(int mid, String uid, String lastMsg, int readCount, long time, String profile) {
+        this.mid = mid;
         this.uid = uid;
         this.lastMsg = lastMsg;
         this.readCount = readCount;
@@ -33,6 +35,7 @@ public class ChatChannelModel {
 
     public Map<String, Object> toChannelMap() {
         Map<String, Object> map = new HashMap<>();
+        map.put("mid", mid);
         map.put("uid", uid);
         map.put("lastMsg", lastMsg);
         map.put("readCount", readCount);
@@ -40,6 +43,14 @@ public class ChatChannelModel {
         map.put("profile", profile);
         map.put("chatting_channel", chatting_channel);
         return map;
+    }
+
+    public int getMid() {
+        return mid;
+    }
+
+    public void setMid(int mid) {
+        this.mid = mid;
     }
 
     public String getUid() {

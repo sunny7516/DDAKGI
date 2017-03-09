@@ -1,33 +1,23 @@
-package com.example.tacademy.ddakgi.data.HomeTimeline;
+package com.example.tacademy.ddakgi.data.Mypage;
 
 /**
- * Created by Tacademy on 2017-03-03.
+ * Created by Tacademy on 2017-03-08.
  */
 
-public class HomePostingModel {
-    int rid;    // 게시글 번호
-    int mid;    // 회원 번호
+public class ResultRoommate {
+    int rid;
+    int mid;
     String nickname;
     String title;
-    String ctime;   // 등록 날짜
+    String ctime;
     int age;
-    String address; // 주소
-    int rooming;    // 방인지 룸메인지 구별 (0:룸메, 1:방)
-    int heart_state;
+    String address;
+    int deposit;
+    int rent;
+    int roomming;
     int heart_count;
-    int matching_rate;
-    int deposit;    // (방 있는 룸메만)
-    int rent;       // (방 있는 룸메만)
-    String thumbnail_image;    // 프로필 사진
-    String[] roommate_image;   // 방 혹은 룸메 사진
-
-    public int getHeart_state() {
-        return heart_state;
-    }
-
-    public void setHeart_state(int heart_state) {
-        this.heart_state = heart_state;
-    }
+    String thumbnail_image;
+    String[] roommate_image;
 
     public int getRid() {
         return rid;
@@ -101,12 +91,12 @@ public class HomePostingModel {
         this.rent = rent;
     }
 
-    public int getRooming() {
-        return rooming;
+    public int getRoomming() {
+        return roomming;
     }
 
-    public void setRooming(int rooming) {
-        this.rooming = rooming;
+    public void setRoomming(int roomming) {
+        this.roomming = roomming;
     }
 
     public int getHeart_count() {
@@ -115,14 +105,6 @@ public class HomePostingModel {
 
     public void setHeart_count(int heart_count) {
         this.heart_count = heart_count;
-    }
-
-    public int getMatching_rate() {
-        return matching_rate;
-    }
-
-    public void setMatching_rate(int matching_rate) {
-        this.matching_rate = matching_rate;
     }
 
     public String getThumbnail_image() {

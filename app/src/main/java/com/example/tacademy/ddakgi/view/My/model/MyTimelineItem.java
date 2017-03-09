@@ -8,7 +8,6 @@ import android.widget.ImageButton;
  */
 
 public class MyTimelineItem {
-
     int profile;
     String nickName;
     Button modifyBt;

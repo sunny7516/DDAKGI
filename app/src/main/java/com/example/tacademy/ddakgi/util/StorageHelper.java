@@ -34,14 +34,16 @@ public class StorageHelper {
 
     // ========================= 저장 타입별 기능 제공 ===========================
 
-    public void setCookies(String key, Set<String> value){
+    public void setCookies(String key, Set<String> value) {
         SharedPreferences.Editor editor = context.getSharedPreferences(STORAGE_KEY, 0).edit();
         editor.putStringSet(key, value);
         editor.commit();
     }
-    public Set<String> getCookies(String key){
-        return context.getSharedPreferences(STORAGE_KEY, 0).getStringSet(key, null);
+
+    public Set<String> getCookies(String key) {
+       return context.getSharedPreferences(STORAGE_KEY, 0).getStringSet(key, null);
     }
+
     /*
     static {
         // NDK로 만들어는 lib, o 등등 파일을(c/c++ 라이브러리) 로드할 때 사용
@@ -76,6 +78,7 @@ public class StorageHelper {
         return
                 context.getSharedPreferences(STORAGE_KEY, 0).getBoolean(key, false);
     }
+
     public void setInt(Context context, String key, int value) {
         // 저장소 획득
         SharedPreferences.Editor editor = context.getSharedPreferences(STORAGE_KEY, 0).edit();

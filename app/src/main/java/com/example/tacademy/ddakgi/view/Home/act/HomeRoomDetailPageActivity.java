@@ -5,15 +5,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.base.BaseActivity;
 import com.example.tacademy.ddakgi.data.DetailPost.DetailPosting;
 import com.example.tacademy.ddakgi.data.DetailPost.ResDetailPosting;
+import com.example.tacademy.ddakgi.data.Heart.ReqSetHeart;
 import com.example.tacademy.ddakgi.data.NetSSL;
-import com.example.tacademy.ddakgi.view.Chat.ChatChannelModel;
+import com.example.tacademy.ddakgi.data.RegisterRoom.ResStringString;
 import com.example.tacademy.ddakgi.view.Chat.ChatRoomActivity;
+import com.example.tacademy.ddakgi.view.Chat.model.ChatChannelModel;
 import com.example.tacademy.ddakgi.view.SignUp.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,30 +29,35 @@ import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.chooco13.NotoTextView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static android.view.View.GONE;
-
 /**
- * getUid -> getKakaoId로 대체
+ * 방 상세 페이지
  */
 
 public class HomeRoomDetailPageActivity extends BaseActivity {
     String postKey;
-    String auth_uid;   // 상대방의 you_id를 임시로 설정해줌
+    String auth_uid;
 
     public int roommate_id;
+    DetailPosting detailPosting;
+    RelativeLayout chatLayout;
 
     ImageView detailPageImg, roomHeart_state;
-    NotoTextView DetailToolbarNickname, roomDetailPageLikeNum, percent, detailNicknameAge;
+    NotoTextView DetailToolbarNickname, roomDetailPageLikeNum, percent, detailNicknameAge, percentTitle;
     NotoTextView detailPrice, detailLocate, detailRoomType, detailPay, detailOptions, detailRoomHeight, detailRoomSize, detailPrefDate;
     NotoTextView detailDescription, detailAnswer1, detailAnswer2, detailAnswer3, detailAnswer4, detailAnswer5;
     NotoTextView detailAnswer6, detailAnswer7, detailAnswer8, detailAnswer9, detailAnswer10;
     CircleImageView detailProfile;
+    TextView chatString;
+
+    NotoTextView roomModifyBt, roomDeleteBt;
+    SweetAlertDialog alert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +66,19 @@ public class HomeRoomDetailPageActivity extends BaseActivity {
 
         // 키 획득
         postKey = getIntent().getStringExtra("KEY");
+        // 파라미터값 받아오기
+        roommate_id = getIntent().getExtras().getInt("roommate_id");
+        // 통신
+        setDetail(roommate_id);
 
         // xml -> java
+        chatLayout = (RelativeLayout) findViewById(R.id.chatLayout);
+        chatString = (TextView) findViewById(R.id.chatString);
+
+        roomModifyBt = (NotoTextView)findViewById(R.id.roomModifyBt);
+        roomDeleteBt = (NotoTextView)findViewById(R.id.roomDeleteBt);
+
+        percentTitle = (NotoTextView) findViewById(R.id.percentTitle);
         roomHeart_state = (ImageView) findViewById(R.id.roomHeart_state);
         DetailToolbarNickname = (NotoTextView) findViewById(R.id.DetailToolbarNickname);
         detailPageImg = (ImageView) findViewById(R.id.detailPageImg);
@@ -85,18 +105,125 @@ public class HomeRoomDetailPageActivity extends BaseActivity {
         detailAnswer9 = (NotoTextView) findViewById(R.id.detailAnswer9);
         detailAnswer10 = (NotoTextView) findViewById(R.id.detailAnswer10);
         detailProfile = (CircleImageView) findViewById(R.id.detailProfile);
-
-        // 파라미터값 받아오기
-        roommate_id = getIntent().getIntExtra("roommate_id", 0);
-        // 통신
-        setDetail(roommate_id);
     }
 
-    DetailPosting detailPosting;
+    boolean heartflag;
 
-    // 통신 ===========================================================================
+    // 클릭 이벤트
+    public void clickHeart(View view) {
+        int likeNum = Integer.parseInt(roomDetailPageLikeNum.getText().toString());
+        if (!heartflag) {
+            roomHeart_state.setImageResource(R.mipmap.heart_on_btn);
+            roomDetailPageLikeNum.setText(String.valueOf(likeNum + 1));
+            heartflag = true;
+            setHeart();
+        } else {
+            roomHeart_state.setImageResource(R.mipmap.heart_off_btn);
+            roomDetailPageLikeNum.setText(String.valueOf(likeNum - 1));
+            heartflag = false;
+            deleteHeart();
+        }
+    }
+
+    public void deleteRoomPosting(View view){
+        alert =
+                new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                        .setContentText("글을 삭제하시겠습니까?")
+                        .setConfirmText("삭제")
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                // 삭제 버튼 누르면 화면에서 글 삭제
+                                alert.dismissWithAnimation();
+                                deleteDB();
+                            }
+                        })
+                        .setCancelText("취소")
+                        .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                alert.dismissWithAnimation();
+                            }
+                        });
+        alert.setCancelable(true);
+        alert.show();
+    }
+
+    // 통신 =========================================================================================
+
+    // 글 삭제
+    public void deleteDB(){
+        Call<ResStringString> resDeletePosting =
+                NetSSL.getInstance().getMemberImpFactory().resDeletePosting(detailPosting.getRid());
+        resDeletePosting.enqueue(new Callback<ResStringString>() {
+            @Override
+            public void onResponse(Call<ResStringString> call, Response<ResStringString> response) {
+                if (response.body().getResult() != null) {
+                    Log.i("RF:DeleteMyPosting", "SUCCESS" + response.body().getResult());
+                    Toast.makeText(HomeRoomDetailPageActivity.this, "글이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Log.i("RF:DeleteMyPosting", "FAIL" + response.body().getError());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResStringString> call, Throwable t) {
+                Log.i("RF:DeleteMyPosting", "ERR" + t.getMessage());
+            }
+        });
+    }
+
+    // 찜 등록 통신
+    public void setHeart() {
+        Call<ResStringString> resReport = NetSSL.getInstance().getMemberImpFactory()
+                .resSetHeart(new ReqSetHeart(roommate_id));
+        resReport.enqueue(new Callback<ResStringString>() {
+            @Override
+            public void onResponse(Call<ResStringString> call, Response<ResStringString> response) {
+                if (response.body().getResult() != null) {
+                    Log.i("RF:SetHeart", "SUCCESS" + response.body().getResult());
+                    Toast.makeText(HomeRoomDetailPageActivity.this, "찜 목록에 추가되었습니다.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.i("RF:SetHeart", "FAIL" + response.body().getError());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResStringString> call, Throwable t) {
+                Log.i("RF:SetHeart", "ERR" + t.getMessage());
+            }
+        });
+    }
+
+    // 찜 삭제 통신
+    public void deleteHeart() {
+        Call<ResStringString> resDeleteHeartCall = NetSSL.getInstance().getMemberImpFactory()
+                .resDeleteHeart(roommate_id);
+        resDeleteHeartCall.enqueue(new Callback<ResStringString>() {
+            @Override
+            public void onResponse(Call<ResStringString> call, Response<ResStringString> response) {
+                if (response.body().getResult() != null) {
+                    Log.i("RF:deleteHeart", "SUCCESS" + response.body().getResult());
+                    if (response.body().getResult() != null) {
+                        Log.i("RF:deleteHeart", response.body().getResult() + "");
+                        Toast.makeText(HomeRoomDetailPageActivity.this, "찜 목록에서 삭제되었습니다", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Log.i("RF:deleteHeart", "FAIL" + response.body().getError());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResStringString> call, Throwable t) {
+                Log.i("RF:deleteHeart", "ERR" + t.getMessage());
+            }
+        });
+    }
+
+    // 상세페이지 조회
     public void setDetail(int roommate_id) {
-        Call<ResDetailPosting> resDetailPostingCall = NetSSL.getInstance().getMemberImpFactory().resDetailPosting(117);
+        Call<ResDetailPosting> resDetailPostingCall = NetSSL.getInstance().getMemberImpFactory().resDetailPosting(roommate_id);
         resDetailPostingCall.enqueue(new Callback<ResDetailPosting>() {
             @Override
             public void onResponse(Call<ResDetailPosting> call, Response<ResDetailPosting> response) {
@@ -104,6 +231,11 @@ public class HomeRoomDetailPageActivity extends BaseActivity {
                     Log.i("RF:Detail", "SUCCESS" + response.body().getResult());
                     if (response.body().getResult() != null) {
                         detailPosting = response.body().getResult();
+                        if (detailPosting.getHeart_state() == 0) {
+                            heartflag = false;
+                        } else {
+                            heartflag = true;
+                        }
                         // 데이터 세팅
                         setData(detailPosting);
                     }
@@ -119,17 +251,42 @@ public class HomeRoomDetailPageActivity extends BaseActivity {
         });
     }
 
+    // 화면 데이터 세팅 ===============================================================================
     public void setData(DetailPosting detailPosting) {
         auth_uid = detailPosting.getUid();  // 게시글 작성자의 uid
+
+        // 나 자신이면 매칭률, 채팅 안보이게함
+        if (getUid() == auth_uid) {
+            chatLayout.setVisibility(View.GONE);
+            percent.setVisibility(View.GONE);
+            percentTitle.setVisibility(View.GONE);
+            chatString.setVisibility(View.GONE);
+
+            // 수정 삭제 버튼
+            roomModifyBt.setVisibility(View.VISIBLE);
+            roomDeleteBt.setVisibility(View.VISIBLE);
+        } else {
+            chatLayout.setVisibility(View.VISIBLE);
+            percent.setVisibility(View.VISIBLE);
+            percentTitle.setVisibility(View.VISIBLE);
+            chatString.setVisibility(View.VISIBLE);
+
+            // 수정 삭제 버튼
+            roomModifyBt.setVisibility(View.GONE);
+            roomDeleteBt.setVisibility(View.GONE);
+        }
+
         if (detailPosting.getHeart_state() == 0) {
             roomHeart_state.setImageResource(R.mipmap.heart_off_btn);
         } else {
             roomHeart_state.setImageResource(R.mipmap.heart_on_btn);
         }
-        Picasso.with(this)
-                .load(detailPosting.getRoommate_image().get(0))
-                .fit()
-                .into(detailPageImg);
+        if (detailPosting.getRoommate_image() != null) {
+            Picasso.with(this)
+                    .load(detailPosting.getRoommate_image().get(0))
+                    .fit()
+                    .into(detailPageImg);
+        }
         DetailToolbarNickname.setText(detailPosting.getNickname());
         roomDetailPageLikeNum.setText(String.valueOf(detailPosting.getHeart_count()));
         percent.setText(detailPosting.getMatching_rate() + "%");
@@ -163,10 +320,10 @@ public class HomeRoomDetailPageActivity extends BaseActivity {
         } else {
             detailProfile.setImageResource(R.mipmap.profile);
         }
-
+/*
         if (auth_uid.equals(getUid())) {
             findViewById(R.id.chatBt).setVisibility(GONE);
-        }
+        }*/
     }
 
     // 채팅 신청 ====================================================================================
@@ -188,13 +345,14 @@ public class HomeRoomDetailPageActivity extends BaseActivity {
                         if (user == null) {
                             Log.i("chat", "내 아이디 없음");
                         } else {
+                            Log.i("chat", "checkYou()");
                             checkYou();
                         }
                     }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-
+                        Log.i("chat", "error" + databaseError.toString());
                     }
                 });
     }
@@ -239,7 +397,7 @@ public class HomeRoomDetailPageActivity extends BaseActivity {
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-
+                        Log.i("chat", "checkYou:error" + databaseError.toString());
                     }
                 });
         hideProgress();
@@ -249,6 +407,7 @@ public class HomeRoomDetailPageActivity extends BaseActivity {
     public void makeChannel(String you_id, String you_profile) {
         // channel에 데이터 설정
         ChatChannelModel ccm = new ChatChannelModel(
+                detailPosting.getMid(),
                 you_id,
                 getNickName() + "님이 채팅을 요청합니다",
                 1,

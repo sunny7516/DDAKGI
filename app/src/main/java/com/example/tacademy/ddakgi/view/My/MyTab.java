@@ -17,14 +17,13 @@ import android.widget.ImageView;
 
 import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.adapter.MyRecyclerAdapter;
-import com.example.tacademy.ddakgi.data.Member.ResMember;
+import com.example.tacademy.ddakgi.data.Mypage.ResMypage;
 import com.example.tacademy.ddakgi.data.NetSSL;
+import com.example.tacademy.ddakgi.data.Ottobus;
 import com.example.tacademy.ddakgi.view.Help.HelpActivity;
-import com.example.tacademy.ddakgi.view.My.model.MyTimelineItem;
 import com.example.tacademy.ddakgi.view.Setting.SettingActivity;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.squareup.otto.Subscribe;
+import com.squareup.picasso.Picasso;
 
 import io.chooco13.NotoTextView;
 import retrofit2.Call;
@@ -34,7 +33,6 @@ import retrofit2.Response;
 
 public class MyTab extends Fragment {
 
-    final int ITEM_SIZE = 3;
     RecyclerView recyclerviewMyTab;
     LinearLayoutManager linearLayoutManager;
 
@@ -43,6 +41,9 @@ public class MyTab extends Fragment {
     ImageButton settingBt;
     ImageView modifyProfileBt;
     NotoTextView myTabNickname;
+
+    boolean ottoflag = false;
+    ResMypage items;
 
     public MyTab() {
         // Required empty public constructor
@@ -53,9 +54,13 @@ public class MyTab extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_tab, container, false);
 
-        // 내 정보(사진, 닉네임) 가져와서 적용
-        getMyInfo();
-        myTabNickname = (NotoTextView)view.findViewById(R.id.myTabNickname);
+        // 레트로핏 통신 ==============================================================================
+        if (!ottoflag) {
+            Ottobus.getInstance().getMaingfrag_bus().register(this);
+            ottoflag = true;
+        }
+
+        myTabNickname = (NotoTextView) view.findViewById(R.id.myTabNickname);
 
         // Fragment toolbar 적용하기
         toolbar = (Toolbar) getActivity().findViewById(R.id.myTabTool);
@@ -78,40 +83,58 @@ public class MyTab extends Fragment {
         linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
         recyclerviewMyTab.setLayoutManager(linearLayoutManager);
 
-        // 가데이터
-        List<MyTimelineItem> items = new ArrayList<>();
-        MyTimelineItem[] item = new MyTimelineItem[ITEM_SIZE];
-        item[0] = new MyTimelineItem(R.drawable.testroom0);
-        item[1] = new MyTimelineItem(R.drawable.testroom1);
-        item[2] = new MyTimelineItem(R.drawable.testroom2);
-
-        for (int i = 0; i < ITEM_SIZE; i++) {
-            items.add(item[i]);
-        }
-        recyclerviewMyTab.setAdapter(new MyRecyclerAdapter(getContext(), items, R.layout.home_timeline));
-
         return view;
     }
 
-    // DB에서 data get ==========================================================================
-    public void getMyInfo() {
-        Call<ResMember> resMemberCall = NetSSL.getInstance().getMemberImpFactory().resMember();
-        resMemberCall.enqueue(new Callback<ResMember>() {
+    @Override
+    public void onStart() {
+        super.onStart();
+        Call<ResMypage> resMypageCall = NetSSL.getInstance().getMemberImpFactory().resMypage();
+        resMypageCall.enqueue(new Callback<ResMypage>() {
             @Override
-            public void onResponse(Call<ResMember> call, Response<ResMember> response) {
-                if (response.body().getResult() != null) {
-                    Log.i("RF:ME", "SUCCESS" + response.body().getResult().getNickname());
-                    myTabNickname.setText(response.body().getResult().getNickname());
+            public void onResponse(Call<ResMypage> call, Response<ResMypage> response) {
+                if (response.body() != null) {
+                    Log.i("RF:My", "SUCCESS" + response.body());
+                    if (response.body() != null) {
+                        // 내 정보 붙여넣기
+                        if (response.body().getResult_member().getProfile_image() != null) {
+                            Picasso.with(getContext())
+                                    .load(response.body().getResult_member().getProfile_image())
+                                    .fit()
+                                    .into(modifyProfileBt);
+                        } else {
+                            modifyProfileBt.setImageResource(R.mipmap.profile_btn);
+                        }
+                        myTabNickname.setText(response.body().getResult_member().getNickname());
+
+                        Ottobus.getInstance().getMaingfrag_bus().post(response.body());
+                    }
                 } else {
-                    Log.i("RF:ME", "FAIL" + response.body().getError());
+                    Log.i("RF:My", "FAIL" + response.body().getError());
                 }
             }
 
             @Override
-            public void onFailure(Call<ResMember> call, Throwable t) {
-                Log.i("RF:ME", "ERR" + t.getMessage());
+            public void onFailure(Call<ResMypage> call, Throwable t) {
+                Log.i("RF:My", "ERR" + t.getMessage());
             }
         });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        // Ottobus 연결 끊어주기
+        Ottobus.getInstance().getMaingfrag_bus().unregister(this);
+    }
+
+    @Subscribe
+    public void FinishLoad(ResMypage data) {
+        items = data;
+
+        MyRecyclerAdapter recyclerAdapter = new MyRecyclerAdapter(getContext(), items, R.layout.home_timeline);
+        recyclerAdapter.notifyDataSetChanged();
+        recyclerviewMyTab.setAdapter(recyclerAdapter);
     }
 
     private View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -124,6 +147,7 @@ public class MyTab extends Fragment {
                     break;
                 case R.id.settingBt:
                     Intent mateIntent = new Intent(getContext(), SettingActivity.class);
+                    mateIntent.putExtra("id", items.getResult_member().getMid());
                     startActivity(mateIntent);
                     break;
                 case R.id.modifyProfileBt:

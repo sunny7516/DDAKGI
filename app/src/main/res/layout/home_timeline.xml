@@ -118,6 +118,7 @@
             android:orientation="vertical">
 
             <io.chooco13.NotoTextView
+                android:id="@+id/matching_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/homeLifeStyleText"

@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // 자동 로그인 상태이면 홈화면으로 바로 이동
-        if (StorageHelper.getInstance().getBoolean(this, "AUTOLOGIN") == true) {
+        if (StorageHelper.getInstance().getBoolean(this, "AUTOLOGIN")) {
             Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
             this.finish();

@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -84,6 +85,7 @@ public class HomeTab extends Fragment {
         // 검색할 수 없도록 막아두기
         searchEditText.setEnabled(false);
         searchEditText.setClickable(false);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         search_close_btn = (ImageView) searchView.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
         search_icon = (ImageView) searchView.findViewById(android.support.v7.appcompat.R.id.search_mag_icon);
@@ -144,18 +146,21 @@ public class HomeTab extends Fragment {
 
     public void AllPostingSet() {
         Call<ResHomePosting> resAllPostingCall = NetSSL.getInstance().getMemberImpFactory().resAllPosting(
-                "0", "0", "0", 1,2,3,4,5,999999,999999,"1111-11-11"
-        );
+                "0", "0", "0", 1, 2, 3, 4, 5, 999999, 999999, "1111-11-11");
         resAllPostingCall.enqueue(new Callback<ResHomePosting>() {
             @Override
             public void onResponse(Call<ResHomePosting> call, Response<ResHomePosting> response) {
-                if (response.body().getResult() != null) {
-                    Log.i("RF:Main/Room", "SUCCESS" + response.body().getResult());
+                if (response.isSuccessful()) {
                     if (response.body().getResult() != null) {
-                        Ottobus.getInstance().getMaingfrag_bus().post(response.body());
+                        Log.i("RF:Main/Room", "SUCCESS" + response.body().getResult());
+                        if (response.body().getResult() != null) {
+                            Ottobus.getInstance().getMaingfrag_bus().post(response.body());
+                        }
+                    } else {
+                        Log.i("RF:Main/Room", "FAIL" + response.message());
                     }
                 } else {
-                    Log.i("RF:Main/Room", "FAIL" + response.body().getError());
+                    Log.i("RF:Main/Room", "정보보기 실패" + response.message());
                 }
             }
 
@@ -199,7 +204,9 @@ public class HomeTab extends Fragment {
     @Subscribe
     public void FinishLoad(ResHomePosting data) {
         items = data;
-        recyclerviewHomeTab.setAdapter(new RecyclerAdapter(getContext(), items, R.layout.home_timeline));
+        RecyclerAdapter recyclerAdapter = new RecyclerAdapter(getContext(), items, R.layout.home_timeline);
+        recyclerAdapter.notifyDataSetChanged();
+        recyclerviewHomeTab.setAdapter(recyclerAdapter);
     }
 
     // Toolbar Click Event
