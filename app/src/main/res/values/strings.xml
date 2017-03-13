@@ -174,6 +174,7 @@
 
     <!-- 필터 -->
     <string name="filterRoomType">방 종류</string>
+    <string name="filter">모든 항목을 설정해야 정확한 필터를 할 수 있습니다.</string>
 
     <!-- ChatTab -->
     <string name="report">신고</string>
@@ -197,7 +198,7 @@
     <!-- MyTab -->
     <string name="myToolText">프로필 수정</string>
     <string name="QnA">Q &amp; A</string>
-    <string name="noMyPosting">내가 쓴 글이 존재하지 않습니다.</string>
+    <string name="noMyPosting">등록한 글이 없습니다.</string>
 
     <!-- 카카오 로그인 -->
     <string name="kakao_app_key">2a53a7a89edf17b188fd0f110c5b427f</string>

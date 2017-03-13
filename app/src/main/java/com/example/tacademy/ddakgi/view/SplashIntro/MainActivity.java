@@ -53,15 +53,14 @@ public class MainActivity extends AppCompatActivity {
             ottoflag = true;
         }
 
-        // 자동 로그인 상태이면 홈화면으로 바로 이동
-        if (StorageHelper.getInstance().getBoolean(this, "AUTOLOGIN")) {
-            Intent intent = new Intent(this, HomeActivity.class);
+        if (StorageHelper.getInstance().getBoolean(MainActivity.this, "AUTOLOGIN")){
+            // 자동 로그인이면
+            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
             startActivity(intent);
-            this.finish();
-        } else {
-            // 자동 로그인 아니면 인트로
-            getIntroData();
         }
+        Log.i("MainActivity", StorageHelper.getInstance().getBoolean(this, "AUTOLOGIN") + "");
+
+        getIntroData();
 
         // intent 애니메이션
         overridePendingTransition(R.anim.act_slide_in_from_bottom, R.anim.act_slide_out_to_top);
@@ -247,6 +246,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
 
-        this.finish();
+        finish();
     }
 }

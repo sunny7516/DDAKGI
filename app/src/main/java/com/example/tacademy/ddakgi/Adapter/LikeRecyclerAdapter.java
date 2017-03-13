@@ -62,13 +62,15 @@ public class LikeRecyclerAdapter extends RecyclerView.Adapter<LikeRecyclerAdapte
         Picasso.with(context).load(item.getThumbnail_image()).fit().into(holder.mPhoto);
         holder.mNickname.setText(item.getNickname());
         holder.mDate.setText(item.getCtime().split("T")[0]);
-        holder.matching_rate.setText(String.valueOf(item.getMatching_rate()));
+        holder.matching_rate.setText(item.getMatching_rate()+"%");
         holder.mTitle.setText(item.getTitle());
         holder.mPrice.setText(item.getDeposit() + "/" + item.getRent());
         holder.mAge.setText(String.valueOf(item.getAge()));
         holder.mLocation.setText(item.getAddress());
         holder.mLikeNum.setText(String.valueOf(item.getHeart_count()));
-        Picasso.with(context).load(item.getRoommate_image()[0]).fit().into(holder.mPhoto);
+        if (item.getRoommate_image() != null) {
+            Picasso.with(context).load(item.getRoommate_image()[0]).fit().into(holder.mPhoto);
+        }
 
         holder.deleteBt.setVisibility(View.VISIBLE);
         holder.deleteBt.setOnClickListener(new View.OnClickListener() {

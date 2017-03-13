@@ -34,6 +34,15 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.example.tacademy.ddakgi.R.id.gosearchBt;
+import static com.example.tacademy.ddakgi.view.Filter.FilterActivity.filterAvailable_date;
+import static com.example.tacademy.ddakgi.view.Filter.FilterActivity.filterDeposit;
+import static com.example.tacademy.ddakgi.view.Filter.FilterActivity.filterRent;
+import static com.example.tacademy.ddakgi.view.Filter.FilterActivity.filterRoomType1;
+import static com.example.tacademy.ddakgi.view.Filter.FilterActivity.filterRoomType2;
+import static com.example.tacademy.ddakgi.view.Filter.FilterActivity.filterRoomType3;
+import static com.example.tacademy.ddakgi.view.Filter.FilterActivity.filterRoomType4;
+import static com.example.tacademy.ddakgi.view.Filter.FilterActivity.filterRoomType5;
+import static com.example.tacademy.ddakgi.view.Filter.FilterActivity.isFilterSet;
 
 /**
  * 홈화면 > all/room/mate 타임라인 보여줌
@@ -72,6 +81,17 @@ public class HomeTab extends Fragment {
             ottoflag = true;
         }
 
+        if (!isFilterSet) {
+            // 디폴트값
+            filterRoomType1 = 1;
+            filterRoomType2 = 2;
+            filterRoomType3 = 3;
+            filterRoomType4 = 4;
+            filterRoomType5 = 5;
+            filterDeposit = 999999;
+            filterRent = 999999;
+            filterAvailable_date = "1111-11-11";
+        }
         AllPostingSet();
 
         // SearchView Style ========================================================================
@@ -146,7 +166,7 @@ public class HomeTab extends Fragment {
 
     public void AllPostingSet() {
         Call<ResHomePosting> resAllPostingCall = NetSSL.getInstance().getMemberImpFactory().resAllPosting(
-                "0", "0", "0", 1, 2, 3, 4, 5, 999999, 999999, "1111-11-11");
+                "0", "0", "0", filterRoomType1, filterRoomType2, filterRoomType3, filterRoomType4, filterRoomType5, filterDeposit, filterRent, filterAvailable_date);
         resAllPostingCall.enqueue(new Callback<ResHomePosting>() {
             @Override
             public void onResponse(Call<ResHomePosting> call, Response<ResHomePosting> response) {
@@ -154,6 +174,7 @@ public class HomeTab extends Fragment {
                     if (response.body().getResult() != null) {
                         Log.i("RF:Main/Room", "SUCCESS" + response.body().getResult());
                         if (response.body().getResult() != null) {
+                            Log.i("isFilterSet", isFilterSet + "");
                             Ottobus.getInstance().getMaingfrag_bus().post(response.body());
                         }
                     } else {
@@ -172,13 +193,15 @@ public class HomeTab extends Fragment {
     }
 
     public void RoomOrMateSet(int roomming) {
-        Call<ResHomePosting> resRoomMatePosting = NetSSL.getInstance().getMemberImpFactory().resRoomMatePosting(roomming);
+        Call<ResHomePosting> resRoomMatePosting = NetSSL.getInstance().getMemberImpFactory().resRoomMatePosting(roomming,
+                "0", "0", "0", filterRoomType1, filterRoomType2, filterRoomType3, filterRoomType4, filterRoomType5, filterDeposit, filterRent, filterAvailable_date);
         resRoomMatePosting.enqueue(new Callback<ResHomePosting>() {
             @Override
             public void onResponse(Call<ResHomePosting> call, Response<ResHomePosting> response) {
                 if (response.body().getResult() != null) {
                     Log.i("RF:RoomMate", "SUCCESS" + response.body().getResult());
                     if (response.body().getResult() != null) {
+                        Log.i("isFilterSet", isFilterSet + "");
                         Log.i("RF:RoomMate", items.getResult() + "");
                         Ottobus.getInstance().getMaingfrag_bus().post(response.body());
                     }
@@ -201,10 +224,12 @@ public class HomeTab extends Fragment {
         Ottobus.getInstance().getMaingfrag_bus().unregister(this);
     }
 
+    RecyclerAdapter recyclerAdapter;
+
     @Subscribe
     public void FinishLoad(ResHomePosting data) {
         items = data;
-        RecyclerAdapter recyclerAdapter = new RecyclerAdapter(getContext(), items, R.layout.home_timeline);
+        recyclerAdapter = new RecyclerAdapter(getContext(), items, R.layout.home_timeline);
         recyclerAdapter.notifyDataSetChanged();
         recyclerviewHomeTab.setAdapter(recyclerAdapter);
     }
@@ -222,11 +247,23 @@ public class HomeTab extends Fragment {
                 // 이미지 버튼 눌렀을 때 filter 화면으로 intent
                 case R.id.filter_menu:
                     Intent intent = new Intent(getActivity(), FilterActivity.class);
-                    startActivity(intent);
+                    startActivityForResult(intent, 1000);
                     break;
             }
         }
     };
+
+    // 필터링 적용했을 때 갱신
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1000) {
+            if (resultCode == 1000) {
+                AllPostingSet();
+                recyclerAdapter.notifyDataSetChanged();
+            }
+        }
+    }
 
     // all/room/mate Bt Click Event
     io.chooco13.NotoTextView clickedText = null;

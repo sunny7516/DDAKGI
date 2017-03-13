@@ -3,28 +3,19 @@ package com.example.tacademy.ddakgi.data.Mypage;
 import java.util.ArrayList;
 
 /**
- * 내 글 목록 조회
+ * Created by Tacademy on 2017-03-09.
  */
 
 public class ResMypage {
-    ResultMember result_member;
-    ArrayList<ResultRoommate> result_roommate;
+    ArrayList<Mypage> result;
     String error;
 
-    public ResultMember getResult_member() {
-        return result_member;
+    public ArrayList<Mypage> getResult() {
+        return result;
     }
 
-    public void setResult_member(ResultMember result_member) {
-        this.result_member = result_member;
-    }
-
-    public ArrayList<ResultRoommate> getResult_roommate() {
-        return result_roommate;
-    }
-
-    public void setResult_roommate(ArrayList<ResultRoommate> result_roommate) {
-        this.result_roommate = result_roommate;
+    public void setResult(ArrayList<Mypage> result) {
+        this.result = result;
     }
 
     public String getError() {

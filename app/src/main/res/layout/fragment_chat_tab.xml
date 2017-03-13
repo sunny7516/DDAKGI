@@ -36,7 +36,7 @@
             android:text="@string/noChat"
             app:fontWeight="medium"
             android:layout_margin="16dp"
-            android:textColor="@color/subTextColor"
+            android:textColor="@color/grayTextColor"
             android:textSize="13sp"/>
         <ScrollView
             android:layout_width="match_parent"

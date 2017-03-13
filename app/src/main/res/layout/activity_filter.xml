@@ -65,6 +65,22 @@
             android:layout_height="8dp"
             android:background="@color/grayTextColor" />
 
+        <io.chooco13.NotoTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/filter"
+            android:textColor="@color/subTextColor"
+            android:textSize="13sp"
+            app:fontWeight="medium" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_height="1dp"
+            android:background="@color/grayTextColor" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -83,6 +99,7 @@
                 app:fontWeight="medium" />
 
             <LinearLayout
+                android:id="@+id/roomTypeLinearLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
@@ -96,6 +113,7 @@
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:onClick="filterChecked"
+                    android:tag="type1"
                     android:textColor="@color/subTextColor"
                     android:textOff="@string/typeOne"
                     android:textOn="@string/typeOne"
@@ -108,6 +126,7 @@
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:onClick="filterChecked"
+                    android:tag="type2"
                     android:textColor="@color/subTextColor"
                     android:textOff="@string/typeTwo"
                     android:textOn="@string/typeTwo"
@@ -120,6 +139,7 @@
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:onClick="filterChecked"
+                    android:tag="type3"
                     android:textColor="@color/subTextColor"
                     android:textOff="@string/typeHouse"
                     android:textOn="@string/typeHouse"
@@ -132,6 +152,7 @@
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:onClick="filterChecked"
+                    android:tag="type4"
                     android:textColor="@color/subTextColor"
                     android:textOff="@string/typeOffice"
                     android:textOn="@string/typeOffice"
@@ -144,6 +165,7 @@
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:onClick="filterChecked"
+                    android:tag="type5"
                     android:textColor="@color/subTextColor"
                     android:textOff="@string/typeApart"
                     android:textOn="@string/typeApart"
@@ -152,6 +174,7 @@
 
             <!-- 보증금 -->
             <io.chooco13.NotoTextView
+                android:id="@+id/depositText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
@@ -161,7 +184,7 @@
                 app:fontWeight="medium" />
 
             <SeekBar
-                android:id="@+id/seekBar"
+                android:id="@+id/depositSeekBar"
                 style="@style/Widget.AppCompat.SeekBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -220,12 +243,25 @@
 
             </LinearLayout>
 
-            <SeekBar
-                android:id="@+id/PriceseekBar"
-                style="@style/Widget.AppCompat.SeekBar"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="26dp" />
+                android:layout_height="wrap_content">
+
+                <SeekBar
+                    android:id="@+id/monthPriceSeekBar"
+                    style="@style/Widget.AppCompat.SeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="26dp" />
+
+                <SeekBar
+                    android:id="@+id/yearPriceSeekBar"
+                    style="@style/Widget.AppCompat.SeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="26dp"
+                    android:visibility="gone" />
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -287,7 +323,7 @@
                 android:text="예) 2017-2-16"
                 android:textColor="@color/defaultTextColor"
                 android:textSize="13sp"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
         </LinearLayout>
     </LinearLayout>

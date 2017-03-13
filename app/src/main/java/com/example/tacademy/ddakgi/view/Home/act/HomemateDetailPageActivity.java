@@ -41,6 +41,13 @@ import retrofit2.Response;
  */
 
 public class HomemateDetailPageActivity extends BaseActivity {
+    String postKey;
+    String auth_uid;
+
+    public int roommate_id;
+    DetailPosting detailPosting;
+    RelativeLayout chatLayout;
+
     ImageView mateDetailPageImg;
     CircleImageView mateDetailProfile;
     NotoTextView detailMateToolbar, mateDetailPageLikeNum, mateDeatilPercent, mateDetailNicknameAge, percentTitle,
@@ -48,14 +55,9 @@ public class HomemateDetailPageActivity extends BaseActivity {
             detailAnswer1, detailAnswer2, detailAnswer3, detailAnswer4, detailAnswer5,
             detailAnswer6, detailAnswer7, detailAnswer8, detailAnswer9, detailAnswer10;
     ImageView heart_state;
-    RelativeLayout chatLayout;
     TextView chatString;
 
     NotoTextView mateModifyBt, mateDeleteBt;
-
-    int roommate_id;
-    String auth_uid;
-
     SweetAlertDialog alert;
 
     @Override
@@ -63,6 +65,8 @@ public class HomemateDetailPageActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homemate_detail_page);
 
+        // 키 획득
+        postKey = getIntent().getStringExtra("KEY");
         // 파라미터값 받아오기
         roommate_id = getIntent().getExtras().getInt("roommate_id");
         // 통신
@@ -119,6 +123,7 @@ public class HomemateDetailPageActivity extends BaseActivity {
         }
     }
 
+    // 글 삭제
     public void deleteMatePosting(View view) {
         alert =
                 new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
@@ -214,8 +219,6 @@ public class HomemateDetailPageActivity extends BaseActivity {
         });
     }
 
-    DetailPosting detailPosting;
-
     // 상세페이지 데이터 조회
     public void setRetrofit(int roommate_id) {
         Call<ResDetailPosting> resDetailPostingCall = NetSSL.getInstance().getMemberImpFactory().resDetailPosting(roommate_id);
@@ -249,6 +252,7 @@ public class HomemateDetailPageActivity extends BaseActivity {
     // 화면 데이터 세팅 ===============================================================================
     public void setData(DetailPosting detailPosting) {
         auth_uid = detailPosting.getUid();  // 게시글 작성자의 uid
+
         // 나 자신이면
         if (getUid() == auth_uid) {
             // 매칭률, 채팅 안보이게함
@@ -275,10 +279,12 @@ public class HomemateDetailPageActivity extends BaseActivity {
         } else {
             heart_state.setImageResource(R.mipmap.heart_on_btn);
         }
-        Picasso.with(this)
-                .load(detailPosting.getRoommate_image().get(0))
-                .fit()
-                .into(mateDetailPageImg);
+        if (detailPosting.getRoommate_image() != null) {
+            Picasso.with(this)
+                    .load(detailPosting.getRoommate_image().get(0))
+                    .fit()
+                    .into(mateDetailPageImg);
+        }
         detailMateToolbar.setText(detailPosting.getNickname());
         mateDetailPageLikeNum.setText(String.valueOf(detailPosting.getHeart_count()));
         mateDeatilPercent.setText(detailPosting.getMatching_rate() + "%");

@@ -38,9 +38,11 @@ public class SettingActivity extends BaseActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+                    Toast.makeText(SettingActivity.this, "푸시알림을 켰습니다.", Toast.LENGTH_SHORT).show();
                     // switch 체크상태일 때,
                     // Push 알림 켜놓기
                 } else {
+                    Toast.makeText(SettingActivity.this, "푸시알림을 껐습니다.", Toast.LENGTH_SHORT).show();
                     // switch 체크상태 아닐 때,
                     // Push 알림 끄기
                 }
@@ -77,9 +79,6 @@ public class SettingActivity extends BaseActivity {
                 Log.i("Logout", "logout!");
                 // 서버에 저장된 로그인 정보도 모두 삭제
                 LogoutDb();
-                // 자동 로그인 삭제
-                StorageHelper.getInstance().setBoolean(getApplicationContext(), "AUTOLOGIN", false);
-
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
@@ -95,6 +94,13 @@ public class SettingActivity extends BaseActivity {
             public void onResponse(Call<ResKaKaoLogout> call, Response<ResKaKaoLogout> response) {
                 if (response.body().getResult() != null) {
                     Log.i("RF:kakaoLogout", "SUCCESS" + response.body().getResult());
+                    // 자동 로그인 해제
+                    StorageHelper.getInstance().setBoolean(SettingActivity.this, "AUTOLOGIN", false);
+                    // 인트로화면으로 돌아가기
+                    Intent intent = new Intent(SettingActivity.this, MainActivity.class);
+                    startActivity(intent);
+
+                    finish();
                 }
             }
 
@@ -115,6 +121,7 @@ public class SettingActivity extends BaseActivity {
             @Override
             public void onClick(SweetAlertDialog sweetAlertDialog) {
                 sweetAlertDialog.dismissWithAnimation();
+                Toast.makeText(SettingActivity.this, "회원 탈퇴되었습니다.", Toast.LENGTH_SHORT).show();
                 // 회원 탈퇴
                 // db에서 회원 정보 삭제
                 // deleteMe();
@@ -137,10 +144,10 @@ public class SettingActivity extends BaseActivity {
         resDeleteMe.enqueue(new Callback<ResStringString>() {
             @Override
             public void onResponse(Call<ResStringString> call, Response<ResStringString> response) {
-                if(response.body().getResult() != null){
+                if (response.body().getResult() != null) {
                     Log.i("RF:DeleteMe", "SUCCESS" + response.body().getResult());
                     Toast.makeText(getApplicationContext(), "회원 탈퇴가 완료되었습니다", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     Log.i("RF:DeleteMe", "FAIL" + response.body().getError());
                 }
             }

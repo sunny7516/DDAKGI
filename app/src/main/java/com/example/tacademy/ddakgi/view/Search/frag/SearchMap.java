@@ -34,11 +34,13 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import static android.view.View.GONE;
+
 public class SearchMap extends Fragment implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener {
 
     protected GoogleApiClient mGoogleApiClient;
     private PlaceAutocompleteAdapter mAdapter;
-    private AutoCompleteTextView mAutocompleteView;
+    private AutoCompleteTextView mAutocompleteView,AutoCompleteviewAll;
     MapView map;
     private GoogleMap mMap;
     boolean alwaysCameraflag = true;    // 처음 위치를 잡기 위한 flag
@@ -61,6 +63,9 @@ public class SearchMap extends Fragment implements OnMapReadyCallback, GoogleApi
                 .build();
 
         mAutocompleteView = (AutoCompleteTextView) getActivity().findViewById(R.id.autocomplete_places);
+        mAutocompleteView.setVisibility(View.VISIBLE);
+        AutoCompleteviewAll = (AutoCompleteTextView)getActivity().findViewById(R.id.autocomplete_all);
+        AutoCompleteviewAll.setVisibility(GONE);
         mAutocompleteView.setOnItemClickListener(mAutocompleteClickListener);
 
         mAdapter = new PlaceAutocompleteAdapter(getContext(), mGoogleApiClient, BOUNDS_GREATER_SYDNEY, null);

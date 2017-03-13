@@ -38,10 +38,12 @@ public class WriteTab extends Fragment {
             switch (v.getId()) {
                 case R.id.roomBt:
                     Intent roomIntent = new Intent(getContext(), WriteRoomActivity.class);
+                    roomIntent.putExtra("modify", 1);
                     startActivity(roomIntent);
                     break;
                 case R.id.mateBt:
                     Intent mateIntent = new Intent(getContext(), WriteMateActivity.class);
+                    mateIntent.putExtra("modify", 1);
                     startActivity(mateIntent);
                     break;
             }

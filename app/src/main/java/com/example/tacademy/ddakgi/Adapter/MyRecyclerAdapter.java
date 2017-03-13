@@ -13,12 +13,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.tacademy.ddakgi.R;
+import com.example.tacademy.ddakgi.data.Mypage.Mypage;
 import com.example.tacademy.ddakgi.data.Mypage.ResMypage;
-import com.example.tacademy.ddakgi.data.Mypage.ResultRoommate;
 import com.example.tacademy.ddakgi.data.NetSSL;
 import com.example.tacademy.ddakgi.data.RegisterRoom.ResStringString;
 import com.example.tacademy.ddakgi.view.Home.act.HomeRoomDetailPageActivity;
 import com.example.tacademy.ddakgi.view.Home.act.HomemateDetailPageActivity;
+import com.example.tacademy.ddakgi.view.Write.act.WriteMateActivity;
+import com.example.tacademy.ddakgi.view.Write.act.WriteRoomActivity;
 import com.squareup.picasso.Picasso;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -54,7 +56,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        ResultRoommate item = items.getResult_roommate().get(position);
+        Mypage item = items.getResult().get(position);
 
         // 좋아요 버튼 클릭이벤트 막아두기
         holder.mLike.setClickable(false);
@@ -82,7 +84,25 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
             Picasso.with(context).load(item.getRoommate_image()[0]).fit().into(holder.image);
         }
 
+        // 수정버튼
         holder.modifyBt.setVisibility(View.VISIBLE);
+        holder.modifyBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent modifyIntent;
+
+                if(item.getRoomming()==0){
+                    modifyIntent = new Intent(v.getContext(), WriteMateActivity.class);
+                }else{
+                    modifyIntent = new Intent(v.getContext(), WriteRoomActivity.class);
+                }
+                modifyIntent.putExtra("modify",0);
+                modifyIntent.putExtra("roommate_id", item.getRid());
+                v.getContext().startActivity(modifyIntent);
+            }
+        });
+
+        // 삭제버튼
         holder.deleteBt.setVisibility(View.VISIBLE);
         holder.deleteBt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,9 +120,9 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
                                         // 데이터 처리
                                         removePosting(position);
 
-                                        items.getResult_roommate().remove(position);
+                                        items.getResult().remove(position);
                                         notifyItemRemoved(position);
-                                        notifyItemRangeChanged(position, items.getResult_roommate().size());
+                                        notifyItemRangeChanged(position, items.getResult().size());
                                         holder.itemView.setVisibility(View.GONE);
 
                                     }
@@ -118,20 +138,20 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
                 alert.show();
             }
         });
-
+        // 상세페이지로 이동
         holder.linear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent detailPage;
-
                 // 타임라인 글을 선택하면 상세페이지로 넘어감
                 // 넘어갈 떄 이미지 정보 같이 전달함
-                if (items.getResult_roommate().get(position).getRoomming() == 0) {
+                if (item.getRoomming() == 0) {
                     detailPage = new Intent(v.getContext(), HomemateDetailPageActivity.class);
                 } else {
                     detailPage = new Intent(v.getContext(), HomeRoomDetailPageActivity.class);
                 }
-                detailPage.putExtra("roommate_id", items.getResult_roommate().get(position).getRid());
+                detailPage.putExtra("roommate_id", items.getResult().get(position).getRid());
+                Log.i("checkUid", "recyclerview"+items.getResult().get(position).getRid());
                 v.getContext().startActivity(detailPage);
             }
         });
@@ -139,7 +159,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
 
     public void removePosting(int position) {
         Call<ResStringString> resDeletePosting =
-                NetSSL.getInstance().getMemberImpFactory().resDeletePosting(items.getResult_roommate().get(position).getRid());
+                NetSSL.getInstance().getMemberImpFactory().resDeletePosting(items.getResult().get(position).getRid());
         resDeletePosting.enqueue(new Callback<ResStringString>() {
             @Override
             public void onResponse(Call<ResStringString> call, Response<ResStringString> response) {
@@ -159,7 +179,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return this.items.getResult_roommate().size();
+        return this.items.getResult().size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

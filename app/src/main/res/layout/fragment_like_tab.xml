@@ -34,7 +34,7 @@
 
         <io.chooco13.NotoTextView
             app:fontWeight="medium"
-            android:textColor="@color/subTextColor"
+            android:textColor="@color/grayTextColor"
             android:textSize="13sp"
             android:text="@string/noLike"
             android:layout_width="wrap_content"

@@ -118,7 +118,8 @@ public class RegisterLifeStyleActivity extends BaseActivity {
             public void onClick(View v) {
                 // 프로필 등록화면에 설문패턴 응답이 끝났음을 알려준다.
                 isLifeStyleFinish = true;
-                // 설문패턴 DB로 저장
+                // 설문패턴 답을 배열에 담아서 Util에 넣은 뒤
+                // 프로필 등록 화면에서 Util로 받아와 DB로 저장
                 U.getInstance().setLifestyleNum(lifestyleAnswer);
                 finish();
             }

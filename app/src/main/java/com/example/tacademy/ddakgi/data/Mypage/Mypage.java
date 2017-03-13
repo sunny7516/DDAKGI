@@ -1,10 +1,10 @@
 package com.example.tacademy.ddakgi.data.Mypage;
 
 /**
- * Created by Tacademy on 2017-03-08.
+ * Created by Tacademy on 2017-03-09.
  */
 
-public class ResultRoommate {
+public class Mypage {
     int rid;
     int mid;
     String nickname;
@@ -14,10 +14,18 @@ public class ResultRoommate {
     String address;
     int deposit;
     int rent;
-    int roomming;
     int heart_count;
     String thumbnail_image;
+    int roomming;
     String[] roommate_image;
+
+    public int getRoomming() {
+        return roomming;
+    }
+
+    public void setRoomming(int roomming) {
+        this.roomming = roomming;
+    }
 
     public int getRid() {
         return rid;
@@ -89,14 +97,6 @@ public class ResultRoommate {
 
     public void setRent(int rent) {
         this.rent = rent;
-    }
-
-    public int getRoomming() {
-        return roomming;
-    }
-
-    public void setRoomming(int roomming) {
-        this.roomming = roomming;
     }
 
     public int getHeart_count() {

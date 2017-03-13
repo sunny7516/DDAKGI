@@ -11,11 +11,15 @@ import com.example.tacademy.ddakgi.data.Kakao.ResKaKaoLogout;
 import com.example.tacademy.ddakgi.data.LifeStyleLogin.ReqLifeStyleLogin;
 import com.example.tacademy.ddakgi.data.Member.ReqUpdateMemberInfo;
 import com.example.tacademy.ddakgi.data.Member.ResMember;
+import com.example.tacademy.ddakgi.data.ModifyPosting.ReqModifyMate;
+import com.example.tacademy.ddakgi.data.ModifyPosting.ReqModifyRoom;
+import com.example.tacademy.ddakgi.data.ModifyPosting.ResModifyDefault;
 import com.example.tacademy.ddakgi.data.Mypage.ResMypage;
 import com.example.tacademy.ddakgi.data.RegisterMate.ReqRegisterMate;
 import com.example.tacademy.ddakgi.data.RegisterRoom.ReqRegisterRoom;
 import com.example.tacademy.ddakgi.data.RegisterRoom.ResStringString;
 import com.example.tacademy.ddakgi.data.Report.ReqReport;
+import com.example.tacademy.ddakgi.data.Search.ResSearchAll;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -83,10 +87,23 @@ public interface MemberImpFactory {
     @POST("roommates/room")
     Call<ResStringString> registerRoom(@Body ReqRegisterRoom reqRegisterRoom);
 
-    // 테스트 필요
     // 9. 방 찾는 룸메이트 등록하기(mate)
     @POST("roommates/mate")
     Call<ResStringString> registerMate(@Body ReqRegisterMate registerMate);
+
+    // 10. 룸메이트 글 조회하기 (수정할 때 디폴트값 설정)
+    @GET("roommates/{roommate_id}")
+    Call<ResModifyDefault> resModifyDefault(@Path("roommate_id") int roommate_id);
+
+    // 11. 방 있는 룸메이트 수정하기
+    @PUT("roommates/room/{roommate_id}")
+    Call<ResStringString> resModifyRoom(@Path("roommate_id") int roommate_id,
+                                        @Body ReqModifyRoom reqModifyRoom);
+
+    // 12. 방 찾는 룸메이트 수정하기
+    @PUT("roommates/mate/{roommate_id}")
+    Call<ResStringString> resModifyMate(@Path("roommate_id") int roommate_id,
+                                        @Body ReqModifyMate reqModifyMate);
 
     // 13. 게시글 삭제하기
     @DELETE("roommates/{roommate_id}")
@@ -98,37 +115,40 @@ public interface MemberImpFactory {
 
     // 15. 게시글 목록보기 (all)
     @GET("postings/list")
-    Call<ResHomePosting> resAllPosting(
-            @Query("location1") String location1,
-            @Query("location2") String location2,
-            @Query("location3") String location3,
-            @Query("roomtype1") int roomtype1,
-            @Query("roomtype2") int roomtype2,
-            @Query("roomtype3") int roomtype3,
-            @Query("roomtype4") int roomtype4,
-            @Query("roomtype5") int roomtype5,
-            @Query("deposit") int deposit,
-            @Query("rent") int rent,
-            @Query("available_date") String available_date);
+    Call<ResHomePosting> resAllPosting(@Query("location1") String location1,
+                                       @Query("location2") String location2,
+                                       @Query("location3") String location3,
+                                       @Query("roomtype1") int roomtype1,
+                                       @Query("roomtype2") int roomtype2,
+                                       @Query("roomtype3") int roomtype3,
+                                       @Query("roomtype4") int roomtype4,
+                                       @Query("roomtype5") int roomtype5,
+                                       @Query("deposit") int deposit,
+                                       @Query("rent") int rent,
+                                       @Query("available_date") String available_date);
 
     // 16. 게시글 목록보기(room/mate)
     @GET("postings/list/{roomming}")
-    Call<ResHomePosting> resRoomMatePosting(@Path("roomming") int roomming);
-                                    /*@Query("location1") String location1,
-                                      @Query("location2") String location2,
-                                      @Query("location3") String location3,
-                                      @Query("roomtype1") int roomtype1,
-                                      @Query("roomtype2") int roomtype2,
-                                      @Query("roomtype3") int roomtype3,
-                                      @Query("roomtype4") int roomtype4,
-                                      @Query("roomtype5") int roomtype5,
-                                      @Query("deposit") int deposit,
-                                      @Query("rent") int rent,
-                                      @Query("available_date") String available_date);*/
+    Call<ResHomePosting> resRoomMatePosting(@Path("roomming") int roomming,
+                                            @Query("location1") String location1,
+                                            @Query("location2") String location2,
+                                            @Query("location3") String location3,
+                                            @Query("roomtype1") int roomtype1,
+                                            @Query("roomtype2") int roomtype2,
+                                            @Query("roomtype3") int roomtype3,
+                                            @Query("roomtype4") int roomtype4,
+                                            @Query("roomtype5") int roomtype5,
+                                            @Query("deposit") int deposit,
+                                            @Query("rent") int rent,
+                                            @Query("available_date") String available_date);
 
     // 17. 게시글 상세페이지 조회하기
     @GET("postings/detail/{roommate_id}")
     Call<ResDetailPosting> resDetailPosting(@Path("roommate_id") int roommate_id);
+
+    // 18. 검색에서 주소 정보 가져오기(자동완성)
+    @GET("search/{keyword}")
+    Call<ResSearchAll> resSearchAll(@Path("keyword") String keyword);
 
     // 22. 신고하기
     @POST("report")

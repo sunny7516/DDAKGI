@@ -7,10 +7,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.base.BaseActivity;
+import com.example.tacademy.ddakgi.data.Member.MemberModel;
 import com.example.tacademy.ddakgi.data.Member.ReqUpdateMemberInfo;
 import com.example.tacademy.ddakgi.data.Member.ResMember;
 import com.example.tacademy.ddakgi.data.NetSSL;
@@ -21,6 +23,7 @@ import com.squareup.picasso.Picasso;
 import com.yalantis.ucrop.UCrop;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.chooco13.NotoTextView;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,9 +33,12 @@ import rx.schedulers.Schedulers;
 
 public class ModifyProfileActivity extends BaseActivity {
     NotoTextView modifyProfileFinish;
-    EditText modifyNickname;
-    EditText modifyAge;
-    ImageView modifyProfileImage;
+    EditText modifyNickname, modifyAge;
+    CircleImageView modifyProfileImage;
+
+    LinearLayout lifestyleLinearlayout;
+    CheckedTextView lifestyle_q1, lifestyle_q2, lifestyle_q3, lifestyle_q4, lifestyle_q5, lifestyle_q6,
+            lifestyle_q7, lifestyle_q8, lifestyle_q9, lifestyle_q10;
 
     SweetAlertDialog alert;
 
@@ -49,27 +55,38 @@ public class ModifyProfileActivity extends BaseActivity {
         // 자신의 정보 조회
         getMemberInfo();
 
+        lifestyleLinearlayout = (LinearLayout) findViewById(R.id.lifestyleLinearlayout);
         modifyProfileFinish = (NotoTextView) findViewById(R.id.modifyProfileFinish);
         modifyNickname = (EditText) findViewById(R.id.modifyNickname);
         modifyAge = (EditText) findViewById(R.id.modifyAge);
-        modifyProfileImage = (ImageView) findViewById(R.id.modifyProfileImage);
+        modifyProfileImage = (CircleImageView) findViewById(R.id.modifyProfileImage);
 
         for (int i = 1; i < CheckObj.length; i++) {
             CheckObj[i] = false;
         }
     }
 
-    // DB에서 data get ==========================================================================
+    MemberModel memberModel;
+
+    // 통신 =========================================================================================
+    // 회원 정보 디폴트값 지정
     public void getMemberInfo() {
         Call<ResMember> resMemberCall = NetSSL.getInstance().getMemberImpFactory().resMember();
         resMemberCall.enqueue(new Callback<ResMember>() {
             @Override
             public void onResponse(Call<ResMember> call, Response<ResMember> response) {
-                if(response.body().getResult() != null){
+                if (response.body().getResult() != null) {
                     Log.i("RF:MEModify", "SUCCESS" + response.body().getResult());
-                    modifyNickname.setText(response.body().getResult().getNickname());
-                    modifyAge.setText(String.valueOf(response.body().getResult().getAge()));
-                }else{
+                    memberModel = response.body().getResult();
+                    modifyNickname.setText(memberModel.getNickname());
+                    modifyAge.setText(String.valueOf(memberModel.getAge()));
+                    // 생활패턴 디폴트 값
+                    setLifeStyle(memberModel.getLifestyle_q1(), memberModel.getLifestyle_q2(),
+                            memberModel.getLifestyle_q3(), memberModel.getLifestyle_q4(),
+                            memberModel.getLifestyle_q5(), memberModel.getLifestyle_q6(),
+                            memberModel.getLifestyle_q7(), memberModel.getLifestyle_q8(),
+                            memberModel.getLifestyle_q9(), memberModel.getLifestyle_q10());
+                } else {
                     Log.i("RF:MEModify", "FAIL" + response.body().getError());
                 }
             }
@@ -77,6 +94,59 @@ public class ModifyProfileActivity extends BaseActivity {
             @Override
             public void onFailure(Call<ResMember> call, Throwable t) {
                 Log.i("RF:MEModify", "ERR" + t.getMessage());
+            }
+        });
+    }
+
+    // 생활패턴 디폴트값 세팅
+    public void setLifeStyle(String lifeStyle1, String lifeStyle2, String lifeStyle3, String lifeStyle4,
+                             String lifeStyle5, String lifeStyle6, String lifeStyle7, String lifeStyle8,
+                             String lifeStyle9, String lifeStyle10) {
+        // 넘겨받은 생활패턴 답변의 번호 앞에 num을 붙이고
+        // 해당 문자열을 Tag로 갖는 checkedTextView를 찾는다.
+        // 메소드를 호출해 매개변수로 넘겨줘 클릭 이벤트를 수행한다.
+
+        // Tag 찾아서 저장
+        lifestyle_q1 = (CheckedTextView) lifestyleLinearlayout.findViewWithTag("num1/" + lifeStyle1);
+        lifestyle_q2 = (CheckedTextView) lifestyleLinearlayout.findViewWithTag("num2/" + lifeStyle2);
+        lifestyle_q3 = (CheckedTextView) lifestyleLinearlayout.findViewWithTag("num3/" + lifeStyle3);
+        lifestyle_q4 = (CheckedTextView) lifestyleLinearlayout.findViewWithTag("num4/" + lifeStyle4);
+        lifestyle_q5 = (CheckedTextView) lifestyleLinearlayout.findViewWithTag("num5/" + lifeStyle5);
+        lifestyle_q6 = (CheckedTextView) lifestyleLinearlayout.findViewWithTag("num6/" + lifeStyle6);
+        lifestyle_q7 = (CheckedTextView) lifestyleLinearlayout.findViewWithTag("num7/" + lifeStyle7);
+        lifestyle_q8 = (CheckedTextView) lifestyleLinearlayout.findViewWithTag("num8/" + lifeStyle8);
+        lifestyle_q9 = (CheckedTextView) lifestyleLinearlayout.findViewWithTag("num9/" + lifeStyle9);
+        lifestyle_q10 = (CheckedTextView) lifestyleLinearlayout.findViewWithTag("num10/" + lifeStyle10);
+
+        ClickedOne(lifestyle_q1, 1);
+        ClickedOne(lifestyle_q2, 2);
+        ClickedOne(lifestyle_q3, 3);
+        ClickedOne(lifestyle_q4, 4);
+        ClickedOne(lifestyle_q5, 5);
+        ClickedOne(lifestyle_q6, 6);
+        ClickedOne(lifestyle_q7, 7);
+        ClickedOne(lifestyle_q8, 8);
+        ClickedOne(lifestyle_q9, 9);
+        ClickedOne(lifestyle_q10, 10);
+    }
+
+    // 마이 정보 수정 후 디비로 업데이트
+    public void updateMemberDB(String nickname) {
+        Call<ResStringString> resUpdateMemberCall = NetSSL.getInstance().getMemberImpFactory()
+                .resUpdateMember(new ReqUpdateMemberInfo(nickname, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "profile_image"));
+        resUpdateMemberCall.enqueue(new Callback<ResStringString>() {
+            @Override
+            public void onResponse(Call<ResStringString> call, Response<ResStringString> response) {
+                if (response.body().getResult() != null) {
+                    Log.i("RF:UpdateMe", "SUCCESS" + response.body().getResult());
+                } else {
+                    Log.i("RF:UpdateMe", "FAIL" + response.body().getError());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResStringString> call, Throwable t) {
+                Log.i("RF:UPDATE", "ERROR" + t.getMessage());
             }
         });
     }
@@ -217,7 +287,7 @@ public class ModifyProfileActivity extends BaseActivity {
     // 답변 후 완료 ==================================================================================
     // 항목 단일 선택하는 부분
     public void styleCheck(View view) {
-        switch (view.getTag().toString()) {
+        switch (view.getTag().toString().split("/")[0]) {
             case "num1":
                 ClickedOne(view, 1);
                 break;
@@ -283,11 +353,11 @@ public class ModifyProfileActivity extends BaseActivity {
         ifAllChecked();
     }
 
-    // 모든 문항의 답변이 완료되었는지 확인
+    // 모든 생활패턴의 답변이 완료되었는지 확인
     public boolean ifAllChecked() {
         for (int i = 1; i < CheckObj.length; i++) {
             boolean flag = CheckObj[i];
-            if (!flag || !isValidate()) {
+            if (!flag) {
                 return false;
             }
         }
@@ -302,32 +372,16 @@ public class ModifyProfileActivity extends BaseActivity {
         modifyProfileFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 수정된 설문패턴 DB로 저장
-                nickname = modifyNickname.getText().toString();
-                updateMemberDB(nickname);
-                // 화면 종료
-                finish();
-            }
-        });
-    }
-
-    // 마이 정보 수정 후 디비로 업데이트
-    public void updateMemberDB(String nickname){
-        Call<ResStringString> resUpdateMemberCall = NetSSL.getInstance().getMemberImpFactory()
-                .resUpdateMember(new ReqUpdateMemberInfo(nickname, 1,2,3,4,5,6,7,8,9,10,"profile_image"));
-        resUpdateMemberCall.enqueue(new Callback<ResStringString>() {
-            @Override
-            public void onResponse(Call<ResStringString> call, Response<ResStringString> response) {
-                if(response.body().getResult() != null){
-                    Log.i("RF:UpdateMe", "SUCCESS" + response.body().getResult());
-                }else{
-                    Log.i("RF:UpdateMe", "FAIL" + response.body().getError());
+                if (!isValidate()) {
+                    Toast.makeText(ModifyProfileActivity.this, "모든 문항에 답해주세요!", Toast.LENGTH_SHORT).show();
+                } else {
+                    // 수정된 설문패턴 DB로 저장
+                    Toast.makeText(ModifyProfileActivity.this, "회원님의 정보가 수정되었습니다.",Toast.LENGTH_SHORT).show();
+                    nickname = modifyNickname.getText().toString();
+                    updateMemberDB(nickname);
+                    // 화면 종료
+                    finish();
                 }
-            }
-
-            @Override
-            public void onFailure(Call<ResStringString> call, Throwable t) {
-                Log.i("RF:UPDATE", "ERROR" + t.getMessage());
             }
         });
     }

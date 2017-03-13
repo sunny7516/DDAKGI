@@ -17,6 +17,7 @@ import android.widget.ImageView;
 
 import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.adapter.MyRecyclerAdapter;
+import com.example.tacademy.ddakgi.data.Member.ResMember;
 import com.example.tacademy.ddakgi.data.Mypage.ResMypage;
 import com.example.tacademy.ddakgi.data.NetSSL;
 import com.example.tacademy.ddakgi.data.Ottobus;
@@ -54,7 +55,7 @@ public class MyTab extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_tab, container, false);
 
-        // 레트로핏 통신 ==============================================================================
+        // 레트로핏 통신
         if (!ottoflag) {
             Ottobus.getInstance().getMaingfrag_bus().register(this);
             ottoflag = true;
@@ -89,38 +90,63 @@ public class MyTab extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
+        getProfile();
+        getMyPosting();
+    }
+
+    int mid;
+
+    // 통신 ========================================================================================
+    // 자기 자신의 정보 통신
+    public void getProfile() {
+        Call<ResMember> resMemberCall = NetSSL.getInstance().getMemberImpFactory().resMember();
+        resMemberCall.enqueue(new Callback<ResMember>() {
+            @Override
+            public void onResponse(Call<ResMember> call, Response<ResMember> response) {
+                if (response.body().getResult() != null) {
+                    Log.i("RF:MytabProfile", "SUCCESS" + response.body().getResult());
+                    if (response.body().getResult().getThumbnail_image() != null) {
+                        Picasso.with(getContext()).load(response.body().getResult().getThumbnail_image()).into(modifyProfileBt);
+                    }
+                    myTabNickname.setText(response.body().getResult().getNickname());
+                    mid = response.body().getResult().getMid();
+                } else {
+                    Log.i("RF:MytabProfile", "FAIL" + response.body().getError());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResMember> call, Throwable t) {
+                Log.i("RF:MytabProfile", "ERR" + t.getMessage());
+            }
+        });
+    }
+
+    // 게시물 통신
+    public void getMyPosting() {
         Call<ResMypage> resMypageCall = NetSSL.getInstance().getMemberImpFactory().resMypage();
         resMypageCall.enqueue(new Callback<ResMypage>() {
             @Override
             public void onResponse(Call<ResMypage> call, Response<ResMypage> response) {
-                if (response.body() != null) {
-                    Log.i("RF:My", "SUCCESS" + response.body());
-                    if (response.body() != null) {
-                        // 내 정보 붙여넣기
-                        if (response.body().getResult_member().getProfile_image() != null) {
-                            Picasso.with(getContext())
-                                    .load(response.body().getResult_member().getProfile_image())
-                                    .fit()
-                                    .into(modifyProfileBt);
-                        } else {
-                            modifyProfileBt.setImageResource(R.mipmap.profile_btn);
-                        }
-                        myTabNickname.setText(response.body().getResult_member().getNickname());
-
+                if (response.body().getResult() != null) {
+                    Log.i("RF:MyPage", "SUCCESS" + response.body().getResult());
+                    if (response.body().getResult() != null) {
                         Ottobus.getInstance().getMaingfrag_bus().post(response.body());
                     }
                 } else {
-                    Log.i("RF:My", "FAIL" + response.body().getError());
+                    Log.i("RF:MyPage", "FAIL" + response.body().getError());
                 }
             }
 
             @Override
             public void onFailure(Call<ResMypage> call, Throwable t) {
-                Log.i("RF:My", "ERR" + t.getMessage());
+                Log.i("RF:INTRO", "ERR" + t.getMessage());
             }
         });
     }
 
+    // Ottobus =====================================================================================
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -147,7 +173,7 @@ public class MyTab extends Fragment {
                     break;
                 case R.id.settingBt:
                     Intent mateIntent = new Intent(getContext(), SettingActivity.class);
-                    mateIntent.putExtra("id", items.getResult_member().getMid());
+                    mateIntent.putExtra("id", mid);
                     startActivity(mateIntent);
                     break;
                 case R.id.modifyProfileBt:

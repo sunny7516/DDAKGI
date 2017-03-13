@@ -15,7 +15,6 @@ import com.example.tacademy.ddakgi.base.HomeActivity;
 import com.example.tacademy.ddakgi.data.Kakao.ResKaKaoLogin;
 import com.example.tacademy.ddakgi.data.NetSSL;
 import com.example.tacademy.ddakgi.util.ImageProc;
-import com.example.tacademy.ddakgi.util.StorageHelper;
 import com.example.tacademy.ddakgi.view.SignUp.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -55,16 +54,6 @@ public class SignUpActivity extends KakaoLoginActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        // 벳지 ============================================================
-        // 벳지 초기화 (앱을 구동하면 무조건 벳지를 0으로 만든다)
-        // 만약 특정 메세지를 확인한 후 없애는 방식이면 그 지점으로 이동시킨다.
-        Intent intent = new Intent("android.intent.action.BADGE_COUNT_UPDATE");
-        intent.putExtra("badge_count", 0);
-        intent.putExtra("badge_count_package_name", getPackageName());
-        intent.putExtra("badge_count_class_name", getComponentName().getClassName());
-        sendBroadcast(intent);
-        StorageHelper.getInstance().setInt(this, "APP_NOREAD_MSG", 0);  //저장값 초기화
-
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
@@ -100,7 +89,6 @@ public class SignUpActivity extends KakaoLoginActivity {
                 }
                 return;
             }
-
         }
     }
 
@@ -135,7 +123,11 @@ public class SignUpActivity extends KakaoLoginActivity {
                 Log.i("KAKA", "UserProfile:" + userProfile);
                 // redirectMainActivity();
                 nickname = userProfile.getNickname();
-                profile = userProfile.getThumbnailImagePath();
+                if (userProfile.getThumbnailImagePath() != null) {
+                    profile = userProfile.getThumbnailImagePath();
+                } else {
+                    profile = null;
+                }
                 onSignUp(1);
             }
 
@@ -184,7 +176,7 @@ public class SignUpActivity extends KakaoLoginActivity {
         });
     }
 
-    // 모든 정보를 획득하였다 -> 회원가입 진행
+    // 카카오 로그인 성공함> 다음 단계 진행
     public void onSignUp(int type) {
         if (type < 0) {
             Toast.makeText(this,
@@ -202,54 +194,107 @@ public class SignUpActivity extends KakaoLoginActivity {
             String pwd = kakaoID + "password";
 
             // 실서버 디비에 저장
-            registerKaKao();
+            registerKaKao(email,pwd);
+        }
 
-            if (getUid() != null) {
-                // 이미 가입한 회원이면 firebase 인증 안함
+        // 프로그레스바 닫아주기
+        hideProgress();
+        finish();
+    }
 
-            } else {
-                // 처음 가입하는 회원
-                // firebase 인증에 회원 정보 저장
-                firebaseAuth.createUserWithEmailAndPassword(email, pwd)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    Log.i("auth", "성공");
-                                    // firebase 디비에 회원 정보 저장
-                                    onUserSaved(email, nickname, profile);
-                                } else {
-                                    Log.i("auth", "실패" + task.getException().getMessage());
-                                    //Toast.makeText(SignUpActivity.this, "회원가입 실패:" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+    // 서버에 정보 저장
+    // 첫 회원, 재로그인 둘다 해야하는 작업
+    public void registerKaKao(String email, String pwd) {
+        Call<ResKaKaoLogin> resKaKaoLoginCall = NetSSL.getInstance().getMemberImpFactory()
+                .resKaKaoLogin(accessToken);
+        resKaKaoLoginCall.enqueue(new Callback<ResKaKaoLogin>() {
+            @Override
+            public void onResponse(Call<ResKaKaoLogin> call, Response<ResKaKaoLogin> response) {
+                if (response.body().getResult() != null) {
+                    Log.i("SIGNUPaccessToken", accessToken);
+
+                    if (response.body().getResult().equals("처음 로그인하는 회원입니다. 추가정보를 입력해주세요")) {
+
+                        Log.i("RF:KaKaoLogin", "처음 로그인" + response.body().getResult());
+
+                        // 가입 진행! > 프로필 등록화면으로 이동(카카오 기본 정보 넘겨줌)
+                        ImageProc.getInstance().getImageLoader(SignUpActivity.this);
+
+                        // 파베 인증에 가입
+                        onSignUp(email,pwd);
+                        Intent intent = new Intent(SignUpActivity.this, RegisterProfileActivity.class);
+                        intent.putExtra("kakaoNickname", nickname);
+                        intent.putExtra("kakaoProfile", profile);
+                        startActivity(intent);
+
+                    } else if (response.body().getResult().equals("회원가입이 완료된 회원입니다. 홈화면으로 이동합니다. ")) {
+                        Log.i("RF:KaKaoLogin", "회원가입이 완료" + response.body().getResult());
+
+                        // 파베 인증 로그인
+                        onLogin(email, pwd);
+                        Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
+                        startActivity(intent);
+
+                    } else if (response.body().getResult().equals("회원가입이 완료되지 않은 회원입니다. 추가정보를 입력해주세요")) {
+                        Log.i("RF:KaKaoLogin", "추가정보를 입력" + response.body().getResult());
+
+                        // 파베 인증 로그인
+                        onLogin(email, pwd);
+                        Intent intent = new Intent(SignUpActivity.this, RegisterProfileActivity.class);
+                        intent.putExtra("kakaoNickname", nickname);
+                        intent.putExtra("kakaoProfile", profile);
+                        startActivity(intent);
+                    }
+                } else {
+                    Log.i("RF:KaKaoLogin", "FAIL" + response.body().getError());
+                }
             }
 
-            // 가입 진행! > 프로필 등록화면으로 이동(카카오 기본 정보 넘겨줌)
-            ImageProc.getInstance().getImageLoader(this);
+            @Override
+            public void onFailure(Call<ResKaKaoLogin> call, Throwable t) {
+                Log.i("RF:KaKaoLogin", "ERROR" + t.getMessage());
+            }
+        });
+    }
 
-            // 프로그레스바 닫아주기
-            hideProgress();
+    public void onSignUp(String email, String pwd) {
+        // 처음 가입하는 회원
+        // firebase 인증에 회원 정보 저장
+        firebaseAuth.createUserWithEmailAndPassword(email, pwd)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Log.i("auth", "회원가입 성공");
+                            // firebase 디비에 회원 정보 저장
+                            onUserSaved(email, nickname, profile);
+                        } else {
+                            Log.i("auth", "회원가입 실패" + task.getException().getMessage());
+                        }
+                    }
+                });
+    }
 
-            Intent intent = new Intent(this, RegisterProfileActivity.class);
-            StorageHelper.getInstance().setString(this, "nickname", nickname);
-            intent.putExtra("kakaoNickname", nickname);
-            intent.putExtra("kakaoProfile", profile);
-            startActivity(intent);
-
-            /*
-            // 카카오 로그인 시 정보 넣어주기
-            registerKaKao();*/
-
-            finish();
-        }
+    public void onLogin(String email, String pwd) {
+        firebaseAuth.signInWithEmailAndPassword(email, pwd)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        // 4. 로딩닫기
+                        hideProgress();
+                        if (task.isSuccessful()) {
+                            Log.i("auth", "로그인 인증 SUCCESS");
+                        } else {
+                            // 실패
+                            Log.i("auth", "로그인 인증 FAIL" + task.getException().getMessage());
+                        }
+                    }
+                });
     }
 
     // 회원 정보 디비에 입력
     public void onUserSaved(String authEmail, String nickname, String profile) {
         String token = FirebaseInstanceId.getInstance().getToken();
-
         // 토큰이 활성화 될 때까지 못 넘어간다 -> 블럭 코드라서 앱이 먹통이 된다!
         while (token == null) {
             try {
@@ -267,38 +312,11 @@ public class SignUpActivity extends KakaoLoginActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Log.i("SUCCESS", "회원정보 firebase 입력");
+                            Log.i("SUCCESS", "파베 디비 SUCESS");
                         } else {
-                            Log.i("Fail", "회원정보 firebase 실패");
+                            Log.i("Fail", "파베 디비 FAIL");
                         }
                     }
                 });
-    }
-
-    public void registerKaKao() {
-        Call<ResKaKaoLogin> resKaKaoLoginCall = NetSSL.getInstance().getMemberImpFactory()
-                .resKaKaoLogin(accessToken);
-        resKaKaoLoginCall.enqueue(new Callback<ResKaKaoLogin>() {
-            @Override
-            public void onResponse(Call<ResKaKaoLogin> call, Response<ResKaKaoLogin> response) {
-                if (response.body().getResult() != null) {
-                    Log.i("RF:KaKaoLogin", "SUCCESS" + response.body().getResult());
-                    Log.i("SIGNUPaccessToken", accessToken);
-                    if (Integer.parseInt(response.body().getResult()) == 1) {
-                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                    }
-                } else {
-                    Log.i("RF:KaKaoLogin", "FAIL" + response.body().getError());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResKaKaoLogin> call, Throwable t) {
-                Log.i("RF:KaKaoLogin", "ERROR" + t.getMessage());
-            }
-        });
     }
 }

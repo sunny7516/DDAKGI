@@ -68,6 +68,7 @@ public class HomeRoomDetailPageActivity extends BaseActivity {
         postKey = getIntent().getStringExtra("KEY");
         // 파라미터값 받아오기
         roommate_id = getIntent().getExtras().getInt("roommate_id");
+        Log.i("check2", roommate_id+"");
         // 통신
         setDetail(roommate_id);
 
@@ -75,8 +76,8 @@ public class HomeRoomDetailPageActivity extends BaseActivity {
         chatLayout = (RelativeLayout) findViewById(R.id.chatLayout);
         chatString = (TextView) findViewById(R.id.chatString);
 
-        roomModifyBt = (NotoTextView)findViewById(R.id.roomModifyBt);
-        roomDeleteBt = (NotoTextView)findViewById(R.id.roomDeleteBt);
+        roomModifyBt = (NotoTextView) findViewById(R.id.roomModifyBt);
+        roomDeleteBt = (NotoTextView) findViewById(R.id.roomDeleteBt);
 
         percentTitle = (NotoTextView) findViewById(R.id.percentTitle);
         roomHeart_state = (ImageView) findViewById(R.id.roomHeart_state);
@@ -125,7 +126,7 @@ public class HomeRoomDetailPageActivity extends BaseActivity {
         }
     }
 
-    public void deleteRoomPosting(View view){
+    public void deleteRoomPosting(View view) {
         alert =
                 new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                         .setContentText("글을 삭제하시겠습니까?")
@@ -152,7 +153,7 @@ public class HomeRoomDetailPageActivity extends BaseActivity {
     // 통신 =========================================================================================
 
     // 글 삭제
-    public void deleteDB(){
+    public void deleteDB() {
         Call<ResStringString> resDeletePosting =
                 NetSSL.getInstance().getMemberImpFactory().resDeletePosting(detailPosting.getRid());
         resDeletePosting.enqueue(new Callback<ResStringString>() {

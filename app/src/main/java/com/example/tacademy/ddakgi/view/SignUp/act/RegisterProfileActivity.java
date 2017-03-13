@@ -85,7 +85,11 @@ public class RegisterProfileActivity extends BaseActivity {
         kakaoNickname = getIntent().getStringExtra("kakaoNickname");
 
         // 이전 화면에서 전달받은 정보들을 현재 layout에 넣어준다.
-        Picasso.with(this).load(kakaoProfile).fit().into(userProfile);
+        if (kakaoProfile != null) {
+            Picasso.with(this).load(kakaoProfile).fit().into(userProfile);
+        } else {
+            userProfile.setImageResource(R.mipmap.profile);
+        }
         userNickname.setText(kakaoNickname);
 
         infoCheckBox = (CheckBox) findViewById(R.id.infoCheckBox);
@@ -270,17 +274,8 @@ public class RegisterProfileActivity extends BaseActivity {
             // 로딩화면 보여주고 회원가입 화면 닫기
             showProgress("회원 정보를 등록중입니다");
 
-        // 자동로그인을 위해서 Storagehelper 이용
-        StorageHelper.getInstance().setBoolean(this, "AUTOLOGIN", true);
-
         // 회원가입 정보 db로 전송
         registerMemberData();
-
-        hideProgress();
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
-        Toast.makeText(this, userNickname.getText().toString() + " 님 환영합니다.", Toast.LENGTH_SHORT).show();
-        this.finish();
     }
 
     public void registerMemberData() {
@@ -310,10 +305,23 @@ public class RegisterProfileActivity extends BaseActivity {
         resLifeStyleLogin.enqueue(new Callback<ResStringString>() {
             @Override
             public void onResponse(Call<ResStringString> call, Response<ResStringString> response) {
-                if (response.body().getResult() != null) {
-                    Log.i("RF:PROFILE", "SUCCESS" + response.body().getResult());
+                if (response.isSuccessful()) {
+                    if (response.body().getResult() != null && response.body() != null) {
+                        Log.i("RF:PROFILE", "SUCCESS" + response.body().getResult());
+                        // 프로필 등록까지 완료되면
+                        // 자동로그인을 위해서 Storagehelper 이용
+                        StorageHelper.getInstance().setBoolean(RegisterProfileActivity.this, "AUTOLOGIN", true);
+                        Log.i("AUTOLOGIN:Profile", StorageHelper.getInstance().getBoolean(RegisterProfileActivity.this, "AUTOLOGIN").toString());
+
+                        Intent intent = new Intent(RegisterProfileActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        Toast.makeText(RegisterProfileActivity.this, userNickname.getText().toString() + " 님 환영합니다♥", Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        Log.i("RF:PROFILE", "FAIL" + response.body().getError());
+                    }
                 } else {
-                    Log.i("RF:PROFILE", "FAIL" + response.body().getError());
+                    Log.i("FAIL PROFILE", "FAIL");
                 }
             }
 
@@ -322,6 +330,7 @@ public class RegisterProfileActivity extends BaseActivity {
                 Log.i("RF", "ERR" + t.getMessage());
             }
         });
+        hideProgress();
     }
 
     //모든 답변했는지 확인

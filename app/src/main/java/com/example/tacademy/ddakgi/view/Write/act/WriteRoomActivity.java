@@ -19,6 +19,9 @@ import android.widget.ToggleButton;
 
 import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.base.BaseActivity;
+import com.example.tacademy.ddakgi.data.ModifyPosting.DefaultModel;
+import com.example.tacademy.ddakgi.data.ModifyPosting.ReqModifyRoom;
+import com.example.tacademy.ddakgi.data.ModifyPosting.ResModifyDefault;
 import com.example.tacademy.ddakgi.data.NetSSL;
 import com.example.tacademy.ddakgi.data.RegisterRoom.ReqRegisterRoom;
 import com.example.tacademy.ddakgi.data.RegisterRoom.ResStringString;
@@ -75,12 +78,26 @@ public class WriteRoomActivity extends BaseActivity {
     String extra_q2;
     String extra_q3;
 
+    int isModify;
+    int roommate_id;
+
     public static Button writelocateBt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_room);
+
+        if (getIntent().getExtras() != null) {
+            isModify = getIntent().getExtras().getInt("modify");
+            roommate_id = getIntent().getExtras().getInt("roommate_id");
+
+            // 수정 디폴트 통신 호출
+            if (isModify == 0) {
+                // 수정화면이면 디폴트값 지정
+                modifyRetrofit(roommate_id);
+            }
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.writeroomTool);
         this.setSupportActionBar(toolbar);
@@ -106,17 +123,222 @@ public class WriteRoomActivity extends BaseActivity {
         newLinear = (LinearLayout) findViewById(R.id.ExtraQuelinear);
     }
 
+    // 통신 =========================================================================================
+    // 글 수정하기 > 디폴트 값 지정 통신
+    DefaultModel defaultModel;
+
+    public void modifyRetrofit(int roommate_id) {
+        Call<ResModifyDefault> resModifyDefaultCall = NetSSL.getInstance().getMemberImpFactory().resModifyDefault(roommate_id);
+        resModifyDefaultCall.enqueue(new Callback<ResModifyDefault>() {
+            @Override
+            public void onResponse(Call<ResModifyDefault> call, Response<ResModifyDefault> response) {
+                if (response.body().getResult() != null) {
+                    Log.i("RF:modifyDefault", "SUCCESS" + response.body().getResult());
+                    defaultModel = response.body().getResult();
+                    // 결과값 디폴트로 적용
+                    setDefault(defaultModel);
+                } else {
+                    Log.i("RF:modifyDefault", "FAIL" + response.body().getError());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResModifyDefault> call, Throwable t) {
+                Log.i("RF:modifyDefault", "ERR" + t.getMessage());
+            }
+        });
+    }
+
+    NotoTextView defaultSize;
+    NotoTextView defaultType;
+    ToggleButton defaultCost;
+    ToggleButton defaultOption;
+
+    // 통신 결과값 수정 디폴트로 적용
+    public void setDefault(DefaultModel defaultModel) {
+        registerRoomTitle.setText(defaultModel.getTitle());
+        writelocateBt.setText(defaultModel.getAddress());
+
+        // 유형 디폴트값
+        switch (defaultModel.getRoom_type()) {
+            case "원룸":
+                defaultType = (NotoTextView) findViewById(R.id.typeOne);
+                typeChecked(defaultType);
+                break;
+            case "투룸":
+                defaultType = (NotoTextView) findViewById(R.id.typeTwo);
+                typeChecked(defaultType);
+                break;
+            case "주택":
+                defaultType = (NotoTextView) findViewById(R.id.typeHouse);
+                typeChecked(defaultType);
+                break;
+            case "오피스텔":
+                defaultType = (NotoTextView) findViewById(R.id.typeOffice);
+                typeChecked(defaultType);
+                break;
+            case "아파트":
+                defaultType = (NotoTextView) findViewById(R.id.typeApart);
+                typeChecked(defaultType);
+                break;
+        }
+
+        // 크기 디폴트값
+        switch (defaultModel.getSize()) {
+            case "10평미만":
+                defaultSize = (NotoTextView) findViewById(R.id.sizeUnderTen);
+                sizeClicked(defaultSize);
+                break;
+            case "10평대":
+                defaultSize = (NotoTextView) findViewById(R.id.sizeTen);
+                sizeClicked(defaultSize);
+                break;
+            case "20평대":
+                defaultSize = (NotoTextView) findViewById(R.id.sizeTwenty);
+                sizeClicked(defaultSize);
+                break;
+            case "30평대":
+                defaultSize = (NotoTextView) findViewById(R.id.sizeThirty);
+                sizeClicked(defaultSize);
+                break;
+            case "40평대이상":
+                defaultSize = (NotoTextView) findViewById(R.id.sizeFirty);
+                sizeClicked(defaultSize);
+                break;
+        }
+
+        registerRoomDeposit.setText(String.valueOf(defaultModel.getDeposit()));
+        registerRoomRent.setText(String.valueOf(defaultModel.getRent()));
+        registerRoomFloor.setText(String.valueOf(defaultModel.getFloor()));
+        prefDate.setText(defaultModel.getAvailable_date().split("T")[0]);
+        registerRoomManageCost.setText(String.valueOf(defaultModel.getManage_cost()));
+        registerRoomDescription.setText(defaultModel.getDescription());
+        registerRoomExtraQueOne.setText(defaultModel.getExtra_q1());
+
+        for(int i=0; i<3; i++){
+            plusExtra(null);
+        }
+
+        if (registerRoomExtraQueTwo != null) {
+            registerRoomExtraQueTwo.setText(defaultModel.getExtra_q2());
+        }
+        if (registerRoomExtraQueThree != null) {
+            registerRoomExtraQueThree.setText(defaultModel.getExtra_q3());
+        }
+
+        // 관리비 내용 디폴트값
+        String[] cost_inc = new String[defaultModel.getManage_cost_inc().split(",").length];
+        for (int i = 0; i < cost_inc.length; i++) {
+            cost_inc[i] = defaultModel.getManage_cost_inc().split(",")[i];
+        }
+        for (String inc : cost_inc) {
+            switch (inc) {
+                case "수도":
+                    defaultCost = (ToggleButton) findViewById(R.id.registerRoomManageCostOne);
+                    defaultCost.setChecked(true);
+                    togglePay(defaultCost);
+                    break;
+                case "전기":
+                    defaultCost = (ToggleButton) findViewById(R.id.registerRoomManageCostTwo);
+                    defaultCost.setChecked(true);
+                    togglePay(defaultCost);
+                    break;
+                case "인터넷":
+                    defaultCost = (ToggleButton) findViewById(R.id.registerRoomManageCostThree);
+                    defaultCost.setChecked(true);
+                    togglePay(defaultCost);
+                    break;
+                case "도시가스":
+                    defaultCost = (ToggleButton) findViewById(R.id.registerRoomManageCostFour);
+                    defaultCost.setChecked(true);
+                    togglePay(defaultCost);
+                    break;
+                case "TV":
+                    defaultCost = (ToggleButton) findViewById(R.id.registerRoomManageCostFive);
+                    defaultCost.setChecked(true);
+                    togglePay(defaultCost);
+                    break;
+                case "난방":
+                    defaultCost = (ToggleButton) findViewById(R.id.registerRoomManageCostSix);
+                    defaultCost.setChecked(true);
+                    togglePay(defaultCost);
+                    break;
+            }
+        }
+
+        // 옵션 디폴트값
+        String[] options = new String[defaultModel.getOptions().split(",").length];
+        for (int i = 0; i < options.length; i++) {
+            options[i] = defaultModel.getOptions().split(",")[i];
+        }
+        for (String option : options) {
+            switch (option) {
+                case "에어컨":
+                    defaultOption = (ToggleButton) findViewById(R.id.airconditon);
+                    defaultOption.setChecked(true);
+                    toggledOp(defaultOption);
+                    break;
+                case "침대":
+                    defaultOption = (ToggleButton) findViewById(R.id.bed);
+                    defaultOption.setChecked(true);
+                    toggledOp(defaultOption);
+                    break;
+                case "엘레베이터":
+                    defaultOption = (ToggleButton) findViewById(R.id.elevator);
+                    defaultOption.setChecked(true);
+                    toggledOp(defaultOption);
+                    break;
+                case "전자레인지":
+                    defaultOption = (ToggleButton) findViewById(R.id.microwave);
+                    defaultOption.setChecked(true);
+                    toggledOp(defaultOption);
+                    break;
+                case "주차":
+                    defaultOption = (ToggleButton) findViewById(R.id.parking);
+                    defaultOption.setChecked(true);
+                    toggledOp(defaultOption);
+                    break;
+                case "냉장고":
+                    defaultOption = (ToggleButton) findViewById(R.id.refrige);
+                    defaultOption.setChecked(true);
+                    toggledOp(defaultOption);
+                    break;
+
+                case "가스레인지":
+                    defaultOption = (ToggleButton) findViewById(R.id.stove);
+                    defaultOption.setChecked(true);
+                    toggledOp(defaultOption);
+                    break;
+
+                case "TV":
+                    defaultOption = (ToggleButton) findViewById(R.id.tv);
+                    defaultOption.setChecked(true);
+                    toggledOp(defaultOption);
+                    break;
+                case "세탁기":
+                    defaultOption = (ToggleButton) findViewById(R.id.washmachine);
+                    defaultOption.setChecked(true);
+                    toggledOp(defaultOption);
+                    break;
+            }
+        }
+    }
+
     // 완료 버튼
     public void finishRegisterRoom(View view) {
         // 모든 답변이 완료됐는지 확인 후
 
         registerRoomExtraQueTwo = (EditText) newLinear.findViewById(R.id.descriptionEditText + 1);    // 추가질문2
         registerRoomExtraQueThree = (EditText) newLinear.findViewById(R.id.descriptionEditText + 2);  // 추가질문3
-        if (registerRoomExtraQueTwo.getText() != null) {
+        if (registerRoomExtraQueTwo != null) {
             extra_q2 = registerRoomExtraQueTwo.getText().toString();
+        } else {
+            extra_q2 = null;
         }
-        if (registerRoomExtraQueTwo.getText() != null) {
+        if (registerRoomExtraQueTwo != null) {
             extra_q3 = registerRoomExtraQueThree.getText().toString();
+        } else {
+            extra_q3 = null;
         }
 
         // 완료 됐으면
@@ -141,11 +363,45 @@ public class WriteRoomActivity extends BaseActivity {
         manage_cost = Integer.parseInt(registerRoomManageCost.getText().toString());    // 관리비
         options = OptionNum();                                                          // 옵션
         description = registerRoomDescription.getText().toString();                     // 자기소개
-        extra_q1 = registerRoomExtraQueOne.getText().toString();                        // 추가질문1
+        extra_q1 = registerRoomExtraQueOne.getText().toString();
+        // 추가질문1
 
-        setData();
+        if (isModify == 0) {
+            // 수정 완료 통신
+            modifyFinishRetrofit(roommate_id);
+        } else if (isModify == 1) {
+            setData();
+            local3 = locationSplit[3];
+        }
+        Log.i("modify", isModify + "");
     }
 
+    // 수정 등록 통신
+    public void modifyFinishRetrofit(int roommate_id){
+        Call<ResStringString> resModifyRoomCall = NetSSL.getInstance().getMemberImpFactory().resModifyRoom(roommate_id,
+                new ReqModifyRoom(title, local1, local2, local3, detailed_local,
+                        room_latitude, room_longitude, room_type, size, deposit, rent, floor, available_date, manage_cost, costNum, options, description,
+                        extra_q1, extra_q2, extra_q3));
+        resModifyRoomCall.enqueue(new Callback<ResStringString>() {
+            @Override
+            public void onResponse(Call<ResStringString> call, Response<ResStringString> response) {
+                if (response.body().getResult() != null) {
+                    Log.i("RF:modifyFinish", "SUCCESS" + response.body().getResult());
+                    Toast.makeText(WriteRoomActivity.this, "글 수정이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Log.i("RF:modifyFinish", "FAIL" + response.body().getError());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResStringString> call, Throwable t) {
+                Log.i("RF:modifyFinish", "ERR" + t.getMessage());
+            }
+        });
+    }
+
+    // 글 등록 통신
     public void setData() {
         // 디비에 정보 저장
         Call<ResStringString> resRegisterRoomCall = NetSSL.getInstance().getMemberImpFactory()
@@ -171,6 +427,7 @@ public class WriteRoomActivity extends BaseActivity {
         });
     }
 
+    // 화면 이벤트 ===================================================================================
     public void showRoomType(View view) {
         if (roomflag) {
             roomflag = false;
@@ -204,7 +461,6 @@ public class WriteRoomActivity extends BaseActivity {
     // 위치 등록
     public void goLocate(View view) {
         //Toast.makeText(this, "goLocate", Toast.LENGTH_SHORT).show();
-
         Intent intent = new Intent(this, WriteLocateActivity.class);
         startActivity(intent);
     }
@@ -268,20 +524,20 @@ public class WriteRoomActivity extends BaseActivity {
     }
 
     // 방 크기 단일 선택
-    TextView clickedSize = null;
+    NotoTextView clickedSize = null;
 
     public void sizeClicked(View view) {
         // 선택된 텍스트가 없으면,
         // 처음으로 선택한 텍스트를 clickedView에 넣고 색상을 적용한다.
         if (clickedSize == null) {
-            clickedSize = (TextView) view;
+            clickedSize = (NotoTextView) view;
             clickedSize.setTextColor(getResources().getColor(R.color.textpointColor));
         } else if (clickedSize != view) {
             // 선택된 텍스트가 저장된 텍스트와 다르면
             // 저장했던 텍스트 색을 default로 변경하고,
             // 현재 선택된 텍스트를 저장 변수에 넣는다. (포인트 색상으로 적용)
             clickedSize.setTextColor(getResources().getColor(R.color.grayTextColor));
-            clickedSize = (TextView) view;
+            clickedSize = (NotoTextView) view;
             clickedSize.setTextColor(getResources().getColor(R.color.textpointColor));
         }
     }

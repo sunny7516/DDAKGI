@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.widget.LinearLayout;
 
 import com.example.tacademy.ddakgi.R;
@@ -100,9 +101,8 @@ public class HomeActivity extends KakaoLoginActivity {
     // 각 탭에 해당하는 화면으로 변경
     public void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.fragment_container, fragment);
-
         // Fragment의 변경이 있은 후에는 반드시 commit 메소드로 변경사항 반영.
         transaction.commit();
     }
