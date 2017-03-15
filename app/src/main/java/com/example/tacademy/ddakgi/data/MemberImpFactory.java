@@ -70,6 +70,15 @@ public interface MemberImpFactory {
     // 4. 회원 등록
     @PUT("members/login")
     Call<ResStringString> resLifeStyleLogin(@Body ReqLifeStyleLogin reqLifeStyleLogin);
+/*
+    // 4-1. 회원 프로필 사진 파일 등록
+    @Multipart
+    @PUT("members/login")
+    //Call<ResStringString> resRegisterProfileImg(@PartMap Map<String, RequestBody> profile_photos);
+    Call<List<String>> uploadImage(
+            @Header("Authorization") String token,
+            @PartMap() Map<String, RequestBody> mapFileAndName);
+*/
 
     // 5. 회원 정보 조회
     @GET("members")

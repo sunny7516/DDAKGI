@@ -1,5 +1,6 @@
 package com.example.tacademy.ddakgi.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -189,11 +190,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                         if (roomOrMate == 0) {
                             Intent detailMatePage = new Intent(context, HomemateDetailPageActivity.class);
                             detailMatePage.putExtra("roommate_id", roommate_id);
-                            context.startActivity(detailMatePage);
+                            ((Activity) context).startActivityForResult(detailMatePage, 2000);
                         } else if (roomOrMate == 1) {
                             Intent detailRoomPage = new Intent(context, HomeRoomDetailPageActivity.class);
                             detailRoomPage.putExtra("roommate_id", roommate_id);
-                            context.startActivity(detailRoomPage);
+                            ((Activity) context).startActivityForResult(detailRoomPage, 2000);
                         }
                     }
                 } else {

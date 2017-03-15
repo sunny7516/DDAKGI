@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
 import com.example.tacademy.ddakgi.R;
 import com.example.tacademy.ddakgi.adapter.MyRecyclerAdapter;
@@ -26,11 +25,15 @@ import com.example.tacademy.ddakgi.view.Setting.SettingActivity;
 import com.squareup.otto.Subscribe;
 import com.squareup.picasso.Picasso;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.chooco13.NotoTextView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * 마이페이지 MyTab
+ */
 
 public class MyTab extends Fragment {
 
@@ -40,7 +43,7 @@ public class MyTab extends Fragment {
     Toolbar toolbar;
     ImageButton helpBt;
     ImageButton settingBt;
-    ImageView modifyProfileBt;
+    CircleImageView modifyProfileBt;
     NotoTextView myTabNickname;
 
     boolean ottoflag = false;
@@ -75,7 +78,7 @@ public class MyTab extends Fragment {
         settingBt.setOnClickListener(onClickListener);
 
         // 프로필 수정으로 이동
-        modifyProfileBt = (ImageView) view.findViewById(R.id.modifyProfileBt);
+        modifyProfileBt = (CircleImageView) view.findViewById(R.id.modifyProfileBt);
         modifyProfileBt.setOnClickListener(onClickListener);
 
         // Inflate the layout for this fragment
@@ -108,6 +111,8 @@ public class MyTab extends Fragment {
                     Log.i("RF:MytabProfile", "SUCCESS" + response.body().getResult());
                     if (response.body().getResult().getThumbnail_image() != null) {
                         Picasso.with(getContext()).load(response.body().getResult().getThumbnail_image()).into(modifyProfileBt);
+                    }else{
+                        modifyProfileBt.setImageResource(R.mipmap.profile_btn);
                     }
                     myTabNickname.setText(response.body().getResult().getNickname());
                     mid = response.body().getResult().getMid();

@@ -39,6 +39,7 @@ public class SearchActivity extends BaseActivity {
                     case 1:
                         Toast.makeText(getApplicationContext(), "내 위치와 50m 정도 차이 날 수 있습니다.", Toast.LENGTH_SHORT).show();
                 }
+                Toast.makeText(getApplicationContext(), "위치 기반 검색은 준비중입니다. 죄송합니다.", Toast.LENGTH_LONG).show();
             }
 
             @Override

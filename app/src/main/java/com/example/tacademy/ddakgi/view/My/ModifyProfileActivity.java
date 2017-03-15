@@ -31,6 +31,10 @@ import retrofit2.Response;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+/**
+ * 프로필 수정 페이지
+ */
+
 public class ModifyProfileActivity extends BaseActivity {
     NotoTextView modifyProfileFinish;
     EditText modifyNickname, modifyAge;
@@ -86,6 +90,11 @@ public class ModifyProfileActivity extends BaseActivity {
                             memberModel.getLifestyle_q5(), memberModel.getLifestyle_q6(),
                             memberModel.getLifestyle_q7(), memberModel.getLifestyle_q8(),
                             memberModel.getLifestyle_q9(), memberModel.getLifestyle_q10());
+                    if (memberModel.getThumbnail_image() != null) {
+                        Picasso.with(getApplicationContext()).load(memberModel.getThumbnail_image()).into(modifyProfileImage);
+                    } else {
+                        modifyProfileImage.setImageResource(R.mipmap.profile);
+                    }
                 } else {
                     Log.i("RF:MEModify", "FAIL" + response.body().getError());
                 }
@@ -376,7 +385,7 @@ public class ModifyProfileActivity extends BaseActivity {
                     Toast.makeText(ModifyProfileActivity.this, "모든 문항에 답해주세요!", Toast.LENGTH_SHORT).show();
                 } else {
                     // 수정된 설문패턴 DB로 저장
-                    Toast.makeText(ModifyProfileActivity.this, "회원님의 정보가 수정되었습니다.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ModifyProfileActivity.this, "회원님의 정보가 수정되었습니다.", Toast.LENGTH_SHORT).show();
                     nickname = modifyNickname.getText().toString();
                     updateMemberDB(nickname);
                     // 화면 종료

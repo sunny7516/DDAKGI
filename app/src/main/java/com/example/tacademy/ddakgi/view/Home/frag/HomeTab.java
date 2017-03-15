@@ -47,6 +47,7 @@ import static com.example.tacademy.ddakgi.view.Filter.FilterActivity.isFilterSet
 /**
  * 홈화면 > all/room/mate 타임라인 보여줌
  */
+
 public class HomeTab extends Fragment {
     private boolean activityStartup = true;
 
@@ -232,6 +233,15 @@ public class HomeTab extends Fragment {
         recyclerAdapter = new RecyclerAdapter(getContext(), items, R.layout.home_timeline);
         recyclerAdapter.notifyDataSetChanged();
         recyclerviewHomeTab.setAdapter(recyclerAdapter);
+    }
+
+    // 상세페이지에서 좋아요했을 때 홈탭의 데이터 갱신
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (recyclerAdapter != null) {
+            AllPostingSet();
+        }
     }
 
     // Toolbar Click Event

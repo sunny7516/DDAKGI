@@ -189,9 +189,12 @@ public class RegisterProfileActivity extends BaseActivity {
                     }
                     Log.i("PH", response.data());
                     loadImage(response.data());
+                    photoPath = response.data();
                     // response.targetUI().loadImage(response.data());
                 });
     }
+
+    String photoPath;
 
     // 포토앨범에서 불러오기
     public void onGallery() {
@@ -214,12 +217,12 @@ public class RegisterProfileActivity extends BaseActivity {
                     }
                     Log.i("PH", response.data());
                     loadImage(response.data());
+                    photoPath = response.data();
                 });
     }
 
     // 사진 올리기
     public void loadImage(String path) {
-
         alert.dismissWithAnimation();
 
         // 이미지뷰에 이미지를 세팅
@@ -278,7 +281,15 @@ public class RegisterProfileActivity extends BaseActivity {
         registerMemberData();
     }
 
-    public void registerMemberData() {
+    public void registerMemberData() {/*
+        Map<String, RequestBody> map = new HashMap<>();
+        File file = new File(photoPath); // 이미지 주소는 확인됨
+        Log.i("RF", file.getAbsolutePath() + "++" + file.canRead());
+
+        RequestBody fileBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        map.put("profile\"; filename=\"profileImg.jpg\"", fileBody);
+        map.put("profile\"; filename=\"thumbnailImg.jpg\"", fileBody);*/
+
         dbNickname = userNickname.getText().toString();
         dbAge = Integer.parseInt(userAge.getText().toString());
         int[] lifestyleAnswer = U.getInstance().getLifestyleNum();

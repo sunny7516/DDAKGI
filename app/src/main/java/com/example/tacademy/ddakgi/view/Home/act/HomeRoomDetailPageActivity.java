@@ -68,7 +68,7 @@ public class HomeRoomDetailPageActivity extends BaseActivity {
         postKey = getIntent().getStringExtra("KEY");
         // 파라미터값 받아오기
         roommate_id = getIntent().getExtras().getInt("roommate_id");
-        Log.i("check2", roommate_id+"");
+        Log.i("check2", roommate_id + "");
         // 통신
         setDetail(roommate_id);
 
@@ -108,20 +108,20 @@ public class HomeRoomDetailPageActivity extends BaseActivity {
         detailProfile = (CircleImageView) findViewById(R.id.detailProfile);
     }
 
-    boolean heartflag;
+    int heartflag = 0;
 
     // 클릭 이벤트
     public void clickHeart(View view) {
         int likeNum = Integer.parseInt(roomDetailPageLikeNum.getText().toString());
-        if (!heartflag) {
+        if (heartflag == 0) {
             roomHeart_state.setImageResource(R.mipmap.heart_on_btn);
             roomDetailPageLikeNum.setText(String.valueOf(likeNum + 1));
-            heartflag = true;
+            heartflag = 1;
             setHeart();
         } else {
             roomHeart_state.setImageResource(R.mipmap.heart_off_btn);
             roomDetailPageLikeNum.setText(String.valueOf(likeNum - 1));
-            heartflag = false;
+            heartflag = 0;
             deleteHeart();
         }
     }
@@ -233,9 +233,9 @@ public class HomeRoomDetailPageActivity extends BaseActivity {
                     if (response.body().getResult() != null) {
                         detailPosting = response.body().getResult();
                         if (detailPosting.getHeart_state() == 0) {
-                            heartflag = false;
+                            heartflag = 0;
                         } else {
-                            heartflag = true;
+                            heartflag = 1;
                         }
                         // 데이터 세팅
                         setData(detailPosting);

@@ -101,10 +101,12 @@ public class LikeTab extends Fragment {
         Ottobus.getInstance().getMaingfrag_bus().unregister(this);
     }
 
+    LikeRecyclerAdapter recyclerAdapter;
+
     @Subscribe
     public void FinishLoad(ResHeartPosting data) {
         items = data;
-        LikeRecyclerAdapter recyclerAdapter = new LikeRecyclerAdapter(getContext(), items, R.layout.home_timeline);
+        recyclerAdapter = new LikeRecyclerAdapter(getContext(), items, R.layout.home_timeline);
         recyclerAdapter.notifyDataSetChanged();
         recyclerviewLikeTab.setAdapter(recyclerAdapter);
     }

@@ -106,19 +106,19 @@ public class HomemateDetailPageActivity extends BaseActivity {
     }
 
     // 클릭 이벤트 ===================================================================================
-    boolean heartflag = false;
+    int heartflag = 0;
 
     public void clickHeart(View view) {
         int likeNum = Integer.parseInt(mateDetailPageLikeNum.getText().toString());
-        if (!heartflag) {
+        if (heartflag == 0) {
             heart_state.setImageResource(R.mipmap.heart_on_btn);
             mateDetailPageLikeNum.setText(String.valueOf(likeNum + 1));
-            heartflag = true;
+            heartflag = 1;
             setHeart();
         } else {
             heart_state.setImageResource(R.mipmap.heart_off_btn);
             mateDetailPageLikeNum.setText(String.valueOf(likeNum - 1));
-            heartflag = false;
+            heartflag = 0;
             deleteHeart();
         }
     }
@@ -230,9 +230,9 @@ public class HomemateDetailPageActivity extends BaseActivity {
                     if (response.body().getResult() != null) {
                         detailPosting = response.body().getResult();
                         if (detailPosting.getHeart_state() == 0) {
-                            heartflag = false;
+                            heartflag = 0;
                         } else {
-                            heartflag = true;
+                            heartflag = 1;
                         }
                         // 데이터 세팅
                         setData(detailPosting);
